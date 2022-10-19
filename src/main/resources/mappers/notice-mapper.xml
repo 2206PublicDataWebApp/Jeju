@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="NoticeMapper">
+	<resultMap type="Notice" id="noticeResultMap">
+		<id property="noticeNo" column="NOTICE_NO"/>
+		<result property="noticeContents" column="NOTICE_CONTENTS"/>
+		<result property="noticeTitle" column="NOTICE_TITLE"/>
+		<result property="regDate" column="REGDATE"/>
+		<result property="noticeUpdate" column="NOTICE_UPDATE"/>
+		<result property="noticeCount" column="NOTICE_COUNT"/>
+	</resultMap>
+	<!--  공지사항 전부 불러오기 -->
+	<select id="selectAllNotice" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL ORDER BY NOTICE_NO DESC
+	</select>
+	<!--  공지사항 하나만 불러오기 -->
+	<select id="selectOneNo" resultMap="noticeResultMap">
+		SELECT * FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	</select>
+	<!--  공지사항 총 갯수 불러오기 -->
+	<select id="selectTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE_TBL
+	</select>
+	
+	<!--  공지사항 수정 -->
+	<update id="updateNotice">
+		UPDATE NOTICE_TBL
+		SET NOTICE_CONTENTS = #{noticeContents}, NOTICE_TITLE = #{noticeTitle}, NOTICE_UPDATE = DEFAULT
+		WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	<!--  공지사항 등록 -->
+	<insert id="insertNotice">
+		INSERT INTO NOTICE_TBL
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContents}, #{noticeTitle}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice">
+		DELETE FROM NOTICE_TBL WHERE NOTICE_NO = #{noticeNo}
+	</delete>
+	
+	
+</mapper>

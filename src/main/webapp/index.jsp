@@ -8,8 +8,8 @@
 </head>
 <body>
 	<div>
-		<button onclick="location.href='/home.kh';">Visit Our WebSite!</button>
+		<jsp:forward page="/home" />
 	</div>
-<%-- 	<jsp:forward page="/home.kh"></jsp:forward> --%>
+
 </body>
 </html>

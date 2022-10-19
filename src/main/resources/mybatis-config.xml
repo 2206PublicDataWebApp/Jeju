@@ -7,15 +7,25 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 		<!-- 만약에 null 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
 	</settings>
-	<typeAliases>
+<!-- 	<typeAliases> -->
 <!-- 	여기다 추가해서 사용 예시 -->
 <!-- 		<typeAlias type="com.kh.junspring.member.domain.Member" alias="Member"/> -->
 <!-- 		<typeAlias type="com.kh.junspring.board.domain.Board" 	alias="Board"/> -->
 <!-- 		<typeAlias type="com.kh.junspring.board.domain.Reply" 	alias="Reply"/> -->
-	</typeAliases>
-	<mappers>
+<!-- 	</typeAliases> -->
+		<typeAliases>
+			<typeAlias type="com.jeju.notice.domain.Notice" alias="Notice"></typeAlias>
+			<typeAlias type="com.jeju.notice.domain.NoticeCount" alias="NoticeCount"></typeAlias>
+		</typeAliases>
+
+
+<!-- 	<mappers> -->
 <!-- 	예시 -->
 <!-- 		<mapper resource="mappers/member-mapper.xml"/> -->
 <!-- 		<mapper resource="mappers/board-mapper.xml"/> -->
-	</mappers>
+<!-- 	</mappers> -->
+
+		<mappers>
+			<mapper resource="mappers/notice-mapper.xml"/>
+		</mappers>
 </configuration>
