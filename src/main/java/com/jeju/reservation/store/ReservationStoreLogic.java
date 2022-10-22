@@ -1,5 +1,8 @@
 package com.jeju.reservation.store;
 
-public class ReservationStoreLogic {
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class ReservationStoreLogic implements ReservationStore{
+	
 }
