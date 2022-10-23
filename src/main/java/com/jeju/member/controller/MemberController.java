@@ -1,9 +1,14 @@
 
 package com.jeju.member.controller;
+import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +38,11 @@ public class MemberController {
 		return "member/join";
 		// /WEB-INF/views/member/join.jsp
 	}
+	@RequestMapping(value="/member/loginView.kh", method=RequestMethod.GET)
+	public String memberLoginView(Model model) {
+		return "member/login";
+		// /WEB-INF/views/member/join.jsp
+	}
 	//  회원정보를 DB에 저장하는 URL
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)
 	public ModelAndView memberJoin(
@@ -56,7 +66,7 @@ public class MemberController {
 			if(result > 0) {
 				// response.sendRedirect("/member/list.kh");
 				//return "redirect:/home.kh";
-				System.out.println("서");
+				
 				mv.setViewName("redirect:/member/joinView.kh");
 			}else {
 				//model.addAttribute("msg", "회원가입실패");
@@ -71,50 +81,63 @@ public class MemberController {
 		}
 		return mv;
 	}
-//	// 로그인 기능
-//	@RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
-//	public ModelAndView memberLogin(
-//			@ModelAttribute Member member
-////			@RequestParam("member-id") String memberId
-////			,@RequestParam("member-pwd") String memberPwd
-////			, Model model
-//			, ModelAndView mv
-//			, HttpServletRequest request) {
-//		try {
-//			//Member member = new Member(memberId, memberPwd);
-//			Member loginUser = mService.loginMember(member);
-//			// id pwd 일치한데 그래서 loginUser는 비어있지 않아.
-//			if(loginUser != null && loginUser.getAdminCheck() == 0) {
-//				/// 일반사용자일때 밑에 코드 실행
-//				HttpSession session = request.getSession();
-//				session.setAttribute("loginUser", loginUser);
-//				System.out.println("일반사용자 입니다.");
-//				// 세션에 저장정보는 민감정보 제외
-////				return "redirect:/home.kh";
-//				mv.setViewName("redirect:/home.kh");
-//			}else if(loginUser.getAdminCheck() == 1) {
-//				HttpSession session = request.getSession();
-//				session.setAttribute("adminCheck", loginUser);
-//				System.out.println("관리자입니다.");
-//				System.out.println(loginUser.getMemberName());
-//				mv.setViewName("redirect:/home.kh");
-//			}else {
-////				model.addAttribute("msg", "회원정보없음");
-////				return "common/errorPage";
-//				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
-//				mv.setViewName("common/errorPage");
-//			}
-//		} catch (Exception e) {
-////			model.addAttribute("msg", e.getMessage());
-////			return "common/errorPage";
-//			// request.setAttribute("msg", "실패!");
-//			// request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp")
-//			//.forward(request, response);
-//			mv.addObject("msg", e.toString());
-//			mv.setViewName("common/errorPage");
-//		}
-//		return mv;
-//	}
+	// 로그인 기능
+	@RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
+	public ModelAndView memberLogin(
+			@ModelAttribute Member member
+			, ModelAndView mv
+			, HttpServletRequest request) {
+		try {
+			Member loginUser = mService.loginMember(member);
+			if(loginUser != null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				mv.setViewName("redirect:/home.kh");
+			}else {
+				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", e.toString());
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	@ResponseBody
+	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
+	public String emailAuth(String email) {		
+		Random random = new Random();
+		int checkNum = random.nextInt(888888) + 111111;
+
+		/* 이메일 보내기 */
+        String setFrom = "lhr7517@naver.com";
+        String toMail = email;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content = 
+                "홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + "입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+        
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return Integer.toString(checkNum);
+	}
+
 	// 로그아웃 기능
 	@RequestMapping(value="/member/logout.kh", method=RequestMethod.GET)
 	public ModelAndView memberLogout(

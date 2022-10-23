@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int registerMember(Member member) {
-		System.out.println("왜안돼시");
+	
 		// SqlSession session = SqlSessionTemplate.getSqlSession();
 		int result = mStore.insertMember(session, member);
 		return result;
