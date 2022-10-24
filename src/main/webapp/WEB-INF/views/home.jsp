@@ -60,13 +60,13 @@
                     <img class="d-block w-100" src="/resources/assets/images/slider/slid_1.jpg" alt="First slide">
                     <div class="carousel-caption fvgb d-none d-md-block">
                         <h5 class="animated bounceInDown">여러분의 숙소를 보여주세요 ! </h5>
-                        <p class="animated bounceInLeft">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, <br>
-                            aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis <br>
-                            sed sagittis at, sagittis quis neque. Praesent.</p>
+                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
+                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
+                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
 
                         <div class="row vbh">
 
-                            <div class="btn btn-primary animated bounceInUp"> 숙소 등록 하러가기 </div>
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
@@ -75,12 +75,12 @@
                     <img class="d-block w-100" src="/resources/assets/images/slider/slid_2.jpg" alt="Third slide">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <h5 class="animated bounceInDown">자신의 숙소를 등록하고 싶다면?</h5>
-                        <p class="animated bounceInLeft">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo neque, <br>
-                            aliquet sit amet elementum vel, vehicula eget eros. Vivamus arcu metus, mattis <br>
-                            sed sagittis at, sagittis quis neque. Praesent.</p>
+                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
+                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
+                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
 
                         <div class="row vbh">
-                            <div class="btn btn-primary animated bounceInUp"><a href="#" style="color:white">숙소 등록 하러가기</a></div>
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
@@ -454,4 +454,9 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
+    <script>
+    	function registPension() {
+    		location.href="/pension/registForm";
+    	}
+    </script>
 </html>

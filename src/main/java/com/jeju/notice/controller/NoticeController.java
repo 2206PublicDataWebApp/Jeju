@@ -18,7 +18,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService nService;
 	
-	
+	// 공지사항 
 	@RequestMapping(value="/notice/list", method=RequestMethod.GET)
 	public ModelAndView noticeListView(
 			ModelAndView mv
@@ -46,7 +46,7 @@ public class NoticeController {
 		mv.setViewName("notice/listView");
 		return mv;
 	}
-	
+	// 공지사항 상세 페이지로 이동
 	@RequestMapping(value="/notice/detail", method=RequestMethod.GET)
 	public ModelAndView noticeDetailView(
 			ModelAndView mv
@@ -58,12 +58,12 @@ public class NoticeController {
 		mv.setViewName("notice/detailView");
 		return mv;
 	}
-	
+	// 공지사항 등록 페이지로 이동
 	@RequestMapping(value="/notice/writeForm", method=RequestMethod.GET)
 	public String noticeWirteForm() {
 		return "notice/writeView";
 	}
-	
+	// 공지사항 등록
 	@RequestMapping(value="/notice/regist", method=RequestMethod.POST)
 	public ModelAndView noticeRegist(
 			ModelAndView mv
@@ -72,7 +72,7 @@ public class NoticeController {
 		mv.setViewName("redirect:/notice/list");
 		return mv;
 	}
-	
+	// 공지사항 수정 페이지로 이동
 	@RequestMapping(value="/notice/modifyForm", method=RequestMethod.GET)
 	public ModelAndView noticeModifyForm(
 			ModelAndView mv
@@ -82,7 +82,7 @@ public class NoticeController {
 		mv.setViewName("notice/modifyView");
 		return mv;
 	}
-
+	// 공지사항 수정
 	@RequestMapping(value="/notice/modify", method=RequestMethod.POST)
 	public ModelAndView noticeModify(
 			ModelAndView mv
@@ -92,6 +92,7 @@ public class NoticeController {
 		mv.setViewName("redirect:/notice/detail?noticeNo="+noticeNo);
 		return mv;
 	}
+	// 공지사항 삭제
 	@RequestMapping(value="/notice/remove", method=RequestMethod.GET)
 	public ModelAndView noticeRemove(
 			ModelAndView mv

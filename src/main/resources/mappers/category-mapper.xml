@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="CategoryMapper">
+	<resultMap type="Category" id="categoryResultMap">
+		<id property="pensionNo" 			column="PENSION_NO"/>
+		<result property="swimming" 		column="SWIMMING"/>
+		<result property="barbecue" 		column="BARBECUE"/>
+		<result property="sing" 			column="SING"/>
+		<result property="park" 			column="PARK"/>
+		<result property="convenienceStore" column="CONVENIENCE_STORE"/>
+		<result property="smokingRoom" 		column="SMOKING_ROOM"/>
+		<result property="dog" 				column="DOG"/>
+		<result property="handicapPerson" 	column="HANDICAP_PERSON"/>
+		<result property="cook" 			column="COOK"/>
+		<result property="breakfast" 		column="BREAKFAST"/>
+		<result property="wifi" 			column="WIFI"/>
+		<result property="aircon" 			column="AIRCON"/>
+		<result property="refrigerator" 	column="REFRIGERATOR"/>
+		<result property="bathtub" 			column="BATHTUB"/>
+		<result property="dry" 				column="DRY"/>
+		<result property="tv" 				column="TV"/>
+		<result property="cStatus" 			column="C_STATUS"/>
+	</resultMap>
+	<insert id="insertCategory">
+		INSERT INTO CATEGORY_TBL
+		VALUES(#{pensionNo},#{swimming},#{barbecue},#{sing},#{park},#{convenienceStore}
+		,#{smokingRoom},#{dog},#{handicapPerson},#{cook},#{breakfast},#{wifi},#{aircon}
+		,#{refrigerator},#{bathtub},#{dry},#{tv},'1')
+	</insert>
+	
+</mapper>

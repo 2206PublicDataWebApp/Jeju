@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="RoomAttachMapper">
+	<resultMap type="RoomAttach" id="roomAttachResultMap">
+		<id property="roomNo" 				column="ROOM_NO"/>
+		<result property="roomPath" 		column="ROOM_PATH"/>
+		<result property="roomImage"		column="ROOM_IMAGE"/>
+		<result property="roomOrd" 			column="ROOM_ORD"/>
+		<result property="roomFileRename" 	column="ROOM_FILE_RENAME"/>
+		<result property="roomFileName" 	column="ROOM_FILE_NAME"/>
+	</resultMap>
+	
+	<insert id="insertRoomAttach">
+		INSERT INTO ROOM_ATTACH
+		VALUES(#{roomPath},DEFAULT,1,#{roomNo},#{roomFileRename},#{roomFileName})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PensionMapper">
+	<resultMap type="Pension" id="pensionResultMap">
+		<id property="pensionNo" column="PENSION_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="pensionName" column="PENSION_NAME"/>
+		<result property="pensionAddr" column="PENSION_ADDR"/>
+		<result property="pensionComments" column="PENSION_COMMENTS"/>
+		<result property="pensionPrice" column="PENSION_PRICE"/>
+		<result property="hardness" column="HARDNESS"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="canclePension" column="CANCEL_PENSION"/>
+		<result property="pensionCheckin" column="PENSION_CHECKIN"/>
+		<result property="pensionCheckout" column="PENSION_CHECKOUT"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileImage" column="FILE_IMAGE"/>
+		<result property="pensionFileName" column="PENSION_FILE_NAME"/>
+		<result property="pensionFileRename" column="PENSION_FILE_RENAME"/>
+	</resultMap>
+	
+	<select id="selectPensionNo" resultType="_int">
+		SELECT PENSION_NO FROM PENSION_TBL WHERE PENSION_NAME = #{pensionName}
+	</select>
+	
+	<insert id="insertPension">
+		INSERT INTO PENSION_TBL
+		VALUES(SEQ_PENSION_NO.NEXTVAL,NULL, #{pensionName},'제주도',#{pensionComments},'0',NULL,NULL,DEFAULT,#{pensionCheckin},#{pensionCheckout},#{filePath},DEFAULT,#{pensionFileName},#{pensionFileRename} )
+	</insert>
+	
+	
+	
+</mapper>
