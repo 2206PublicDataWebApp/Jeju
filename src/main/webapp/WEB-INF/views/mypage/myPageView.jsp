@@ -5,14 +5,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Travelet Free Website Tempalte | Smarteyeapps.com</title>
-    <link rel="shortcut icon" href="resources/assets/images/fav.png" type="image/x-icon">
+    <title>마이페이지</title>
+    <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="resources/assets/images/fav.jpg">
-    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/assets/css/all.min.css">
-    <link rel="stylesheet" href="resources/assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css" />
+    <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
+    <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/all.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
 </head>
 <body>
 	<header class="container-flui">
@@ -22,7 +22,7 @@
 	                        <div class="col-md-4 d-none d-md-block mail-detail">  
 	                        </div>
 	                        <div class="col-md-4 logo">
-	                            <img src="resources/assets/images/logo.png" alt="">
+	                            <img src="/resources/assets/images/logo.png" alt="">
 	                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
 	                        </div>
 	                    </div>
@@ -32,11 +32,11 @@
 	               <div class="container">
 	                   <div class="row nav-row">
 	                       <ul>
-	                           <li><a href="home.html">홈</a></li>
-	                           <li><a href="#">공지사항</a></li>
+	                           <li><a href="/home">홈</a></li>
+	                           <li><a href="/notice/list">공지사항</a></li>
 	                           <li><a href="detail.html">숙소 리스트</a></li>
 	                           <li><a href="destinations.html">커뮤니티</a></li>
-	                           <li><a href="MyPensionList.html">마이페이지</a></li>
+	                           <li><a href="/mypage/myPage">마이페이지</a></li>
 	                       </ul>
 	                   </div>
 	               </div>
@@ -48,13 +48,12 @@
 	            <div class="row">
 	                <h2> 마이페이지</h2>
 	                <ul>
-	                    <li> <a href="#"><i class="fas fa-home"></i> 홈</a></li>
+	                    <li> <a href="/home"><i class="fas fa-home"></i> 홈</a></li>
 	                    <li><i class="fas fa-angle-double-right"></i> 마이페이지</li>
 	                </ul>
 	            </div>
 	        </div>
 	    </div>
-	    
 	    <div class="destinations container-fluid">
 	       <div class="container">
 	            <div class="session-title">
@@ -63,43 +62,38 @@
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
 	                        <div class="dest-img">
-	                            <img src="assets/images/destination/d4.jpg" alt="">
+	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>내 정보</h3>
-	                        
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
+	                        <a class="btn btn-outline-success" href="#">바로가기</a>
 	                    </div>
 	                </div>
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
 	                        <div class="dest-img">
-	                            <img src="assets/images/destination/d4.jpg" alt="">
+	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>이용내역</h3>
-	                        
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
+	                        <a class="btn btn-outline-success" href="#">바로가기</a>
 	                    </div>
 	                </div>
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
 	                        <div class="dest-img">
-	                            <img src="assets/images/destination/d4.jpg" alt="">
+	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>숙소관리</h3>
-	                   
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
+	                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>
 	                    </div>
 	                </div> 
-	
 	                <div class="col-lg-4 col-md-6">
 	                    <br><br><br><br><br>
 	                    <div class="dest-col">
 	                        <div class="dest-img">
-	                            <img src="assets/images/destination/d4.jpg" alt="">
+	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>후기 조회</h3>
-	                       
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
+	                        <a class="btn btn-outline-success" href="/mypage/review">바로가기</a>
 	                    </div>
 	                </div>
 	
@@ -107,11 +101,10 @@
 	                    <br><br><br><br><br>
 	                    <div class="dest-col">
 	                        <div class="dest-img">
-	                            <img src="assets/images/destination/d4.jpg" alt="">
+	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
-	                        <h3>찜</h3>
-	                       
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
+	                        <h3>찜 내역</h3>
+	                        <a class="btn btn-outline-success" href="/mypage/jjim">바로가기</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -143,10 +136,10 @@
 	        </div>
 	    </footer>
 </body>
-    <script src="resources/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="resources/assets/js/popper.min.js"></script>
-    <script src="resources/assets/js/bootstrap.min.js"></script>
-    <script src="resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-    <script src="resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
-    <script src="resources/assets/js/script.js"></script>
+    <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/assets/js/popper.min.js"></script>
+    <script src="/resources/assets/js/bootstrap.min.js"></script>
+    <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
+    <script src="/resources/assets/js/script.js"></script>
 </html>

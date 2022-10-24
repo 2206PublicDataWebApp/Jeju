@@ -72,12 +72,12 @@
 	                    <div class="row g-0 position-relative test2">
 	                        <div class="col-md-6 p-6 ps-md-0">
 	                            <div style="float: left; font-size: 21px; font-weight: bold">
-									<input name="noticeTitle" class="form-control form-control-lg" type="text" placeholder="제목을 입력해주세요." aria-label=".form-control-lg example" value="${notice.noticeTitle }">
+									<input name="noticeTitle" class="form-control form-control-lg" type="text" placeholder="제목을 입력해주세요." aria-label=".form-control-lg example" value="${notice.noticeTitle }" required>
 								</div>
 	                        </div>
 	                    </div>
 	                    <div class="mb-3">				  
-						  <textarea name="noticeContents" class="form-control" id="exampleFormControlTextarea1" rows="30" cols="200" placeholder="내용을 입력해주세요." style="resize:none">${notice.noticeContents }</textarea>
+						  <textarea name="noticeContents" class="form-control" id="exampleFormControlTextarea1" rows="30" cols="200" placeholder="내용을 입력해주세요." style="resize:none" required>${notice.noticeContents } </textarea>
 						</div>  
 	                </div>
 	            </div>

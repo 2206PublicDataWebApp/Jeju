@@ -16,6 +16,10 @@
 		<typeAliases>
 			<typeAlias type="com.jeju.notice.domain.Notice" alias="Notice"></typeAlias>
 			<typeAlias type="com.jeju.notice.domain.NoticeCount" alias="NoticeCount"></typeAlias>
+			<typeAlias type="com.jeju.pension.domain.Pension" alias="Pension"></typeAlias>
+			<typeAlias type="com.jeju.room.domain.Room" alias="Room"></typeAlias>
+			<typeAlias type="com.jeju.category.domain.Category" alias="Category"></typeAlias>
+			<typeAlias type="com.jeju.room.domain.RoomAttach" alias="RoomAttach"></typeAlias>
 		</typeAliases>
 
 
@@ -27,5 +31,9 @@
 
 		<mappers>
 			<mapper resource="mappers/notice-mapper.xml"/>
+			<mapper resource="mappers/pension-mapper.xml"/>
+			<mapper resource="mappers/room-mapper.xml"/>
+			<mapper resource="mappers/category-mapper.xml"/>
+			<mapper resource="mappers/roomAttach-mapper.xml"/>
 		</mappers>
 </configuration>

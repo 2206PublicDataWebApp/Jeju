@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="RoomMapper">
+	<resultMap type="Room" id="roomResultMap">
+		<id property="roomNo" 			column="ROOM_NO"/>
+		<result property="startTime" 	column="START_TIME"/>
+		<result property="endTime"		column="END_TIME"/>
+		<result property="rStatus" 		column="R_STATUS"/>
+		<result property="price" 		column="PRICE"/>
+		<result property="roomName" 	column="ROOM_NAME"/>
+		<result property="delStatus" 	column="DEL_STATUS"/>
+		<result property="pensionNo" 	column="PENSION_NO"/>
+		<result property="latitude"		column="LATITUDE"/>
+		<result property="maxPersonnel" column="MAX_PERSONNEL"/>
+	</resultMap>
+	
+	<select id="selectRoomNo" resultType="_int">
+		SELECT ROOM_NO FROM ROOM_TBL WHERE PENSION_NO = #{pensionNo}
+	</select>
+	
+	<insert id="insertRoom">
+		INSERT INTO ROOM_TBL
+		VALUES(SEQ_ROOM_NO.NEXTVAL,SYSDATE,NULL,'0',#{price},#{roomName},DEFAULT,#{pensionNo},#{maxPersonnel} )
+	</insert>
+</mapper>

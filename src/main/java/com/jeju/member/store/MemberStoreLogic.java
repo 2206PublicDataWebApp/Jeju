@@ -1,5 +1,8 @@
 package com.jeju.member.store;
 
-public class MemberStoreLogic {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class MemberStoreLogic implements MemberStore{
 
 }
