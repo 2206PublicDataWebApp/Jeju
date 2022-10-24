@@ -4,6 +4,11 @@ import com.jeju.category.domain.Category;
 import com.jeju.pension.domain.Pension;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
+import java.util.List;
+
+import com.jeju.category.domain.Category2;
+import com.jeju.pension.domain.Pension;
+import com.jeju.review.domain.Review;
 
 public interface PensionService {
 
@@ -19,5 +24,15 @@ public interface PensionService {
 	void registerRoomAttach(RoomAttach roomAttach);
 	// 카테고리 등록
 	void registerCategory(Category category);
+	List<Pension> selectAllPension();
+
+	List<Category2> selectCategory(Category2 category);
+
+	Pension selectCategoryFilter(String pensionNo);
+
+	List<Pension> selectReviewRank();
+
+	List<Pension> selectPensionRank(Pension pension);
+
 
 }

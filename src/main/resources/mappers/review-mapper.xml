@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="ReviewMapper">
+	<resultMap type="Review" id="reviewResultMap">
+		<id 	property="reviewNo" 		column="REVIEW_NO" />
+		<result property="memberId" 		column="MEMBER_ID"/>
+		<result property="regDate" 			column="REGDATE"/>
+		<result property="reviewUpdate" 	column="REVIEW_UPDATE"/>
+		<result property="reivewContents" 	column="REVIEW_CONTENTS"/>
+		<result property="reivewCount" 		column="REVIEW_COUNT"/>
+		<result property="pensionNo" 		column="PENSION_NO"/>
+	</resultMap>
+	
+	<resultMap type="Review" id="reviewCountMap">
+		<result property="reivewCount" 		column="REVIEW_COUNT"/>
+		<result property="pensionNo" 		column="PENSION_NO"/>
+	</resultMap>
+	
+<!-- 	<select id="selectReviewRank" resultMap="reviewCountMap"> -->
+<!-- 		SELECT PENSION_NO, REVIEW_COUNT FROM REVIEW_TBL -->
+<!-- 	</select> -->
+	
+	<select id="selectReviewRank" resultType="_int">
+		SELECT PENSION_NO FROM (SELECT DISTINCT PENSION_NO, REVIEW_COUNT, DENSE_RANK() OVER (ORDER BY REVIEW_COUNT DESC) DENSE_RANK FROM REVIEW_TBL ORDER BY REVIEW_COUNT DESC) <![CDATA[WHERE ROWNUM <= 5]]> 
+	</select>
+	
+</mapper>
