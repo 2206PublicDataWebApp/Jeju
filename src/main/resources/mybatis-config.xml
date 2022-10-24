@@ -15,11 +15,13 @@
 			<typeAlias type="com.jeju.pension.domain.Pension" 	alias="Pension"/>
 			<typeAlias type="com.jeju.category.domain.Category2" 	alias="Category2"/>
 			<typeAlias type="com.jeju.review.domain.Review" 	alias="Review"/>
+			<typeAlias type="com.jeju.reservation.domain.Reservation" 	alias="Reservation"/>
 	</typeAliases>
 	<mappers>
 <!-- 	예시 -->
 			<mapper resource="mappers/pension-mapper.xml"/>
 			<mapper resource="mappers/review-mapper.xml"/>
+			<mapper resource="mappers/reservation-mapper.xml"/>
 <!-- 		<mapper resource="mappers/member-mapper.xml"/> -->
 <!-- 		<mapper resource="mappers/board-mapper.xml"/> -->
 	</mappers>
