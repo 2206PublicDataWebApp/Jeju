@@ -17,17 +17,18 @@ import com.jeju.review.domain.Review;
 public interface PensionStore {
 
 	// 숙소 번호 가져오기
-	int selectPensionNo(SqlSessionTemplate session, Pension pension);
+	int selectPensionNo(SqlSession session, Pension pension);
 	// 숙소 등록
-	void insertPension(SqlSessionTemplate session, Pension pension);
+	void insertPension(SqlSession session, Pension pension);
 	// 객실 번호 가져오기
-	int selectRoomNo(SqlSessionTemplate session, Room room);
+	int selectRoomNo(SqlSession session, Room room);
 	// 객실 등록
-	void insertRoom(SqlSessionTemplate session, Room room);
+	void insertRoom(SqlSession session, Room room);
 	// 객실 이미지 등록
-	void insertRoomAttach(SqlSessionTemplate session, RoomAttach roomAttach);
+	void insertRoomAttach(SqlSession session, RoomAttach roomAttach);
 	// 카테고리 등록
-	void insertCategory(SqlSessionTemplate session, Category category);
+	void insertCategory(SqlSession session, Category category);
+	
 	List<Pension> selectAllPension(SqlSession session);
 
 	List<Category2> selectCategory(SqlSession session, Category2 category);

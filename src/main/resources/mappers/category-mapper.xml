@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="CategoryMapper">
 	<resultMap type="Category" id="categoryResultMap">
-		<id property="pensionNo" 			column="PENSION_NO"/>
+		<id property="refPensionNumber" 	column="REF_PENSION_NUMBER"/>
 		<result property="swimming" 		column="SWIMMING"/>
 		<result property="barbecue" 		column="BARBECUE"/>
 		<result property="sing" 			column="SING"/>
@@ -25,7 +25,7 @@
 	</resultMap>
 	<insert id="insertCategory">
 		INSERT INTO CATEGORY_TBL
-		VALUES(#{pensionNo},#{swimming},#{barbecue},#{sing},#{park},#{convenienceStore}
+		VALUES(#{refPensionNumber},#{swimming},#{barbecue},#{sing},#{park},#{convenienceStore}
 		,#{smokingRoom},#{dog},#{handicapPerson},#{cook},#{breakfast},#{wifi},#{aircon}
 		,#{refrigerator},#{bathtub},#{dry},#{tv},'1')
 	</insert>

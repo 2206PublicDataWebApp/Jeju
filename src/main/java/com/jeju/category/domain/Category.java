@@ -2,125 +2,155 @@ package com.jeju.category.domain;
 
 public class Category {
 
-	private int pensionNo;
-	private int swimming;
-	private int barbecue;
-	private int sing;
-	private int park;
-	private int convenienceStore;
-	private int smokingRoom;
-	private int dog;
-	private int handicapPerson;
-	private int cook;
-	private int breakfast;
-	private int wifi;
-	private int aircon;
-	private int refrigerator;
-	private int bathtub;
-	private int dry;
-	private int tv;
+	private Integer refPensionNumber;
+	private Integer swimming;
+	private Integer barbecue;
+	private Integer sing;
+	private Integer park;
+	private Integer convenienceStore;
+	private Integer smokingRoom;
+	private Integer dog;
+	private Integer handicapPerson;
+	private Integer cook;
+	private Integer breakfast;
+	private Integer wifi;
+	private Integer aircon;
+	private Integer refrigerator;
+	private Integer bathtub;
+	private Integer dry;
+	private Integer tv;
 	private String cStatus;
-	
-	public int getPensionNo() {
-		return pensionNo;
+	@Override
+	public String toString() {
+		return "Category [refPensionNumber=" + refPensionNumber + ", swimming=" + swimming + ", barbecue=" + barbecue
+				+ ", sing=" + sing + ", park=" + park + ", convenienceStore=" + convenienceStore + ", smokingRoom="
+				+ smokingRoom + ", dog=" + dog + ", handicapPerson=" + handicapPerson + ", cook=" + cook
+				+ ", breakfast=" + breakfast + ", wifi=" + wifi + ", aircon=" + aircon + ", refrigerator="
+				+ refrigerator + ", bathtub=" + bathtub + ", dry=" + dry + ", tv=" + tv + ", cStatus=" + cStatus + "]";
 	}
-	public void setPensionNo(int pensionNo) {
-		this.pensionNo = pensionNo;
+	public Category(Integer refPensionNumber, Integer swimming, Integer barbecue, Integer sing, Integer park,
+			Integer convenienceStore, Integer smokingRoom, Integer dog, Integer handicapPerson, Integer cook,
+			Integer breakfast, Integer wifi, Integer aircon, Integer refrigerator, Integer bathtub, Integer dry,
+			Integer tv, String cStatus) {
+		this.refPensionNumber = refPensionNumber;
+		this.swimming = swimming;
+		this.barbecue = barbecue;
+		this.sing = sing;
+		this.park = park;
+		this.convenienceStore = convenienceStore;
+		this.smokingRoom = smokingRoom;
+		this.dog = dog;
+		this.handicapPerson = handicapPerson;
+		this.cook = cook;
+		this.breakfast = breakfast;
+		this.wifi = wifi;
+		this.aircon = aircon;
+		this.refrigerator = refrigerator;
+		this.bathtub = bathtub;
+		this.dry = dry;
+		this.tv = tv;
+		this.cStatus = cStatus;
 	}
-	public int getSwimming() {
+	public Integer getRefPensionNumber() {
+		return refPensionNumber;
+	}
+	public void setRefPensionNumber(Integer refPensionNumber) {
+		this.refPensionNumber = refPensionNumber;
+	}
+	public Integer getSwimming() {
 		return swimming;
 	}
-	public void setSwimming(int swimming) {
+	public void setSwimming(Integer swimming) {
 		this.swimming = swimming;
 	}
-	public int getBarbecue() {
+	public Integer getBarbecue() {
 		return barbecue;
 	}
-	public void setBarbecue(int barbecue) {
+	public void setBarbecue(Integer barbecue) {
 		this.barbecue = barbecue;
 	}
-	public int getSing() {
+	public Integer getSing() {
 		return sing;
 	}
-	public void setSing(int sing) {
+	public void setSing(Integer sing) {
 		this.sing = sing;
 	}
-	public int getPark() {
+	public Integer getPark() {
 		return park;
 	}
-	public void setPark(int park) {
+	public void setPark(Integer park) {
 		this.park = park;
 	}
-	public int getConvenienceStore() {
+	public Integer getConvenienceStore() {
 		return convenienceStore;
 	}
-	public void setConvenienceStore(int convenienceStore) {
+	public void setConvenienceStore(Integer convenienceStore) {
 		this.convenienceStore = convenienceStore;
 	}
-	public int getSmokingRoom() {
+	public Integer getSmokingRoom() {
 		return smokingRoom;
 	}
-	public void setSmokingRoom(int smokingRoom) {
+	public void setSmokingRoom(Integer smokingRoom) {
 		this.smokingRoom = smokingRoom;
 	}
-	public int getDog() {
+	public Integer getDog() {
 		return dog;
 	}
-	public void setDog(int dog) {
+	public void setDog(Integer dog) {
 		this.dog = dog;
 	}
-	public int getHandicapPerson() {
+	public Integer getHandicapPerson() {
 		return handicapPerson;
 	}
-	public void setHandicapPerson(int handicapPerson) {
+	public void setHandicapPerson(Integer handicapPerson) {
 		this.handicapPerson = handicapPerson;
 	}
-	public int getCook() {
+	public Integer getCook() {
 		return cook;
 	}
-	public void setCook(int cook) {
+	public void setCook(Integer cook) {
 		this.cook = cook;
 	}
-	public int getBreakfast() {
+	public Integer getBreakfast() {
 		return breakfast;
 	}
-	public void setBreakfast(int breakfast) {
+	public void setBreakfast(Integer breakfast) {
 		this.breakfast = breakfast;
 	}
-	public int getWifi() {
+	public Integer getWifi() {
 		return wifi;
 	}
-	public void setWifi(int wifi) {
+	public void setWifi(Integer wifi) {
 		this.wifi = wifi;
 	}
-	public int getAircon() {
+	public Integer getAircon() {
 		return aircon;
 	}
-	public void setAircon(int aircon) {
+	public void setAircon(Integer aircon) {
 		this.aircon = aircon;
 	}
-	public int getRefrigerator() {
+	public Integer getRefrigerator() {
 		return refrigerator;
 	}
-	public void setRefrigerator(int refrigerator) {
+	public void setRefrigerator(Integer refrigerator) {
 		this.refrigerator = refrigerator;
 	}
-	public int getBathtub() {
+	public Integer getBathtub() {
 		return bathtub;
 	}
-	public void setBathtub(int bathtub) {
+	public void setBathtub(Integer bathtub) {
 		this.bathtub = bathtub;
 	}
-	public int getDry() {
+	public Integer getDry() {
 		return dry;
 	}
-	public void setDry(int dry) {
+	public void setDry(Integer dry) {
 		this.dry = dry;
 	}
-	public int getTv() {
+	public Integer getTv() {
 		return tv;
 	}
-	public void setTv(int tv) {
+	public void setTv(Integer tv) {
 		this.tv = tv;
 	}
 	public String getcStatus() {
@@ -129,13 +159,7 @@ public class Category {
 	public void setcStatus(String cStatus) {
 		this.cStatus = cStatus;
 	}
-	@Override
-	public String toString() {
-		return "Category [pensionNo=" + pensionNo + ", swimming=" + swimming + ", barbecue=" + barbecue + ", sing="
-				+ sing + ", park=" + park + ", convenienceStore=" + convenienceStore + ", smokingRoom=" + smokingRoom
-				+ ", dog=" + dog + ", handicapPerson=" + handicapPerson + ", cook=" + cook + ", breakfast=" + breakfast
-				+ ", wifi=" + wifi + ", aircon=" + aircon + ", refrigerator=" + refrigerator + ", bathtub=" + bathtub
-				+ ", dry=" + dry + ", tv=" + tv + ", cStatus=" + cStatus + "]";
-	}
+	
+	
 	
 }

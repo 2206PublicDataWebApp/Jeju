@@ -1,19 +1,17 @@
 package com.jeju.pension.service;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.store.PensionStore;
-import com.jeju.review.domain.Review;
+import com.jeju.room.domain.Room;
+import com.jeju.room.domain.RoomAttach;
 
 @Service
 public class PensionServiceImpl implements PensionService{
@@ -52,21 +50,6 @@ public class PensionServiceImpl implements PensionService{
 		List<Pension> rList = pStore.selectPensionRank(session, pensionNo);
 		return rList;
 	}
-
-import com.jeju.category.domain.Category;
-import com.jeju.pension.domain.Pension;
-import com.jeju.pension.store.PensionStore;
-import com.jeju.room.domain.Room;
-import com.jeju.room.domain.RoomAttach;
-
-@Service
-public class PensionServiceImpl implements PensionService{
-
-	@Autowired
-	private SqlSessionTemplate session;
-	
-	@Autowired
-	private PensionStore pStore;
 
 	// 숙소 번호 가져오기
 	@Override

@@ -3,20 +3,37 @@ package com.jeju.room.domain;
 import java.sql.Date;
 
 public class Room {
-	private int roomNo;
+	private Integer roomNo;
 	private Date startTime;
 	private Date endTime;
-	private char rStatus;
+	private String rStatus;
 	private String price;
 	private String roomName;
-	private char delStatus;
-	private int pensionNo;
+	private String delStatus;
+	private Integer refPensionNo;
 	private int maxPersonnel;
-	
-	public int getRoomNo() {
+	@Override
+	public String toString() {
+		return "Room [roomNo=" + roomNo + ", startTime=" + startTime + ", endTime=" + endTime + ", rStatus=" + rStatus
+				+ ", price=" + price + ", roomName=" + roomName + ", delStatus=" + delStatus + ", refPensionNo="
+				+ refPensionNo + ", maxPersonnel=" + maxPersonnel + "]";
+	}
+	public Room(Integer roomNo, Date startTime, Date endTime, String rStatus, String price, String roomName,
+			String delStatus, Integer refPensionNo, int maxPersonnel) {
+		this.roomNo = roomNo;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.rStatus = rStatus;
+		this.price = price;
+		this.roomName = roomName;
+		this.delStatus = delStatus;
+		this.refPensionNo = refPensionNo;
+		this.maxPersonnel = maxPersonnel;
+	}
+	public Integer getRoomNo() {
 		return roomNo;
 	}
-	public void setRoomNo(int roomNo) {
+	public void setRoomNo(Integer roomNo) {
 		this.roomNo = roomNo;
 	}
 	public Date getStartTime() {
@@ -31,10 +48,10 @@ public class Room {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	public char getrStatus() {
+	public String getrStatus() {
 		return rStatus;
 	}
-	public void setrStatus(char rStatus) {
+	public void setrStatus(String rStatus) {
 		this.rStatus = rStatus;
 	}
 	public String getPrice() {
@@ -49,101 +66,17 @@ public class Room {
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	public char getDelStatus() {
+	public String getDelStatus() {
 		return delStatus;
 	}
-	public void setDelStatus(char delStatus) {
+	public void setDelStatus(String delStatus) {
 		this.delStatus = delStatus;
 	}
-	public int getPensionNo() {
-		return pensionNo;
+	public Integer getRefPensionNo() {
+		return refPensionNo;
 	}
-	public void setPensionNo(int pensionNo) {
-		this.pensionNo = pensionNo;
-	}
-	public int getMaxPersonnel() {
-		return maxPersonnel;
-	}
-	public void setMaxPersonnel(int maxPersonnel) {
-		this.maxPersonnel = maxPersonnel;
-	}
-	@Override
-	public String toString() {
-		return "Room [roomNo=" + roomNo + ", startTime=" + startTime + ", endTime=" + endTime + ", rStatus=" + rStatus
-				+ ", price=" + price + ", roomName=" + roomName + ", delStatus=" + delStatus + ", pensionNo="
-				+ pensionNo + ", maxPersonnel=" + maxPersonnel + "]";
-	}
-	
-public class Room {
-	 private int roomNo;
-	   private Date startTime;
-	   private Date endTime;
-	   private char rStatus;
-	   private int price;
-	   private String roomName;
-	   private char delStatus;
-	   private int pensionNo;
-	   private int maxPersonnel;
-	   
-	public Room(int roomNo, Date startTime, Date endTime, char rStatus, int price, String roomName, char delStatus,
-			int pensionNo, int maxPersonnel) {
-		this.roomNo = roomNo;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.rStatus = rStatus;
-		this.price = price;
-		this.roomName = roomName;
-		this.delStatus = delStatus;
-		this.pensionNo = pensionNo;
-		this.maxPersonnel = maxPersonnel;
-	}
-	public int getRoomNo() {
-		return roomNo;
-	}
-	public void setRoomNo(int roomNo) {
-		this.roomNo = roomNo;
-	}
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-	public char getrStatus() {
-		return rStatus;
-	}
-	public void setrStatus(char rStatus) {
-		this.rStatus = rStatus;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public String getRoomName() {
-		return roomName;
-	}
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-	public char getDelStatus() {
-		return delStatus;
-	}
-	public void setDelStatus(char delStatus) {
-		this.delStatus = delStatus;
-	}
-	public int getPensionNo() {
-		return pensionNo;
-	}
-	public void setPensionNo(int pensionNo) {
-		this.pensionNo = pensionNo;
+	public void setRefPensionNo(Integer refPensionNo) {
+		this.refPensionNo = refPensionNo;
 	}
 	public int getMaxPersonnel() {
 		return maxPersonnel;

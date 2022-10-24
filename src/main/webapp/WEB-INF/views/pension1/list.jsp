@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>펜션 목록</title>
+    <title>숙소 목록</title>
     <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
@@ -59,7 +59,7 @@
                             
                         </div>
                         <div class="col-md-4 logo">
-                            <img src="assets/images/logo.png" alt="">
+                            <img src="/resources/assets/images/logo.png" alt="">
                             <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
                         </div>
                         
@@ -71,6 +71,7 @@
                    <div class="row nav-row">
                        <ul>
                            <li><a href="/home">홈</a></li>
+                           <li><a href="/notice/list">공지사항</a></li>
                            <li><a href="/pension/list">숙소 리스트</a></li>
                            <li><a href="#">커뮤니티</a></li>
                            <li><a href="/myPage/myPage">마이페이지</a></li>
