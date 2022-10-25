@@ -16,9 +16,17 @@
 		<result property="maxPersonnel" column="MAX_PERSONNEL"/>
 	</resultMap>
 	
+	<select id="selectRoom" resultMap="roomResultMap">
+		SELECT * FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}
+	</select>
+	
 	<select id="selectRoomNo" resultType="_int">
 		SELECT ROOM_NO FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}
 	</select>
+	
+<!-- 	<select id="selectRoomAttachNo" resultType="java.util.ArrayList"> -->
+<!-- 		SELECT ROOM_NO FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo} -->
+<!-- 	</select> -->
 	
 	<insert id="insertRoom">
 		INSERT INTO ROOM_TBL

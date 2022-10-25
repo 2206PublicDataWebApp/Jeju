@@ -23,6 +23,16 @@
 		<result property="tv" 				column="TV"/>
 		<result property="cStatus" 			column="C_STATUS"/>
 	</resultMap>
+	
+<!-- 	<select id="selectPensionCategory" resultMap="categoryResultMap"> -->
+<!-- 		SELECT  -->
+<!-- 		    SWIMMING,BARBECUE,SING,PARK,CONVENIENCE_STORE,SMOKING_ROOM,DOG -->
+<!-- 		    ,HANDICAP_PERSON,COOK,BREAKFAST,WIFI,AIRCON,REFRIGERATOR,BATHTUB,DRY,TV -->
+<!-- 		FROM CATEGORY_TBL WHERE REF_PENSION_NUMBER = #{refPensionNumber} -->
+<!-- 	</select> -->
+	<select id="selectCategory" resultMap="categoryResultMap">
+		SELECT * FROM CATEGORY_TBL WHERE REF_PENSION_NUMBER = #{refPensionNumber}
+	</select>
 	<insert id="insertCategory">
 		INSERT INTO CATEGORY_TBL
 		VALUES(#{refPensionNumber},#{swimming},#{barbecue},#{sing},#{park},#{convenienceStore}

@@ -69,7 +69,6 @@ public class PensionStoreLogic implements PensionStore{
 
 	@Override
 	public List<Pension> selectReviewRank(SqlSession session) {
-		System.out.println("�ù�");
 		List<Pension> rList = session.selectList("ReviewMapper.selectReviewRank");
 		return rList;
 	}
@@ -78,6 +77,42 @@ public class PensionStoreLogic implements PensionStore{
 	public List<Pension> selectPensionRank(SqlSession session, Pension pensionNo) {
 		List<Pension> rList = session.selectOne("PensionMapper.selectPensionRank", pensionNo);
 		return rList;
+	}
+	// 숙소 상세페이지
+	@Override
+	public Pension selectOnePension(SqlSession session, Integer pensionNo) {
+		Pension pension = session.selectOne("PensionMapper.selectPension", pensionNo);
+		return pension;
+	}
+	// 숙소 카테고리 가져오기
+//	@Override
+//	public Category selectPensionCategory(SqlSession session, Integer pensionNo) {
+//		Category category= session.selectOne("CategoryMapper.selectPensionCategory", pensionNo);
+//		return category;
+//	}
+	// 숙소 이름 중복체크
+	@Override
+	public int checkPensionName(SqlSession session, String pensionName) {
+		int result = session.selectOne("PensionMapper.selectPensionName", pensionName);
+		return result;
+	}
+	// 객실 가져오기
+	@Override
+	public List<Room> selectRoom(SqlSession session, Integer pensionNo) {
+		List<Room> rList = session.selectList("RoomMapper.selectRoom", pensionNo);
+		return rList;
+	}
+	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
+//	@Override
+//	public List<Integer> selectRoomAttachNo(SqlSession session, Integer pensionNo) {
+//		List<Integer> roomNo = session.selectOne("RoomMapper.selectRoomAttachNo", pensionNo);
+//		return roomNo;
+//	}
+	// 카테고리 가져오기
+	@Override
+	public List<Category> selectCategoryCheck(SqlSession session, Integer pensionNo) {
+		List<Category> category = session.selectList("CategoryMapper.selectCategory", pensionNo);
+		return category;
 	}
 	
 	

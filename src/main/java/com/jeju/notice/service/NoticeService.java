@@ -17,5 +17,7 @@ public interface NoticeService {
 	int modifyNotice(Notice notice);
 	// 공지사항 삭제
 	void removeNotice(int noticeNo);
+	// 공지사항 조회수
+	void updateViewCount(Integer noticeNo);
 		
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,7 +107,32 @@ public class PensionController {
 			mv.setViewName("redirect:/home");
 			return mv;
 		}
-
+		// 숙소 이름 중복 체크
+		@ResponseBody
+		@RequestMapping(
+				value="/pension/checkPensionName"
+				, method=RequestMethod.GET)
+		public int checkPensionName(@RequestParam("pensionName") String pensionName) {
+			int result = pService.checkPensionName(pensionName);
+			return result;
+		}
+		// 숙소 상세페이지
+		@RequestMapping(value="/pension/detailView", method=RequestMethod.GET)
+		public ModelAndView pensionDetailView(
+				ModelAndView mv
+				,@RequestParam("pensionNo") Integer pensionNo) {
+			Pension pension = pService.selecteOnePension(pensionNo);
+			List<Category> category = pService.selectCategoryCheck(pensionNo);
+			System.out.println(category);
+//			Category category = pService.selectPensionCategory(pensionNo);
+			List<Room> rList = pService.selecteRoom(pensionNo);
+//			List<Integer> roomNo = pService.selecteRoomAttachNo(pensionNo);
+//			System.out.println(roomNo);
+			mv.addObject("rList", rList);
+			mv.addObject("pension", pension);
+			mv.setViewName("/pension/detailView");
+			return mv;
+		}
 
 	
 //	@RequestMapping(value="/pension/list", method=RequestMethod.GET)

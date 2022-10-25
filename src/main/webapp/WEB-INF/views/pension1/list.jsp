@@ -127,7 +127,7 @@
 									</div>
 									<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 										<ul class="modify">
-											<li class="test4"><h2 style="font-size : 25px;">${pension.pensionName }</h2></li>
+											<li class="test4"><h2 style="font-size : 25px;"><a href="/pension/detailView?pensionNo=${pension.pensionNo }">${pension.pensionName }</a></h2></li>
 											<li class="test4">${pension.pensionAddr }</li>
 											<li class="test4">${pension.pensionPrice }</li>
 											<li class="test4">리뷰 364</li>

@@ -49,5 +49,14 @@ public class RoomAttach {
 	public void setRoomFileName(String roomFileName) {
 		this.roomFileName = roomFileName;
 	}
+	public RoomAttach(String roomPath, char roomImage, int roomOrd, int roomNo, String roomFileRename,
+			String roomFileName) {
+		this.roomPath = roomPath;
+		this.roomImage = roomImage;
+		this.roomOrd = roomOrd;
+		this.roomNo = roomNo;
+		this.roomFileRename = roomFileRename;
+		this.roomFileName = roomFileName;
+	}
 	
 }

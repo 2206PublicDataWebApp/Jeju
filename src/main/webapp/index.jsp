@@ -9,9 +9,6 @@
 <body>
 	<div>
 		<jsp:forward page="/home" />
-		<button onclick="location.href='/home';">Visit Our WebSite!</button>
-		<button onclick="location.href='';">펜션 리스트</button>
 	</div>
-
 </body>
 </html>

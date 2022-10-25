@@ -49,7 +49,6 @@
 <!--################### Slider Starts Here #######################--->
 
     <div class="slider-detail">
-
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -63,14 +62,11 @@
                         <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
                             전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
                             언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
-
                         <div class="row vbh">
-
                             <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
-
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="/resources/assets/images/slider/slid_2.jpg" alt="Third slide">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
@@ -78,13 +74,11 @@
                         <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
                             전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
                             언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
-
                         <div class="row vbh">
                             <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -95,10 +89,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-
     </div>
-       
        
           <!--*************** About Us Starts Here ***************-->
    
@@ -182,9 +173,6 @@
                  </div>
            </div>      
         </div>
-        
-  <!-- ######## Our Team End ####### --> 
-       
         
     <!--################### Destinations Starts Here #######################--->
         

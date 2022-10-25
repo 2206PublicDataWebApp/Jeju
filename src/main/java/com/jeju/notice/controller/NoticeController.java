@@ -2,8 +2,14 @@ package com.jeju.notice.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,10 +57,37 @@ public class NoticeController {
 	public ModelAndView noticeDetailView(
 			ModelAndView mv
 			, @RequestParam("noticeNo") Integer noticeNo
-			, @RequestParam("page") int page) {
+			, @RequestParam("page") int page
+			, HttpServletRequest request
+			, HttpServletResponse response) {
 		Notice notice = nService.selectOneNo(noticeNo);
 		mv.addObject("page", page);
 		mv.addObject("notice", notice);
+		// 조회수 로직 
+		Cookie oldCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("postView")) {
+					oldCookie = cookie;
+				}
+			}
+		}
+		if(oldCookie != null) {
+			if(!oldCookie.getValue().contains("["+ noticeNo.toString()+"]")) {
+				this.nService.updateViewCount(noticeNo);
+				oldCookie.setValue(oldCookie.getValue() + "_[" + noticeNo + "]");
+				oldCookie.setPath("/");
+				oldCookie.setMaxAge(60 * 60 * 24); 		// 쿠키 시간
+				response.addCookie(oldCookie);
+			}
+		}else {
+			this.nService.updateViewCount(noticeNo);
+			Cookie newCookie = new Cookie("postView", "[" + noticeNo + "]");
+			newCookie.setPath("/");
+			newCookie.setMaxAge(60 * 60 * 24); 								// 쿠키 시간
+			response.addCookie(newCookie);
+		}
 		mv.setViewName("notice/detailView");
 		return mv;
 	}
@@ -102,4 +135,8 @@ public class NoticeController {
 		mv.setViewName("redirect:/notice/list?page="+page);
 		return mv;
 	}
+	
+	
+	
+	
 }

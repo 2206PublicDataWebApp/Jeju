@@ -93,7 +93,7 @@
 		                            <div style="float: left; font-size: 21px; font-weight: bold"><a href="/notice/detail?noticeNo=${notice.noticeNo }&page=${currentPage }" >${notice.noticeTitle}</a></div>
 		                        </div>
 		                    </div>
-		                    <div style="float: left; font-weight: bold; color: rgb(173, 173, 173);">${notice.regDate }  조회수${notice.noticeCount }</div>
+		                    <div style="float: left; font-weight: bold; color: rgb(173, 173, 173);">${notice.regDate }  조회수 ${notice.noticeCount }</div>
 		                </div>
 		                <hr>
 	                </c:forEach>
