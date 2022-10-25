@@ -13,7 +13,6 @@
 	<div class="login-area">
 <%-- 		<c:if test="${empty sessionScope.loginUser }">	 --%>
 		<c:if test="${sessionScope.loginUser eq null }">
-<!-- 		세션이 없데 그니까 로그인 창을 보여줌 -->
 			<form action="/member/login.kh" method="post">
 				<table align="right">
 					<tr>

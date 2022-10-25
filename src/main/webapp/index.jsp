@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div>
-		<button onclick="location.href='/home';">Visit Our WebSite!</button>
+		<button onclick="location.href='/home.kh';">Visit Our WebSite!</button>
 		<button onclick="location.href='';">펜션 리스트</button>
 	</div>
 <%-- 	<jsp:forward page="/home.kh"></jsp:forward> --%>

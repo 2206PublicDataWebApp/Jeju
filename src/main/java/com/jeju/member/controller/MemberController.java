@@ -27,17 +27,14 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-//	private void doGet() {
-//		// TODO Auto-generated method stub
-//		request.getRequestDispatcher("/WEB-INF/views/member/join.jsp").forward(request, response);
-//	}
-	
-	// 회원가입할때 회원가입 페이지 보여줌
+
+	// 회원가입할때 회원가입 페이지 
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
 	public String memberJoinView(Model model) {
 		return "member/join";
 		// /WEB-INF/views/member/join.jsp
 	}
+	// login 페이지 
 	@RequestMapping(value="/member/loginView.kh", method=RequestMethod.GET)
 	public String memberLoginView(Model model) {
 		return "member/login";
@@ -46,53 +43,57 @@ public class MemberController {
 	//  회원정보를 DB에 저장하는 URL
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)
 	public ModelAndView memberJoin(
-			// ModelAttribute를 쓸 때 jsp의 input태그의 name값은 VO의 멤버변수 명과 같아야 함
-			// 다른게 있다면 Member객체에서 그 값은 안들어감.
+			
 			@ModelAttribute Member member
 			, @RequestParam("post") String post
 			, @RequestParam("address1") String address1
 			, @RequestParam("address2") String address2
 //			, Model model
 			, ModelAndView mv) {
-		// request.setCharacterEncoding("utf-8");
+
 		try {
-//			Member member 
-//			= new Member(memberId, memberPwd, memberName, memberEmail, memberPhone
-//					, post + "," + memberAddress);
+			
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
 			
 			if(result > 0) {
-				// response.sendRedirect("/member/list.kh");
-				//return "redirect:/home.kh";
-				
-				mv.setViewName("redirect:/member/joinView.kh");
+	
+				mv.setViewName("redirect:/member/loginView.kh");
 			}else {
-				//model.addAttribute("msg", "회원가입실패");
-				//return "common/errorPage";
+		
 				mv.addObject("msg", "회원가입을 실패했습니다.");
 				mv.setViewName("common/errorPage");
 			}
 		} catch (Exception e) {
-			//model.addAttribute("msg", e.getMessage());
-			//return "common/errorPage";
+		
 			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}
 		return mv;
 	}
 	// 로그인 기능
-	@RequestMapping(value="/member/login.kh", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public ModelAndView memberLogin(
-			@ModelAttribute Member member
+			@RequestParam("memberId") String memberId
+			,@RequestParam("memberPwd") String memberPwd
 			, ModelAndView mv
 			, HttpServletRequest request) {
 		try {
+			Member member = new Member();
+			member.setMemberId(memberId);
+			member.setMemberPwd(memberPwd);
+			System.out.println(memberId);
+			System.out.println(memberPwd);
 			Member loginUser = mService.loginMember(member);
+			System.out.println(loginUser);
 			if(loginUser != null) {
+				System.out.println("성공");
 				HttpSession session = request.getSession();
+//				
 				session.setAttribute("loginUser", loginUser);
-				mv.setViewName("redirect:/home.kh");
+				
+				mv.setViewName("redirect:/member/loginView.kh");
+				
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");

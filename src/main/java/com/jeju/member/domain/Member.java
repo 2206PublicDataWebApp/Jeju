@@ -1,7 +1,4 @@
 package com.jeju.member.domain;
-
-
-
 import java.sql.Date;
 
 public class Member {
@@ -22,6 +19,8 @@ public class Member {
 	private String gender;
 	private Date birthDate;
 	private String mStatus;
+	
+	public Member () {}
 	public String getMemberId() {
 		return memberId;
 	}
