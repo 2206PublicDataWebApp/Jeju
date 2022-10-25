@@ -254,7 +254,7 @@
                     </div>
                     
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item" id="button1" title="결제하기 버튼">결제하기</li>
+                      <li class="list-group-item" id="button1" title="결제하기 버튼" onclick="iamport();">결제하기</li>
                       <li class="list-group-item" id="button2">나중에 결제<div>(회원만 가능)</div></li>   
                     </ul>
 
@@ -436,94 +436,124 @@
      <script>
      
      
-     $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#phoneDoubleChk").val() == "true" && $("#nameChk").val() != null){
- 	    	alert("예약이 완료되었습니다.");
- 	    }else{
- 	    	alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
- 	    	if(!$("#agreement1").prop("checked")){
- 	    		$("#successChk1").text("동의 해주시기 바랍니다.");
- 				$("#successChk1").css("color", "red");
- 	    	}
- 	    	if(!$("#agreement2").prop("checked")) {
- 	    		$("#successChk2").text("동의 해주시기 바랍니다.");
- 				$("#successChk2").css("color", "red");
- 	    	}
- 	    	if(!$("#agreement3").prop("checked")) {
- 	    		$("#successChk3").text("동의 해주시기 바랍니다.");
- 				$("#successChk3").css("color", "red");
-	    	}
- 	    	var nameChk = $("#nameChk").val();
- 	    	if(nameChk == ""){
- 	    		console.log($("#nameChk").val());
- 	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
- 				$("#successNameChk").css("color", "red");
- 	    	}
- 	    	if($("#phoneDoubleChk").val() != "true"){
- 	    		console.log($("#phoneDoubleChk").val());
- 	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
- 				$(".successPhoneChk").css("color", "red");	    		
- 	    	}
- 	    	return false
- 	    }    	    	
-     });
+     function iamport(){
+ 		//가맹점 식별코드
+ 		IMP.init('imp28778843');
+ 		IMP.request_pay({
+ 		    pg : 'KG이니시스 API',
+ 		    pay_method : 'card',
+ 		    merchant_uid : 'merchant_' + new Date().getTime(),
+ 		    name : '한재민' ,
+ 		    amount : 100, //실제 결제되는 가격
+ 		    buyer_email : 'iamport@siot.do',
+ 		    buyer_name : '구매자이름',
+ 		    buyer_tel : '010-1234-5678',
+ 		    buyer_addr : '서울 강남구 도곡동',
+ 		    buyer_postcode : '123-456'
+ 		}, function(rsp) {
+ 			console.log(rsp);
+ 		    if ( rsp.success ) {
+ 		    	var msg = '결제가 완료되었습니다.';
+ 		        msg += '고유ID : ' + rsp.imp_uid;
+ 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+ 		        msg += '결제 금액 : ' + rsp.paid_amount;
+ 		        msg += '카드 승인번호 : ' + rsp.apply_num;
+ 		    } else {
+ 		    	 var msg = '결제에 실패하였습니다.';
+ 		         msg += '에러내용 : ' + rsp.error_msg;
+ 		    }
+ 		    alert(msg);
+ 		});
+ 	}
+
+//      $("#button1").click(function(){
+//  	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#phoneDoubleChk").val() == "true" && $("#nameChk").val() != null){
+//  	    	alert("예약이 완료되었습니다.");
+//  	    }else{
+//  	    	alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
+//  	    	if(!$("#agreement1").prop("checked")){
+//  	    		$("#successChk1").text("동의 해주시기 바랍니다.");
+//  				$("#successChk1").css("color", "red");
+//  	    	}
+//  	    	if(!$("#agreement2").prop("checked")) {
+//  	    		$("#successChk2").text("동의 해주시기 바랍니다.");
+//  				$("#successChk2").css("color", "red");
+//  	    	}
+//  	    	if(!$("#agreement3").prop("checked")) {
+//  	    		$("#successChk3").text("동의 해주시기 바랍니다.");
+//  				$("#successChk3").css("color", "red");
+// 	    	}
+//  	    	var nameChk = $("#nameChk").val();
+//  	    	if(nameChk == ""){
+//  	    		console.log($("#nameChk").val());
+//  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
+//  				$("#successNameChk").css("color", "red");
+//  	    	}
+//  	    	if($("#phoneDoubleChk").val() != "true"){
+//  	    		console.log($("#phoneDoubleChk").val());
+//  	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//  				$(".successPhoneChk").css("color", "red");	    		
+//  	    	}
+//  	    	return false
+//  	    }    	    	
+//      });
 	
      
      
-	    var code2 = "";
-	    $("#phoneChk").click(function(){
-	    	if($("#phone").val() != "") {
-	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-		    	var phone = $("#phone").val();
-		    	$.ajax({
-		            type:"GET",
-		            url:"/reservation/phoneCheck?memberPhone=" + phone,
-		            cache : false,
-		            success:function(data){
-		            	if(data == "error"){
-		            		alert("휴대폰 번호가 올바르지 않습니다.");
-		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-		    				$(".successPhoneChk").css("color","red");
-		    				$("#phone").attr("autofocus",true);
-		            	}else{	        		
-		            		$("#phone2").attr("disabled",false);
-		            		$("#phoneChk2").css("display","inline-block");
-		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-		            		$(".successPhoneChk").css("color","green");
-		            		$("#phone").attr("readonly",true);
-		            		code2 = data;
-		            	}
-		            }
-		        });
-	    	}else {
-	    		alert("휴대폰 번호를 입력해주세요.");
-	    	}
-	    });
+// 	    var code2 = "";
+// 	    $("#phoneChk").click(function(){
+// 	    	if($("#phone").val() != "") {
+// 	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+// 		    	var phone = $("#phone").val();
+// 		    	$.ajax({
+// 		            type:"GET",
+// 		            url:"/reservation/phoneCheck?memberPhone=" + phone,
+// 		            cache : false,
+// 		            success:function(data){
+// 		            	if(data == "error"){
+// 		            		alert("휴대폰 번호가 올바르지 않습니다.");
+// 		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+// 		    				$(".successPhoneChk").css("color","red");
+// 		    				$("#phone").attr("autofocus",true);
+// 		            	}else{	        		
+// 		            		$("#phone2").attr("disabled",false);
+// 		            		$("#phoneChk2").css("display","inline-block");
+// 		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+// 		            		$(".successPhoneChk").css("color","green");
+// 		            		$("#phone").attr("readonly",true);
+// 		            		code2 = data;
+// 		            	}
+// 		            }
+// 		        });
+// 	    	}else {
+// 	    		alert("휴대폰 번호를 입력해주세요.");
+// 	    	}
+// 	    });
 
 	    
-	    $("#phoneChk2").click(function(){
-	    	if($("#phone2").val() == code2){
-	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
-	    		$(".successPhoneChk").css("color","green");
-	    		$("#phoneDoubleChk").val("true");
-	    		$("#phone2").attr("disabled",true);
-	    	}else{
-	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-	    		$(".successPhoneChk").css("color","red");
-	    		$("#phoneDoubleChk").val("false");
-	    		$(this).attr("autofocus",true);
-	    	}
-	    });
+// 	    $("#phoneChk2").click(function(){
+// 	    	if($("#phone2").val() == code2){
+// 	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
+// 	    		$(".successPhoneChk").css("color","green");
+// 	    		$("#phoneDoubleChk").val("true");
+// 	    		$("#phone2").attr("disabled",true);
+// 	    	}else{
+// 	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+// 	    		$(".successPhoneChk").css("color","red");
+// 	    		$("#phoneDoubleChk").val("false");
+// 	    		$(this).attr("autofocus",true);
+// 	    	}
+// 	    });
 
-	    function clickshow(elem,ID) {
-	    	 var menu = document.getElementById(ID);
-	    	 if (elem.className !='closed') {
-	    	    elem.className = 'closed';
-	    	    menu.style.display = "none";
-	    	 } else {
-	    	    elem.className ='opened';
-	    	    menu.style.display ="block";
-	    	}}
+// 	    function clickshow(elem,ID) {
+// 	    	 var menu = document.getElementById(ID);
+// 	    	 if (elem.className !='closed') {
+// 	    	    elem.className = 'closed';
+// 	    	    menu.style.display = "none";
+// 	    	 } else {
+// 	    	    elem.className ='opened';
+// 	    	    menu.style.display ="block";
+// 	    	}}
     </script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>
@@ -531,4 +561,5 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
+    
 </html>
