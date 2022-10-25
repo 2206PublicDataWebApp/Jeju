@@ -28,10 +28,12 @@
 					<c:if test="${search.pensionPrice == '판매 완료'}">
 						<li class="test4">${search.pensionPrice }</li>
 					</c:if>
-					<c:if test="${search.pensionPrice != '판매 완료' }">
+					<c:if test="${search.pensionPrice != '판매 완료' && search.pensionPrice != '다른날짜 확인'}">
 						<li class="test4">${search.pensionPrice }원</li>
 					</c:if>
-					<li class="test4">${search.pensionPrice }</li>
+					<c:if test="${search.pensionPrice == '다른날짜 확인' }">
+						<li class="test4">${search.pensionPrice }</li>
+					</c:if>
 					<li class="test4">리뷰 364</li>
 				</ul>
 			</div>
