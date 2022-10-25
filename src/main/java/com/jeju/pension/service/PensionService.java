@@ -34,5 +34,9 @@ public interface PensionService {
 
 	List<Pension> selectPensionRank(Pension pension);
 
+	List<Pension> selectDate(long diffDays);
+
+	List<Pension> selectPrice();
+
 
 }

@@ -24,18 +24,16 @@ public class ReservationController {
 		return "reservation/list";
 	}
 	
-	//ÈÞ´ëÆùÀÎÁõ ÄÁÆ®·Ñ·¯
 	@RequestMapping(value = "/reservation/phoneCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public String sendSMS(@RequestParam("memberPhone") String userPhoneNumber) { // ÈÞ´ëÆù ¹®ÀÚº¸³»±â
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//³­¼ö »ý¼º
+	public String sendSMS(@RequestParam("memberPhone") String userPhoneNumber) { // ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ï¿½ï¿½
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		aService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		
 		return Integer.toString(randomNumber);
 	}
 	
-	//¿¹¾àÇÏ±â
 	@RequestMapping(value = "/reservation/add", method = RequestMethod.POST)
 	public ModelAndView addReservation(
 			ModelAndView mv,
@@ -44,4 +42,6 @@ public class ReservationController {
 		int result = aService.addReservation(reservation);
 		return mv;	
 	}
+	
+	
 }

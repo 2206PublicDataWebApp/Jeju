@@ -1,175 +1,179 @@
 package com.jeju.pension.domain;
 
 public class Pension {
-   private Integer pensionNo;
-   private String memberId;
-   private String pensionName;
-   private String category;
-   private String pensionAddr;
-   private String pensionComments;
-   private String pensionPrice;
-   private int hardness;
-   private int latitude;
-   private String cancelPension;
-   private int pensionCheckin;
-   private int pensionCheckout;
-   private String filePath;
-   private String fileImage;
-   private String pensionFileName;
-   private String pensionFileRename;
-   
-   public Pension () {}
+	private int pensionNo;
+	private String memberId;
+	private String pensionName;
+	private String category;
+	private String pensionAddr;
+	private String pensionComments;
+	private String pensionPrice;
+	private int hardness;
+	private int latitude;
+	private String cancelPension;
+	private int pensionCheckin;
+	private int pensionCheckout;
+	private String filePath;
+	private String fileImage;
+	private String pensionFileName;
+	private String pensionFileRename;
 
-   public Integer getPensionNo() {
-      return pensionNo;
-   }
+	public Pension () {}
 
-   public void setPensionNo(Integer pensionNo) {
-      this.pensionNo = pensionNo;
-   }
+	public int getPensionNo() {
+		return pensionNo;
+	}
 
-   public String getMemberId() {
-      return memberId;
-   }
+	public void setPensionNo(int pensionNo) {
+		this.pensionNo = pensionNo;
+	}
 
-   public void setMemberId(String memberId) {
-      this.memberId = memberId;
-   }
+	public String getMemberId() {
+		return memberId;
+	}
 
-   public String getPensionName() {
-      return pensionName;
-   }
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
-   public void setPensionName(String pensionName) {
-      this.pensionName = pensionName;
-   }
+	public String getPensionName() {
+		return pensionName;
+	}
 
-   public String getCategory() {
-      return category;
-   }
+	public void setPensionName(String pensionName) {
+		this.pensionName = pensionName;
+	}
 
-   public void setCategory(String category) {
-      this.category = category;
-   }
+	public String getCategory() {
+		return category;
+	}
 
-   public String getPensionAddr() {
-      return pensionAddr;
-   }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-   public void setPensionAddr(String pensionAddr) {
-      this.pensionAddr = pensionAddr;
-   }
+	public String getPensionAddr() {
+		return pensionAddr;
+	}
 
-   public String getPensionComments() {
-      return pensionComments;
-   }
+	public void setPensionAddr(String pensionAddr) {
+		this.pensionAddr = pensionAddr;
+	}
 
-   public void setPensionComments(String pensionComments) {
-      this.pensionComments = pensionComments;
-   }
+	public String getPensionComments() {
+		return pensionComments;
+	}
 
-   public String getPensionPrice() {
-      return pensionPrice;
-   }
+	public void setPensionComments(String pensionComments) {
+		this.pensionComments = pensionComments;
+	}
 
-   public void setPensionPrice(String pensionPrice) {
-      this.pensionPrice = pensionPrice;
-   }
+	public String getPensionPrice() {
+		return pensionPrice;
+	}
 
-   public int getHardness() {
-      return hardness;
-   }
+	public void setPensionPrice(String pensionPrice) {
+		this.pensionPrice = pensionPrice;
+	}
 
-   public void setHardness(int hardness) {
-      this.hardness = hardness;
-   }
+	public int getHardness() {
+		return hardness;
+	}
 
-   public int getLatitude() {
-      return latitude;
-   }
+	public void setHardness(int hardness) {
+		this.hardness = hardness;
+	}
 
-   public void setLatitude(int latitude) {
-      this.latitude = latitude;
-   }
+	public int getLatitude() {
+		return latitude;
+	}
 
-   public String getCancelPension() {
-      return cancelPension;
-   }
+	public void setLatitude(int latitude) {
+		this.latitude = latitude;
+	}
 
-   public void setCancelPension(String cancelPension) {
-      this.cancelPension = cancelPension;
-   }
+	public String getCancelPension() {
+		return cancelPension;
+	}
 
-   public int getPensionCheckin() {
-      return pensionCheckin;
-   }
+	public void setCancelPension(String cancelPension) {
+		this.cancelPension = cancelPension;
+	}
 
-   public void setPensionCheckin(int pensionCheckin) {
-      this.pensionCheckin = pensionCheckin;
-   }
+	public int getPensionCheckin() {
+		return pensionCheckin;
+	}
 
-   public int getPensionCheckout() {
-      return pensionCheckout;
-   }
+	public void setPensionCheckin(int pensionCheckin) {
+		this.pensionCheckin = pensionCheckin;
+	}
 
-   public void setPensionCheckout(int pensionCheckout) {
-      this.pensionCheckout = pensionCheckout;
-   }
+	public int getPensionCheckout() {
+		return pensionCheckout;
+	}
 
-   public String getFilePath() {
-      return filePath;
-   }
+	public void setPensionCheckout(int pensionCheckout) {
+		this.pensionCheckout = pensionCheckout;
+	}
 
-   public void setFilePath(String filePath) {
-      this.filePath = filePath;
-   }
+	public String getFilePath() {
+		return filePath;
+	}
 
-   public String getFileImage() {
-      return fileImage;
-   }
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
 
-   public void setFileImage(String fileImage) {
-      this.fileImage = fileImage;
-   }
+	public String getFileImage() {
+		return fileImage;
+	}
 
-   public String getPensionFileName() {
-      return pensionFileName;
-   }
+	public void setFileImage(String fileImage) {
+		this.fileImage = fileImage;
+	}
 
-   public void setPensionFileName(String pensionFileName) {
-      this.pensionFileName = pensionFileName;
-   }
+	public String getPensionFileName() {
+		return pensionFileName;
+	}
 
-   public String getPensionFileRename() {
-      return pensionFileRename;
-   }
+	public void setPensionFileName(String pensionFileName) {
+		this.pensionFileName = pensionFileName;
+	}
 
-   public void setPensionFileRename(String pensionFileRename) {
-      this.pensionFileRename = pensionFileRename;
-   }
+	public String getPensionFileRename() {
+		return pensionFileRename;
+	}
 
-   public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
-         String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
-         int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
-         String pensionFileRename) {
-      this.pensionNo = pensionNo;
-      this.memberId = memberId;
-      this.pensionName = pensionName;
-      this.category = category;
-      this.pensionAddr = pensionAddr;
-      this.pensionComments = pensionComments;
-      this.pensionPrice = pensionPrice;
-      this.hardness = hardness;
-      this.latitude = latitude;
-      this.cancelPension = cancelPension;
-      this.pensionCheckin = pensionCheckin;
-      this.pensionCheckout = pensionCheckout;
-      this.filePath = filePath;
-      this.fileImage = fileImage;
-      this.pensionFileName = pensionFileName;
-      this.pensionFileRename = pensionFileRename;
-   }
+	public void setPensionFileRename(String pensionFileRename) {
+		this.pensionFileRename = pensionFileRename;
+	}
 
-   
+	public Pension(int pensionNo, String memberId, String pensionName, String category, String pensionAddr,
+				   String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
+				   int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
+				   String pensionFileRename) {
+		this.pensionNo = pensionNo;
+		this.memberId = memberId;
+		this.pensionName = pensionName;
+		this.category = category;
+		this.pensionAddr = pensionAddr;
+		this.pensionComments = pensionComments;
+		this.pensionPrice = pensionPrice;
+		this.hardness = hardness;
+		this.latitude = latitude;
+		this.cancelPension = cancelPension;
+		this.pensionCheckin = pensionCheckin;
+		this.pensionCheckout = pensionCheckout;
+		this.filePath = filePath;
+		this.fileImage = fileImage;
+		this.pensionFileName = pensionFileName;
+		this.pensionFileRename = pensionFileRename;
+	}
+
+
+
+	public int getPensionNo() {
+		return pensionNo;
+	}
 
 }

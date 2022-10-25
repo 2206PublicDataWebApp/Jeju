@@ -434,6 +434,8 @@
    
     </body>
      <script>
+     
+     
      $("#button1").click(function(){
  	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#phoneDoubleChk").val() == "true" && $("#nameChk").val() != null){
  	    	alert("예약이 완료되었습니다.");
@@ -523,7 +525,7 @@
 	    	    menu.style.display ="block";
 	    	}}
     </script>
-
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
