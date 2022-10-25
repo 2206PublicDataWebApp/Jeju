@@ -66,14 +66,14 @@ span.guide {
 				<form action="/member/register.kh" method="post">
 				아이디 
 				<input type="text" id="memberId" name="memberId">
-<!-- 					<span class="guide ok">이 아이디는 사용 가능합니다.</span> -->
-<!-- 						<span class="guide error">이 아이디는 사용할 수 없습니다.</span> -->
+					<span class="guide ok">이 아이디는 사용 가능합니다.</span> 
+ 						<span class="guide error">이 아이디는 이미 사용중입니다.</span> 
 
-			비밀번호					
-			<input type="password" placeholder="비밀번호" name="memberPwd" id="password">
+								
+			<input type="password" placeholder="비밀번호" name="memberPwd" id="memberPwd">
 			
 					<div class="email_auth">
-						<input type="text" placeholder="이메일" name="email" id="email" class="email">
+						<input type="text" placeholder="이메일" name="memberEmail" id="email" class="email">
  						<button type="button" id="email_auth_btn" class="email_auth_btn">인증번호 받기</button>
 					</div>
 				<input type="text" placeholder="인증번호 입력" id="email_auth_key"> 
@@ -125,58 +125,95 @@ span.guide {
 	 *  회원가입 관련 처리
 	 */
 	 
-	 function fn_join(){
-		var f = $('#join_frm');
-		var formData = f.serialize();
+// 	 function fn_join(){
+// 		var f = $('#join_frm');
+// 		var formData = f.serialize();
 			
-		$.ajax({
-			type : "POST",
-			url : "/join",
-			data : formData,
-			success: function(data){
-				if(data == "Y"){
-					alert("회원가입이 완료되었습니다.");	
-					location.href="/"
-				}else{
-					alert("회원가입에 실패하였습니다.");
-				}
-			},
-			error: function(data){
-				alert("회원가입 에러 발생!");
-				console.log(data);
-			}
-		});
-	 }
+// 		$.ajax({
+// 			type : "POST",
+// 			url : "/join",
+// 			data : formData,
+// 			success: function(data){
+// 				if(data == "Y"){
+// 					alert("회원가입이 완료되었습니다.");	
+// 					location.href="/"
+// 				}else{
+// 					alert("회원가입에 실패하였습니다.");
+// 				}
+// 			},
+// 			error: function(data){
+// 				alert("회원가입 에러 발생!");
+// 				console.log(data);
+// 			}
+// 		});
+// 	 }
 	 
-	 $(function() { 
+	
+// 	 $(function() { 
 	 	
-	 	var email_auth_cd = '';
+// 	 	var email_auth_cd = '';
 	 
-		$('#join').click(function(){
+// 		$('#join').click(function(){
 			
-			if($('#id').val() == ""){
-				alert("아이디를 입력해주세요.");
-				return false;
-			}
+// 			if($('#id').val() == ""){
+// 				alert("아이디를 입력해주세요.");
+// 				return false;
+// 			}
 			
+// 			if($('#nickname').val() == ""){
+// 				alert("닉네임을 입력해주세요.");
+// 				return false;
+// 			}
 			
-			if($('#password').val() == ""){
-				alert("비밀번호를 입력해주세요.");
-				return false;
-			}
+// 			if($('#password').val() == ""){
+// 				alert("비밀번호를 입력해주세요.");
+// 				return false;
+// 			}
 			
-			if($('#password').val() != $('#password_ck').val()){
-				alert("비밀번호가 일치하지 않습니다.");
-				return false;
-			}
+// 			if($('#password').val() != $('#password_ck').val()){
+// 				alert("비밀번호가 일치하지 않습니다.");
+// 				return false;
+// 			}
 			
-			if($('#email_auth_key').val() != email_auth_cd){
-				alert("인증번호가 일치하지 않습니다.");
-				return false;
-			}
+// 			if($('#email_auth_key').val() != email_auth_cd){
+// 				alert("인증번호가 일치하지 않습니다.");
+// 				return false;
+// 			}
 		
-			fn_join();
+// 			fn_join();
+// 		});
+	
+		$("#memberId").on("blur", function() {
+			var memberId = $("#memberId").val();
+			if(memberId == "") {
+				$(".ok").hide();
+				$(".error").hide();
+			}else{
+				$.ajax({
+					url : "/member/checkDupId.kh",
+					data : { "memberId" : memberId },
+					type : "get",
+					success : function(result) {
+						console.log(result);
+						if(result != 0) {
+							// 아이디를 사용할 수 없습니다.
+							// $(".guide.ok").css("display", "none");
+							// $(".guide.ok").css("display", "inline-block");
+							$(".guide.ok").hide();
+							$(".guide.error").show();
+						}else{
+							// 아이디를 사용할 수 있습니다.
+							$(".guide.error").hide();
+							$(".guide.ok").show();
+						}
+					},
+					error : function() {
+						alert("ajax 통신 실패!")
+					}
+				})
+			}
 		});
+		
 		
 		$(".email_auth_btn").click(function(){	     	 
 	    	 var email = $('#email').val();
@@ -220,26 +257,7 @@ span.guide {
 			}); 
 		});
 		
-		$('#nickname').focusout(function(){
-			var nickname = $('#nickname').val();
 		
-			$.ajax({
-				type : "POST",
-				url : "/nicknameCheck",
-				data : {nickname : nickname},
-				success: function(data){
-					if(data == "Y"){
-						$('#nickname_ck').removeClass("dpn");
-					}else{
-						$('#nickname_ck').addClass("dpn");
-					}
-				},
-				error: function(data){
-				}
-			}); 
-		});
-	 });
 	</script>
 </body>
 </html>
-

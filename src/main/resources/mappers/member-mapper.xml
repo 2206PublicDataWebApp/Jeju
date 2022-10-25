@@ -25,7 +25,7 @@
    <select id="selectCheckOne" resultType="_int">
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
-   <insert id="insertMember" parameterType="Member">
+   <insert id="insertMember">
       INSERT INTO MEMBER_TBL
       VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT)
    </insert>
@@ -41,8 +41,8 @@
       WHERE MEMBER_ID = #{memberId }
    </update>
    <select id="selectLoginOne" resultMap="memberResultMap">
-      SELECT MEMBER_ID, MEMBER_NAME, ADMIN_CHECK FROM MEMBER_TBL
-      WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd} AND M_STATUS = 'Y'
+      SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER_TBL
+      WHERE MEMBER_ID = #{memberId } AND MEMBER_PWD = #{memberPwd }
    </select>
    <select id="selectOneById" resultMap="memberResultMap">
       SELECT * FROM MEMBER_TBL
