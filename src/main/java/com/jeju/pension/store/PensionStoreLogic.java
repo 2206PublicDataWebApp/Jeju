@@ -32,7 +32,7 @@ public class PensionStoreLogic implements PensionStore{
 
 	@Override
 	public List<Pension> selectReviewRank(SqlSession session) {
-		System.out.println("½Ã¹ß");
+		System.out.println("ï¿½Ã¹ï¿½");
 		List<Pension> rList = session.selectList("ReviewMapper.selectReviewRank");
 		return rList;
 	}
@@ -41,6 +41,18 @@ public class PensionStoreLogic implements PensionStore{
 	public List<Pension> selectPensionRank(SqlSession session, Pension pensionNo) {
 		List<Pension> rList = session.selectOne("PensionMapper.selectPensionRank", pensionNo);
 		return rList;
+	}
+
+	@Override
+	public List<Pension> selectDate(SqlSession session, long diffDays) {
+		List<Pension> rList = session.selectList("PensionMapper.selectDate", diffDays);
+		return rList;
+	}
+
+	@Override
+	public List<Pension> selectPrice(SqlSession session) {
+		List<Pension> priceList = session.selectList("PensionMapper.selectPrice");
+		return priceList;
 	}
 	
 	

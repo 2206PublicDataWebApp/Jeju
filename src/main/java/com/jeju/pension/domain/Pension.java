@@ -15,27 +15,10 @@ public class Pension {
 	private int pensionCheckout;
 	private String filePath;
 	private String fileImage;
+	private String pensionFileName;
+	private String pensionFileRename;
 	
 	public Pension () {}
-
-	public Pension(int pensionNo, String memberId, String pensionName, String category, String pensionAddr,
-			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
-			int pensionCheckin, int pensionCheckout, String filePath, String fileImage) {
-		this.pensionNo = pensionNo;
-		this.memberId = memberId;
-		this.pensionName = pensionName;
-		this.category = category;
-		this.pensionAddr = pensionAddr;
-		this.pensionComments = pensionComments;
-		this.pensionPrice = pensionPrice;
-		this.hardness = hardness;
-		this.latitude = latitude;
-		this.cancelPension = cancelPension;
-		this.pensionCheckin = pensionCheckin;
-		this.pensionCheckout = pensionCheckout;
-		this.filePath = filePath;
-		this.fileImage = fileImage;
-	}
 
 	public int getPensionNo() {
 		return pensionNo;
@@ -149,7 +132,45 @@ public class Pension {
 		this.fileImage = fileImage;
 	}
 
-	
+	public String getPensionFileName() {
+		return pensionFileName;
+	}
+
+	public void setPensionFileName(String pensionFileName) {
+		this.pensionFileName = pensionFileName;
+	}
+
+	public String getPensionFileRename() {
+		return pensionFileRename;
+	}
+
+	public void setPensionFileRename(String pensionFileRename) {
+		this.pensionFileRename = pensionFileRename;
+	}
+
+	public Pension(int pensionNo, String memberId, String pensionName, String category, String pensionAddr,
+			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
+			int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
+			String pensionFileRename) {
+		this.pensionNo = pensionNo;
+		this.memberId = memberId;
+		this.pensionName = pensionName;
+		this.category = category;
+		this.pensionAddr = pensionAddr;
+		this.pensionComments = pensionComments;
+		this.pensionPrice = pensionPrice;
+		this.hardness = hardness;
+		this.latitude = latitude;
+		this.cancelPension = cancelPension;
+		this.pensionCheckin = pensionCheckin;
+		this.pensionCheckout = pensionCheckout;
+		this.filePath = filePath;
+		this.fileImage = fileImage;
+		this.pensionFileName = pensionFileName;
+		this.pensionFileRename = pensionFileRename;
+	}
+
+
 	
 
 }

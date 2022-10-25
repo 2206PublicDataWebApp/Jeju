@@ -20,4 +20,8 @@ public interface PensionStore {
 
 	List<Pension> selectPensionRank(SqlSession session, Pension pensionNo);
 
+	List<Pension> selectDate(SqlSession session, long diffDays);
+
+	List<Pension> selectPrice(SqlSession session);
+
 }

@@ -18,6 +18,8 @@
 		<result property="pensionCheckout" 	column="PENSION_CHECKOUT"/>
 		<result property="filePath" 			column="FILE_PATH"/>
 		<result property="fileImage" 			column="FILE_IMAGE"/>
+		<result property="pensionFileName" 			column="PENSION_FILE_NAME"/>
+		<result property="pensionFileRename" 			column="PENSION_FILE_RENAME"/>
 	</resultMap>
 	
 	<select id="selectAllPension" resultMap="pensionResultMap">
@@ -32,10 +34,17 @@
 		SELECT * FROM PENSION_TBL WHERE PENSION_NO = #{pension.pensionNo}
 	</select>
 	
+	<select id="selectDate" resultMap="pensionResultMap">
+		SELECT PENSION_NO, PENSION_ADDR, PENSION_PRICE * ${diffDays}, FILE_PATH FROM PENSION_TBL 
+	</select>
+	
+	<select id="selectPrice" resultMap="pensionResultMap">
+		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO FROM PENSION_TBL
+	</select>
 	
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">
-		<result property="pensionNo" 		column="PENSION_NO" />
+		<result property="refPensionNumber" 		column="REF_PENSION_NUMBER" />
 		<result property="swimming" 		column="SWIMMING"/>
 		<result property="barbecue" 		column="BARBECUE"/>
 		<result property="sing" 			column="SING"/>
@@ -108,7 +117,7 @@
 	
 	<!--재민 	카테고리 검색 -->
 	<select id="selectCategory" resultMap="category2ResultMap">
-		SELECT PENSION_NO FROM CATEGORY_TBL WHERE C_STATUS = 0 <include refid="filter"></include>
+		SELECT REF_PENSION_NUMBER FROM CATEGORY_TBL WHERE C_STATUS = 0 <include refid="filter"></include>
 	</select>
 	
 	

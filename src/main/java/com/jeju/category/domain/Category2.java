@@ -1,7 +1,7 @@
 package com.jeju.category.domain;
 
 public class Category2 {
-	private String pensionNo;
+	private String refPensionNumber;
 	private boolean swimming;
 	private boolean barbecue;
 	private boolean sing;
@@ -20,12 +20,12 @@ public class Category2 {
 	private boolean tv;
 	
 	public Category2() {}
-	
-	public Category2(String pensionNo, boolean swimming, boolean barbecue, boolean sing, boolean park,
+
+	public Category2(String refPensionNumber, boolean swimming, boolean barbecue, boolean sing, boolean park,
 			boolean convenienceStore, boolean smokingRoom, boolean dog, boolean handicapPerson, boolean cook,
 			boolean breakfast, boolean wifi, boolean aircon, boolean refrigerator, boolean bathtub, boolean dry,
 			boolean tv) {
-		this.pensionNo = pensionNo;
+		this.refPensionNumber = refPensionNumber;
 		this.swimming = swimming;
 		this.barbecue = barbecue;
 		this.sing = sing;
@@ -44,12 +44,12 @@ public class Category2 {
 		this.tv = tv;
 	}
 
-	public String getPensionNo() {
-		return pensionNo;
+	public String getRefPensionNumber() {
+		return refPensionNumber;
 	}
 
-	public void setPensionNo(String pensionNo) {
-		this.pensionNo = pensionNo;
+	public void setRefPensionNumber(String refPensionNumber) {
+		this.refPensionNumber = refPensionNumber;
 	}
 
 	public boolean isSwimming() {

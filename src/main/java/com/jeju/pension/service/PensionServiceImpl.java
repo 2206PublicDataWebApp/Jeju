@@ -50,4 +50,16 @@ public class PensionServiceImpl implements PensionService{
 		return rList;
 	}
 
+	@Override
+	public List<Pension> selectDate(long diffDays) {
+		List<Pension> rList = pStore.selectDate(session, diffDays);
+		return rList;
+	}
+
+	@Override
+	public List<Pension> selectPrice() {
+		List<Pension> priceList = pStore.selectPrice(session);
+		return priceList;
+	}
+
 }

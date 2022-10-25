@@ -19,10 +19,10 @@
 			<id>oracle</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+
 	
 	</repositories>
 	<dependencies>
-	
 
 	<!-- GSON : List 데이터를 JSON 데이터로 변환해주는 라이브러리 -->
 	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
