@@ -129,6 +129,7 @@ public class PensionController {
 //			System.out.println(roomNo);
 		mv.addObject("rList", rList);
 		mv.addObject("pension", pension);
+		mv.addObject("category", category);
 		mv.setViewName("/pension/detailView");
 		return mv;
 	}
@@ -222,12 +223,9 @@ public class PensionController {
 		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
 		long diffDays = diffSec / (24*60*60); //일자수 차이
 		System.out.println(diffDays);
-
 		ArrayList<Pension> prList = new ArrayList<Pension>();
-
 		//가격리스트 가져옴
 		List<Pension> priceList = pService.selectPrice();
-
 		for(int i=0; i<priceList.size(); i++) {
 			if(priceList.get(i).getPensionPrice() == null) {
 				priceList.get(i).setPensionPrice("판매완료");

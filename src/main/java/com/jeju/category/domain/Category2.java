@@ -1,7 +1,7 @@
 package com.jeju.category.domain;
 
 public class Category2 {
-	private String pensionNo;
+	private String refPensionNumber;
 	private boolean swimming;
 	private boolean barbecue;
 	private boolean sing;

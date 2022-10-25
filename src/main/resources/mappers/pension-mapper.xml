@@ -61,7 +61,7 @@
 
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">
-		<result property="pensionNo" 		column="PENSION_NO" />
+		<result property="refPensionNumber" 		column="REF_PENSION_NUMBER" />
 		<result property="swimming" 		column="SWIMMING"/>
 		<result property="barbecue" 		column="BARBECUE"/>
 		<result property="sing" 			column="SING"/>

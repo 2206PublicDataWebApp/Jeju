@@ -69,22 +69,38 @@
                 </div>
                 <div class="col-md-7 text">
                     <h1>${pension.pensionName }</h1>
+                    <hr>
                     <br>
-                    <h5>숙소 소개</h4>
+                    <h3>숙소 소개</h3><br>
                     <p>${pension.pensionComments } </p>
-                    <br>
-                    <h5>편의시설</h4>
-                    <p>비비큐장 </p>
-                    <p>수영장 </p>
-                    <p>흡연 불가 </p>
-                    <p>객실 내 취사가능 </p>
-                    <br>
-                    <h5>이용 규칙</h4>
+                    <br><hr>
+                    <h3>편의시설</h3><br>
+                    <c:forEach items="${category }" var="category">
+                    	<c:if test="${category.swimming eq 1 }"><p>수영장</p></c:if>
+                    	<c:if test="${category.barbecue eq 1 }"><p>바비큐</p></c:if>
+                    	<c:if test="${category.sing eq 1 }"><p>노래방</p></c:if>
+                    	<c:if test="${category.park eq 1 }"><p>주차장</p></c:if>
+                    	<c:if test="${category.convenienceStore eq 1 }"><p>편의점</p></c:if>
+                    	<c:if test="${category.smokingRoom eq 1 }"><p>흡연</p></c:if>
+                    	<c:if test="${category.dog eq 1 }"><p>애견동반</p></c:if>
+                    	<c:if test="${category.handicapPerson eq 1 }"><p>장애인 편의시설</p></c:if>
+                    	<c:if test="${category.cook eq 1 }"><p>객실 내 취사</p></c:if>
+                    	<c:if test="${category.breakfast eq 1 }"><p>조식</p></c:if>
+                    	<c:if test="${category.wifi eq 1 }"><p>와이파이</p></c:if>
+                    	<c:if test="${category.aircon eq 1 }"><p>에어컨</p></c:if>
+                    	<c:if test="${category.refrigerator eq 1 }"><p>냉장고</p></c:if>
+                    	<c:if test="${category.bathtub eq 1 }"><p>욕조</p></c:if>
+                    	<c:if test="${category.dry eq 1 }"><p>드라이기</p></c:if>
+                    	<c:if test="${category.tv eq 1 }"><p>TV</p></c:if>
+                    </c:forEach>
+                    <br><hr>
+                    <h3>이용 규칙</h4><br>
                     <p>체크인 : ${pension.pensionCheckin }시 </p>
                     <p>체크아웃 : ${pension.pensionCheckout }시 </p>
                 </div>
             </div>
        </div>
+       <hr>
    </section>
       
         <!--  *************************Our Team Start Here ************************** -->
