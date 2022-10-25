@@ -20,6 +20,38 @@ public class Pension {
 
 	public Pension () {}
 
+	@Override
+	public String toString() {
+		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
+				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
+				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
+				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
+				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
+				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + "]";
+	}
+
+	public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
+				   String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
+				   int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
+				   String pensionFileRename) {
+		this.pensionNo = pensionNo;
+		this.memberId = memberId;
+		this.pensionName = pensionName;
+		this.category = category;
+		this.pensionAddr = pensionAddr;
+		this.pensionComments = pensionComments;
+		this.pensionPrice = pensionPrice;
+		this.hardness = hardness;
+		this.latitude = latitude;
+		this.cancelPension = cancelPension;
+		this.pensionCheckin = pensionCheckin;
+		this.pensionCheckout = pensionCheckout;
+		this.filePath = filePath;
+		this.fileImage = fileImage;
+		this.pensionFileName = pensionFileName;
+		this.pensionFileRename = pensionFileRename;
+	}
+
 	public Integer getPensionNo() {
 		return pensionNo;
 	}
@@ -146,27 +178,5 @@ public class Pension {
 
 	public void setPensionFileRename(String pensionFileRename) {
 		this.pensionFileRename = pensionFileRename;
-	}
-
-	@Override
-	public String toString() {
-		return "Pension{" +
-				"pensionNo=" + pensionNo +
-				", memberId='" + memberId + '\'' +
-				", pensionName='" + pensionName + '\'' +
-				", category='" + category + '\'' +
-				", pensionAddr='" + pensionAddr + '\'' +
-				", pensionComments='" + pensionComments + '\'' +
-				", pensionPrice='" + pensionPrice + '\'' +
-				", hardness=" + hardness +
-				", latitude=" + latitude +
-				", cancelPension='" + cancelPension + '\'' +
-				", pensionCheckin=" + pensionCheckin +
-				", pensionCheckout=" + pensionCheckout +
-				", filePath='" + filePath + '\'' +
-				", fileImage='" + fileImage + '\'' +
-				", pensionFileName='" + pensionFileName + '\'' +
-				", pensionFileRename='" + pensionFileRename + '\'' +
-				'}';
 	}
 }
