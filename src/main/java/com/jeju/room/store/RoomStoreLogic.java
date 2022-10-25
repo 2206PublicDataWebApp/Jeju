@@ -1,5 +1,8 @@
 package com.jeju.room.store;
 
-public class RoomStoreLogic {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class RoomStoreLogic implements RoomStore{
 
 }

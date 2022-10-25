@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!doctype html>
 <html lang="en">
 
@@ -7,13 +8,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>숙소 상세 페이지</title>
-    <link rel="shortcut icon" href="resources/assets/images/fav.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="resources/assets/images/fav.jpg">
-    <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/assets/css/all.min.css">
-    <link rel="stylesheet" href="resources/assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="resources/assets/css/style.css" />
+    <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
+    <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/all.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
 </head>
     <body>
         <header class="container-flui">
@@ -24,7 +25,7 @@
                             
                         </div>
                         <div class="col-md-4 logo">
-                            <img src="resources/assets/images/logo.png" alt="">
+                            <img src="/resources/assets/images/logo.png" alt="">
                             <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
                         </div>                        
                     </div>
@@ -36,7 +37,7 @@
                        <ul>
                            <li><a href="/home">홈</a></li>
                            <li><a href="/notice/list">공지사항</a></li>
-                           <li><a href="detail.html">숙소 리스트</a></li>
+                           <li><a href="/pension/list">숙소 리스트</a></li>
                            <li><a href="destinations.html">커뮤니티</a></li>
                            <li><a href="/mypage/myPageView">마이페이지</a></li>
                        </ul>
@@ -51,7 +52,7 @@
             <div class="row">
                 <h2>숙소 상세 페이지</h2>
                 <ul>
-                    <li> <a href="#"><i class="fas fa-home"></i> 홈</a></li>
+                    <li> <a href="/home"><i class="fas fa-home"></i> 홈</a></li>
                     <li><i class="fas fa-angle-double-right"></i> 숙소 상세 페이지</li>
                 </ul>
             </div>
@@ -64,13 +65,13 @@
        <div class="container">
             <div class="row">
                 <div class="col-md-5 center image">
-                    <img src="resources/assets/images/about.png" alt="">
+                    <img src="/resources/assets/images/about.png" alt="">
                 </div>
                 <div class="col-md-7 text">
-                    <h1>숙소 이름</h1>
+                    <h1>${pension.pensionName }</h1>
                     <br>
                     <h5>숙소 소개</h4>
-                    <p>숙소 소개입니다 어쩌구 저쩌구 </p>
+                    <p>${pension.pensionComments } </p>
                     <br>
                     <h5>편의시설</h4>
                     <p>비비큐장 </p>
@@ -79,121 +80,100 @@
                     <p>객실 내 취사가능 </p>
                     <br>
                     <h5>이용 규칙</h4>
-                    <p>체크인 : 00시 </p>
-                    <p>체크아웃 : 00시 </p>
-                    <p>흡연 금지</p>
+                    <p>체크인 : ${pension.pensionCheckin }시 </p>
+                    <p>체크아웃 : ${pension.pensionCheckout }시 </p>
                 </div>
             </div>
        </div>
    </section>
       
         <!--  *************************Our Team Start Here ************************** -->
-        <div class="destinations container-fluid">
-            <div class="container">               
-                <div class="row session-title">
-                    <h2>객실 안내</h2>
-                </div>   
-                 <div class="dest-row row">
-                     <div class="col-lg-4 col-md-6">
-                         <div class="dest-col">
-                             <div class="dest-img">
-                                 <img src="resources/assets/images/destination/d2.jpg" alt="">
-                             </div>
-                             <h3>101호</h3>
-                             <p>최대인원 0명</p>
-                             <p>₩ 180,000원 x 박</p>
-                             <a class="btn btn-outline-success" href="#">예약하기</a>
-                         </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                        <div class="dest-col">
-                            <div class="dest-img">
-                                <img src="resources/assets/images/destination/d2.jpg" alt="">
-                            </div>
-                            <h3>201호</h3>
-                            <p>최대인원 0명</p>
-                            <p>₩ 200,000원 x 박</p>
-                            <a class="btn btn-outline-success" href="#">예약하기</a>
+  <div class="destinations container-fluid">
+  	<div class="row session-title"><h2>주소</h2></div>
+  	<div style="text-align:center"><h4>${pension.pensionAddr }</h2></div>
+	<div id="map" style="width:1420px;height:400px;margin-top:10px;display:block"></div><br><br><br><br><hr>
+    <div class="container">               
+    	<div class="row session-title">
+        	<h2>객실 안내</h2>
+        </div>  
+        <div class="dest-row row">
+        	<c:forEach items="${rList }" var="room">
+        	<input type="hidden" onload="roomNo(${room.roomNo})">
+            	<div class="col-lg-4 col-md-6">
+                    <div class="dest-col">
+                        <div class="dest-img">
+                            <img src="/resources/assets/images/destination/d2.jpg" alt="">
                         </div>
+                        <h3>${room.roomName }</h3>
+                        <p>최대인원 0명</p>
+                        <p>₩ ${room.price } x 박</p>
+                        <a class="btn btn-outline-success" href="#">예약하기</a>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="dest-col">
-                            <div class="dest-img">
-                                <img src="resources/assets/images/destination/d2.jpg" alt="">
-                            </div>
-                            <h3>301호</h3>
-                            <p>최대인원 0명</p>
-                            <p>₩ 220,000원 x 박</p>
-                            <a class="btn btn-outline-success" href="#">예약하기</a>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-         </div>
-         </div>
-         
-         <section class="customer-serv">
-            <div class="container">
-                <div class="row session-title">
-                    <h2>★ 후기 00개</h2>
                 </div>
-                <div class="row ro-clo">                    
-                    <div class="col-12  col-md-6 col-lg-4">
-                        <div class="shado-2 card-b">
-                            <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
-                            </p>
-                        </div>
-                        <div class="cust-det row">
-                            <div class="col-sm-3 col-3 img-circl">
-                                <img alt="" src="resources/assets/images/testimonial/member.jpg">
-                            </div>
-                            <div class="col-sm-5 col-5 an-mtc no-padding">
-                                <b>사용자ID</b>
-                                <p>2022년 10월 15일</p>
-                            </div>                
-                        </div>
-                    </div>                    
-                    <div data-anijs="if: scroll, on: window, do: bounceInRight animated, before: scrollReveal" class="col-12  col-md-6 col-lg-4">
-                        <div class="shado-2 card-b">
-                            <p>Very essensial product.it is clean and helthy water is mutually most important so that acqa is fufil its quality.our life now a days very tressful and restless</p>
-                        </div>
-                        <div class="cust-det row">
-                            <div class="col-sm-3 col-3 img-circl">
-                                <img alt="" src="resources/assets/images/testimonial/member-03.jpg">
-                            </div>
-                            <div class="col-sm-5 col-5 an-mtc no-padding">
-                                <b>사용자ID</b>
-                                <p>2022년 10월 15일</p>
-                            </div>
-                        </div>
-                    </div>   
-                    <div class="col-12  col-md-6 col-lg-4">
-                        <div class="shado-2 card-b">
-                            <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
-                            </p>
-                        </div>
-                        <div class="cust-det row">
-                            <div class="col-sm-3 col-3 img-circl">
-                                <img alt="" src="resources/assets/images/testimonial/member.jpg">
-                            </div>
-                            <div class="col-sm-5 col-5 an-mtc no-padding">
-                                <b>사용자ID</b>
-                                <p>2022년 10월 15일</p>
-                            </div>                
-                        </div>
-                    </div>     
-                </div>             
-            </div>
-        </section>    
-        </div>
-        <div>
-            <div style="text-align: center; margin-bottom: 100px;">
-                <a class="btn btn-outline-success" href="#" >목록으로</a>
-            </div>
-        </div>
+          	</c:forEach> 
+           </div>
+      </div>
+   </div>
+   <section class="customer-serv">
+      <div class="container">
+          <div class="row session-title">
+              <h2>★ 후기 00개</h2>
+          </div>
+          <div class="row ro-clo">                    
+              <div class="col-12  col-md-6 col-lg-4">
+                  <div class="shado-2 card-b">
+                      <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
+                      </p>
+                  </div>
+                  <div class="cust-det row">
+                      <div class="col-sm-3 col-3 img-circl">
+                          <img alt="" src="/resources/assets/images/testimonial/member.jpg">
+                      </div>
+                      <div class="col-sm-5 col-5 an-mtc no-padding">
+                          <b>사용자ID</b>
+                          <p>2022년 10월 15일</p>
+                      </div>                
+                  </div>
+              </div>                    
+              <div data-anijs="if: scroll, on: window, do: bounceInRight animated, before: scrollReveal" class="col-12  col-md-6 col-lg-4">
+                  <div class="shado-2 card-b">
+                      <p>Very essensial product.it is clean and helthy water is mutually most important so that acqa is fufil its quality.our life now a days very tressful and restless</p>
+                  </div>
+                  <div class="cust-det row">
+                      <div class="col-sm-3 col-3 img-circl">
+                          <img alt="" src="/resources/assets/images/testimonial/member-03.jpg">
+                      </div>
+                      <div class="col-sm-5 col-5 an-mtc no-padding">
+                          <b>사용자ID</b>
+                          <p>2022년 10월 15일</p>
+                      </div>
+                  </div>
+              </div>   
+              <div class="col-12  col-md-6 col-lg-4">
+                  <div class="shado-2 card-b">
+                      <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
+                      </p>
+                  </div>
+                  <div class="cust-det row">
+                      <div class="col-sm-3 col-3 img-circl">
+                          <img alt="" src="/resources/assets/images/testimonial/member.jpg">
+                      </div>
+                      <div class="col-sm-5 col-5 an-mtc no-padding">
+                          <b>사용자ID</b>
+                          <p>2022년 10월 15일</p>
+                      </div>                
+                  </div>
+              </div>     
+          </div>             
+      </div>
+  </section>    
+  </div>
+  <div>
+      <div style="text-align: center; margin-bottom: 100px;">
+          <a class="btn btn-outline-success" href="#" >목록으로</a>
+      </div>
+  </div>
         
-  <!-- ######## Our Team End ####### --> 
-       
    <!--*************** Footer  Starts Here *************** -->   
 
     <footer>
@@ -221,10 +201,28 @@
         </div>
     </footer>
     </body>
-    <script src="resources/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="resources/assets/js/popper.min.js"></script>
-    <script src="resources/assets/js/bootstrap.min.js"></script>
-    <script src="resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-    <script src="resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
-    <script src="resources/assets/js/script.js"></script>
+    <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/assets/js/popper.min.js"></script>
+    <script src="/resources/assets/js/bootstrap.min.js"></script>
+    <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
+    <script src="/resources/assets/js/script.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=758e7cab4812bbb68bb37b0a19e22d0f"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+		function roomNo(roomNo) {
+			$.ajax({
+				url :"/pension/detailView",
+				data : {"roomNo" : roomNo},
+				type : "get"
+			})
+			
+		}
+	</script>
 </html>

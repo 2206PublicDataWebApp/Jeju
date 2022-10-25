@@ -11,7 +11,8 @@ public class Room {
 	private String roomName;
 	private String delStatus;
 	private Integer refPensionNo;
-	private int maxPersonnel;
+	private Integer maxPersonnel;
+	
 	@Override
 	public String toString() {
 		return "Room [roomNo=" + roomNo + ", startTime=" + startTime + ", endTime=" + endTime + ", rStatus=" + rStatus
@@ -19,7 +20,7 @@ public class Room {
 				+ refPensionNo + ", maxPersonnel=" + maxPersonnel + "]";
 	}
 	public Room(Integer roomNo, Date startTime, Date endTime, String rStatus, String price, String roomName,
-			String delStatus, Integer refPensionNo, int maxPersonnel) {
+			String delStatus, Integer refPensionNo, Integer maxPersonnel) {
 		this.roomNo = roomNo;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -78,10 +79,10 @@ public class Room {
 	public void setRefPensionNo(Integer refPensionNo) {
 		this.refPensionNo = refPensionNo;
 	}
-	public int getMaxPersonnel() {
+	public Integer getMaxPersonnel() {
 		return maxPersonnel;
 	}
-	public void setMaxPersonnel(int maxPersonnel) {
+	public void setMaxPersonnel(Integer maxPersonnel) {
 		this.maxPersonnel = maxPersonnel;
 	}
 

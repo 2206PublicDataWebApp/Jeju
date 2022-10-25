@@ -38,6 +38,18 @@ public interface PensionStore {
 	List<Pension> selectReviewRank(SqlSession session);
 
 	List<Pension> selectPensionRank(SqlSession session, Pension pensionNo);
+	// 숙소 상세페이지
+	Pension selectOnePension(SqlSession session, Integer pensionNo);
+	// 숙소 카테고리 가져오기
+//	Category selectPensionCategory(SqlSession session, Integer pensionNo);
+	// 숙소 이름 중복체크
+	int checkPensionName(SqlSession session, String pensionName);
+	// 객실 가져오기
+	List<Room> selectRoom(SqlSession session, Integer pensionNo);
+	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
+//	List<Integer> selectRoomAttachNo(SqlSession session, Integer pensionNo);
+	// 카테고리 가져오기
+	List<Category> selectCategoryCheck(SqlSession session, Integer pensionNo);
 
 	List<Pension> selectDate(SqlSession session, long diffDays);
 

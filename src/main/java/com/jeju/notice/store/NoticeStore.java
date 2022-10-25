@@ -19,5 +19,7 @@ public interface NoticeStore {
 	int updateNotice(SqlSessionTemplate session, Notice notice);
 	// 공지사항 삭제
 	void deleteNotice(SqlSessionTemplate session, int noticeNo);
+	// 공지사항 조회수
+	void updateViewCount(SqlSessionTemplate session, Integer noticeNo);
 	
 }

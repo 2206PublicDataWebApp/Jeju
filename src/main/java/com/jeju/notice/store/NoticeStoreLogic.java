@@ -52,5 +52,11 @@ public class NoticeStoreLogic implements NoticeStore{
 	public void deleteNotice(SqlSessionTemplate session, int noticeNo) {
 		session.delete("NoticeMapper.deleteNotice", noticeNo);
 	}
+	// 공지사항 조회수
+	@Override
+	public void updateViewCount(SqlSessionTemplate session, Integer noticeNo) {
+		session.update("NoticeMapper.updateViewCount",noticeNo);
+		
+	}
 
 }
