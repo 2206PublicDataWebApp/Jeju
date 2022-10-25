@@ -51,6 +51,11 @@ public class PensionServiceImpl implements PensionService{
 		List<Pension> rList = pStore.selectPensionRank(session, pensionNo);
 		return rList;
 	}
+	@Override
+   public List<Pension> selectDate(long diffDays) {
+      List<Pension> rList = pStore.selectDate(session, diffDays);
+      return rList;
+   }
 
 	// 숙소 번호 가져오기
 	@Override
@@ -63,10 +68,19 @@ public class PensionServiceImpl implements PensionService{
 	@Override
 	public void registerPension(Pension pension) {
 		pStore.insertPension(session, pension);
-		
 	}
-
+	// 객실 등록
+	@Override
+	public void registerRoom(Room room) {
+		pStore.insertRoom(session, room);
+	}
 	// 객실 번호 가져오기
+		@Override
+		public int selecteRoomNo(Room room) {
+			int roomNo = pStore.selectRoomNo(session, room);
+			return roomNo;
+		}
+		
 	@Override
 	public List<Pension> selectPrice() {
 		List<Pension> priceList = pStore.selectPrice(session);
@@ -121,4 +135,5 @@ public class PensionServiceImpl implements PensionService{
 		List<Category> category = pStore.selectCategoryCheck(session, pensionNo);
 		return category;
 	}
+
 }

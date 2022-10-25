@@ -2,10 +2,10 @@ package com.jeju.pension.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.service.PensionService;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @Controller
 public class PensionController {
-
 
 	@Autowired
 	private PensionService pService;
@@ -43,37 +42,37 @@ public class PensionController {
 	}
 	
 	// 숙소 등록
-		@RequestMapping(value="/pension/regist", method=RequestMethod.POST)
-		public ModelAndView registPension(
-				ModelAndView mv
-				,@ModelAttribute Pension pension
-				,@ModelAttribute Room room
-				,@ModelAttribute Category category
-				,@ModelAttribute RoomAttach roomAttach
-				,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-				,@RequestParam(value="uploadRoomFile", required=false) MultipartFile uploadRoomFile
-				,HttpServletRequest request) {
-					try {
-						String pensionFileName = uploadFile.getOriginalFilename();
-						if(!pensionFileName.equals("")) {
-							String root = request.getSession().getServletContext().getRealPath("resources");
-							String savePath = root + "\\files/pension";
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-							String pensionFileRename
-							= sdf.format(new Date(System.currentTimeMillis()))+"."
-									+pensionFileName.substring(pensionFileName.lastIndexOf(".")+1);
-							File file = new File(savePath);
-							if(!file.exists()) {
-								file.mkdir();
-							}
-							uploadFile.transferTo(new File(savePath+"\\"+pensionFileRename));
-							String filePath = savePath+"\\"+pensionFileRename;
-							pension.setPensionFileName(pensionFileName);
-							pension.setPensionFileRename(pensionFileRename);
-							pension.setFilePath("/resources/files/pension/"+pensionFileRename);
-							}
-						}catch (Exception e) {
-						}
+	@RequestMapping(value="/pension/regist", method=RequestMethod.POST)
+	public ModelAndView registPension(
+			ModelAndView mv
+			,@ModelAttribute Pension pension
+			,@ModelAttribute Room room
+			,@ModelAttribute Category category
+			,@ModelAttribute RoomAttach roomAttach
+			,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			,@RequestParam(value="uploadRoomFile", required=false) MultipartFile uploadRoomFile
+			,HttpServletRequest request) {
+			try {
+				String pensionFileName = uploadFile.getOriginalFilename();
+				if(!pensionFileName.equals("")) {
+					String root = request.getSession().getServletContext().getRealPath("resources");
+					String savePath = root + "\\files/pension";
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+					String pensionFileRename
+					= sdf.format(new Date(System.currentTimeMillis()))+"."
+							+pensionFileName.substring(pensionFileName.lastIndexOf(".")+1);
+					File file = new File(savePath);
+					if(!file.exists()) {
+						file.mkdir();
+					}
+					uploadFile.transferTo(new File(savePath+"\\"+pensionFileRename));
+					String filePath = savePath+"\\"+pensionFileRename;
+					pension.setPensionFileName(pensionFileName);
+					pension.setPensionFileRename(pensionFileRename);
+					pension.setFilePath("/resources/files/pension/"+pensionFileRename);
+					}
+				}catch (Exception e) {
+				}
 			try {
 				String roomFileName = uploadRoomFile.getOriginalFilename();
 				if(!roomFileName.equals("")) {
@@ -111,9 +110,7 @@ public class PensionController {
 
 	// 숙소 이름 중복 체크
 	@ResponseBody
-	@RequestMapping(
-			value="/pension/checkPensionName"
-			, method=RequestMethod.GET)
+	@RequestMapping(value="/pension/checkPensionName", method=RequestMethod.GET)
 	public int checkPensionName(@RequestParam("pensionName") String pensionName) {
 		int result = pService.checkPensionName(pensionName);
 		return result;
@@ -168,7 +165,7 @@ public class PensionController {
 //			}
 
 //			mv.addObject("rList", rList);
-		mv.setViewName("pension1/list");
+		mv.setViewName("pension/list");
 		return mv;
 	}
 
@@ -178,7 +175,7 @@ public class PensionController {
 			,@ModelAttribute Pension pension
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
-			,Model model) throws ParseException {
+			,Model model) throws java.text.ParseException{
 		//가져온 날짜를 가져와서 가격을 변경시키기 위해 일수의 차이를 구하는 코드
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
@@ -209,7 +206,7 @@ public class PensionController {
 			System.out.println(cList);
 		}
 		model.addAttribute("cList", cList);
-		return "pension1/list2";
+		return "pension/list2";
 	}
 
 	@RequestMapping(value="/pension/dateSearch", method=RequestMethod.POST)
@@ -217,7 +214,7 @@ public class PensionController {
 			ModelAndView mv
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
-			,Model model) throws ParseException {
+			,Model model) throws ParseException, Exception {
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
@@ -244,6 +241,7 @@ public class PensionController {
 			}
 		}
 		mv.addObject("prList", prList);
-		mv.setViewName("pension1/list");
+		mv.setViewName("pension/list");
 		return mv;
 	}
+}

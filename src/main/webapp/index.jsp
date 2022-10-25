@@ -7,8 +7,8 @@
 	<title>Spring Project</title>
 </head>
 <body>
-<div>
-	<jsp:forward page="/home" />
-</div>
+	<div>
+		<jsp:forward page="/home"/>
+	</div>
 </body>
 </html>
