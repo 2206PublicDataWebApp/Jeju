@@ -24,6 +24,7 @@
 		<typeAlias type="com.jeju.review.domain.Review" 	alias="Review"/>
 		<typeAlias type="com.jeju.reservation.domain.Reservation" 	alias="Reservation"/>
 		<typeAlias type="com.jeju.member.domain.Member" 	alias="Member"/>
+		<typeAlias type="com.jeju.admin.domain.Admin" 	alias="Admin"/>
 
 	</typeAliases>
 
@@ -39,6 +40,7 @@
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/admin-mapper.xml"/>
 
 	</mappers>
 
