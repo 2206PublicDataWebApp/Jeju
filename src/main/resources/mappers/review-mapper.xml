@@ -12,11 +12,27 @@
 		<result property="reviewCount" 		column="REVIEW_COUNT"/>
 		<result property="pensionNo" 		column="PENSION_NO"/>
 	</resultMap>
-	
+
 	<resultMap type="Review" id="reviewCountMap">
+		<result property="reviewCount" 		column="REVIEW_COUNT"/>
+		<result property="reviewContents" 	column="REVIEW_CONTENTS"/>
 		<result property="reviewCount" 		column="REVIEW_COUNT"/>
 		<result property="pensionNo" 		column="PENSION_NO"/>
 	</resultMap>
+
+	<!-- 해당 아이디 후기 총 갯수 가져오기 -->
+	<select id="selectReviewCount" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+
+	<select id="selectReview" resultMap="reviewResultMap">
+		SELECT * FROM REVIEW_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+
+<!-- 	<resultMap type="Review" id="reviewCountMap"> -->
+<!-- 		<result property="reivewCount" 		column="REVIEW_COUNT"/> -->
+<!-- 		<result property="pensionNo" 		column="PENSION_NO"/> -->
+<!-- 	</resultMap> -->
 
 <!-- 	<select id="selectReviewRank" resultMap="reviewCountMap"> -->
 <!-- 		SELECT PENSION_NO, REVIEW_COUNT FROM REVIEW_TBL -->
@@ -24,11 +40,18 @@
 	
 	<select id="selectReviewRank" resultMap="reviewCountMap">
 		SELECT PENSION_NO FROM (SELECT DISTINCT PENSION_NO, REVIEW_COUNT, DENSE_RANK() OVER (ORDER BY REVIEW_COUNT DESC) DENSE_RANK FROM REVIEW_TBL ORDER BY REVIEW_COUNT DESC) <![CDATA[WHERE ROWNUM <= 5]]> 
+<!-- 	<select id="selectReviewRank" resultType="_int"> -->
+<!-- 		SELECT PENSION_NO FROM (SELECT DISTINCT PENSION_NO, REVIEW_COUNT, DENSE_RANK() OVER (ORDER BY REVIEW_COUNT DESC) DENSE_RANK FROM REVIEW_TBL ORDER BY REVIEW_COUNT DESC) <![CDATA[WHERE ROWNUM <= 5]]>  -->
+<!-- 	</select> -->
+
+	<!-- 리뷰 전부 불러오기 (상세페이지)-->
+	<select id="selectAllReview" resultMap="reviewResultMap">
+		SELECT * FROM REVIEW_TBL WHERE PENSION_NO = #{pensionNo} ORDER BY REGDATE DESC
 	</select>
 
-	
+
 	<select id="selectReviewNumber" resultMap="reviewResultMap">
 		SELECT DISTINCT REVIEW_COUNT FROM REVIEW_TBL WHERE PENSION_NO = #{pensionNo}
 	</select>
-	
+
 </mapper>

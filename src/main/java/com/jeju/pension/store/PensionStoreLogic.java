@@ -1,5 +1,6 @@
 package com.jeju.pension.store;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -98,12 +99,6 @@ public class PensionStoreLogic implements PensionStore{
 		Pension pension = session.selectOne("PensionMapper.selectPension", pensionNo);
 		return pension;
 	}
-	// 숙소 카테고리 가져오기
-//	@Override
-//	public Category selectPensionCategory(SqlSession session, Integer pensionNo) {
-//		Category category= session.selectOne("CategoryMapper.selectPensionCategory", pensionNo);
-//		return category;
-//	}
 	// 숙소 이름 중복체크
 	@Override
 	public int checkPensionName(SqlSession session, String pensionName) {
@@ -112,9 +107,9 @@ public class PensionStoreLogic implements PensionStore{
 	}
 	// 객실 가져오기
 	@Override
-	public List<Room> selectRoom(SqlSession session, Integer pensionNo) {
-		List<Room> rList = session.selectList("RoomMapper.selectRoom", pensionNo);
-		return rList;
+	public List<String> selectRoomAttach(SqlSession session, Integer pensionNo) {
+		List<String> roomAttach = session.selectList("RoomMapper.selectRoomAttach", pensionNo);
+		return roomAttach;
 	}
 	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
 //	@Override
@@ -141,6 +136,17 @@ public class PensionStoreLogic implements PensionStore{
 
 
 
+	@Override
+	public List<Room> selectRoom(SqlSession session, Integer pensionNo) {
+		List<Room> rList = session.selectList("RoomMapper.selectRoom", pensionNo);
+		return rList;
+	}
+	// 리뷰 전부 가져오기
+	@Override
+	public List<Review> selectAllReview(SqlSession session, Integer pensionNo) {
+		List<Review> reviewList = session.selectList("ReviewMapper.selectAllReview", pensionNo);
+		return reviewList;
+	}
 
 
 }

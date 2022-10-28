@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/resources/assets/css/all.min.css">
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce0b65b35053a74c5f16b289cf432142"></script>
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
     <body>
         <header class="container-flui">
@@ -39,7 +41,7 @@
                            <li><a href="/notice/list">공지사항</a></li>
                            <li><a href="/pension/list">숙소 리스트</a></li>
                            <li><a href="destinations.html">커뮤니티</a></li>
-                           <li><a href="/mypage/myPageView">마이페이지</a></li>
+                           <li><a href="/mypage/myPage">마이페이지</a></li>
                        </ul>
                    </div>
                </div>
@@ -65,7 +67,12 @@
        <div class="container">
             <div class="row">
                 <div class="col-md-5 center image">
-                    <img src="/resources/assets/images/about.png" alt="">
+                    <img src="${pension.filePath }" alt=""><br><br><br>
+                    <form action="/jjim/jjim" method="post" style="display: inline">
+		            	<input type="hidden" name="memberId" value="${sessionScope.loginUser.memberId }"/>
+		                <input type="hidden" name="pensionNo" value="${pension.pensionNo }"/>
+		            	<button type="submit" class="btn btn-danger"><i class="fa-solid fa-heart fa-2x">찜 ${pension.jjimCount }</i></button>
+		          	</form>
                 </div>
                 <div class="col-md-7 text">
                     <h1>${pension.pensionName }</h1>
@@ -114,11 +121,10 @@
         </div>  
         <div class="dest-row row">
         	<c:forEach items="${rList }" var="room">
-        	<input type="hidden" onload="roomNo(${room.roomNo})">
             	<div class="col-lg-4 col-md-6">
                     <div class="dest-col">
                         <div class="dest-img">
-                            <img src="/resources/assets/images/destination/d2.jpg" alt="">
+                            <img src="${room.roomAttach.roomPath }" alt="객실 사진">
                         </div>
                         <h3>${room.roomName }</h3>
                         <p>최대인원 0명</p>
@@ -126,67 +132,97 @@
                         <a class="btn btn-outline-success" href="/reservation/list?refPensionNo=${room.refPensionNo }&roomNo=${room.roomNo}&startDate=${startDate}&endDate=${endDate}&price=${room.price}">예약하기</a>
                     </div>
                 </div>
-          	</c:forEach> 
+          	</c:forEach>
            </div>
       </div>
    </div>
    <section class="customer-serv">
       <div class="container">
           <div class="row session-title">
-              <h2>★ 후기 00개</h2>
+              <h2>★ 후기 ${reviewList[0].reviewCount}개</h2>
           </div>
           <div class="row ro-clo">                    
               <div class="col-12  col-md-6 col-lg-4">
                   <div class="shado-2 card-b">
-                      <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
-                      </p>
+                      <p>${reviewList[0].reviewContents }</p>
                   </div>
                   <div class="cust-det row">
                       <div class="col-sm-3 col-3 img-circl">
                           <img alt="" src="/resources/assets/images/testimonial/member.jpg">
                       </div>
                       <div class="col-sm-5 col-5 an-mtc no-padding">
-                          <b>사용자ID</b>
-                          <p>2022년 10월 15일</p>
+                          <b>작성일</b>
+                          <p>${reviewList[0].regDate }</p>
                       </div>                
                   </div>
               </div>                    
-              <div data-anijs="if: scroll, on: window, do: bounceInRight animated, before: scrollReveal" class="col-12  col-md-6 col-lg-4">
-                  <div class="shado-2 card-b">
-                      <p>Very essensial product.it is clean and helthy water is mutually most important so that acqa is fufil its quality.our life now a days very tressful and restless</p>
-                  </div>
-                  <div class="cust-det row">
-                      <div class="col-sm-3 col-3 img-circl">
-                          <img alt="" src="/resources/assets/images/testimonial/member-03.jpg">
-                      </div>
-                      <div class="col-sm-5 col-5 an-mtc no-padding">
-                          <b>사용자ID</b>
-                          <p>2022년 10월 15일</p>
-                      </div>
-                  </div>
-              </div>   
               <div class="col-12  col-md-6 col-lg-4">
                   <div class="shado-2 card-b">
-                      <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
-                      </p>
+                  	<p>${reviewList[1].reviewContents }</p>
                   </div>
                   <div class="cust-det row">
                       <div class="col-sm-3 col-3 img-circl">
                           <img alt="" src="/resources/assets/images/testimonial/member.jpg">
                       </div>
                       <div class="col-sm-5 col-5 an-mtc no-padding">
-                          <b>사용자ID</b>
-                          <p>2022년 10월 15일</p>
+                          <b>작성일</b>
+                          <p>${reviewList[1].regDate }</p>
+                      </div>                
+                  </div>
+              </div>
+              <div class="col-12  col-md-6 col-lg-4">
+                  <div class="shado-2 card-b">
+                  	<p>${reviewList[2].reviewContents }</p>
+                  </div>
+                  <div class="cust-det row">
+                      <div class="col-sm-3 col-3 img-circl">
+                          <img alt="" src="/resources/assets/images/testimonial/member.jpg">
+                      </div>
+                      <div class="col-sm-5 col-5 an-mtc no-padding">
+                          <b>작성일</b>
+                          <p>${reviewList[2].regDate }</p>
                       </div>                
                   </div>
               </div>     
-          </div>             
+          </div>
+          <button type='button' class='btn btn-xs btn-success' data-toggle='modal' data-target='#modifyModal'>
+			  더 보기
+		  </button>
+		  <div class="modal fade" id="modifyModal" role="dialog">
+				  <div class="modal-dialog">
+				      <div class="modal-content">
+				          <div class="modal-header">
+				              <button type="button" class="close" data-dismiss="modal">&times;</button>
+				              <h4 class="modal-title">후기 ${reviewList[0].reviewCount }개</h4>
+				          </div>
+				          <div class="modal-body">
+				          <c:forEach items="${reviewList }" var="review">
+				                  <div class="shado-2 card-b">
+				                  <p>${review.reviewContents }</p>
+				                  </div>
+				                  <div class="cust-det row">
+				                      <div class="col-sm-3 col-3 img-circl">
+				                          <img alt="" src="/resources/assets/images/testimonial/member.jpg">
+				                      </div>
+				                      <div class="col-sm-5 col-5 an-mtc no-padding">
+				                          <b>작성일</b>
+				                          <p>${review.regDate }</p>
+				                      </div>                
+				                  </div><br><hr>
+				          	</c:forEach>
+				          </div>
+				          <div class="modal-footer">
+				              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				          </div>
+				      </div>
+				  </div>
+			</div>             
       </div>
   </section>    
   </div>
   <div>
       <div style="text-align: center; margin-bottom: 100px;">
-          <a class="btn btn-outline-success" href="#" >목록으로</a>
+          <a class="btn btn-outline-success" href="/pension/list" >목록으로</a>
       </div>
   </div>
         
@@ -223,22 +259,12 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=758e7cab4812bbb68bb37b0a19e22d0f"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
 			level: 3
 		};
-
 		var map = new kakao.maps.Map(container, options);
-		function roomNo(roomNo) {
-			$.ajax({
-				url :"/pension/detailView",
-				data : {"roomNo" : roomNo},
-				type : "get"
-			})
-			
-		}
 	</script>
 </html>

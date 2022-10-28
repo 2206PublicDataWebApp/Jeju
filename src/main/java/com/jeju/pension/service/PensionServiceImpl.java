@@ -119,9 +119,9 @@ public class PensionServiceImpl implements PensionService{
 	}
 	// 객실 가져오기
 	@Override
-	public List<Room> selecteRoom(Integer pensionNo) {
-		List<Room> rList = pStore.selectRoom(session, pensionNo);
-		return rList;
+	public List<String> selecteRoomAttach(Integer pensionNo) {
+		List<String> roomAttack = pStore.selectRoomAttach(session, pensionNo);
+		return roomAttack;
 	}
 	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
 //	@Override
@@ -135,7 +135,19 @@ public class PensionServiceImpl implements PensionService{
 		List<Category> category = pStore.selectCategoryCheck(session, pensionNo);
 		return category;
 	}
-	
+	// 객실 가져오기
+	@Override
+	public List<Room> selecteRoom(Integer pensionNo) {
+		List<Room> rList = pStore.selectRoom(session, pensionNo);
+		return rList;
+	}
+	// 리뷰 전부 가져오기
+	@Override
+	public List<Review> selectAllReview(Integer pensionNo) {
+		List<Review> reviewList = pStore.selectAllReview(session, pensionNo);
+		return reviewList;
+	}
+
 	//낮은가격순 정렬
 	@Override
 	public List<Pension> ascPriceSort() {

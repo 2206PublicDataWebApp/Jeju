@@ -4,9 +4,11 @@ public class RoomAttach {
 	private String roomPath;
 	private char roomImage;
 	private int roomOrd;
-	private int roomNo;
+	private Integer roomNo;
 	private String roomFileRename;
 	private String roomFileName;
+	
+	public RoomAttach () {}
 	
 	@Override
 	public String toString() {
@@ -31,10 +33,10 @@ public class RoomAttach {
 	public void setRoomOrd(int roomOrd) {
 		this.roomOrd = roomOrd;
 	}
-	public int getRoomNo() {
+	public Integer getRoomNo() {
 		return roomNo;
 	}
-	public void setRoomNo(int roomNo) {
+	public void setRoomNo(Integer roomNo) {
 		this.roomNo = roomNo;
 	}
 	public String getRoomFileRename() {
@@ -49,7 +51,7 @@ public class RoomAttach {
 	public void setRoomFileName(String roomFileName) {
 		this.roomFileName = roomFileName;
 	}
-	public RoomAttach(String roomPath, char roomImage, int roomOrd, int roomNo, String roomFileRename,
+	public RoomAttach(String roomPath, char roomImage, int roomOrd, Integer roomNo, String roomFileRename,
 			String roomFileName) {
 		this.roomPath = roomPath;
 		this.roomImage = roomImage;

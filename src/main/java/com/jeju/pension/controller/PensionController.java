@@ -40,6 +40,12 @@ public class PensionController {
 	@Autowired
 	private PensionService pService;
 	
+	// 마이페이지 숙소 관리 페이지로 이동
+	@RequestMapping(value="/mypage/pensionManagement", method=RequestMethod.GET)
+	public ModelAndView pensionManagement(ModelAndView mv) {
+		mv.setViewName("mypage/pensionManagementView");
+		return mv;
+	}
 	// 숙소 등록 페이지로 이동
 	@RequestMapping(value="/pension/registForm", method=RequestMethod.GET)
 	public String registPension() {
@@ -109,7 +115,8 @@ public class PensionController {
 			pService.registerRoomAttach(roomAttach);
 			category.setRefPensionNumber(pensionNo);
 			pService.registerCategory(category);
-			mv.setViewName("redirect:/home");
+
+			mv.setViewName("redirect:/mypage/pensionManagementView");
 			return mv;
 		}
 
@@ -120,7 +127,6 @@ public class PensionController {
 		int result = pService.checkPensionName(pensionName);
 		return result;
 	}
-	
 	// 숙소 상세페이지
 	@RequestMapping(value="/pension/detailView", method=RequestMethod.GET)
 	public ModelAndView pensionDetailView(
@@ -128,46 +134,48 @@ public class PensionController {
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
 			,@RequestParam("pensionNo") Integer pensionNo
-			,Model model) {
+			,Model model
+			,HttpSession session) {
+		List<Review> reviewList = pService.selectAllReview(pensionNo);
 		Pension pension = pService.selecteOnePension(pensionNo);
 		List<Category> category = pService.selectCategoryCheck(pensionNo);
-		System.out.println(category);
-//			Category category = pService.selectPensionCategory(pensionNo);
 		List<Room> rList = pService.selecteRoom(pensionNo);
 //			List<Integer> roomNo = pService.selecteRoomAttachNo(pensionNo);
 //			System.out.println(roomNo);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		List<String> roomImg = pService.selecteRoomAttach(pensionNo);
+//		Member loginMember = (Member)session.getAttribute("loginUser");
+//		System.out.println(roomImg);
+//		System.out.println(reviewList);
 		mv.addObject("rList", rList);
+//		mv.addObject("roomImg", roomImg);
 		mv.addObject("pension", pension);
 		mv.addObject("category", category);
+		mv.addObject("reviewList", reviewList);
 		mv.setViewName("/pension/detailView");
 		return mv;
 	}
-	
-//	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
-//	public String showList() {
-//		return "pension1/list";
-//	}
-	
+
 	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
 	public ModelAndView pensionListView(
 			ModelAndView mv
 			,String startDate
 			, String endDate
-			, Model model) {
+			, Model model
+	) {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date();
 		startDate = sdf2.format(now);
 		endDate = sdf2.format(now);
 		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);		
-		List<Pension> pList = pService.selectAllPension();
+		model.addAttribute("endDate", endDate);
 
+		List<Pension> pList = pService.selectAllPension();
 		if(!pList.isEmpty()) {
 			mv.addObject("pList", pList);
 		}
-		
+
 			List<Pension> rList = new ArrayList<Pension>();
 			//5순위까지 조회해서 펜션번호 5개 가져옴
  			List<Review> rankList = pService.selectReviewRank();
@@ -179,7 +187,7 @@ public class PensionController {
 		return mv;
 	}
 
-	
+
 	//날짜조회 후 ajax로 카테고리 적용한것도 고려하여 코드 작성
 	@RequestMapping(value="/pension/category", method=RequestMethod.POST)
 	public ModelAndView categoryFiltering(
@@ -190,7 +198,7 @@ public class PensionController {
 			,Model model
 			,ModelAndView mv) throws java.text.ParseException{
 		//가져온 날짜를 가져와서 가격을 변경시키기 위해 일수의 차이를 구하는 코드
-		
+
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
 		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
@@ -260,7 +268,7 @@ public class PensionController {
 				prList.add(i, priceList.get(i));
 			}
 		}
-	
+
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -268,11 +276,11 @@ public class PensionController {
 				rList.add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
 			}
 		mv.addObject("rList", rList);	//일반 펜션목록 출력용
-		mv.addObject("prList", prList);	//날짜 조회용 
+		mv.addObject("prList", prList);	//날짜 조회용
 		mv.setViewName("pension/list");
 		return mv;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/pension/dateSearchSort", method=RequestMethod.POST)
 	public ModelAndView dateSearchSort(
@@ -304,8 +312,8 @@ public class PensionController {
 			}
 		}
 		Collections.sort(prList, Collections.reverseOrder());
-		System.out.println(prList.get(0).getReviewCount());		
-		System.out.println(prList.get(1).getReviewCount());	
+		System.out.println(prList.get(0).getReviewCount());
+		System.out.println(prList.get(1).getReviewCount());
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -313,11 +321,11 @@ public class PensionController {
 				rList.add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
 			}
 		mv.addObject("rList", rList);	//일반 펜션목록 출력용
-		mv.addObject("drList", prList);	//날짜 조회용 
+		mv.addObject("drList", prList);	//날짜 조회용
 		mv.setViewName("pension/list2");
 		return mv;
 	}
-	
+
 //카테고리 필터링만 적용시키고 인기순 정렬했을때 코
 	@ResponseBody
 	@RequestMapping(value="/pension/popular", method=RequestMethod.GET)
@@ -359,7 +367,7 @@ public class PensionController {
 		}
 		Collections.sort(cList, Collections.reverseOrder());
 		System.out.println(cList.get(0).getReviewCount());
-		
+
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -371,9 +379,9 @@ public class PensionController {
 		model.addAttribute("cList", cList);
 		mv.addObject("rList", rList);
 		mv.setViewName("pension/list2");
-		return mv;	
+		return mv;
 	}
-	
+
 	//날짜선택 후 낮은가격순 정렬
 	@ResponseBody
 	@RequestMapping(value="/pension/datePriceSort", method=RequestMethod.POST)
@@ -418,11 +426,11 @@ public class PensionController {
 				rList.add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
 			}
 		mv.addObject("rList", rList);	//일반 펜션목록 출력용
-		mv.addObject("drList", prList);	//날짜 조회용 
+		mv.addObject("drList", prList);	//날짜 조회용
 		mv.setViewName("pension/list2");
 		return mv;
 	}
-	
+
 	//카테고리 필터링시 오름차순 정렬
 	@ResponseBody
 	@RequestMapping(value="/pension/categoryPriceSort", method=RequestMethod.POST)
@@ -440,41 +448,41 @@ public class PensionController {
 
 		ArrayList<Pension> cList = new ArrayList<>();
 		//우선 카테고리대로 넘버값을 가져옴
-		List<Category2> gList = pService.selectCategory(category);	
-		
+		List<Category2> gList = pService.selectCategory(category);
+
 		int iNumber = 0;
 		for(int i=0; i < gList.size(); i++) {
-			pension = pService.selectCategoryFilter(gList.get(i).getRefPensionNumber());				
+			pension = pService.selectCategoryFilter(gList.get(i).getRefPensionNumber());
 			if(pension.getPensionPrice().equals("판매 완료") || pension.getPensionPrice().equals("다른날짜 확인")) {
 				continue;
-			}else {				
+			}else {
 				DecimalFormat decFormat = new DecimalFormat("###,###");
 				//현재 i번째 숫자
-				String price = pension.getPensionPrice().replaceAll("[^0-9]","");	
+				String price = pension.getPensionPrice().replaceAll("[^0-9]","");
 				if(diffDays == 0) {
 					diffDays = 1;
-				}	
+				}
 				String result = String.valueOf(Integer.parseInt(price) * diffDays);
 				String str = decFormat.format(Integer.parseInt(result));
 				pension.setPensionPrice(str);
 				cList.add(iNumber, pension);
 				iNumber++;
-			}	
+			}
 		}
-		
-		
+
+
 		int pListNum = 0;
 		Pension tmp = new Pension();
 		for(int j=0; j<cList.size(); j++) {
 			for(int k= j+1; k<cList.size(); k++) {
-				if(Integer.parseInt(cList.get(j).getPensionPrice().replaceAll("[^0-9]","")) > Integer.parseInt(cList.get(k).getPensionPrice().replaceAll("[^0-9]",""))) {			
+				if(Integer.parseInt(cList.get(j).getPensionPrice().replaceAll("[^0-9]","")) > Integer.parseInt(cList.get(k).getPensionPrice().replaceAll("[^0-9]",""))) {
 					tmp = cList.get(j);
 					cList.set(j, cList.get(k));
 					cList.set(k, tmp);
 				}
 			}
 		}
-		
+
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -486,9 +494,9 @@ public class PensionController {
 		model.addAttribute("cList", cList);
 		mv.addObject("rList", rList);
 		mv.setViewName("pension/list2");
-		return mv;	
+		return mv;
 	}
-	
+
 	//날짜선택 후 내림차순 가격 정렬
 		@ResponseBody
 		@RequestMapping(value="/pension/dateDescPriceSort", method=RequestMethod.POST)
@@ -533,12 +541,12 @@ public class PensionController {
 					rList. add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
 				}
 			mv.addObject("rList", rList);	//일반 펜션목록 출력용
-			mv.addObject("drList", prList);	//날짜 조회용 
+			mv.addObject("drList", prList);	//날짜 조회용
 			mv.setViewName("pension/list2");
 			return mv;
 		}
-	
-		
+
+
 		//카테고리 필터링시 오름차순 정렬
 		@ResponseBody
 		@RequestMapping(value="/pension/categoryDescPriceSort", method=RequestMethod.POST)
@@ -556,41 +564,41 @@ public class PensionController {
 
 			ArrayList<Pension> cList = new ArrayList<>();
 			//우선 카테고리대로 넘버값을 가져옴
-			List<Category2> gList = pService.selectCategory(category);	
-			
+			List<Category2> gList = pService.selectCategory(category);
+
 			int iNumber = 0;
 			for(int i=0; i < gList.size(); i++) {
-				pension = pService.selectCategoryFilter(gList.get(i).getRefPensionNumber());				
+				pension = pService.selectCategoryFilter(gList.get(i).getRefPensionNumber());
 				if(pension.getPensionPrice().equals("판매 완료") || pension.getPensionPrice().equals("다른날짜 확인")) {
 					continue;
-				}else {				
+				}else {
 					DecimalFormat decFormat = new DecimalFormat("###,###");
 					//현재 i번째 숫자
-					String price = pension.getPensionPrice().replaceAll("[^0-9]","");	
+					String price = pension.getPensionPrice().replaceAll("[^0-9]","");
 					if(diffDays == 0) {
 						diffDays = 1;
-					}	
+					}
 					String result = String.valueOf(Integer.parseInt(price) * diffDays);
 					String str = decFormat.format(Integer.parseInt(result));
 					pension.setPensionPrice(str);
 					cList.add(iNumber, pension);
 					iNumber++;
-				}	
+				}
 			}
-			
-			
+
+
 			int pListNum = 0;
 			Pension tmp = new Pension();
 			for(int j=0; j<cList.size(); j++) {
 				for(int k= j+1; k<cList.size(); k++) {
-					if(Integer.parseInt(cList.get(j).getPensionPrice().replaceAll("[^0-9]","")) < Integer.parseInt(cList.get(k).getPensionPrice().replaceAll("[^0-9]",""))) {			
+					if(Integer.parseInt(cList.get(j).getPensionPrice().replaceAll("[^0-9]","")) < Integer.parseInt(cList.get(k).getPensionPrice().replaceAll("[^0-9]",""))) {
 						tmp = cList.get(j);
 						cList.set(j, cList.get(k));
 						cList.set(k, tmp);
 					}
 				}
 			}
-			
+
 			List<Pension> rList = new ArrayList<Pension>();
 			//5순위까지 조회해서 펜션번호 5개 가져옴
 				List<Review> rankList = pService.selectReviewRank();
@@ -602,7 +610,7 @@ public class PensionController {
 			model.addAttribute("cList", cList);
 			mv.addObject("rList", rList);
 			mv.setViewName("pension/list2");
-			return mv;	
+			return mv;
 		}
-	
+
 }

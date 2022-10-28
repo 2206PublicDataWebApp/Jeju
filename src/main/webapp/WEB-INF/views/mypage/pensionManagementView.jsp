@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
 	                       <ul>
 	                           <li><a href="/home">홈</a></li>
 	                           <li><a href="/notice/list">공지사항</a></li>
-	                           <li><a href="detail.html">숙소 리스트</a></li>
+	                           <li><a href="/pension/list">숙소 리스트</a></li>
 	                           <li><a href="destinations.html">커뮤니티</a></li>
 	                           <li><a href="/mypage/myPage">마이페이지</a></li>
 	                       </ul>
@@ -56,7 +57,7 @@
 	    </div>
 	    <div class="destinations container-fluid">
 	       <div class="container">
-	            <div class="session-title"></div>
+	       <div class="row session-title"><h2>${sessionScope.loginUser }님이 등록하신 숙소</h2></div>
 	            <div class="dest-row row">
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">

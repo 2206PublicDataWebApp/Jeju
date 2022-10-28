@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-       pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -137,10 +137,10 @@
    <div class="container" id="test5">
       <div class="row">
          <div class="col-md-7 center image" >
-            <div class="gallery-filter d-none d-sm-block" id="test_second">    
-           			<button class="btn btn-default filter-button" data-filter="all" value="popular" onclick="searchPopular(this);">인기순</button>    
-           		<button class="btn btn-default filter-button" data-filter="hdpe" value="asc" onclick="searchPopular(this);">낮은 가격 순</button>
-               <button class="btn btn-default filter-button" value="desc" data-filter="sprinkle" onclick="searchPopular(this);">높은 가격 순</button>       		         		             
+            <div class="gallery-filter d-none d-sm-block" id="test_second">
+               <button class="btn btn-default filter-button" data-filter="all" value="popular" onclick="searchPopular(this);">인기순</button>
+               <button class="btn btn-default filter-button" data-filter="hdpe" value="asc" onclick="searchPopular(this);">낮은 가격 순</button>
+               <button class="btn btn-default filter-button" value="desc" data-filter="sprinkle" onclick="searchPopular(this);">높은 가격 순</button>
             </div>
             <hr id="margin_test">
             <div class="row g-0 position-relative test2" id="test_first">
@@ -240,15 +240,15 @@
                         <ul>
                            <c:forEach items="${rList }" var="rank" varStatus="i">
                               <li style="margin-bottom: 25px;"><img
-                                    src="${rank.filePath }"
-                                    alt="Image placeholder" class="me-4 rounded"
-                                    style="width: 160px; height: 130px;">
+                                      src="${rank.filePath }"
+                                      alt="Image placeholder" class="me-4 rounded"
+                                      style="width: 160px; height: 130px;">
                                  <div class="text"
-                                     style="display: inline-block; margin-left: 20px;">
+                                      style="display: inline-block; margin-left: 20px;">
                                     <h5>${rank.pensionName }</h5>
                                     <div class="post-meta">
                                     <span class="mr-2"><fmt:formatNumber type="number"
-                                                                maxFractionDigits="3" value="${rank.pensionPrice}" />${rank.pensionPrice }</span>
+                                                                         maxFractionDigits="3" value="${rank.pensionPrice}" />${rank.pensionPrice }</span>
                                     </div>
                                  </div></li>
                            </c:forEach>
@@ -418,179 +418,179 @@
 
    }
 
-   
+
    function searchPopular(elem) {
-	   var swimming = $("#swimming").is(":checked");
-	      var barbecue = $("#barbecue").is(":checked");
-	      var sing = $("#sing").is(":checked");
-	      var park = $("#park").is(":checked");
-	      var convenienceStore = $("#convenienceStore").is(":checked");
-	      var smokingRoom = $("#smokingRoom").is(":checked");
-	      var dog = $("#dog").is(":checked");
-	      var handicapPerson = $("#handicapPerson").is(":checked");
-	      var cook = $("#cook").is(":checked");
-	      var breakfast = $("#breakfast").is(":checked");
-	      var wifi = $("#wifi").is(":checked");
-	      var aircon = $("#aircon").is(":checked");
-	      var refrigerator = $("#refrigerator").is(":checked");
-	      var bathtub = $("#bathtub").is(":checked");
-	      var dry = $("#dry").is(":checked");
-	      var tv = $("#tv").is(":checked");
-	      var all = $('.all').is(':checked');
-	      var startDate = document.getElementById("datepicker").value;
-	      var endDate = document.getElementById("datepicker1").value;
-	      console.log("들어가기 전");   
-	      if(elem.value == 'popular') {
-	    	  if(all == false) {
-		    	  console.log("들어왔다!");
-		          $.ajax({
-		        	  url : "/pension/dateSearchSort?startDate=${startDate}&endDate=${endDate}",
-		        	  data : {
-		        		  "startDate" : startDate,
-		        		  "endDate" : endDate	  
-		        	  } , 
-		        	  type : "post",
-		    		   success : function(result) {    			   
-		    		   		var $body = $("#test_first");
-		    	            $body.html("");
-		    	            $("#test_first").html(result); 
-		    		   }       	  
-		          });
-		       }else {
-		    	   $.ajax({
-		    		   url : "/pension/popular",
-		    		   data : {
-		    	            "swimming" : swimming,
-		    	            "barbecue" : barbecue,
-		    	            "sing" : sing,
-		    	            "park" : park,
-		    	            "convenienceStore" : convenienceStore,
-		    	            "smokingRoom" : smokingRoom,
-		    	            "dog" : dog,
-		    	            "handicapPerson" : handicapPerson,
-		    	            "cook" : cook,
-		    	            "breakfast" : breakfast,
-		    	            "wifi" : wifi,
-		    	            "aircon" : aircon,
-		    	            "refrigerator" : refrigerator,
-		    	            "bathtub" : bathtub,
-		    	            "dry" : dry,
-		    	            "tv" : tv,
-		    	            "startDate" : startDate,
-		    	            "endDate" : endDate
-		    	         },
-		    		   type : "get",
-		    		   success : function(result) {		   
-		    		   		var $body = $("#test_first");
-		    	            $body.html("");
-		    	            $("#test_first").html(result); 
-		    		   }
-		    	   
-		    	 });
-		       }
-	      }else if(elem.value == 'asc'){
-	    	  if(all == false) {
-	    		  $.ajax({
-	 	    		 url : "/pension/datePriceSort?startDate=${startDate}&endDate=${endDate}",
-	 	    		 data : {
-	 	    			 "startDate" : startDate,
-	 	        		  "endDate" : endDate	
-	 	    		 },
-	 	    		 type : "post",
-	 	    			 success : function(result) {    			   
-	 		    		   		var $body = $("#test_first");
-	 		    	            $body.html("");
-	 		    	            $("#test_first").html(result); 
-	 		    		   }   
-	 	    	  });
-	    	  }else {
-	    		  $.ajax({
-		    		   url : "/pension/categoryPriceSort?startDate=${startDate}&endDate=${endDate}",
-		    		   data : {
-		    	            "swimming" : swimming,
-		    	            "barbecue" : barbecue,
-		    	            "sing" : sing,
-		    	            "park" : park,
-		    	            "convenienceStore" : convenienceStore,
-		    	            "smokingRoom" : smokingRoom,
-		    	            "dog" : dog,
-		    	            "handicapPerson" : handicapPerson,
-		    	            "cook" : cook,
-		    	            "breakfast" : breakfast,
-		    	            "wifi" : wifi,
-		    	            "aircon" : aircon,
-		    	            "refrigerator" : refrigerator,
-		    	            "bathtub" : bathtub,
-		    	            "dry" : dry,
-		    	            "tv" : tv,
-		    	            "startDate" : startDate,
-		    	            "endDate" : endDate
-		    	         },
-		    		   type : "post",
-		    		   success : function(result) {		
-		    			   console.log("성공!");
-		    			   console.log(result);
-		    		   		var $body = $("#test_first");
-		    	            $body.html("");
-		    	            $("#test_first").html(result); 
-		    		   }
-		    	   
-		    	 });
-	    	  }
-	    	  
-	      }else if(elem.value == 'desc') {
-	    	  if(all == false) {
-	    		  $.ajax({
-	 	    		 url : "/pension/dateDescPriceSort?startDate=${startDate}&endDate=${endDate}",
-	 	    		 data : {
-	 	    			 "startDate" : startDate,
-	 	        		  "endDate" : endDate	
-	 	    		 },
-	 	    		 type : "post",
-	 	    			 success : function(result) {    			   
-	 		    		   		var $body = $("#test_first");
-	 		    	            $body.html("");
-	 		    	            $("#test_first").html(result); 
-	 		    		   }   
-	 	    	  });
-	    	  }else {
-	    		  $.ajax({
-		    		   url : "/pension/categoryDescPriceSort?startDate=${startDate}&endDate=${endDate}",
-		    		   data : {
-		    	            "swimming" : swimming,
-		    	            "barbecue" : barbecue,
-		    	            "sing" : sing,
-		    	            "park" : park,
-		    	            "convenienceStore" : convenienceStore,
-		    	            "smokingRoom" : smokingRoom,
-		    	            "dog" : dog,
-		    	            "handicapPerson" : handicapPerson,
-		    	            "cook" : cook,
-		    	            "breakfast" : breakfast,
-		    	            "wifi" : wifi,
-		    	            "aircon" : aircon,
-		    	            "refrigerator" : refrigerator,
-		    	            "bathtub" : bathtub,
-		    	            "dry" : dry,
-		    	            "tv" : tv,
-		    	            "startDate" : startDate,
-		    	            "endDate" : endDate
-		    	         },
-		    		   type : "post",
-		    		   success : function(result) {		
-		    			   console.log("성공!");
-		    			   console.log(result);
-		    		   		var $body = $("#test_first");
-		    	            $body.html("");
-		    	            $("#test_first").html(result); 
-		    		   }
-		    	   
-		    	 });
-	      }
-	      
-	      }
-}
-  
+      var swimming = $("#swimming").is(":checked");
+      var barbecue = $("#barbecue").is(":checked");
+      var sing = $("#sing").is(":checked");
+      var park = $("#park").is(":checked");
+      var convenienceStore = $("#convenienceStore").is(":checked");
+      var smokingRoom = $("#smokingRoom").is(":checked");
+      var dog = $("#dog").is(":checked");
+      var handicapPerson = $("#handicapPerson").is(":checked");
+      var cook = $("#cook").is(":checked");
+      var breakfast = $("#breakfast").is(":checked");
+      var wifi = $("#wifi").is(":checked");
+      var aircon = $("#aircon").is(":checked");
+      var refrigerator = $("#refrigerator").is(":checked");
+      var bathtub = $("#bathtub").is(":checked");
+      var dry = $("#dry").is(":checked");
+      var tv = $("#tv").is(":checked");
+      var all = $('.all').is(':checked');
+      var startDate = document.getElementById("datepicker").value;
+      var endDate = document.getElementById("datepicker1").value;
+      console.log("들어가기 전");
+      if(elem.value == 'popular') {
+         if(all == false) {
+            console.log("들어왔다!");
+            $.ajax({
+               url : "/pension/dateSearchSort?startDate=${startDate}&endDate=${endDate}",
+               data : {
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               } ,
+               type : "post",
+               success : function(result) {
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+            });
+         }else {
+            $.ajax({
+               url : "/pension/popular",
+               data : {
+                  "swimming" : swimming,
+                  "barbecue" : barbecue,
+                  "sing" : sing,
+                  "park" : park,
+                  "convenienceStore" : convenienceStore,
+                  "smokingRoom" : smokingRoom,
+                  "dog" : dog,
+                  "handicapPerson" : handicapPerson,
+                  "cook" : cook,
+                  "breakfast" : breakfast,
+                  "wifi" : wifi,
+                  "aircon" : aircon,
+                  "refrigerator" : refrigerator,
+                  "bathtub" : bathtub,
+                  "dry" : dry,
+                  "tv" : tv,
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               },
+               type : "get",
+               success : function(result) {
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+
+            });
+         }
+      }else if(elem.value == 'asc'){
+         if(all == false) {
+            $.ajax({
+               url : "/pension/datePriceSort?startDate=${startDate}&endDate=${endDate}",
+               data : {
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               },
+               type : "post",
+               success : function(result) {
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+            });
+         }else {
+            $.ajax({
+               url : "/pension/categoryPriceSort?startDate=${startDate}&endDate=${endDate}",
+               data : {
+                  "swimming" : swimming,
+                  "barbecue" : barbecue,
+                  "sing" : sing,
+                  "park" : park,
+                  "convenienceStore" : convenienceStore,
+                  "smokingRoom" : smokingRoom,
+                  "dog" : dog,
+                  "handicapPerson" : handicapPerson,
+                  "cook" : cook,
+                  "breakfast" : breakfast,
+                  "wifi" : wifi,
+                  "aircon" : aircon,
+                  "refrigerator" : refrigerator,
+                  "bathtub" : bathtub,
+                  "dry" : dry,
+                  "tv" : tv,
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               },
+               type : "post",
+               success : function(result) {
+                  console.log("성공!");
+                  console.log(result);
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+
+            });
+         }
+
+      }else if(elem.value == 'desc') {
+         if(all == false) {
+            $.ajax({
+               url : "/pension/dateDescPriceSort?startDate=${startDate}&endDate=${endDate}",
+               data : {
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               },
+               type : "post",
+               success : function(result) {
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+            });
+         }else {
+            $.ajax({
+               url : "/pension/categoryDescPriceSort?startDate=${startDate}&endDate=${endDate}",
+               data : {
+                  "swimming" : swimming,
+                  "barbecue" : barbecue,
+                  "sing" : sing,
+                  "park" : park,
+                  "convenienceStore" : convenienceStore,
+                  "smokingRoom" : smokingRoom,
+                  "dog" : dog,
+                  "handicapPerson" : handicapPerson,
+                  "cook" : cook,
+                  "breakfast" : breakfast,
+                  "wifi" : wifi,
+                  "aircon" : aircon,
+                  "refrigerator" : refrigerator,
+                  "bathtub" : bathtub,
+                  "dry" : dry,
+                  "tv" : tv,
+                  "startDate" : startDate,
+                  "endDate" : endDate
+               },
+               type : "post",
+               success : function(result) {
+                  console.log("성공!");
+                  console.log(result);
+                  var $body = $("#test_first");
+                  $body.html("");
+                  $("#test_first").html(result);
+               }
+
+            });
+         }
+
+      }
+   }
+
 
 
 
