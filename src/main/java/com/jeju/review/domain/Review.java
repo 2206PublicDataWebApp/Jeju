@@ -26,85 +26,66 @@ public class Review {
 
 	public Integer getReivewNo() {
 		return reivewNo;
-	private String reviewContents;
-	private Integer reviewCount;
-	private Integer pensionNo;
+	}
 
-	public Review(Integer reviewNo, String memberId, Date regDate, Date reviewUpdate, String reviewContents,
-			Integer reviewCount, Integer pensionNo) {
-		this.reviewNo = reviewNo;
+	public void setReivewNo(Integer reivewNo) {
+		this.reivewNo = reivewNo;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+
+	public Date getReviewUpdate() {
+		return reviewUpdate;
+	}
+
+	public void setReviewUpdate(Date reviewUpdate) {
 		this.reviewUpdate = reviewUpdate;
-		this.reviewContents = reviewContents;
+	}
+
+	public String getReivewContents() {
+		return reivewContents;
+	}
+
+	public void setReivewContents(String reivewContents) {
+		this.reivewContents = reivewContents;
+	}
+
+	public Integer getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(Integer reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+
+	public Integer getPensionNo() {
+		return pensionNo;
+	}
+
+	public void setPensionNo(Integer pensionNo) {
 		this.pensionNo = pensionNo;
 	}
 
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", memberId=" + memberId + ", regDate=" + regDate + ", reviewUpdate="
-				+ reviewUpdate + ", reviewContents=" + reviewContents + ", reviewCount=" + reviewCount + ", pensionNo="
+		return "Review [reivewNo=" + reivewNo + ", memberId=" + memberId + ", regDate=" + regDate + ", reviewUpdate="
+				+ reviewUpdate + ", reivewContents=" + reivewContents + ", reviewCount=" + reviewCount + ", pensionNo="
 				+ pensionNo + "]";
 	}
 
-	public void setReivewNo(Integer reivewNo){
-			this.reivewNo = reivewNo;
 
-			public Integer getReviewNo () {
-				return reviewNo;
-			}
-
-
-			public void setReviewNo (Integer reviewNo){
-				this.reviewNo = reviewNo;
-			}
-
-			public String getMemberId () {
-				return memberId;
-			}
-			public void setMemberId (String memberId){
-				this.memberId = memberId;
-			}
-
-			public Date getRegDate () {
-				return regDate;
-			}
-
-			public void setRegDate (Date regDate){
-				this.regDate = regDate;
-			}
-
-			public Date getReviewUpdate () {
-				return reviewUpdate;
-			}
-
-			public void setReviewUpdate (Date reviewUpdate){
-				this.reviewUpdate = reviewUpdate;
-			}
-
-			public String getReivewContents () {
-				return reivewContents;
-
-				public void setReviewContents (String reviewContents){
-					this.reviewContents = reviewContents;
-				}
-
-				public Integer getReviewCount () {
-					return reviewCount;
-				}
-
-				public void setReviewCount (Integer reviewCount){
-					this.reviewCount = reviewCount;
-				}
-
-				public Integer getPensionNo () {
-					return pensionNo;
-				}
-
-				public void setPensionNo (Integer pensionNo){
-					this.pensionNo = pensionNo;
-				}
-
-
-			}
+}

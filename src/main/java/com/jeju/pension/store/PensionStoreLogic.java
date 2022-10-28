@@ -135,12 +135,13 @@ public class PensionStoreLogic implements PensionStore{
 	}
 
 
-
 	@Override
 	public List<Room> selectRoom(SqlSession session, Integer pensionNo) {
-		List<Room> rList = session.selectList("RoomMapper.selectRoom", pensionNo);
+		List<Room> rList = session.selectList("RoomMapper.selectRoomNumber", pensionNo);
 		return rList;
 	}
+	
+	
 	// 리뷰 전부 가져오기
 	@Override
 	public List<Review> selectAllReview(SqlSession session, Integer pensionNo) {

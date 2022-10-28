@@ -28,8 +28,11 @@
 		SELECT * FROM ROOM_TBL WHERE ROOM_NO = #{roomNo}
 	</select>
 
-	<select id="selectRoom" resultMap="roomResultMap">
+
+	<select id="selectRoomNumber" resultMap="roomResultMap">
 		SELECT * FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}
+	</select>
+
 	<select id="selectRoomAttach" parameterType="Room" resultMap="roomResultMap">
 		SELECT ROOM_ATTACH.ROOM_PATH
 		FROM ROOM_TBL
@@ -37,6 +40,7 @@
 		ON ROOM_TBL.ROOM_NO = ROOM_ATTACH.ROOM_NO
 		WHERE REF_PENSION_NO = #{refPensionNo}
 	</select>
+	
 	<select id="selectRoom" parameterType="Room" resultMap="roomResultMap">
 		SELECT ROOM_TBL.*,ROOM_ATTACH.ROOM_PATH
 		FROM ROOM_TBL
@@ -53,4 +57,5 @@
 		INSERT INTO ROOM_TBL
 		VALUES(SEQ_ROOM_NO.NEXTVAL,SYSDATE,NULL, DEFAULT,#{price},#{roomName},DEFAULT,#{refPensionNo},#{maxPersonnel} )
 	</insert>
+	
 </mapper>

@@ -23,6 +23,8 @@ public class Pension implements Comparable<Pension>{
 	private Integer reviewCount;
 	private Integer jjimCount;
 
+	public Pension() {}
+
 	public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
 			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
 			int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
@@ -44,38 +46,9 @@ public class Pension implements Comparable<Pension>{
 		this.pensionFileName = pensionFileName;
 		this.pensionFileRename = pensionFileRename;
 		this.reviewCount = reviewCount;
-		this.reviewCount = reviewCount;
 		this.jjimCount = jjimCount;
 	}
 
-	public Integer getReviewCount() {
-		return reviewCount;
-	}
-
-	public void setReviewCount(Integer reviewCount) {
-		this.reviewCount = reviewCount;
-	}
-
-	public Pension () {}
-
-	@Override
-	public String toString() {
-		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
-				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
-				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
-				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
-				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
-				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + ", reviewCount=" + reviewCount
-				+ ", jjimCount=" + jjimCount + "]";
-	}
-
-	public Integer getJjimCount() {
-		return jjimCount;
-	}
-
-	public void setJjimCount(Integer jjimCount) {
-		this.jjimCount = jjimCount;
-	}
 
 	public Integer getPensionNo() {
 		return pensionNo;
@@ -211,6 +184,14 @@ public class Pension implements Comparable<Pension>{
 
 	public void setReviewCount(Integer reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+
+	public Integer getJjimCount() {
+		return jjimCount;
+	}
+
+	public void setJjimCount(Integer jjimCount) {
+		this.jjimCount = jjimCount;
 	}
 
 	@Override
