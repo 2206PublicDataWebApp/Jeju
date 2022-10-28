@@ -26,12 +26,14 @@
 		<typeAlias type="com.jeju.member.domain.Member" 	alias="Member"/>
 		<typeAlias type="com.jeju.admin.domain.Admin" 	alias="Admin"/>
 
+		<typeAlias type="com.jeju.pay.domain.Pay" 	alias="Pay"/>
 	</typeAliases>
 
 	<!-- </typeAliases> -->
 
 	<!-- 	<mappers> -->
 	<mappers>
+		<mapper resource="mappers/pay-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/pension-mapper.xml"/>
 		<mapper resource="mappers/room-mapper.xml"/>

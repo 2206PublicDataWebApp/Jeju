@@ -3,82 +3,80 @@ package com.jeju.reservation.domain;
 import java.sql.Date;
 
 public class Reservation {
-	private int reservationNo;
+	private Integer reservationNo;
 	private String memberId;
-	private Date checkIn;
-	private Date checkOut;
 	private String rStatus;
-	private int roomNo;
-	private int pensionNo;
+	private Integer roomNo;
+	private Integer rePensionNo;
 	private int useHistory;
-	private String price;
+	private int rePrice;
 	
-	public Reservation(int reservationNo, String memberId, Date checkIn, Date checkOut, String rStatus, int roomNo,
-			int pensionNo, int useHistory, String price) {
+	public Reservation() {}
+	
+	public Reservation(Integer reservationNo, String memberId, String rStatus, Integer roomNo, Integer rePensionNo,
+			int useHistory, int rePrice) {
 		this.reservationNo = reservationNo;
 		this.memberId = memberId;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
 		this.rStatus = rStatus;
 		this.roomNo = roomNo;
-		this.pensionNo = pensionNo;
+		this.rePensionNo = rePensionNo;
 		this.useHistory = useHistory;
-		this.price = price;
+		this.rePrice = rePrice;
 	}
-	
-	public int getReservationNo() {
+
+	public Integer getReservationNo() {
 		return reservationNo;
 	}
-	public void setReservationNo(int reservationNo) {
+
+	public void setReservationNo(Integer reservationNo) {
 		this.reservationNo = reservationNo;
 	}
+
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public Date getCheckIn() {
-		return checkIn;
-	}
-	public void setCheckIn(Date checkIn) {
-		this.checkIn = checkIn;
-	}
-	public Date getCheckOut() {
-		return checkOut;
-	}
-	public void setCheckOut(Date checkOut) {
-		this.checkOut = checkOut;
-	}
+
 	public String getrStatus() {
 		return rStatus;
 	}
+
 	public void setrStatus(String rStatus) {
 		this.rStatus = rStatus;
 	}
-	public int getRoomNo() {
+
+	public Integer getRoomNo() {
 		return roomNo;
 	}
-	public void setRoomNo(int roomNo) {
+
+	public void setRoomNo(Integer roomNo) {
 		this.roomNo = roomNo;
 	}
-	public int getPensionNo() {
-		return pensionNo;
+
+	public Integer getRePensionNo() {
+		return rePensionNo;
 	}
-	public void setPensionNo(int pensionNo) {
-		this.pensionNo = pensionNo;
+
+	public void setRePensionNo(Integer rePensionNo) {
+		this.rePensionNo = rePensionNo;
 	}
+
 	public int getUseHistory() {
 		return useHistory;
 	}
+
 	public void setUseHistory(int useHistory) {
 		this.useHistory = useHistory;
 	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
+
+	public int getRePrice() {
+		return rePrice;
 	}
 
+	public void setRePrice(int rePrice) {
+		this.rePrice = rePrice;
+	}
 }

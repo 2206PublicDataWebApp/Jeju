@@ -1,14 +1,17 @@
 package com.jeju.reservation.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
 import com.jeju.reservation.store.ReservationStore;
+import com.jeju.room.domain.Room;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -28,10 +31,10 @@ public class ReservationServiceImpl implements ReservationService{
 
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", userPhoneNumber);    // ¼ö½ÅÀüÈ­¹øÈ£
-	    params.put("from", "01032888503");    // ¹ß½ÅÀüÈ­¹øÈ£. Å×½ºÆ®½Ã¿¡´Â ¹ß½Å,¼ö½Å µÑ´Ù º»ÀÎ ¹øÈ£·Î ÇÏ¸é µÊ
+	    params.put("to", userPhoneNumber);    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½È£
+	    params.put("from", "01032888503");    // ï¿½ß½ï¿½ï¿½ï¿½È­ï¿½ï¿½È£. ï¿½×½ï¿½Æ®ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ß½ï¿½,ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½
 	    params.put("type", "SMS");
-	    params.put("text", "[TEST] ÀÎÁõ¹øÈ£´Â" + "["+randomNumber+"]" + "ÀÔ´Ï´Ù."); // ¹®ÀÚ ³»¿ë ÀÔ·Â
+	    params.put("text", "[TEST] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½" + "["+randomNumber+"]" + "ï¿½Ô´Ï´ï¿½."); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	    params.put("app_version", "test app 1.2"); // application name and version
 
 	    try {
@@ -47,6 +50,18 @@ public class ReservationServiceImpl implements ReservationService{
 	public int addReservation(Reservation reservation) {
 		int result = aStore.addReserve(session, reservation);
 		return result;
+	}
+
+	@Override
+	public Pension selectOneByPension(Integer pensionNo) {
+		Pension pList = aStore.selectOneByPension(session, pensionNo);
+		return pList;
+	}
+
+	@Override
+	public Room selectOneByRoom(Integer roomNo) {
+		Room room = aStore.selectOneByRoom(session, roomNo);
+		return room;
 	}
 	
 }

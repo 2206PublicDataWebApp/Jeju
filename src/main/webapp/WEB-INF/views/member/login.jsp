@@ -76,26 +76,24 @@
 
 <body>
 
-	
-	<div class="input-box">
-
-		<c:if test="${sessionScope.loginUser eq null }"> 
-			<form action="/member/login" method="get">
-<!-- 				<table align="right"> -->
-<!-- 					<tr> -->
-<!-- 						<td>아이디 : </td> -->
-<!-- 						<td><input type="text" name="memberId"></td> -->
-<!-- 						<td rowspan="2"> -->
-<!-- 							<input type="submit" value="로그인"> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>비밀번호 : </td> -->
-<!-- 						<td><input type="password" name="memberPwd"></td> -->
-<!-- 	<!-- 					<td></td> --> 
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-				<div class="input-box">
+   
+   <div class="input-box">
+         <form action="/member/login" method="get">
+<!--             <table align="right"> -->
+<!--                <tr> -->
+<!--                   <td>아이디 : </td> -->
+<!--                   <td><input type="text" name="memberId"></td> -->
+<!--                   <td rowspan="2"> -->
+<!--                      <input type="submit" value="로그인"> -->
+<!--                   </td> -->
+<!--                </tr> -->
+<!--                <tr> -->
+<!--                   <td>비밀번호 : </td> -->
+<!--                   <td><input type="password" name="memberPwd"></td> -->
+<!--    <!--                <td></td> --> 
+<!--                </tr> -->
+<!--                <tr> -->
+            <div class="input-box">
                 <input id="memberId" type="text" name="memberId" placeholder="아이디">
                 <label for="memberId">아이디</label>
             </div>
@@ -104,32 +102,19 @@
                 <input id="memberPwd" type="password" name="memberPwd" placeholder="비밀번호">
                 <label for="memberPwd">비밀번호</label>
                 
-						
-					</div>
-			아이디가 없으신가요?-><td colspan="3"><a href="/member/joinView.kh">회원가입</a></td>
+                  
+               </div>
+         아이디가 없으신가요?-><td colspan="3"><a href="/member/joinView.kh">회원가입</a></td>
            
             <input type="submit" value="로그인">
 
         </form>
 
 
-		</c:if> 
- 		<c:if test="${not empty loginUser }"> 
-			<table align="right">
-				<tr>
-					<td colspan="2">${sessionScope.loginUser.memberName }님 환영합니다!!</td>
-<!-- 					<td></td> -->
-				</tr>
-				<tr>
-					<td><a href="/member/myPage.kh">정보수정</a></td>
-					<td><a href="/member/logout.kh">로그아웃</a></td>
-				</tr>
-			</table>
-		</c:if>	 
-	</div>
-	
-	<script>
-		
-	</script>
+   
+   </div>
+   
+   <script>
+      
+   </script>
 </body>
-</html>

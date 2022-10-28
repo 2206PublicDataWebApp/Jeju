@@ -145,7 +145,7 @@
                    <div class="row nav-row">
                        <ul>
                            <li><a href="index.html">Home</a></li>
-                           <li><a href="about_us.html">About Us</a></li>
+                           <li><a href="/pension/list">숙소 리스트</a></li>
                            <li><a href="destinations.html">Destinations</a></li>
                            <li><a href="blog.html">Blog</a></li>
                            <li><a href="gallery.html">Gallery</a></li>
@@ -210,6 +210,7 @@
                         
 			<input type="hidden" id="phoneDoubleChk"/>
 			</div>
+			
                     <div  class="row cont-row info3">
                         <div  class="col-sm-3 reserve"><label>등급 할인</label></div>
                     </div>
@@ -217,6 +218,8 @@
                     <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : <span id="price1">300,000원</span></div>
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
                     <br><br>
+                    
+               
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
 							class="col-sm-9">
@@ -227,30 +230,47 @@
 							<br>
 						</div>
 					</div>
+				
+					
+					
+					<div style="margin-top: 10px;" class="row">
+						<div style="text-align: center; background-color: lightblue;"
+							class="col-sm-9">
+							<br>
+							<div class="login">등급할인 혜택을 누리세요!</div>
+<!-- 							<div class="login">등급할인이 적용됩니다.</div> -->
+<!-- 							<div class="login" style="margin-top: 10px;">로그인</div> -->
+							<br>
+						</div>
+					</div>
+
 					
                 </div>
                 
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                      <h5 class="card-title">숙소 이름</h5>
-                      <p class="card-text">제주도 서귀포 펜션</p>
+                    <c:if test="${!empty p }">
+                    	<h5 class="card-title">숙소이름</h5>
+                      <p class="card-text">${p.pensionName }</p>
                       <br>
+                       </c:if>  
+                       <c:if test="${!empty r }">
                       <h5 class="card-title">객실 타입 / 기간</h5>
-                      <p class="card-text">제주도 서귀포 펜션</p>
+                      <p class="card-text">${r.roomName }</p>
                       <br>
                       <h5 class="card-title">체크인</h5>
-                      <p class="card-text">10.13 목 15:00</p>
+                      <p class="card-text">${startDate1 }월 ${startDate2 }일 15:00시</p>
                       <br>
                       <h5 class="card-title">체크 아웃</h5>
-                      <p class="card-text">10.14 금 15:00</p>
+                      <p class="card-text">${endDate1 }월 ${endDate2 }일 11:00시</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price">300,000원</h5>
+                      <h5 class="card-title" id="price">${changePrice }원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
                       </ul>
-
+					</c:if>
                     </div>
                     
                     <ul class="list-group list-group-flush">
@@ -272,7 +292,8 @@
 			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1"><span class="check7 closed"
 				onclick="clickshow(this,'categories1');"><label for="agreement1">개인정보 수집/이용 동의</label></span><span
 				class="test5">(필수)</span><span id="successChk1" style="font-size : 13px; margin-left : 5px;"></span></li>
-			<div >
+			
+			<div>
 				<fieldset id="categories1" style="display: none;">
 				<div>
 					<div class="content">
@@ -318,8 +339,10 @@
 				</div>
 			</fieldset>
 			</div>
+			
 			<li class="check6"><input id="agreement2" type="checkbox" name="agreement2"><span class="check7 closed" onclick="clickshow(this,'categories2');" style="display : inline-block"><label for="agreement2">숙소 이용규칙 및 환불 규정</label></span><span
 				class="test5">(필수)</span><span id="successChk2" style="font-size : 13px; margin-left : 5px;"></span></li>
+			
 			<div>
 			<fieldset id="categories2" style="display: none;">
 				<div>
@@ -344,11 +367,12 @@
 
 						</div>
 				</div>
-			</fieldset>
-				
+			</fieldset>				
 			</div>
+			
 			<li class="check6" ><input id="agreement3" type="checkbox" name="agreement3"><span class="check7 closed" onclick="clickshow(this,'categories3');"><label for="agreement3">만 14세 이상 확인</label></span><span
 				class="test5">(필수)</span><span id="successChk3" style="font-size : 13px; margin-left : 5px;"></span></li>
+			
 			<div>
 			<fieldset id="categories3" style="display: none;">
 				<div>
@@ -377,12 +401,9 @@
  그러나 부모님 모르게 부모님의 주민등록번호 등을 이용해 회원 가입을 했거나 부모님께서 자녀가 온라인 게임 사이트에 회원 가입을 했다는 사실을 알고 계신 경우 등에는 요금을 돌려받을 수 없으므로 유의해야 합니다.
 </textarea>
 						</p>
-
-
 						</div>
 				</div>
 			</fieldset>
-				
 			</div>	
 		</ul>
 	</form>
@@ -435,10 +456,73 @@
     </body>
      <script>
      
-     
+
+//      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#phoneDoubleChk").val() == "true" && $("#nameChk").val() != null){
- 	    	alert("예약이 완료되었습니다.");
+ 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#nameChk").val() != null){
+ 	     		//가맹점 식별코드
+ 	     		IMP.init('imp28778843');
+ 	     		IMP.request_pay({
+ 	     		    pg : 'kcp',
+ 	     		    pay_method : 'card',
+ 	     		    merchant_uid : 'merchant_' + new Date().getTime(),
+ 	     		    name : '한재민' ,
+		    		amount : '501',
+//  	     			amount : '${price}',
+ 	     		    buyer_email : 'iamport@siot.do',
+ 	     		    buyer_name : $("#nameChk").val(),
+ 	     		    buyer_tel : $("#phone").val()
+// 	      		    buyer_addr : '서울 강남구 도곡동',
+// 	      		    buyer_postcode : '123-456'
+ 	     		},function(rsp) {
+ 	     			console.log(rsp);
+ 	     		    if ( rsp.success ) {
+ 	     		        msg += '고유ID : ' + rsp.imp_uid;
+ 	     		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+ 	     		        msg += '결제 금액 : ' + rsp.paid_amount;
+ 	     		        msg += '카드 승인번호 : ' + rsp.apply_num;  
+ 	     		        
+ 	     		        $.ajax({
+ 	     		        	url : "/pay/success",
+ 	     		        	data : {
+ 	     		        		"payId" : rsp.imp_uid,
+ 	     		        		"roomNo" : '${r.roomNo}',
+ 	     		        		"payPensionNo" : '${r.refPensionNo}',
+ 	     		        		"payPrice" : rsp.paid_amount        		
+ 	     		        	},
+ 	     		        	type : "post",
+ 	     		        	success : function(result) {
+ 	     		        		alert(result);
+ 	     		        		$.ajax({
+ 	     		        			url : "/reservation/success",
+ 	     		        			data : {
+ 	     		        				"roomNo" : '${r.roomNo}',
+ 	     		        				"rePensionNo" : '${r.refPensionNo}',
+ 	     		        				"rePrice" : rsp.paid_amount
+ 	     		        			},
+ 	     		        			type : "post",
+ 	     		        			success : function(result) {
+ 	     		        				console.log("제발 되라" + result);
+ 	     		        				location.href = "/pension/list";
+ 	     		        			},
+ 	     		        			error : function() {
+ 	    	     		        		alert("예약 등록 실패!");
+ 	    	     		        	}
+ 	     		        		});
+
+ 	     		        	},
+ 	     		        	error : function() {
+ 	     		        		alert("결제 등록 실패!");
+ 	     		        	}
+ 	     		        });
+ 	     		    } else {
+ 	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
+ 	     		         msg += '에러내용 : ' + rsp.error_msg;
+ 	     		       alert(msg);
+ 	     		     location.href = "/pension/list";
+ 	     		    }	
+//  	     		  location.href = "/pension/list";
+ 	     		});	
  	    }else{
  	    	alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
  	    	if(!$("#agreement1").prop("checked")){
@@ -459,61 +543,61 @@
  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
  				$("#successNameChk").css("color", "red");
  	    	}
- 	    	if($("#phoneDoubleChk").val() != "true"){
- 	    		console.log($("#phoneDoubleChk").val());
- 	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
- 				$(".successPhoneChk").css("color", "red");	    		
- 	    	}
+//  	    	if($("#phoneDoubleChk").val() != "true"){
+//  	    		console.log($("#phoneDoubleChk").val());
+//  	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//  				$(".successPhoneChk").css("color", "red");	    		
+//  	    	}
  	    	return false
  	    }    	    	
      });
 	
      
      
-	    var code2 = "";
-	    $("#phoneChk").click(function(){
-	    	if($("#phone").val() != "") {
-	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-		    	var phone = $("#phone").val();
-		    	$.ajax({
-		            type:"GET",
-		            url:"/reservation/phoneCheck?memberPhone=" + phone,
-		            cache : false,
-		            success:function(data){
-		            	if(data == "error"){
-		            		alert("휴대폰 번호가 올바르지 않습니다.");
-		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-		    				$(".successPhoneChk").css("color","red");
-		    				$("#phone").attr("autofocus",true);
-		            	}else{	        		
-		            		$("#phone2").attr("disabled",false);
-		            		$("#phoneChk2").css("display","inline-block");
-		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-		            		$(".successPhoneChk").css("color","green");
-		            		$("#phone").attr("readonly",true);
-		            		code2 = data;
-		            	}
-		            }
-		        });
-	    	}else {
-	    		alert("휴대폰 번호를 입력해주세요.");
-	    	}
-	    });
+// 	    var code2 = "";
+// 	    $("#phoneChk").click(function(){
+// 	    	if($("#phone").val() != "") {
+// 	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+// 		    	var phone = $("#phone").val();
+// 		    	$.ajax({
+// 		            type:"GET",
+// 		            url:"/reservation/phoneCheck?memberPhone=" + phone,
+// 		            cache : false,
+// 		            success:function(data){
+// 		            	if(data == "error"){
+// 		            		alert("휴대폰 번호가 올바르지 않습니다.");
+// 		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+// 		    				$(".successPhoneChk").css("color","red");
+// 		    				$("#phone").attr("autofocus",true);
+// 		            	}else{	        		
+// 		            		$("#phone2").attr("disabled",false);
+// 		            		$("#phoneChk2").css("display","inline-block");
+// 		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+// 		            		$(".successPhoneChk").css("color","green");
+// 		            		$("#phone").attr("readonly",true);
+// 		            		code2 = data;
+// 		            	}
+// 		            }
+// 		        });
+// 	    	}else {
+// 	    		alert("휴대폰 번호를 입력해주세요.");
+// 	    	}
+// 	    });
 
 	    
-	    $("#phoneChk2").click(function(){
-	    	if($("#phone2").val() == code2){
-	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
-	    		$(".successPhoneChk").css("color","green");
-	    		$("#phoneDoubleChk").val("true");
-	    		$("#phone2").attr("disabled",true);
-	    	}else{
-	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-	    		$(".successPhoneChk").css("color","red");
-	    		$("#phoneDoubleChk").val("false");
-	    		$(this).attr("autofocus",true);
-	    	}
-	    });
+// 	    $("#phoneChk2").click(function(){
+// 	    	if($("#phone2").val() == code2){
+// 	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
+// 	    		$(".successPhoneChk").css("color","green");
+// 	    		$("#phoneDoubleChk").val("true");
+// 	    		$("#phone2").attr("disabled",true);
+// 	    	}else{
+// 	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+// 	    		$(".successPhoneChk").css("color","red");
+// 	    		$("#phoneDoubleChk").val("false");
+// 	    		$(this).attr("autofocus",true);
+// 	    	}
+// 	    });
 
 	    function clickshow(elem,ID) {
 	    	 var menu = document.getElementById(ID);
@@ -531,4 +615,5 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
+    
 </html>

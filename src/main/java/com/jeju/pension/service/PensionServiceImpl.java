@@ -1,6 +1,5 @@
 package com.jeju.pension.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +10,7 @@ import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.store.PensionStore;
+import com.jeju.review.domain.Review;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
 
@@ -40,15 +40,15 @@ public class PensionServiceImpl implements PensionService{
 	}
 
 	@Override
-	public List<Pension> selectReviewRank() {
-		List<Pension> rList = pStore.selectReviewRank(session);
+	public List<Review> selectReviewRank() {
+		List<Review> rList = pStore.selectReviewRank(session);
 		return rList;
 	}
 
 
 	@Override
-	public List<Pension> selectPensionRank(Pension pensionNo) {
-		List<Pension> rList = pStore.selectPensionRank(session, pensionNo);
+	public Pension selectPensionRank(Integer pensionNo) {
+		Pension rList = pStore.selectPensionRank(session, pensionNo);
 		return rList;
 	}
 	@Override
@@ -135,5 +135,21 @@ public class PensionServiceImpl implements PensionService{
 		List<Category> category = pStore.selectCategoryCheck(session, pensionNo);
 		return category;
 	}
+	
+	//낮은가격순 정렬
+	@Override
+	public List<Pension> ascPriceSort() {
+		List<Pension> priceList = pStore.ascPriceSort(session);
+		return priceList;
+	}
+
+	@Override
+	public List<Pension> DescPriceSort() {
+		List<Pension> priceList = pStore.descPriceSort(session);
+		return priceList;
+	}
+
+
+
 
 }

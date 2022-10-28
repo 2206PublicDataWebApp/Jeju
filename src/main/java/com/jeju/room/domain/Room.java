@@ -4,8 +4,7 @@ import java.sql.Date;
 
 public class Room {
 	private Integer roomNo;
-	private Date startTime;
-	private Date endTime;
+
 	private String rStatus;
 	private String price;
 	private String roomName;
@@ -13,17 +12,10 @@ public class Room {
 	private Integer refPensionNo;
 	private Integer maxPersonnel;
 	
-	@Override
-	public String toString() {
-		return "Room [roomNo=" + roomNo + ", startTime=" + startTime + ", endTime=" + endTime + ", rStatus=" + rStatus
-				+ ", price=" + price + ", roomName=" + roomName + ", delStatus=" + delStatus + ", refPensionNo="
-				+ refPensionNo + ", maxPersonnel=" + maxPersonnel + "]";
-	}
-	public Room(Integer roomNo, Date startTime, Date endTime, String rStatus, String price, String roomName,
+
+	public Room(Integer roomNo, String rStatus, String price, String roomName,
 			String delStatus, Integer refPensionNo, Integer maxPersonnel) {
 		this.roomNo = roomNo;
-		this.startTime = startTime;
-		this.endTime = endTime;
 		this.rStatus = rStatus;
 		this.price = price;
 		this.roomName = roomName;
@@ -36,18 +28,6 @@ public class Room {
 	}
 	public void setRoomNo(Integer roomNo) {
 		this.roomNo = roomNo;
-	}
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
 	}
 	public String getrStatus() {
 		return rStatus;

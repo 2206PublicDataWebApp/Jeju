@@ -89,10 +89,10 @@ public class MemberController {
 			if(loginUser != null) {
 				System.out.println("성공");
 				HttpSession session = request.getSession();
-//
-				session.setAttribute("loginUser", loginUser);
 
-				mv.setViewName("redirect:/member/loginView.kh");
+				session.setAttribute("loginUser", loginUser);
+				
+				mv.setViewName("redirect:/home");
 
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");

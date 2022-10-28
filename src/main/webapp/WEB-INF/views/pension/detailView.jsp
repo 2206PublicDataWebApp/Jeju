@@ -123,7 +123,7 @@
                         <h3>${room.roomName }</h3>
                         <p>최대인원 0명</p>
                         <p>₩ ${room.price } x 박</p>
-                        <a class="btn btn-outline-success" href="#">예약하기</a>
+                        <a class="btn btn-outline-success" href="/reservation/list?refPensionNo=${room.refPensionNo }&roomNo=${room.roomNo}&startDate=${startDate}&endDate=${endDate}&price=${room.price}">예약하기</a>
                     </div>
                 </div>
           	</c:forEach> 

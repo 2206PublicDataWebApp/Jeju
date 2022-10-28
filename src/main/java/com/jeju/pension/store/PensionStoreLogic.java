@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
 import com.jeju.pension.domain.Pension;
+import com.jeju.review.domain.Review;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
 
@@ -68,15 +69,14 @@ public class PensionStoreLogic implements PensionStore{
 	}
 
 	@Override
-	public List<Pension> selectReviewRank(SqlSession session) {
-		System.out.println("�ù�");
-		List<Pension> rList = session.selectList("ReviewMapper.selectReviewRank");
+	public List<Review> selectReviewRank(SqlSession session) {
+		List<Review> rList = session.selectList("ReviewMapper.selectReviewRank");
 		return rList;
 	}
 
 	@Override
-	public List<Pension> selectPensionRank(SqlSession session, Pension pensionNo) {
-		List<Pension> rList = session.selectOne("PensionMapper.selectPensionRank", pensionNo);
+	public Pension selectPensionRank(SqlSession session, Integer pensionNo) {
+		Pension rList = session.selectOne("PensionMapper.selectPensionRank", pensionNo);
 		return rList;
 	}
 
@@ -128,6 +128,19 @@ public class PensionStoreLogic implements PensionStore{
 		List<Category> category = session.selectList("CategoryMapper.selectCategory", pensionNo);
 		return category;
 	}
+	@Override
+	public List<Pension> ascPriceSort(SqlSession session) {
+		List<Pension> apList = session.selectList("PensionMapper.ascPriceSort");
+		return apList;
+	}
+	@Override
+	public List<Pension> descPriceSort(SqlSession session) {
+		List<Pension> apList = session.selectList("PensionMapper.descPriceSort");
+		return apList;
+	}
+
+
+
 
 
 }

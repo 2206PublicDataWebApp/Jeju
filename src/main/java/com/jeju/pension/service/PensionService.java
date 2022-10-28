@@ -31,10 +31,9 @@ public interface PensionService {
 
 	Pension selectCategoryFilter(String pensionNo);
 
-	List<Pension> selectReviewRank();
+	List<Review> selectReviewRank();
 
-	List<Pension> selectPensionRank(Pension pension);
-	
+	Pension selectPensionRank(Integer pensionNo);
 	//숙소 상세페이지
 	Pension selecteOnePension(Integer pensionNo);
 	// 숙소 카테고리 가져오기
@@ -47,10 +46,15 @@ public interface PensionService {
 //	List<Integer> selecteRoomAttachNo(Integer pensionNo);
 	// 카테고리 가져오기
 	List<Category> selectCategoryCheck(Integer pensionNo);
-
+	//날짜 조회용
 	List<Pension> selectDate(long diffDays);
-
+	//가격 조회용
 	List<Pension> selectPrice();
+	//카테고리 인기순 정렬
+	List<Pension> ascPriceSort();
+	//날짜만 필터링했을때 내림차순 정렬
+	List<Pension> DescPriceSort();
+
 
 
 }

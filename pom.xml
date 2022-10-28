@@ -21,7 +21,7 @@
    </repositories>
 
    <dependencies>
-   <!--    이메일 인증 코드 -->
+  <!--    이메일 인증 코드 -->
       <dependency>
       <groupId>net.nurigo</groupId>
        <artifactId>javaSDK</artifactId>
