@@ -75,6 +75,7 @@
          <div class="row nav-row">
             <ul>
                <li><a href="/home">홈</a></li>
+               <li><a href="/notice/list">공지사항</a></li>
                <li><a href="/pension/list">숙소 리스트</a></li>
                <li><a href="#">커뮤니티</a></li>
                <li><a href="/mypage/myPage">마이페이지</a></li>

@@ -41,7 +41,7 @@
 		WHERE REF_PENSION_NO = #{refPensionNo}
 	</select>
 	
-	<select id="selectRoomNumber" parameterType="Room" resultMap="roomResultMap">
+	<select id="selectRoomAll" parameterType="Room" resultMap="roomResultMap">
 		SELECT ROOM_TBL.*,ROOM_ATTACH.ROOM_PATH
 		FROM ROOM_TBL
 		LEFT OUTER JOIN ROOM_ATTACH

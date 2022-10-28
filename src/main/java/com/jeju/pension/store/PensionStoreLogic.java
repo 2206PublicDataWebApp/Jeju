@@ -137,7 +137,7 @@ public class PensionStoreLogic implements PensionStore{
 
 	@Override
 	public List<Room> selectRoom(SqlSession session, Integer pensionNo) {
-		List<Room> rList = session.selectList("RoomMapper.selectRoomNumber", pensionNo);
+		List<Room> rList = session.selectList("RoomMapper.selectRoomAll", pensionNo);
 		return rList;
 	}
 	
