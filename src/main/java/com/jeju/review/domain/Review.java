@@ -3,33 +3,22 @@ package com.jeju.review.domain;
 import java.sql.Date;
 
 public class Review {
-	private Integer reivewNo;
+	private Integer reviewNo;
 	private String memberId;
 	private Date regDate;
 	private Date reviewUpdate;
-	private String reivewContents;
+	private String reviewContents;
 	private Integer reviewCount;
 	private Integer pensionNo;
 
 	public Review () {}
 
-	public Review(Integer reivewNo, String memberId, Date regDate, Date reviewUpdate, String reivewContents,
-			Integer reviewCount, Integer pensionNo) {
-		this.reivewNo = reivewNo;
-		this.memberId = memberId;
-		this.regDate = regDate;
-		this.reviewUpdate = reviewUpdate;
-		this.reivewContents = reivewContents;
-		this.reviewCount = reviewCount;
-		this.pensionNo = pensionNo;
+	public Integer getReviewNo() {
+		return reviewNo;
 	}
 
-	public Integer getReivewNo() {
-		return reivewNo;
-	}
-
-	public void setReivewNo(Integer reivewNo) {
-		this.reivewNo = reivewNo;
+	public void setReviewNo(Integer reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
 	public String getMemberId() {
@@ -56,12 +45,12 @@ public class Review {
 		this.reviewUpdate = reviewUpdate;
 	}
 
-	public String getReivewContents() {
-		return reivewContents;
+	public String getReviewContents() {
+		return reviewContents;
 	}
 
-	public void setReivewContents(String reivewContents) {
-		this.reivewContents = reivewContents;
+	public void setReviewContents(String reviewContents) {
+		this.reviewContents = reviewContents;
 	}
 
 	public Integer getReviewCount() {
@@ -80,12 +69,23 @@ public class Review {
 		this.pensionNo = pensionNo;
 	}
 
+	public Review(Integer reviewNo, String memberId, Date regDate, Date reviewUpdate, String reviewContents,
+			Integer reviewCount, Integer pensionNo) {
+		this.reviewNo = reviewNo;
+		this.memberId = memberId;
+		this.regDate = regDate;
+		this.reviewUpdate = reviewUpdate;
+		this.reviewContents = reviewContents;
+		this.reviewCount = reviewCount;
+		this.pensionNo = pensionNo;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reivewNo=" + reivewNo + ", memberId=" + memberId + ", regDate=" + regDate + ", reviewUpdate="
-				+ reviewUpdate + ", reivewContents=" + reivewContents + ", reviewCount=" + reviewCount + ", pensionNo="
+		return "Review [reviewNo=" + reviewNo + ", memberId=" + memberId + ", regDate=" + regDate + ", reviewUpdate="
+				+ reviewUpdate + ", reviewContents=" + reviewContents + ", reviewCount=" + reviewCount + ", pensionNo="
 				+ pensionNo + "]";
 	}
 
-
+	
 }

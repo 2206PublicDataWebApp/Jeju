@@ -141,6 +141,7 @@ public class PensionServiceImpl implements PensionService{
 		List<Room> rList = pStore.selectRoom(session, pensionNo);
 		return rList;
 	}
+	
 	// 리뷰 전부 가져오기
 	@Override
 	public List<Review> selectAllReview(Integer pensionNo) {

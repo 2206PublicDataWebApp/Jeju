@@ -8,7 +8,7 @@
 		<result property="memberId" 		column="MEMBER_ID"/>
 		<result property="regDate" 			column="REGDATE"/>
 		<result property="reviewUpdate" 	column="REVIEW_UPDATE"/>
-		<result property="reivewContents" 	column="REVIEW_CONTENTS"/>
+		<result property="reviewContents" 	column="REVIEW_CONTENTS"/>
 		<result property="reviewCount" 		column="REVIEW_COUNT"/>
 		<result property="pensionNo" 		column="PENSION_NO"/>
 	</resultMap>
