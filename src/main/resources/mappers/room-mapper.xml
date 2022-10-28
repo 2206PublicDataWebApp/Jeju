@@ -5,8 +5,6 @@
 <mapper namespace="RoomMapper">
 	<resultMap type="Room" id="roomResultMap">
 		<id property="roomNo" 			column="ROOM_NO"/>
-		<result property="startTime" 	column="START_TIME"/>
-		<result property="endTime"		column="END_TIME"/>
 		<result property="rStatus" 		column="R_STATUS"/>
 		<result property="price" 		column="PRICE"/>
 		<result property="roomName" 	column="ROOM_NAME"/>
@@ -15,6 +13,10 @@
 		<result property="latitude"		column="LATITUDE"/>
 		<result property="maxPersonnel" column="MAX_PERSONNEL"/>
 	</resultMap>
+	
+	<select id="selectOneByRoom" resultMap="roomResultMap">
+		SELECT * FROM ROOM_TBL WHERE ROOM_NO = #{roomNo}
+	</select>
 	
 	<select id="selectRoom" resultMap="roomResultMap">
 		SELECT * FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}

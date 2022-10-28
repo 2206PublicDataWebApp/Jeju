@@ -6,16 +6,14 @@
 	<resultMap type="Reservation" id="reservationResultMap">
 		<id 	property="reservationNo" 		column="RESERVATION_NO" />
 		<result property="memberId" 		column="MEMBER_ID"/>
-		<result property="checkIn" 		column="CHECK_IN"/>
-		<result property="checkOut" 		column="CHECK_OUT"/>
 		<result property="rStatus" 		column="R_STATUS"/>
 		<result property="roomNo" 		column="ROOM_NO"/>
-		<result property="pensionNo" 		column="PENSION_NO"/>
+		<result property="rePensionNo" 		column="RE_PENSION_NO"/>
 		<result property="useHistory" 		column="USE_HISTORY"/>
-		<result property="price" 		column="PRICE"/>
+		<result property="rePrice" 		column="RE_PRICE"/>
 	</resultMap>
 	
-<!-- 	<insert id="insertReservation"> -->
-<!-- 		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, NULL, NULL, ) -->
-<!-- 	</insert> -->
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 1, #{roomNo}, #{rePensionNo}, 0, #{rePrice})
+	</insert>
 </mapper>

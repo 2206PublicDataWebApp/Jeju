@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="PayMappers">
+	<resultMap type="Pay" id="payResultMap">
+		<id property="payId" 	column="PAY_ID"/>
+		<result property="memberId" 		column="MEMBER_ID"/>
+		<result property="paySuccess" 		column="PAY_SUCCESS"/>
+		<result property="payPrice" 			column="PAY_PRICE"/>
+		<result property="payDate" 			column="PAY_DATE"/>
+		<result property="roomNo" column="ROOM_NO"/>
+		<result property="payPensionNo" 		column="PAY_PENSION_NO"/>
+	</resultMap>
+	
+	<insert id="insertPayInfo">
+		INSERT INTO PAYMENT_TBL VALUES(#{payId}, #{memberId}, 1, #{payPrice}, DEFAULT, #{roomNo}, #{payPensionNo})
+	</insert>
+</mapper>

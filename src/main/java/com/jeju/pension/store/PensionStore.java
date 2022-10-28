@@ -35,9 +35,9 @@ public interface PensionStore {
 
 	Pension selectCategoryFilter(SqlSession session, String pensionNo);
 
-	List<Pension> selectReviewRank(SqlSession session);
+	List<Review> selectReviewRank(SqlSession session);
 
-	List<Pension> selectPensionRank(SqlSession session, Pension pensionNo);
+	Pension selectPensionRank(SqlSession session, Integer pensionNo);
 	// 숙소 상세페이지
 	Pension selectOnePension(SqlSession session, Integer pensionNo);
 	// 숙소 카테고리 가져오기
@@ -54,5 +54,10 @@ public interface PensionStore {
 	List<Pension> selectDate(SqlSession session, long diffDays);
 
 	List<Pension> selectPrice(SqlSession session);
+	//낮은가격 정렬
+	List<Pension> ascPriceSort(SqlSession session);
+	//날짜 필터링시 내림차순 정렬
+	List<Pension> descPriceSort(SqlSession session);
+	
 
 }

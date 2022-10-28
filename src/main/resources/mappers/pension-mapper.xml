@@ -19,7 +19,9 @@
       <result property="fileImage"          column="FILE_IMAGE"/>
       <result property="pensionFileName"          column="PENSION_FILE_NAME"/>
       <result property="pensionFileRename"          column="PENSION_FILE_RENAME"/>
+       <result property="reviewCount"          column="REVIEW_COUNT"/>
    </resultMap>
+
 
    <select id="selectPensionName" resultType="_int">
    		SELECT COUNT(*) FROM PENSION_TBL WHERE PENSION_NAME = #{pensionName}
@@ -48,7 +50,7 @@
 	</select>
 	
 	<select id="selectPensionRank" resultMap="pensionResultMap">
-		SELECT * FROM PENSION_TBL WHERE PENSION_NO = #{pension.pensionNo}
+		SELECT * FROM PENSION_TBL WHERE PENSION_NO = #{pensionNo}
 	</select>
 
 	<select id="selectDate" resultMap="pensionResultMap">
@@ -56,8 +58,18 @@
 	</select>
 
 	<select id="selectPrice" resultMap="pensionResultMap">
-		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO FROM PENSION_TBL
+		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO, REVIEW_COUNT FROM PENSION_TBL
 	</select>
+	
+	<select id="ascPriceSort" resultMap="pensionResultMap">
+		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_PRICE
+	</select>
+	
+	<select id="descPriceSort" resultMap="pensionResultMap">
+		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_PRICE DESC
+	</select>
+	
+	
 
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">
@@ -136,6 +148,5 @@
 	<select id="selectCategory" resultMap="category2ResultMap">
 		SELECT REF_PENSION_NUMBER FROM CATEGORY_TBL WHERE C_STATUS = 0 <include refid="filter"></include>
 	</select>
-	
 	
 </mapper>

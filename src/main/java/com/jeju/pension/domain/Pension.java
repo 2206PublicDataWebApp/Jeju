@@ -1,6 +1,9 @@
 package com.jeju.pension.domain;
 
-public class Pension {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pension implements Comparable<Pension>{
 	private Integer pensionNo;
 	private String memberId;
 	private String pensionName;
@@ -17,23 +20,14 @@ public class Pension {
 	private String fileImage;
 	private String pensionFileName;
 	private String pensionFileRename;
+	private Integer reviewCount;
 
 	public Pension () {}
-
-	@Override
-	public String toString() {
-		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
-				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
-				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
-				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
-				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
-				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + "]";
-	}
 
 	public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
 			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
 			int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
-			String pensionFileRename) {
+			String pensionFileRename, Integer reviewCount) {
 		this.pensionNo = pensionNo;
 		this.memberId = memberId;
 		this.pensionName = pensionName;
@@ -50,7 +44,10 @@ public class Pension {
 		this.fileImage = fileImage;
 		this.pensionFileName = pensionFileName;
 		this.pensionFileRename = pensionFileRename;
+		this.reviewCount = reviewCount;
 	}
+
+	
 
 	public Integer getPensionNo() {
 		return pensionNo;
@@ -179,4 +176,23 @@ public class Pension {
 	public void setPensionFileRename(String pensionFileRename) {
 		this.pensionFileRename = pensionFileRename;
 	}
+
+	public Integer getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(Integer reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	@Override
+	public int compareTo(Pension pension) {	
+		if(pension.reviewCount < reviewCount) {
+			return 1;
+		}else {
+			return -1;
+		}		
+	}
+
+	
 }
