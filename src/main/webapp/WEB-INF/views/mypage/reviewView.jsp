@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="/resources/assets/css/all.min.css">
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="container-flui">
@@ -34,7 +36,7 @@
                     <ul>
                         <li><a href="/home">홈</a></li>
                         <li><a href="/notice/list">공지사항</a></li>
-                        <li><a href="detail.html">숙소 리스트</a></li>
+                        <li><a href="/pension/list">숙소 리스트</a></li>
                         <li><a href="destinations.html">커뮤니티</a></li>
                         <li><a href="/mypage/myPage">마이페이지</a></li>
                     </ul>
@@ -55,57 +57,45 @@
             </div>
         </div>
     </div>
-              
-    <!--################### Destinations Starts Here #######################--->
         
     <section class="customer-serv">
         <div class="container">
-            <div class="row session-title"><h2>★ 후기 00개</h2></div>
+            <div class="row session-title"><h2>${rList[0].memberId }님의 후기 ${totalCount }개 <i class="fa-solid fa-comments"></i></h2></div>
             <div class="row ro-clo">
-                <div data-anijs="if: scroll, on: window, do: bounceInLeft animated, before: scrollReveal" class="col-12  col-md-6 col-lg-4">
-                    <div class="shado-2 card-b">
-                        <p>리뷰입니다 리뷰입니다 리뷰입니다 리뷰입니다 </p>
-                    </div>
-                    <div class="cust-det row">
-                        <div class="col-sm-3 col-3 img-circl">
-                            <img alt="" src="/resources/assets/images/testimonial/member.jpg"">
-                        </div>
-                        <div class="col-sm-5 col-5 an-mtc no-padding">
-                            <b>사용자ID</b>
-                            <p>2022년 10월 14일</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12  col-md-6 col-lg-4">
-                    <div class="shado-2 card-b">
-                        <p> have use this product at my home last 1 and half year of this. This product quality is good.Its good quality product for use it can improve water Quality.
-                        </p>
-                    </div>
-                    <div class="cust-det row">
-                        <div class="col-sm-3 col-3 img-circl">
-                            <img alt="" src="/resources/assets/images/testimonial/member.jpg">
-                        </div>
-                        <div class="col-sm-5 col-5 an-mtc no-padding">
-                            <b>사용자ID</b>
-                            <p>2022년 10월 15일</p>
-                        </div>                
-                    </div>
-                </div>
-                <div data-anijs="if: scroll, on: window, do: bounceInRight animated, before: scrollReveal" class="col-12  col-md-6 col-lg-4">
-                    <div class="shado-2 card-b">
-                        <p>Very essensial product.it is clean and helthy water is mutually most important so that acqa is fufil its quality.our life now a days very tressful and restless</p>
-                    </div>
-                    <div class="cust-det row">
-                        <div class="col-sm-3 col-3 img-circl">
-                            <img alt="" src="/resources/assets/images/testimonial/member-03.jpg">
-                        </div>
-                        <div class="col-sm-5 col-5 an-mtc no-padding">
-                            <b>사용자ID</b>
-                            <p>2022년 10월 15일</p>
-                        </div>
-                    </div>
-                </div>
+            	<c:forEach items="${rList }" var="review">
+	            	<div class="col-12  col-md-6 col-lg-4">
+	                    <div class="shado-2 card-b">
+	                        <p>${review.reviewContents }</p>
+	                    </div>
+	                    <div class="cust-det row">
+	                        <div class="col-sm-3 col-3 img-circl">
+	                            <a class="btn btn-outline-success" href="/pension/detailView?pensionNo=${review.pensionNo }&page=${currentPage}">작성일 ${review.regDate } 숙소로 이동</a>
+	                        </div><br><br>
+	                    </div>
+	                </div>
+                </c:forEach>
             </div>
+            <nav aria-label="Page navigation example" >
+				<ul class="pagination" style="justify-content: center;">
+					<li class="page-item">
+						<c:if test="${currentPage > 5}">
+							<a class="page-link" href="/mypage/${urlVal }?page=${startNavi - 1 }" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+					  		</a>
+					  	</c:if>
+					</li>
+					<c:forEach var="p" begin="${startNavi }" end="${endNavi }">	
+					    <li class="page-item"><a class="page-link" href="/mypage/${urlVal }?page=${p }">${p }</a></li>
+					</c:forEach>
+					<c:if test="${maxPage-4 > currentPage }">
+					    <li class="page-item">
+					    	<a class="page-link" href="/mypage/${urlVal }?page=${endNavi + 1 }" aria-label="Next">
+					     		<span aria-hidden="true">&raquo;</span>
+					   		</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
         </div>
     </section>  
    

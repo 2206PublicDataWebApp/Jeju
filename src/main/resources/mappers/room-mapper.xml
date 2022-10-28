@@ -4,29 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="RoomMapper">
 	<resultMap type="Room" id="roomResultMap">
-		<id property="roomNo" 			column="ROOM_NO"/>
-		<result property="startTime" 	column="START_TIME"/>
-		<result property="endTime"		column="END_TIME"/>
-		<result property="rStatus" 		column="R_STATUS"/>
-		<result property="price" 		column="PRICE"/>
-		<result property="roomName" 	column="ROOM_NAME"/>
-		<result property="delStatus" 	column="DEL_STATUS"/>
+		<id property="roomNo" 				column="ROOM_NO"/>
+		<result property="rStatus" 			column="R_STATUS"/>
+		<result property="price" 			column="PRICE"/>
+		<result property="roomName" 		column="ROOM_NAME"/>
+		<result property="delStatus" 		column="DEL_STATUS"/>
 		<result property="refPensionNo" 	column="REF_PENSION_NO"/>
-		<result property="latitude"		column="LATITUDE"/>
-		<result property="maxPersonnel" column="MAX_PERSONNEL"/>
+		<result property="latitude"			column="LATITUDE"/>
+		<result property="maxPersonnel" 	column="MAX_PERSONNEL"/>
+		<collection property="roomAttach" 	resultMap="roomAttachResultMap" />
 	</resultMap>
-	
-	<select id="selectRoom" resultMap="roomResultMap">
-		SELECT * FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}
+	<resultMap type="RoomAttach" id="roomAttachResultMap">
+		<id property="roomNo" 				column="ROOM_NO"/>
+		<result property="roomPath" 		column="ROOM_PATH"/>
+		<result property="roomImage"		column="ROOM_IMAGE"/>
+		<result property="roomOrd" 			column="ROOM_ORD"/>
+		<result property="roomFileRename" 	column="ROOM_FILE_RENAME"/>
+		<result property="roomFileName" 	column="ROOM_FILE_NAME"/>
+	</resultMap>
+	<select id="selectRoomAttach" parameterType="Room" resultMap="roomResultMap">
+		SELECT ROOM_ATTACH.ROOM_PATH
+		FROM ROOM_TBL 
+		FULL OUTER JOIN ROOM_ATTACH
+		ON ROOM_TBL.ROOM_NO = ROOM_ATTACH.ROOM_NO
+		WHERE REF_PENSION_NO = #{refPensionNo}
+	</select>
+	<select id="selectRoom" parameterType="Room" resultMap="roomResultMap">
+		SELECT ROOM_TBL.*,ROOM_ATTACH.ROOM_PATH
+		FROM ROOM_TBL 
+		LEFT OUTER JOIN ROOM_ATTACH
+		ON ROOM_TBL.ROOM_NO = ROOM_ATTACH.ROOM_NO
+		WHERE REF_PENSION_NO = #{refPensionNo}
 	</select>
 	
 	<select id="selectRoomNo" resultType="_int">
 		SELECT ROOM_NO FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo}
 	</select>
-	
-<!-- 	<select id="selectRoomAttachNo" resultType="java.util.ArrayList"> -->
-<!-- 		SELECT ROOM_NO FROM ROOM_TBL WHERE REF_PENSION_NO = #{refPensionNo} -->
-<!-- 	</select> -->
 	
 	<insert id="insertRoom">
 		INSERT INTO ROOM_TBL

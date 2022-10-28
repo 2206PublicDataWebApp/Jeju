@@ -7,27 +7,23 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 		<!-- 만약에 null 데이터가 전달되었으면 빈칸이 아닌 NULL로 인식하도록 설정 -->
 	</settings>
-	<!-- 	<typeAliases> -->
-	<!-- 	여기다 추가해서 사용 예시 -->
-	<!-- 		<typeAlias type="com.kh.junspring.member.domain.Member" alias="Member"/> -->
-	<!-- 		<typeAlias type="com.kh.junspring.board.domain.Board" 	alias="Board"/> -->
-	<!-- 		<typeAlias type="com.kh.junspring.board.domain.Reply" 	alias="Reply"/> -->
-	<!-- 	</typeAliases> -->
+	
+	<!-- </typeAliases> -->
 	<typeAliases>
-		<typeAlias type="com.jeju.notice.domain.Notice" alias="Notice"></typeAlias>
-		<typeAlias type="com.jeju.notice.domain.NoticeCount" alias="NoticeCount"></typeAlias>
-		<typeAlias type="com.jeju.pension.domain.Pension" alias="Pension"></typeAlias>
-		<typeAlias type="com.jeju.room.domain.Room" alias="Room"></typeAlias>
-		<typeAlias type="com.jeju.category.domain.Category" alias="Category"></typeAlias>
-		<typeAlias type="com.jeju.room.domain.RoomAttach" alias="RoomAttach"></typeAlias>
-		<typeAlias type="com.jeju.category.domain.Category2" 	alias="Category2"/>
-		<typeAlias type="com.jeju.review.domain.Review" 	alias="Review"/>
+		<typeAlias type="com.jeju.notice.domain.Notice" 			alias="Notice"></typeAlias>
+		<typeAlias type="com.jeju.notice.domain.NoticeCount" 		alias="NoticeCount"></typeAlias>
+		<typeAlias type="com.jeju.pension.domain.Pension" 			alias="Pension"></typeAlias>
+		<typeAlias type="com.jeju.room.domain.Room" 				alias="Room"></typeAlias>
+		<typeAlias type="com.jeju.category.domain.Category" 		alias="Category"></typeAlias>
+		<typeAlias type="com.jeju.room.domain.RoomAttach" 			alias="RoomAttach"></typeAlias>
+		<typeAlias type="com.jeju.category.domain.Category2" 		alias="Category2"/>
+		<typeAlias type="com.jeju.review.domain.Review" 			alias="Review"/>
 		<typeAlias type="com.jeju.reservation.domain.Reservation" 	alias="Reservation"/>
-		<typeAlias type="com.jeju.member.domain.Member" 	alias="Member"/>
-
+		<typeAlias type="com.jeju.member.domain.Member" 			alias="Member"/>
+		<typeAlias type="com.jeju.jjim.domain.Jjim" 				alias="Jjim"/>
 	</typeAliases>
 
-	<!-- </typeAliases> -->
+	
 
 	<!-- 	<mappers> -->
 	<mappers>
@@ -39,7 +35,7 @@
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-
+		<mapper resource="mappers/jjim-mapper.xml"/>
 	</mappers>
 
 </configuration>

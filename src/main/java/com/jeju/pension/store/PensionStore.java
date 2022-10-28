@@ -6,6 +6,8 @@ import com.jeju.category.domain.Category;
 import com.jeju.pension.domain.Pension;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,7 +47,7 @@ public interface PensionStore {
 	// 숙소 이름 중복체크
 	int checkPensionName(SqlSession session, String pensionName);
 	// 객실 가져오기
-	List<Room> selectRoom(SqlSession session, Integer pensionNo);
+	List<String> selectRoomAttach(SqlSession session, Integer pensionNo);
 	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
 //	List<Integer> selectRoomAttachNo(SqlSession session, Integer pensionNo);
 	// 카테고리 가져오기
@@ -54,5 +56,9 @@ public interface PensionStore {
 	List<Pension> selectDate(SqlSession session, long diffDays);
 
 	List<Pension> selectPrice(SqlSession session);
+	
+	List<Room> selectRoom(SqlSession session, Integer pensionNo);
+	// 리뷰 전부 가져오기
+	List<Review> selectAllReview(SqlSession session, Integer pensionNo);
 
 }

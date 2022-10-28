@@ -11,6 +11,7 @@ import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.store.PensionStore;
+import com.jeju.review.domain.Review;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
 
@@ -117,11 +118,11 @@ public class PensionServiceImpl implements PensionService{
 		int result = pStore.checkPensionName(session, pensionName);
 		return result;
 	}
-	// 객실 가져오기
+	
 	@Override
-	public List<Room> selecteRoom(Integer pensionNo) {
-		List<Room> rList = pStore.selectRoom(session, pensionNo);
-		return rList;
+	public List<String> selecteRoomAttach(Integer pensionNo) {
+		List<String> roomAttack = pStore.selectRoomAttach(session, pensionNo);
+		return roomAttack;
 	}
 	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
 //	@Override
@@ -134,6 +135,18 @@ public class PensionServiceImpl implements PensionService{
 	public List<Category> selectCategoryCheck(Integer pensionNo) {
 		List<Category> category = pStore.selectCategoryCheck(session, pensionNo);
 		return category;
+	}
+	// 객실 가져오기
+	@Override
+	public List<Room> selecteRoom(Integer pensionNo) {
+		List<Room> rList = pStore.selectRoom(session, pensionNo);
+		return rList;
+	}
+	// 리뷰 전부 가져오기
+	@Override
+	public List<Review> selectAllReview(Integer pensionNo) {
+		List<Review> reviewList = pStore.selectAllReview(session, pensionNo);
+		return reviewList;
 	}
 
 }

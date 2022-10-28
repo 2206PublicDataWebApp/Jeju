@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jeju.category.domain.Category;
 import com.jeju.category.domain.Category2;
+import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.service.PensionService;
+import com.jeju.review.domain.Review;
 import com.jeju.room.domain.Room;
 import com.jeju.room.domain.RoomAttach;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
@@ -35,6 +38,12 @@ public class PensionController {
 	@Autowired
 	private PensionService pService;
 	
+	// 마이페이지 숙소 관리 페이지로 이동
+	@RequestMapping(value="/mypage/pensionManagement", method=RequestMethod.GET)
+	public ModelAndView pensionManagement(ModelAndView mv) {
+		mv.setViewName("mypage/pensionManagementView");
+		return mv;
+	}
 	// 숙소 등록 페이지로 이동
 	@RequestMapping(value="/pension/registForm", method=RequestMethod.GET)
 	public String registPension() {
@@ -104,7 +113,8 @@ public class PensionController {
 			pService.registerRoomAttach(roomAttach);
 			category.setRefPensionNumber(pensionNo);
 			pService.registerCategory(category);
-			mv.setViewName("redirect:/home");
+			
+			mv.setViewName("redirect:/mypage/pensionManagementView");
 			return mv;
 		}
 
@@ -119,25 +129,24 @@ public class PensionController {
 	@RequestMapping(value="/pension/detailView", method=RequestMethod.GET)
 	public ModelAndView pensionDetailView(
 			ModelAndView mv
-			,@RequestParam("pensionNo") Integer pensionNo) {
+			,@RequestParam("pensionNo") Integer pensionNo
+			,HttpSession session) {
+		List<Review> reviewList = pService.selectAllReview(pensionNo);
 		Pension pension = pService.selecteOnePension(pensionNo);
 		List<Category> category = pService.selectCategoryCheck(pensionNo);
-		System.out.println(category);
-//			Category category = pService.selectPensionCategory(pensionNo);
 		List<Room> rList = pService.selecteRoom(pensionNo);
-//			List<Integer> roomNo = pService.selecteRoomAttachNo(pensionNo);
-//			System.out.println(roomNo);
+		List<String> roomImg = pService.selecteRoomAttach(pensionNo);
+//		Member loginMember = (Member)session.getAttribute("loginUser");
+//		System.out.println(roomImg);
+//		System.out.println(reviewList);
 		mv.addObject("rList", rList);
+//		mv.addObject("roomImg", roomImg);
 		mv.addObject("pension", pension);
 		mv.addObject("category", category);
+		mv.addObject("reviewList", reviewList);
 		mv.setViewName("/pension/detailView");
 		return mv;
 	}
-	
-//	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
-//	public String showList() {
-//		return "pension1/list";
-//	}
 	
 	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
 	public ModelAndView pensionListView(

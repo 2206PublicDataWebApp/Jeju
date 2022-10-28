@@ -58,9 +58,7 @@
                 </div>
             </div>
         </div>
-
               
-    <!--################### Destinations Starts Here #######################--->
     	<c:if test="${empty nList }">
 	        <div class="destinations container-fluid">
 	        	<div class="container">
@@ -97,8 +95,8 @@
 		                </div>
 		                <hr>
 	                </c:forEach>
-	                <nav aria-label="Page navigation example">
-						<ul class="pagination" align="center">
+	                <nav aria-label="Page navigation example" >
+						<ul class="pagination" style="justify-content: center;">
 							<li class="page-item">
 								<c:if test="${currentPage > 5}">
 					 				<a class="page-link" href="/notice/${urlVal }?page=${startNavi - 1 }" aria-label="Previous">

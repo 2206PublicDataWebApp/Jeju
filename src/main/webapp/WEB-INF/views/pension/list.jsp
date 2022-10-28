@@ -52,21 +52,17 @@
       }
    </style>
 </head>
-
 <body>
-
 <header class="container-flui">
    <div class="header-top">
       <div class="container">
          <div class="row">
             <div class="col-md-4 d-none d-md-block mail-detail">
-
             </div>
             <div class="col-md-4 logo">
                <img src="" alt="">
                <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
             </div>
-
          </div>
       </div>
    </div>
@@ -75,6 +71,7 @@
          <div class="row nav-row">
             <ul>
                <li><a href="/home">홈</a></li>
+               <li><a href="/notice/list">공지사항</a></li>
                <li><a href="/pension/list">숙소 리스트</a></li>
                <li><a href="#">커뮤니티</a></li>
                <li><a href="/mypage/myPage">마이페이지</a></li>
@@ -82,9 +79,7 @@
          </div>
       </div>
    </div>
-
 </header>
-
 
 <!--  ************************* Page Title Starts Here ************************** -->
 <div class="page-nav no-margin row">
@@ -124,7 +119,6 @@
                   </div>
                   <div class="col-sm-8 col-md-4 col-lg-3">
                      <input type="submit" class="btn btn-info btn-block my-2" value="Search" id="Search">
-
                   </div>
                </div>
             </form>
@@ -138,22 +132,15 @@
 <section id="about" class="contianer-fluid about-us">
    <div class="container" id="test5">
       <div class="row">
-
-
          <div class="col-md-8 center image">
-
-
-
             <div class="gallery-filter d-none d-sm-block">
                <button class="btn btn-default filter-button" data-filter="all">인기순</button>
                <button class="btn btn-default filter-button" data-filter="hdpe">낮은 가격 순</button>
                <button class="btn btn-default filter-button" data-filter="sprinkle">높은 가격 순</button>
-
             </div>
             <hr id="margin_test">
             <div class="row g-0 position-relative test2" id="test_first">
                <div id="testtest">
-
                </div>
                <c:if test="${!empty pList }">
                   <c:forEach items="${pList }" var="pension" >
@@ -177,7 +164,7 @@
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
-                           <li class="test4"><h2 style="font-size : 25px;">${dateSearch.pensionName }</h2></li>
+                           <li class="test4"><h2 style="font-size : 25px;"><a href="/pension/detailView?pensionNo=${dateSearch.pensionNo }">${dateSearch.pensionName }</a></h2></li>
                            <li class="test4">${dateSearch.pensionAddr }</li>
                               <%--                                  <li class="test4">${dateSearch.pensionPrice }원</li> --%>
                            <c:if test="${dateSearch.pensionPrice == '판매완료' }">
@@ -262,14 +249,11 @@
                                  </div></li>
                            </c:forEach>
                         </ul>
-
                      </div>
                   </div>
-
                </div>
             </div>
          </div>
-
       </div>
    </div>
 </section>

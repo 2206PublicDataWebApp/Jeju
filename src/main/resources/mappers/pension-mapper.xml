@@ -4,40 +4,65 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
   <mapper namespace="PensionMapper">
 	<resultMap type="Pension" id="pensionResultMap">
-      <id    property="pensionNo"       column="PENSION_NO" />
-      <result property="memberId"       column="MEMBER_ID"/>
-      <result property="pensionName"       column="PENSION_NAME"/>
-      <result property="pensionAddr"       column="PENSION_ADDR"/>
+      <id    property="pensionNo"       	column="PENSION_NO" />
+      <result property="memberId"       	column="MEMBER_ID"/>
+      <result property="pensionName"       	column="PENSION_NAME"/>
+      <result property="pensionAddr"       	column="PENSION_ADDR"/>
       <result property="pensionComments"    column="PENSION_COMMENTS"/>
-      <result property="pensionPrice"    column="PENSION_PRICE"/>
-      <result property="hardness"       column="HARDNESS"/>
-      <result property="latitude"       column="LATITUDE"/>
-      <result property="cancelPension"    column="CANCEL_PENSION"/>
-      <result property="pensionCheckin"    column="PENSION_CHECKIN"/>
+      <result property="pensionPrice"    	column="PENSION_PRICE"/>
+      <result property="hardness"       	column="HARDNESS"/>
+      <result property="latitude"       	column="LATITUDE"/>
+      <result property="cancelPension"    	column="CANCEL_PENSION"/>
+      <result property="pensionCheckin"    	column="PENSION_CHECKIN"/>
       <result property="pensionCheckout"    column="PENSION_CHECKOUT"/>
-      <result property="filePath"          column="FILE_PATH"/>
+      <result property="filePath"          	column="FILE_PATH"/>
       <result property="fileImage"          column="FILE_IMAGE"/>
-      <result property="pensionFileName"          column="PENSION_FILE_NAME"/>
-      <result property="pensionFileRename"          column="PENSION_FILE_RENAME"/>
+      <result property="pensionFileName"    column="PENSION_FILE_NAME"/>
+      <result property="pensionFileRename"  column="PENSION_FILE_RENAME"/>
+      <result property="reviewCount"        column="REVIEW_COUNT"/>
+      <result property="jjimCount"         	column="JJIM_COUNT"/>
    </resultMap>
-
+	<!-- 숙소 이름 중복 체크 -->
    <select id="selectPensionName" resultType="_int">
    		SELECT COUNT(*) FROM PENSION_TBL WHERE PENSION_NAME = #{pensionName}
    </select>
-
+	<!-- 숙소 상세페이지 -->
    <select id="selectPension" resultMap="pensionResultMap">
    		SELECT * FROM PENSION_TBL WHERE PENSION_NO = #{pensionNo}
    </select>
-
+	<!-- 숙소 번호 가져오기 -->
 	<select id="selectPensionNo" resultType="_int">
 		SELECT PENSION_NO FROM PENSION_TBL WHERE PENSION_NAME = #{pensionName}
 	</select>
-
+	<!-- 숙소 찜 총 갯수 가져오기 -->
+	<select id="selectPensionCount" resultType="_int">
+		SELECT COUNT(*) 
+		FROM PENSION_TBL P
+		INNER JOIN (SELECT * FROM JJIM_TBL WHERE MEMBER_ID = #{memberId}) J
+		ON P.PENSION_NO = J.PENSION_NO
+	</select>
+	<!-- 찜 목록 가져오기 -->	
+	<select id="selectJjimPension" resultMap="pensionResultMap">
+		SELECT * 
+		FROM PENSION_TBL P
+		INNER JOIN (SELECT * FROM JJIM_TBL WHERE MEMBER_ID = #{memberId}) J
+		ON P.PENSION_NO = J.PENSION_NO
+	</select>
+	<!-- 숙소 등록-->
 	<insert id="insertPension">
 		INSERT INTO PENSION_TBL
 		VALUES(SEQ_PENSION_NO.NEXTVAL,NULL, #{pensionName},#{pensionAddr},#{pensionComments},'0',NULL,NULL,DEFAULT,#{pensionCheckin},#{pensionCheckout},#{filePath},DEFAULT,#{pensionFileName},#{pensionFileRename} )
 	</insert>
-	
+	<!-- 숙소 찜 총 갯수 + 1 -->
+	<update id="updateJjimCount">
+		UPDATE PENSION_TBL SET JJIM_COUNT = JJIM_COUNT + 1
+		WHERE PENSION_NO = #{pensionNo}
+	</update>
+	<!-- 숙소 찜 총 갯수 - 1 -->
+	<update id="deleteJjimCount">
+		UPDATE PENSION_TBL SET JJIM_COUNT = JJIM_COUNT - 1
+		WHERE PENSION_NO = #{pensionNo}
+	</update>
 	
 	<select id="selectAllPension" resultMap="pensionResultMap">
 		SELECT * FROM PENSION_TBL

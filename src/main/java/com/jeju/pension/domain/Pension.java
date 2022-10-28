@@ -17,23 +17,13 @@ public class Pension {
 	private String fileImage;
 	private String pensionFileName;
 	private String pensionFileRename;
-
-	public Pension () {}
-
-	@Override
-	public String toString() {
-		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
-				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
-				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
-				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
-				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
-				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + "]";
-	}
+	private Integer reviewCount;
+	private Integer jjimCount;
 
 	public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
 			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
 			int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
-			String pensionFileRename) {
+			String pensionFileRename, Integer reviewCount, Integer jjimCount) {
 		this.pensionNo = pensionNo;
 		this.memberId = memberId;
 		this.pensionName = pensionName;
@@ -50,6 +40,37 @@ public class Pension {
 		this.fileImage = fileImage;
 		this.pensionFileName = pensionFileName;
 		this.pensionFileRename = pensionFileRename;
+		this.reviewCount = reviewCount;
+		this.jjimCount = jjimCount;
+	}
+
+	public Integer getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(Integer reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public Pension () {}
+
+	@Override
+	public String toString() {
+		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
+				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
+				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
+				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
+				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
+				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + ", reviewCount=" + reviewCount
+				+ ", jjimCount=" + jjimCount + "]";
+	}
+
+	public Integer getJjimCount() {
+		return jjimCount;
+	}
+
+	public void setJjimCount(Integer jjimCount) {
+		this.jjimCount = jjimCount;
 	}
 
 	public Integer getPensionNo() {

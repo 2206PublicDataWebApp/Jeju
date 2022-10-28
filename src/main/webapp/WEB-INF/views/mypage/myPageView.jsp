@@ -104,7 +104,7 @@
 	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>찜 내역</h3>
-	                        <a class="btn btn-outline-success" href="/mypage/jjim">바로가기</a>
+	                        <a class="btn btn-outline-success" href="/mypage/jjimView">바로가기</a>
 	                    </div>
 	                </div>
 	            </div>
