@@ -20,7 +20,7 @@
 		<c:forEach items="${cList }" var="search">
 			<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
 				<img src="${search.filePath}" alt="Image" class="img-fluid"
-					style="height: 190px;">
+					style="height: 190px; border-radius: 15px;">
 			</div>
 			<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 				<ul class="modify">
@@ -47,7 +47,7 @@
 	<c:if test="${!empty drList }">
                   <c:forEach items="${drList }" var="dateSearch" >
                      <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="height : 190px;">
+                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="height : 190px; border-radius: 15px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">

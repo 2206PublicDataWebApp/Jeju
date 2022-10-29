@@ -74,7 +74,7 @@
 	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 	                        </div>
 	                        <h3>이용내역</h3>
-	                        <a class="btn btn-outline-success" href="#">바로가기</a>
+	                        <a class="btn btn-outline-success" href="/reservation/myPage">바로가기</a>
 	                    </div>
 	                </div>
 	                <div class="col-lg-4 col-md-6">

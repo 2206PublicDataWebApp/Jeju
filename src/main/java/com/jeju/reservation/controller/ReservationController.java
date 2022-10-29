@@ -90,5 +90,39 @@ public class ReservationController {
 		return "예약 성공!";	
 	}
 	
+	@RequestMapping(value="/reservation/myPage", method=RequestMethod.GET)
+	public String reservationMyPage() {		
+		return "mypage/reservation";	
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/reservation/idNullCheck", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
+	public String idCheck(
+			@RequestParam("nameChk") String nameChk) {
+		return nameChk;		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservation/agreeCheck1", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
+	public String idCheck1(
+			@RequestParam("agree1") Boolean agree1) {
+		return null;	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservation/agreeCheck2", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
+	public String idCheck2(
+			@RequestParam("agree2") Boolean agree2) {
+		return null;	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservation/agreeCheck3", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
+	public String idCheck3(
+			@RequestParam("agree3") Boolean agree3) {
+		return null;	
+	}
 	
 }

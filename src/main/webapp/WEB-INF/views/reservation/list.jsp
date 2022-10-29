@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 
@@ -107,55 +108,63 @@
 </head>
 
     <body>
-        <header class="container-flui">
+         <header class="container-flui">
            <div class="header-top">
                <div class="container">
                     <div class="row">
-                        <div class="col-md-4 d-none d-md-block mail-detail">
-                            <ul>
-                                <li>Call US : +12 878 777 76765</li>
-                                <li>Email : info@thetraveller.com</li>
-                            </ul>
-                        </div>
+     
+                        <div class="col-md-4 d-none d-md-block mail-detail"></div>
                         <div class="col-md-4 logo">
                             <img src="/resources/assets/images/logo.png" alt="">
                             <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
                         </div>
+                        
                         <div class="col-md-4 d-none d-md-block social-link ">
-                            <ul>
-                                <li>
-                                    <i class="fab fa-facebook-square"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-twitter-square"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-instagram"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-linkedin"></i>
-                                </li>
-                            </ul>
+                               <c:if test="${empty sessionScope.loginUser  }">
+         <div class="login-area">
+            <table align="right">
+               <tr>
+                  <td rowspan="2">
+                     <button onclick="location.href='/member/loginView.kh'" class="btn btn-primary">로그인</button>
+                     <button onclick="location.href='/member/joinView.kh'" class="btn btn-secondary">회원가입</button>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </c:if>
+      <c:if test="${not empty sessionScope.loginUser }">
+         <table align="right">
+            <tr>
+               <td>
+                  <a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
+               </td>
+            </tr>
+            <tr>
+               <td><a href="/member/logout.kh">로그아웃</a></td>
+            </tr>
+         </table>
+      </c:if>
                         </div>
                     </div>
                 </div>
            </div>
+        
+      
            <div id="menu-jk" class="header-nav d-none d-md-block">
                <div class="container">
                    <div class="row nav-row">
                        <ul>
-                           <li><a href="index.html">Home</a></li>
+                           <li><a href="/home">홈</a></li>
+                           <li><a href="/notice/list">공지사항</a></li>
                            <li><a href="/pension/list">숙소 리스트</a></li>
-                           <li><a href="destinations.html">Destinations</a></li>
-                           <li><a href="blog.html">Blog</a></li>
-                           <li><a href="gallery.html">Gallery</a></li>
-                           <li><a href="contact_us.html">Contact Us</a></li>
+                           <li><a href="/community/chat">커뮤니티</a></li>
+                           <li><a href="/mypage/myPage">마이페이지</a></li>
+                           <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
                        </ul>
                    </div>
                </div>
            </div>
-            
-        </header>   
+        </header>      
         
         
  <!--  ************************* Page Title Starts Here ************************** -->
@@ -219,7 +228,7 @@
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
                     <br><br>
                     
-               
+               		<c:if test="${sessionScope.loginUser eq null }">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
 							class="col-sm-9">
@@ -230,21 +239,19 @@
 							<br>
 						</div>
 					</div>
-				
-					
-					
+					</c:if>
+					<c:if test="${not empty sessionScope.loginUser}">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
 							class="col-sm-9">
 							<br>
-							<div class="login">등급할인 혜택을 누리세요!</div>
-<!-- 							<div class="login">등급할인이 적용됩니다.</div> -->
-<!-- 							<div class="login" style="margin-top: 10px;">로그인</div> -->
+							<div class="login">숙소를 예약하기전</div>
+							<div class="login">등급할인 혜택을 누려보세요!</div>
+ 							<div class="login" style="margin-top: 10px;">나의 등급</div>
 							<br>
 						</div>
 					</div>
-
-					
+					</c:if>					
                 </div>
                 
                 <div class="card" style="width: 18rem;">
@@ -287,8 +294,8 @@
 	<form action="" style="position: relative; bottom: 60px; left: 180px;">
 		<div id="check1">이용 약관</div>
 		<ul>
-			<li class="check6"><input type="checkbox"><span
-				class="check7">전체동의</span></li>
+			<li class="check6"><input type="checkbox" onclick="checkAll();" id="allCheck"><span
+				class="check7"><label for="allCheck">전체동의</label></span></li>
 			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1"><span class="check7 closed"
 				onclick="clickshow(this,'categories1');"><label for="agreement1">개인정보 수집/이용 동의</label></span><span
 				class="test5">(필수)</span><span id="successChk1" style="font-size : 13px; margin-left : 5px;"></span></li>
@@ -455,11 +462,17 @@
    
     </body>
      <script>
-     
+     function checkAll() {
+    	 if($("#allCheck").is(':checked')) {
+    			$("input[type=checkbox]").prop("checked", true);
+    		} else {
+    			$("input[type=checkbox]").prop("checked", false);
+    		}
+     }
 
 //      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#nameChk").val() != null){
+ 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
  	     		//가맹점 식별코드
  	     		IMP.init('imp28778843');
  	     		IMP.request_pay({
@@ -551,6 +564,93 @@
  	    	return false
  	    }    	    	
      });
+    
+     $('#nameChk').focusout(function(){
+    	 var nameChk = $("#nameChk").val();
+ 		$.ajax({
+ 			url : "/reservation/idNullCheck",
+ 			type : "post",
+ 			data : {"nameChk": nameChk},
+ 			success : function(result){
+					if(nameChk == "") {
+						$("#successNameChk").text("예약자 이름을 입력해주세요");
+		 				$("#successNameChk").css("color", "red");
+					}else {
+						$("#successNameChk").text("");
+		 				$("#successNameChk").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+     
+     $('#agreement1').change(function(){
+    	 var agree1 = $("#agreement1").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck1",
+ 			type : "post",
+ 			data : {"agree1": agree1
+ 			},
+ 			success : function(result){
+					if(agree1 == true) {
+						$("#successChk1").text("");
+		 				$("#successChk1").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+     
+     $('#agreement2').change(function(){
+    	 var agree2 = $("#agreement2").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck2",
+ 			type : "post",
+ 			data : {"agree2": agree2
+ 			},
+ 			success : function(result){
+					if(agree2 == true) {
+						$("#successChk2").text("");
+		 				$("#successChk2").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+     
+     $('#agreement3').change(function(){
+    	 var agree3 = $("#agreement3").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck3",
+ 			type : "post",
+ 			data : {"agree3": agree3
+ 			},
+ 			success : function(result){
+					if(agree3 == true) {
+						$("#successChk3").text("");
+		 				$("#successChk3").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+	
 	
      
      
