@@ -1,9 +1,11 @@
 
 package com.jeju.member.controller;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,25 +45,19 @@ public class MemberController {
 	//  회원정보를 DB에 저장하는 URL
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)
 	public ModelAndView memberJoin(
-
 			@ModelAttribute Member member
 			, @RequestParam("post") String post
 			, @RequestParam("address1") String address1
 			, @RequestParam("address2") String address2
 //			, Model model
 			, ModelAndView mv) {
-
 		try {
-
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
-
 			if(result > 0) {
-
 				mv.setViewName("redirect:/member/loginView.kh");
 			}else {
-
 				mv.addObject("msg", "회원가입을 실패했습니다.");
 				mv.setViewName("common/errorPage");
 			}
@@ -77,7 +73,8 @@ public class MemberController {
 			@RequestParam("memberId") String memberId
 			,@RequestParam("memberPwd") String memberPwd
 			, ModelAndView mv
-			, HttpServletRequest request) {
+			, HttpServletRequest request
+			,HttpServletResponse response) {
 		try {
 			Member member = new Member();
 			member.setMemberId(memberId);
@@ -91,7 +88,7 @@ public class MemberController {
 				HttpSession session = request.getSession();
 
 				session.setAttribute("loginUser", loginUser);
-				
+
 				mv.setViewName("redirect:/home");
 
 			}else {

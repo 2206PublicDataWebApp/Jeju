@@ -83,7 +83,7 @@
          <table align="right">
             <tr>
                <td>
-                  <a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
+                  <a href="/">${sessionScope.loginUser.memberId}</a>님 환영합니다
                </td>
             </tr>
             <tr>

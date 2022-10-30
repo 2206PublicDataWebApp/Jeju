@@ -91,6 +91,10 @@
 	<select id="descPriceSort" resultMap="pensionResultMap">
 		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_PRICE DESC
 	</select>
+	
+	<select id="selectImage" resultMap="pensionResultMap">
+		SELECT FILE_PATH, PENSION_NAME  FROM PENSION_TBL WHERE PENSION_NO = #{rePensionNo}
+	</select>
 
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">

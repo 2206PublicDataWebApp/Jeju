@@ -22,7 +22,6 @@
            <div class="header-top">
                <div class="container">
                     <div class="row">
-     
                         <div class="col-md-4 d-none d-md-block mail-detail"></div>
                         <div class="col-md-4 logo">
                             <img src="/resources/assets/images/logo.png" alt="">
@@ -101,30 +100,21 @@
             </div>
             <hr>
            <div style="font-size: 16px; color : red; font-weight : bold; margin-bottom: 15px;">결제 대기</div>
-                <div class="blog-row row">
-                    <div class="col-lg-4 col-md-6 ">
-                       <div class="blog-col">
-                            <img src="assets/images/destination/d1.jpg" alt="">
-                            <span>2022.10.13 결제</span>
-                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                            <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                       </div>
-                       
-                    </div>
-                    <div class="col-lg-4 col-md-6 ">
-                        <div class="blog-col">
-                             <img src="assets/images/destination/d1.jpg" alt="">
-                             <span>2022.10.13 결제</span>
-                             <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                             <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                             <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                             <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                        </div>
-                        
-                     </div>
-                    
+                <div class="blog-row row">     
+                    <c:if test="${!empty wList}">
+                    	<c:forEach items="${wList }" var="wait">
+	                    	<div class="col-lg-4 col-md-6 ">
+		                    	<div class="blog-col">
+		                            <img src="${wait.reFilePath}">
+		                            <span>${wait.rePayDate} 결제</span>
+		                            <a href="/reservation/cancel?reservationNo=${wait.reservationNo }"><div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div></a>
+		                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${wait.rePensionName }</div>
+		                            <div style="text-align: center;">${wait.reStartDate } ~ ${wait.reEndDate }</div>
+		                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${wait.rePrice }원</span></div>
+		                        </div>
+		                     </div>  
+                    	</c:forEach>                  
+                    </c:if>  
             </div>
         </div>
 
@@ -133,40 +123,20 @@
             <hr>
           <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">예약 내역</div>
                <div class="blog-row row">
-                <div class="col-lg-4 col-md-6 ">
-                    <div class="blog-col">
-                         <img src="assets/images/destination/d1.jpg" alt="">
-                         <span>2022.10.13 결제</span>
-                         <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                         <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                         <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                         <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                    </div>
-                    
-                 </div>
-                 <div class="col-lg-4 col-md-6 ">
-                    <div class="blog-col">
-                         <img src="assets/images/destination/d1.jpg" alt="">
-                         <span>2022.10.13 결제</span>
-                         <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                         <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                         <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                         <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                    </div>
-                    
-                 </div>
-                 <div class="col-lg-4 col-md-6 ">
-                    <div class="blog-col">
-                         <img src="assets/images/destination/d1.jpg" alt="">
-                         <span>2022.10.13 결제</span>
-                         <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                         <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                         <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                         <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                    </div>
-                    
-                 </div>
-                   
+                <c:if test="${!empty rList}">
+                   	<c:forEach items="${rList }" var="success">
+                    	<div class="col-lg-4 col-md-6 ">
+	                    	<div class="blog-col">
+	                            <img src="${success.reFilePath}">
+	                            <span>${success.rePayDate} 결제</span>
+	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
+	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${success.rePensionName }</div>
+	                            <div style="text-align: center;">${success.reStartDate } ~ ${success.reEndDate }</div>
+	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${success.rePrice }원</span></div>
+	                        </div>
+	                     </div>  
+                   	</c:forEach>                  
+                 </c:if>           
            </div>
        </div>
 
@@ -174,81 +144,7 @@
         <hr>
       <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
            <div class="blog-row row">
-            <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-             <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-             <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-               
-       </div>
-   </div>
-   
-   <div class="container">
-        <hr>
-      <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">취소 내역</div>
-           <div class="blog-row row">
-            <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-             <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-             <div class="col-lg-4 col-md-6 ">
-                <div class="blog-col">
-                     <img src="assets/images/destination/d1.jpg" alt="">
-                     <span>2022.10.13 결제</span>
-                     <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">결제 대기</button></div>
-                     <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">제주도 서귀포 펜션</div>
-                     <div style="text-align: center;">2022.10.13 ~ 2022.10.14 목 / 1박</div>
-                     <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">300,000원</span></div>
-                </div>
-                
-             </div>
-               
+            
        </div>
    </div>
         
@@ -352,6 +248,11 @@
         </div>
 
     </body>
+    
+    <script>
+
+    
+    </script>
 
     <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>

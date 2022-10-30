@@ -100,9 +100,7 @@
 
             <div class="input-box">
                 <input id="memberPwd" type="password" name="memberPwd" placeholder="비밀번호">
-                <label for="memberPwd">비밀번호</label>
-                
-                  
+                <label for="memberPwd">비밀번호</label>       
                </div>
          아이디가 없으신가요?-><td colspan="3"><a href="/member/joinView.kh">회원가입</a></td>
            
@@ -115,6 +113,5 @@
    </div>
    
    <script>
-      
    </script>
 </body>

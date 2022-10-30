@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
 import com.jeju.reservation.store.ReservationStore;
@@ -51,6 +52,12 @@ public class ReservationServiceImpl implements ReservationService{
 		int result = aStore.addReserve(session, reservation);
 		return result;
 	}
+	
+	@Override
+	public int addReservationWait(Reservation reservation) {
+		int result = aStore.addReserveWati(session, reservation);
+		return result;
+	}
 
 	@Override
 	public Pension selectOneByPension(Integer pensionNo) {
@@ -63,5 +70,39 @@ public class ReservationServiceImpl implements ReservationService{
 		Room room = aStore.selectOneByRoom(session, roomNo);
 		return room;
 	}
+
+	//결제대기 리스트 불러오기
+	@Override
+	public List<Reservation> selectWaitList(String memberId) {
+		List<Reservation> wList = aStore.selectWaitList(session, memberId);
+		return wList;
+	}
+
+	//결제대기 추가전 이미지 경로 불러오기
+	@Override
+	public Pension selectImage(Integer rePensionNo) {
+		Pension imageList = aStore.selectImage(session, rePensionNo);
+		return imageList;
+	}
+
+	@Override
+	public List<Reservation> selectReserveList(String memberId) {
+		List<Reservation> rList = aStore.selectReserveList(session, memberId);
+		return rList;
+	}
+
+	@Override
+	public Reservation selectOneByWaitList(Integer reservationNo) {
+		Reservation rList = aStore.selectOneByWaitList(session, reservationNo);
+		return rList;
+	}
+
+	@Override
+	public int deleteWaitReserve(Integer reservationNo) {
+		int result = aStore.deleteWaitReserve(session, reservationNo);
+		return result;
+	}
+
+	
 	
 }
