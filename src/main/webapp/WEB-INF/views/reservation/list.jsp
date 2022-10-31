@@ -143,7 +143,7 @@
 							<br>
 							<div class="login">로그인 후 예약하시면</div>
 							<div class="login">등급할인이 적용됩니다.</div>
-							<div class="login" style="margin-top: 10px;">로그인</div>
+							<a href="/member/loginView.kh"><div class="login" style="margin-top: 10px;">로그인</div></a>
 							<br>
 						</div>
 					</div>
@@ -200,7 +200,7 @@
 			<li id="check1">이용 약관</li>
 			<li class="check6"><input type="checkbox" onclick="checkAll();" id="allCheck"><span
 				class="check7"><label for="allCheck">전체동의</label></span></li>
-			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1"><span class="check7 closed"
+			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1" class="agree1"><span class="check7 closed"
 				onclick="clickshow(this,'categories1');"><label for="agreement1">개인정보 수집/이용 동의</label></span><span
 				class="test5">(필수)</span><span id="successChk1" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
@@ -249,7 +249,7 @@
 			</fieldset>
 			</div>
 			
-			<li class="check6"><input id="agreement2" type="checkbox" name="agreement2"><span class="check7 closed" onclick="clickshow(this,'categories2');" style="display : inline-block"><label for="agreement2">숙소 이용규칙 및 환불 규정</label></span><span
+			<li class="check6"><input id="agreement2" type="checkbox" name="agreement2"  class="agree2"><span class="check7 closed" onclick="clickshow(this,'categories2');" style="display : inline-block"><label for="agreement2">숙소 이용규칙 및 환불 규정</label></span><span
 				class="test5">(필수)</span><span id="successChk2" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
 			<div>
@@ -279,7 +279,7 @@
 			</fieldset>				
 			</div>
 			
-			<li class="check6" ><input id="agreement3" type="checkbox" name="agreement3"><span class="check7 closed" onclick="clickshow(this,'categories3');"><label for="agreement3">만 14세 이상 확인</label></span><span
+			<li class="check6" ><input id="agreement3" type="checkbox" name="agreement3"  class="agree3"><span class="check7 closed" onclick="clickshow(this,'categories3');"><label for="agreement3">만 14세 이상 확인</label></span><span
 				class="test5">(필수)</span><span id="successChk3" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
 			<div>
@@ -369,6 +369,7 @@
     		}
      }
 
+     //바로 결제
 //      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
  	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
@@ -466,70 +467,115 @@
  	    	return false
  	    }    	    	
      });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      
+     //나중에 결제 
      $("#button2").click(function() {
     	 $.ajax({
-    		url : "/reservation/checkSession",
+    		url : "/reservation/checkSessionId",
     		type : "post",
-    		success : function(result) {
-    			console.log(result);
-    			if(result === "있음") {
-   	    		 if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
-   	        		 $.ajax({
-   	        			url : "/reservation/waiting",
-   	        			type : "post",
-   	        			data : {
-   	        				"reservationName" : $("#nameChk").val(),
-   	        				"roomNo" : '${r.roomNo}',
-   	        				"rePensionNo" : '${r.refPensionNo}',
-   	        				"rePrice" : '${price}',
-   	        				"reStartDate" : '${startDate}',
-   	        				"reEndDate" : '${endDate}'
-   	        			},
-   	        			success : function(result) {
-   	        				alert("예약되었습니다. 마이페이지에서 시간내에 결제해주세요.");
-   	        				location.href = "/pension/list";
-   	        			}
-   	        		 });
-   	        	 }else {
-   	        		alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
-   	  	    	if(!$("#agreement1").prop("checked")){
-   	  	    		$("#successChk1").text("동의 해주시기 바랍니다.");
-   	  				$("#successChk1").css("color", "red");
-   	  	    	}
-   	  	    	if(!$("#agreement2").prop("checked")) {
-   	  	    		$("#successChk2").text("동의 해주시기 바랍니다.");
-   	  				$("#successChk2").css("color", "red");
-   	  	    	}
-   	  	    	if(!$("#agreement3").prop("checked")) {
-   	  	    		$("#successChk3").text("동의 해주시기 바랍니다.");
-   	  				$("#successChk3").css("color", "red");
-   	 	    	}
-   	  	    	var nameChk = $("#nameChk").val();
-   	  	    	if(nameChk == ""){
-   	  	    		console.log($("#nameChk").val());
-   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
-   	  				$("#successNameChk").css("color", "red");
-   	  	    	}
-//   	   	    	if($("#phoneDoubleChk").val() != "true"){
-//   	   	    		console.log($("#phoneDoubleChk").val());
-//   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-//   	   				$(".successPhoneChk").css("color", "red");	    		
-//   	   	    	}
-   	  	    	return false
-   	        	 }
+    		success : function(result) {   
+    			var sessionId = "";
+    			if(result != "") {
+    			 sessionId = result;
+    			 $.ajax({
+    				url : "/reservation/waitAvailability",
+    				data : {
+    					"memberId" : sessionId
+    				},
+    			 	type : "post",
+    			 	success : function(result) {
+    			 		if(result == "1") {
+    			 			alert("이미 결제해야할 예약건이 있습니다! 결제 완료 후 다시 시도해주세요.");
+    			 			location.href="/pension/list";
+    			 		}else {
+    			 			 if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null){
+    		   	        		 $.ajax({
+    		   	        			url : "/reservation/waiting",
+    		   	        			type : "post",
+    		   	        			data : {
+    		   	        				"reservationName" : $("#nameChk").val(),
+    		   	        				"roomNo" : '${r.roomNo}',
+    		   	        				"rePensionNo" : '${r.refPensionNo}',
+    		   	        				"rePrice" : '${price}',
+    		   	        				"reStartDate" : '${startDate}',
+    		   	        				"reEndDate" : '${endDate}'  	       	        				
+    		   	        			},
+    		   	        			success : function(result) {	
+    		   	     		    			var keyName = sessionId;	// 키이름은 time
+    		   	   	        				var keyValue = 	$("#nameChk").val();// 저장할 값은 30분에서 0분까지 줄어드는 기능        		 	    		
+    		   	   	        				console.log("keyName : " + keyName);
+    		   	   	        				console.log("keyValue : " + keyValue);
+//    		   	    	        				var tts = 1800000;	// 만료시간 30분
+    		   								var tts = 10000;
+//    		    	   	        			 	let min=30;			//분 
+//    		    		        		 	    let sec=60;			//초
+    		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
+    		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
+    		   		        		 	    	const date = new Date();
+    		   		        		 	    	
+    		   									const obj = {
+    		   											value : keyValue,	// obj객체에 value는 time
+    		   											expire : Date.now() + tts,
+    		   											time : tts,
+    		   											name : keyName
+    		   									}
+    		   									console.log(obj);
+    		   									
+    		   									//local에는 객체를 저장할 수 없어서 JSON으로 문자열 변환							
+    		   									const objString = JSON.stringify(obj);	// JSON으로 문자열 변환
+    		   									//변환한 객체를 파라미터로 입력받은 name과 함께 localStorage에 저장
+    		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
+    		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
+    		   									console.log("로컬 저장 완료! 로컬확인해봐");
+    		   					
+    		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");
+    		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
+    		   	        			}
+    		   	        		 });
+    		   	        	 }else {
+    		   	        		alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
+    		   	  	    	if(!$(".agree1").prop("checked")){
+    		   	  	    		$("#successChk1").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk1").css("color", "red");
+    		   	  	    	}
+    		   	  	    	if(!$(".agree2").prop("checked")) {
+    		   	  	    		$("#successChk2").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk2").css("color", "red");
+    		   	  	    	}
+    		   	  	    	if(!$(".agree3").prop("checked")) {
+    		   	  	    		$("#successChk3").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk3").css("color", "red");
+    		   	 	    	}
+    		   	  	    	var nameChk = $("#nameChk").val();
+    		   	  	    	if(nameChk == ""){
+    		   	  	    		console.log($("#nameChk").val());
+    		   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
+    		   	  				$("#successNameChk").css("color", "red");
+    		   	  	    	}
+//    		   	   	    	if($("#phoneDoubleChk").val() != "true"){
+//    		   	   	    		console.log($("#phoneDoubleChk").val());
+//    		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//    		   	   				$(".successPhoneChk").css("color", "red");	    		
+//    		   	   	    	}
+    		   	  	    	return false
+    		   	        	 }
+    			 		}
+    			 	}
+    			 });
     			}else {
     				alert("로그인 후 이용가능합니다.");
     			}
-
-
     		},
     		error : function() {
-    			alert("왜안돼 시발;");
+    			alert("왜안돼");
     		}
     	 });
      });
     
+/////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    
+     //예약자명 적었냐 안적었냐 체크ajax
      $('#nameChk').focusout(function(){
     	 var nameChk = $("#nameChk").val();
  		$.ajax({
@@ -553,8 +599,9 @@
  		 
  	});
      
-     $('#agreement1').change(function(){
-    	 var agree1 = $("#agreement1").is(":checked");
+     //동의 체크했는지 안했는디 ajax
+     $('.agree1').change(function(){
+    	 var agree1 = $(".agree1").is(":checked");
  		$.ajax({
  			url : "/reservation/agreeCheck1",
  			type : "post",
@@ -570,12 +617,12 @@
  			error : function(){
  				alert("서버요청실패");
  			}
- 		})
- 		 
+ 		}) 
  	});
      
-     $('#agreement2').change(function(){
-    	 var agree2 = $("#agreement2").is(":checked");
+   //동의 체크했는지 안했는디 ajax
+     $('.agree2').change(function(){
+    	 var agree2 = $(".agree2").is(":checked");
  		$.ajax({
  			url : "/reservation/agreeCheck2",
  			type : "post",
@@ -595,8 +642,9 @@
  		 
  	});
      
-     $('#agreement3').change(function(){
-    	 var agree3 = $("#agreement3").is(":checked");
+   //동의 체크했는지 안했는디 ajax
+     $('.agree3').change(function(){
+    	 var agree3 = $(".agree3").is(":checked");
  		$.ajax({
  			url : "/reservation/agreeCheck3",
  			type : "post",
@@ -664,6 +712,7 @@
 // 	    	}
 // 	    });
 
+		//약관 내용 열고 닫기
 	    function clickshow(elem,ID) {
 	    	 var menu = document.getElementById(ID);
 	    	 if (elem.className !='closed') {

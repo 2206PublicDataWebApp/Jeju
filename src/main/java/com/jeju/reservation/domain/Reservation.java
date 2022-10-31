@@ -16,12 +16,13 @@ public class Reservation {
 	private Date reStartDate;
 	private Date reEndDate;
 	private Date rePayDate;
-	
+
 	public Reservation() {}
 
 	public Reservation(Integer reservationNo, String memberId, String rStatus, Integer roomNo, Integer rePensionNo,
 			int useHistory, String rePrice, String reservationName, String reFilePath, String rePensionName,
 			Date reStartDate, Date reEndDate, Date rePayDate) {
+		super();
 		this.reservationNo = reservationNo;
 		this.memberId = memberId;
 		this.rStatus = rStatus;
@@ -139,5 +140,7 @@ public class Reservation {
 
 	public void setRePayDate(Date rePayDate) {
 		this.rePayDate = rePayDate;
-	}	
+	}
+
+
 }

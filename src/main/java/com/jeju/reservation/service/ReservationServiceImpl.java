@@ -97,9 +97,23 @@ public class ReservationServiceImpl implements ReservationService{
 		return rList;
 	}
 
+	//결제대기 수동삭제
 	@Override
 	public int deleteWaitReserve(Integer reservationNo) {
 		int result = aStore.deleteWaitReserve(session, reservationNo);
+		return result;
+	}
+	
+	//결제대기 자동삭제
+	@Override
+	public int removeWaitReserve(String reservationName) {
+		int result = aStore.removeWaitReserve(session, reservationName);
+		return result;
+	}
+
+	@Override
+	public int selectRstatus(String memberId) {
+		int result = aStore.selectWaitRstatus(session, memberId);
 		return result;
 	}
 

@@ -29,4 +29,8 @@ public interface ReservationService {
 	//결제대기 삭제
 	int deleteWaitReserve(Integer reservationNo);
 
+	int removeWaitReserve(String reservationName);
+
+	int selectRstatus(String memberId);
+
 }

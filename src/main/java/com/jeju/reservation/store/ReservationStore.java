@@ -29,6 +29,10 @@ public interface ReservationStore {
 	Reservation selectOneByWaitList(SqlSession session, Integer reservationNo);
 	//결제대기 삭제
 	int deleteWaitReserve(SqlSession session, Integer reservationNo);
+	
+	int removeWaitReserve(SqlSession session, String reservationName);
+
+	int selectWaitRstatus(SqlSession session, String memberId);
 
 
 }

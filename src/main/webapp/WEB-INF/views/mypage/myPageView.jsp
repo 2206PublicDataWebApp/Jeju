@@ -142,10 +142,10 @@
 	<script>
 		$("#reservationList").click(function() {
 			 $.ajax({
-		    		url : "/reservation/checkSession",
+		    		url : "/reservation/checkSessionId",
 		    		type : "post",
 		    		success : function(result) {
-		    			if(result == "있음") {
+		    			if(result != "") {
 		    				location.href="/reservation/myPage";
 		    			}else {
 		    				alert("로그인 후 이용가능합니다.");

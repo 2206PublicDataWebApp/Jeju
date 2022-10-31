@@ -61,10 +61,24 @@ public class ReservationStoreLogic implements ReservationStore{
 		Reservation rList = session.selectOne("ReservationMapper.selectOneByWaitList", reservationNo);
 		return rList;
 	}
-
+	
+	//결제대기 수동삭제
 	@Override
 	public int deleteWaitReserve(SqlSession session, Integer reservationNo) {
 		int result = session.delete("ReservationMapper.deleteWaitReserve", reservationNo);
+		return result;
+	}
+	
+	//결제대기 자동삭제
+	@Override
+	public int removeWaitReserve(SqlSession session, String reservationName) {
+		int result = session.delete("ReservationMapper.removeWaitReserve", reservationName);
+		return result;
+	}
+
+	@Override
+	public int selectWaitRstatus(SqlSession session, String memberId) {
+		int result = session.selectOne("ReservationMapper.selectRstatus", memberId);
 		return result;
 	}
 

@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,21 +61,19 @@ public class ReservationController {
 		mv.setViewName("/reservation/list");		
 		return mv;
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/reservation/checkSession",produces="text/plain;charset=utf-8", method=RequestMethod.POST)
-	public String checkSession(HttpSession session) {
+	@RequestMapping(value="/reservation/checkSessionId", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String checkSessionId(HttpSession session) {
 		String chkSession = "";
 		Member member = (Member) session.getAttribute("loginUser");
-		if(member != null) {
-			chkSession = "있음";
-		}else {
-			chkSession = "없음";
+		chkSession = member.getMemberId();
+		if(member.getMemberId() == null) {
+			chkSession = "";
 		}
 		return chkSession;
 	}
-	
-	
+
 	@RequestMapping(value = "/reservation/phoneCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String sendSMS(@RequestParam("memberPhone") String userPhoneNumber) { // �޴��� ���ں�����
@@ -117,6 +114,7 @@ public class ReservationController {
 		reservation.setReFilePath(imageList.getFilePath());
 		reservation.setRePensionName(imageList.getPensionName());
 		int result = aService.addReservationWait(reservation);
+//		Reservation reservationNo = aService.selectReservationNo();
 		return "결제대기 추가 성공!";	
 	}
 	
@@ -161,19 +159,38 @@ public class ReservationController {
 	}
 	
 	
+	//사용자가 결제대기 상태에서 직접 결제 취소요청 했을 경우
 	@ResponseBody
 	@RequestMapping(value="/reservation/deleteWaitReserve", method=RequestMethod.POST)
 	public String deleteWaitReserve(@RequestParam("reservationNo") Integer reservationNo) {
 		int result = aService.deleteWaitReserve(reservationNo);
 		if(result > 0) {
-			System.out.println("삭제 성공!");
+			System.out.println("취소 성공!");
 		}
-		return "삭제 성공";
+		return "취소 성공";
 	}
-
 	
+	//사용자가 결제대기 상태에서 30분넘어도 결제를 하지 않았을때 자동삭제
+	@ResponseBody
+	@RequestMapping(value="/reservation/removeWait", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String removeWaitReserve(@RequestParam("reservationName") String reservationName) {
+		String chk = "";
+		int result = aService.removeWaitReserve(reservationName);
+		if(result > 0) {
+			chk = "삭제 성공!";
+		}else {
+			chk = "삭제 실패!";
+		}
+		return chk;	
+	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/reservation/waitAvailability", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String waitAvailability(@RequestParam("memberId") String memberId) {
+		int count = aService.selectRstatus(memberId);
+		System.out.println("카운트값 : "+count);
+		return String.valueOf(count);		
+	}
 	
 	
 	

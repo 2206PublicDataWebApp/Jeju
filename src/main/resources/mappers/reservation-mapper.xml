@@ -27,8 +27,14 @@
 		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 0, #{roomNo}, #{rePensionNo}, 0, #{rePrice}, #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT)
 	</insert>
 	
+	<!-- 결제대기 수동삭제 -->
 	<delete id="deleteWaitReserve">
 		DELETE FROM RESERVATION_TBL WHERE RESERVATION_NO = #{reservationNo}
+	</delete>
+	
+	<!-- 결제대기 자동삭제 -->
+	<delete id="removeWaitReserve">
+		DELETE FROM RESERVATION_TBL WHERE RESERVATION_NAME = #{reservationName}
 	</delete>
 	
 	<select id="selectWaitList" resultMap="reservationResultMap">
@@ -42,4 +48,9 @@
 	<select id="selectOneByWaitList" resultMap="reservationResultMap">
 		SELECT * FROM RESERVATION_TBL WHERE RESERVATION_NO = #{reservationNo}
 	</select>
+	
+	<select id="selectRstatus" resultType="_int">
+		SELECT COUNT(*) FROM RESERVATION_TBL WHERE MEMBER_ID = #{memberId} AND R_STATUS = 0
+	</select>
+	
 </mapper>

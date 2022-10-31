@@ -288,14 +288,12 @@ public class PensionController {
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
 			,Model model) throws ParseException, Exception {
-		System.out.println("들어왔어!");
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
 		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
 		long diffDays = diffSec / (24*60*60); //일자수 차이
-		System.out.println(diffDays);
 		ArrayList<Pension> prList = new ArrayList<Pension>();
 		//가격리스트 가져옴
 		List<Pension> priceList = pService.selectPrice();
@@ -311,9 +309,8 @@ public class PensionController {
 				prList.add(i, priceList.get(i));
 			}
 		}
+		System.out.println(prList);
 		Collections.sort(prList, Collections.reverseOrder());
-		System.out.println(prList.get(0).getReviewCount());
-		System.out.println(prList.get(1).getReviewCount());
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -363,11 +360,8 @@ public class PensionController {
 				pension.setPensionPrice(str);
 				cList.add(i, pension);
 			}
-			System.out.println(cList);
 		}
 		Collections.sort(cList, Collections.reverseOrder());
-		System.out.println(cList.get(0).getReviewCount());
-
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
 			List<Review> rankList = pService.selectReviewRank();
@@ -470,7 +464,6 @@ public class PensionController {
 			}
 		}
 
-
 		int pListNum = 0;
 		Pension tmp = new Pension();
 		for(int j=0; j<cList.size(); j++) {
@@ -505,7 +498,6 @@ public class PensionController {
 				,@RequestParam("startDate") String startDate
 				,@RequestParam("endDate") String endDate
 				,Model model) throws ParseException, Exception {
-			System.out.println("들어왔어!");
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
 			Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
@@ -612,5 +604,4 @@ public class PensionController {
 			mv.setViewName("pension/list2");
 			return mv;
 		}
-
 }
