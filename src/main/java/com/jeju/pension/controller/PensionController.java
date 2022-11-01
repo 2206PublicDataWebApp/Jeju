@@ -186,6 +186,33 @@ public class PensionController {
 		mv.setViewName("pension/list");
 		return mv;
 	}
+	
+	@RequestMapping(value="/pension/searchName", method=RequestMethod.GET)
+	public ModelAndView searchPensionName(
+			ModelAndView mv
+			,@RequestParam("pensionName") String pensionName
+			,String startDate
+			, String endDate
+			, Model model) {
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+		Date now = new Date();
+		startDate = sdf2.format(now);
+		endDate = sdf2.format(now);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		List<Pension> pList = pService.searchPensionTitle(pensionName);
+		List<Pension> rList = new ArrayList<Pension>();
+		
+		//5순위까지 조회해서 펜션번호 5개 가져옴
+			List<Review> rankList = pService.selectReviewRank();
+			for(int i=0; i<rankList.size(); i++) {
+				rList.add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
+			}
+		mv.addObject("rList", rList);	
+		mv.addObject("pList", pList);
+		mv.setViewName("pension/list");
+		return mv;	
+	}
 
 
 	//날짜조회 후 ajax로 카테고리 적용한것도 고려하여 코드 작성
@@ -195,37 +222,46 @@ public class PensionController {
 			,@ModelAttribute Pension pension
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
+			,@RequestParam("price1") String price1
+			,@RequestParam("price2") String price2
 			,Model model
 			,ModelAndView mv) throws java.text.ParseException{
+		System.out.println("price1 : " + price1);
+		System.out.println("price2 : " + price2);
 		//가져온 날짜를 가져와서 가격을 변경시키기 위해 일수의 차이를 구하는 코드
-
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
 		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
 		long diffDays = diffSec / (24*60*60); //일자수 차이
-
+		DecimalFormat decFormat = new DecimalFormat("###,###");		
 		ArrayList<Pension> cList = new ArrayList<>();
 		List<Category2> gList = pService.selectCategory(category);
+		
 		for(int i=0; i < gList.size(); i++) {
 			//숙소리스트를 가져와 pension에 저장후 cList에 add하는 작업
 			pension = pService.selectCategoryFilter(gList.get(i).getRefPensionNumber());
 			System.out.println("펜션 가격 : " + pension.getPensionPrice());
 			if(pension.getPensionPrice().equals("판매 완료") || pension.getPensionPrice().equals("다른날짜 확인")) {
 				cList.add(i, pension);
-			}else {
-				DecimalFormat decFormat = new DecimalFormat("###,###");
+			}else {				
 				System.out.println("if문 안의 펜션 가격 : " + pension.getPensionPrice());
 				String price = pension.getPensionPrice().replaceAll("[^0-9]","");
 				if(diffDays == 0) {
 					diffDays = 1;
 				}
-				String result = String.valueOf(Integer.parseInt(price) * diffDays);
-				String str = decFormat.format(Integer.parseInt(result));
-				System.out.println(str);
-				pension.setPensionPrice(str);
-				cList.add(i, pension);
+				long priceNum1 = Integer.parseInt(price) * diffDays;
+				System.out.println("priceNum1 : " + priceNum1);
+				if(priceNum1 >= (Integer.parseInt(price1)*10000) && priceNum1 <= (Integer.parseInt(price2)*10000)) {
+					String str = decFormat.format(priceNum1);
+					System.out.println(str);
+					pension.setPensionPrice(str);
+					cList.add(i, pension);		
+					System.out.println(cList.get(i).getPensionPrice());
+				}else {
+					cList.add(i, null);
+				}
 			}
-			System.out.println(cList);
+			System.out.println(cList.size());
 		}
 		List<Pension> rList = new ArrayList<Pension>();
 		//5순위까지 조회해서 펜션번호 5개 가져옴
@@ -240,6 +276,66 @@ public class PensionController {
 		mv.setViewName("pension/list2");
 		return mv;
 	}
+	
+	//날짜조회 후 ajax로 카테고리 적용한것도 고려하여 코드 작성
+		@RequestMapping(value="/pension/priceSet", method=RequestMethod.POST)
+		public ModelAndView priceSet(
+				@ModelAttribute Pension pension
+				,@RequestParam("startDate") String startDate
+				,@RequestParam("endDate") String endDate
+				,@RequestParam("price1") String price1
+				,@RequestParam("price2") String price2
+				,Model model
+				,ModelAndView mv) throws java.text.ParseException{
+			System.out.println("price1 : " + price1);
+			System.out.println("price2 : " + price2);
+			//가져온 날짜를 가져와서 가격을 변경시키기 위해 일수의 차이를 구하는 코드
+			Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
+			long diffDays = diffSec / (24*60*60); //일자수 차이
+			DecimalFormat decFormat = new DecimalFormat("###,###");		
+			ArrayList<Pension> fList = new ArrayList<>();
+			List<Pension> gList = pService.priceSet();
+			System.out.println(gList);
+			for(int i=0; i < gList.size(); i++) {
+				//숙소리스트를 가져와 pension에 저장후 cList에 add하는 작업
+				if(gList.get(i).getPensionPrice().equals("판매 완료") || gList.get(i).getPensionPrice().equals("다른날짜 확인")) {
+					fList.add(i, pension);
+					System.out.println(fList.get(i));
+				}else {				
+					String price = gList.get(i).getPensionPrice().replaceAll("[^0-9]","");
+					if(diffDays == 0) {
+						diffDays = 1;
+					}
+					long priceNum1 = Integer.parseInt(price) * diffDays;
+					System.out.println("priceNum1 : " + priceNum1);
+					if(priceNum1 >= (Integer.parseInt(price1)*10000) && priceNum1 <= (Integer.parseInt(price2)*10000)) {
+						String str = decFormat.format(priceNum1);
+						System.out.println(str);
+						gList.get(i).setPensionPrice(str);
+						fList.add(i, gList.get(i));		
+					}else {
+						fList.add(i, null);
+						System.out.println("null값 체크 : "+ fList.get(i));
+					}
+				}
+				System.out.println(fList.size());
+			}
+			
+			List<Pension> rList = new ArrayList<Pension>();
+			//5순위까지 조회해서 펜션번호 5개 가져옴
+				List<Review> rankList = pService.selectReviewRank();
+				for(int i=0; i<rankList.size(); i++) {
+					rList.add(i, pService.selectPensionRank(rankList.get(i).getPensionNo()));
+				}
+			model.addAttribute("startDate", startDate);
+			model.addAttribute("endDate", endDate);
+			model.addAttribute("fList", fList);
+			mv.addObject("rList", rList);
+			mv.setViewName("pension/list2");
+			return mv;
+		}
 
 	@RequestMapping(value="/pension/dateSearch", method=RequestMethod.POST)
 	public ModelAndView dateSearch(

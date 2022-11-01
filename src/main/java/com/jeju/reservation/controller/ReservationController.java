@@ -67,9 +67,11 @@ public class ReservationController {
 	public String checkSessionId(HttpSession session) {
 		String chkSession = "";
 		Member member = (Member) session.getAttribute("loginUser");
-		chkSession = member.getMemberId();
-		if(member.getMemberId() == null) {
+		System.out.println(member);		
+		if(member == null) {
 			chkSession = "";
+		}else {
+			chkSession = member.getMemberId();
 		}
 		return chkSession;
 	}

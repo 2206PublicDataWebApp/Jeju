@@ -65,5 +65,8 @@ public interface PensionStore {
 	List<Room> selectRoom(SqlSession session, Integer pensionNo);
 	// 리뷰 전부 가져오기
 	List<Review> selectAllReview(SqlSession session, Integer pensionNo);
+	List<Pension> searchPensionName(SqlSession session, String pensionName);
+	//모든 펜션 조회
+	List<Pension> priceSet(SqlSession session);
 
 }

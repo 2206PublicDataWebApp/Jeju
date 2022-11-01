@@ -7,7 +7,6 @@ public class Pension implements Comparable<Pension>{
 	private Integer pensionNo;
 	private String memberId;
 	private String pensionName;
-
 	private String pensionAddr;
 	private String pensionComments;
 	private String pensionPrice;

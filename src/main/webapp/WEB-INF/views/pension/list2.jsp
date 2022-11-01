@@ -18,36 +18,68 @@
 <body>
 	<c:if test="${!empty cList }">
 		<c:forEach items="${cList }" var="search">
-			<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-				<img src="${search.filePath}" alt="Image" class="img-fluid"
-					style="height: 190px; border-radius: 15px;">
-			</div>
-			<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
-				<ul class="modify">
-					<li class="test4"><h2 style="font-size: 22px;">
-							<a href="/pension/detailView?pensionNo=${search.pensionNo }&startDate=${startDate}&endDate=${endDate}">${search.pensionName }</a>
-						</h2></li>
-					<li class="test4">${search.pensionAddr }</li>
-					<c:if test="${search.pensionPrice == '판매 완료'}">
-						<li class="test4">${search.pensionPrice }</li>
-					</c:if>
-					<c:if
-						test="${search.pensionPrice != '판매 완료' && search.pensionPrice != '다른날짜 확인'}">
-						<li class="test4">${search.pensionPrice }원</li>
-					</c:if>
-					<c:if test="${search.pensionPrice == '다른날짜 확인' }">
-						<li class="test4">${search.pensionPrice }</li>
-					</c:if>
-					<li class="test4">${search.reviewCount }개</li>
-				</ul>
-			</div>
+		  <c:if test="${search ne null}">
+				<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
+					<img src="${search.filePath}" alt="Image" class="img-fluid"
+						style="width : 370px; height : 250px; border-radius: 15px;">
+				</div>
+				<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
+					<ul class="modify">
+						<li class="test4"><h2 style="font-size: 22px;">
+								<a href="/pension/detailView?pensionNo=${search.pensionNo }&startDate=${startDate}&endDate=${endDate}">${search.pensionName }</a>
+							</h2></li>
+						<li class="test4">${search.pensionAddr }</li>
+						<c:if test="${search.pensionPrice == '판매 완료'}">
+							<li class="test4">${search.pensionPrice }</li>
+						</c:if>
+						<c:if
+							test="${search.pensionPrice != '판매 완료' && search.pensionPrice != '다른날짜 확인'}">
+							<li class="test4">${search.pensionPrice }원</li>
+						</c:if>
+						<c:if test="${search.pensionPrice == '다른날짜 확인' }">
+							<li class="test4">${search.pensionPrice }</li>
+						</c:if>
+						<li class="test4">${search.reviewCount }개</li>
+					</ul>
+				</div>
+		   </c:if>
 		</c:forEach>
 	</c:if>
+		<c:if test="${!empty fList }">
+			<c:forEach items="${fList }" var="priceSet">
+			  <c:if test="${priceSet.filePath ne null}">
+					<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
+						<img src="${priceSet.filePath}" alt="Image" class="img-fluid"
+							style="width : 370px; height : 250px; border-radius: 15px;">
+					</div>
+					<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
+						<ul class="modify">
+							<li class="test4"><h2 style="font-size: 22px;">
+									<a href="/pension/detailView?pensionNo=${priceSet.pensionNo }&startDate=${startDate}&endDate=${endDate}">${priceSet.pensionName }</a>
+								</h2></li>
+							<li class="test4">${priceSet.pensionAddr }</li>
+							<c:if test="${priceSet.pensionPrice == '판매 완료'}">
+								<li class="test4">${priceSet.pensionPrice }</li>
+							</c:if>
+							<c:if
+								test="${priceSet.pensionPrice != '판매 완료' && priceSet.pensionPrice != '다른날짜 확인'}">
+								<li class="test4">${priceSet.pensionPrice }원</li>
+							</c:if>
+							<c:if test="${priceSet.pensionPrice == '다른날짜 확인' }">
+								<li class="test4">${priceSet.pensionPrice }</li>
+							</c:if>
+							<li class="test4">${priceSet.reviewCount }개</li>
+						</ul>
+					</div>
+			   </c:if>
+			</c:forEach>
+		</c:if>
+	
 	
 	<c:if test="${!empty drList }">
                   <c:forEach items="${drList }" var="dateSearch" >
                      <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="height : 190px; border-radius: 15px;">
+                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 15px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">

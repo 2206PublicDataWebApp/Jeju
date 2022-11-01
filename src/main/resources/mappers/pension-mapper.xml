@@ -95,6 +95,10 @@
 	<select id="selectImage" resultMap="pensionResultMap">
 		SELECT FILE_PATH, PENSION_NAME  FROM PENSION_TBL WHERE PENSION_NO = #{rePensionNo}
 	</select>
+	
+	<select id="searchPensionName" resultMap="pensionResultMap">
+		SELECT PENSION_NO, PENSION_NAME, PENSION_ADDR, PENSION_PRICE, FILE_PATH, REVIEW_COUNT FROM PENSION_TBL WHERE PENSION_NAME LIKE '%'||#{pensionName}||'%'
+	</select>
 
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">

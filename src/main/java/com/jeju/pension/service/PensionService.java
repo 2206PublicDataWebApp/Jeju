@@ -61,6 +61,10 @@ public interface PensionService {
 
 	// 리뷰 전부 불러오기
 	List<Review> selectAllReview(Integer pensionNo);
+	//펜션 제목 검색
+	List<Pension> searchPensionTitle(String pensionName);
+	//모든 펜션 조회
+	List<Pension> priceSet();
 
 
 }
