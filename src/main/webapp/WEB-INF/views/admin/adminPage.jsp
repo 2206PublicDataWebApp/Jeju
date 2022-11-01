@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -350,66 +350,42 @@
                             <div class="table-responsive table--no-card m-b-30">
                                 <h3 class="title-3 m-b-30">
 
-                                    <%--ajax 이용--%>
+                                    <!--회원관리 -->
                                     <i class="zmdi zmdi-account-calendar"></i>회원관리</h3>
                                 <table class="table table-borderless table-striped table-earning">
                                     <thead>
-                                    <tr>
-                                        <th>이름</th>
-                                        <th>ID</th>
-                                        <th>전화번호</th>
-                                        <th>주소</th>
-                                        <th>이메일</th>
-                                        <th>최근예약일</th>
-                                        <th>회원상태</th>
-                                    </tr>
-                                    </thead>
                                     <tbody>
                                     <tr>
-                                        <td>홍길동</td>
-                                        <td>user01</td>
-                                        <td>010-1515-1414</td>
-                                        <td>서울시 도봉구 쌍문동 59</td>
-                                        <td>user01@gmail.com</td>
-                                        <td>2022-10-22</td>
-                                        <th>Y</th>
+                                        <td>번호</td>
+                                        <td>아이디</td>
+                                        <td>이메일</td>
+                                        <td>이름</td>
+                                        <td>전화번호</td>
+                                        <td>주소</td>
+                                        <td>가입날짜</td>
+                                        <td>생년월일</td>
+                                        <td>성별</td>
+                                        <td>총결재금액</td>
+                                        <td>예약횟수</td>
+                                        <td>탈퇴</td>
                                     </tr>
+                                    <c:forEach items="${memberList }" var="adminMember" varStatus="i">
                                     <tr>
-                                        <td>홍길동</td>
-                                        <td>user01</td>
-                                        <td>010-1515-1414</td>
-                                        <td>서울시 도봉구 쌍문동 59</td>
-                                        <td>user01@gmail.com</td>
-                                        <td>2022-10-22</td>
-                                        <th>Y</th>
+                                        <td>${i.count}</td>
+                                        <td>${adminMember.memberId}</td>
+                                        <td>${adminMember.memberEmail}</td>
+                                        <td>${adminMember.memberName}</td>
+                                        <td>${adminMember.memberPhone}</td>
+                                        <td>${adminMember.memberAddr}</td>
+                                        <td>${adminMember.enrollDate}</td>
+                                        <td>${adminMember.birthDate}</td>
+                                        <td>${adminMember.gender}</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td><a href="#">강제탈퇴</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>홍길동</td>
-                                        <td>user01</td>
-                                        <td>010-1515-1414</td>
-                                        <td>서울시 도봉구 쌍문동 59</td>
-                                        <td>user01@gmail.com</td>
-                                        <td>2022-10-22</td>
-                                        <th>Y</th>
-                                    </tr>
-                                    <tr>
-                                        <td>홍길동</td>
-                                        <td>user01</td>
-                                        <td>010-1515-1414</td>
-                                        <td>서울시 도봉구 쌍문동 59</td>
-                                        <td>user01@gmail.com</td>
-                                        <td>2022-10-22</td>
-                                        <th>Y</th>
-                                    </tr>
-                                    <tr>
-                                        <td>홍길동</td>
-                                        <td>user01</td>
-                                        <td>010-1515-1414</td>
-                                        <td>서울시 도봉구 쌍문동 59</td>
-                                        <td>user01@gmail.com</td>
-                                        <td>2022-10-22</td>
-                                        <th>Y</th>
-                                    </tr>
+                                    </c:forEach>
+                                    </thead>
                                     </tbody>
                                 </table>
                             </div>
@@ -468,85 +444,31 @@
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
                                         <tr>
+                                            <th>번호</th>
                                             <th>이름</th>
-                                            <th>ID</th>
-                                            <th>전화번호</th>
                                             <th>주소</th>
-                                            <th>이메일</th>
-                                            <th>최근예약일</th>
-                                            <th>회원상태</th>
+                                            <th>가격</th>
+                                            <th>리뷰 개수</th>
+                                            <th>기타</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>user01</td>
-                                            <td>010-1515-1414</td>
-                                            <td>서울시 도봉구 쌍문동 59</td>
-                                            <td>user01@gmail.com</td>
-                                            <td>2022-10-22</td>
-                                            <th>Y</th>
-                                        </tr>
+                                        <c:forEach items="${pensionList }" var="adminPension" varStatus="i">
+                                            <tr>
+                                                <th>${i.count}</th>
+                                                <th>${adminPension.pensionName}</th>
+                                                <th>${adminPension.pensionAddr}</th>
+                                                <th>${adminPension.pensionPrice}</th>
+                                                <th>${adminPension.reviewCount}</th>
+                                                <th><a href="#">삭제</a></th>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
 
                                 </div>
                                 <div class="user-data__footer">
-                                    <button class="au-btn au-btn-load">load more</button>
+
                                 </div>
                             </div>
 
@@ -560,53 +482,17 @@
                                     <table class="table table-top-campaign">
                                         <tbody>
                                         <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
+                                            <td>아이디</td>
+                                            <td>내용</td>
+                                            <td>작성날짜</td>
                                         </tr>
+                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i">
                                         <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr><tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr><tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr><tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr><tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
+                                            <td>${adminReview.memberId}</td>
+                                            <td>${adminReview.reviewContents}</td>
+                                            <td>${adminReview.regDate}</td>
                                         </tr>
-                                        <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>리뷰내용 리뷰내용 리뷰내용</td>
-                                            <td>작성자</td>
-                                            <td><a href="#">삭제</a></td>
-                                        </tr>
-
-
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -616,84 +502,45 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-
-
-
                         </div>
                     </div>
                     <div class="row m-t-30">
                         <div class="col-md-12">
                             <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>예약관리</h3>
+                                <i class="zmdi zmdi-account-calendar"></i>예약/결재관리</h3>
                             <!-- DATA TABLE-->
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
                                     <thead>
                                     <tr>
-                                        <th>date</th>
-                                        <th>type</th>
-                                        <th>description</th>
-                                        <th>status</th>
-                                        <th>price</th>
+                                        <th>번호</th>
+                                        <th>숙소</th>
+                                        <th>결재여부</th>
+                                        <th>결재일</th>
+                                        <th>아이디</th>
+                                        <th>가격</th>
+                                        <th>예약상태</th>
+                                        <th>예약기간-시작</th>
+                                        <th>예약기간-마감</th>
+                                        <th>기타</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Mobile</td>
-                                        <td>iPhone X 64Gb Grey</td>
-                                        <td class="process">Processed</td>
-                                        <td>$999.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-28 01:22</td>
-                                        <td>Mobile</td>
-                                        <td>Samsung S8 Black</td>
-                                        <td class="process">Processed</td>
-                                        <td>$756.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-27 02:12</td>
-                                        <td>Game</td>
-                                        <td>Game Console Controller</td>
-                                        <td class="denied">Denied</td>
-                                        <td>$22.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-26 23:06</td>
-                                        <td>Mobile</td>
-                                        <td>iPhone X 256Gb Black</td>
-                                        <td class="denied">Denied</td>
-                                        <td>$1199.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-25 19:03</td>
-                                        <td>Accessories</td>
-                                        <td>USB 3.0 Cable</td>
-                                        <td class="process">Processed</td>
-                                        <td>$10.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-29 05:57</td>
-                                        <td>Accesories</td>
-                                        <td>Smartwatch 4.0 LTE Wifi</td>
-                                        <td class="denied">Denied</td>
-                                        <td>$199.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-24 19:10</td>
-                                        <td>Camera</td>
-                                        <td>Camera C430W 4k</td>
-                                        <td class="process">Processed</td>
-                                        <td>$699.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2018-09-22 00:43</td>
-                                        <td>Computer</td>
-                                        <td>Macbook Pro Retina 2017</td>
-                                        <td class="process">Processed</td>
-                                        <td>$10.00</td>
-                                    </tr>
+                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i">
+                                        <tr>
+                                            <th>${i.count}</th>
+                                            <th>${adminReservation.roomNo}</th>
+                                            <th>0</th>
+                                            <th>0</th>
+                                            <th>${adminReservation.memberId}</th>
+                                            <th>${adminReservation.rePrice}</th>
+                                            <th>${adminReservation.rStatus}</th>
+                                            <th>0</th>
+                                            <th>0</th>
+                                            <th>0</th>
+
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

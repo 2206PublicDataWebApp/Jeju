@@ -55,4 +55,19 @@
       SELECT * FROM MEMBER_TBL
       WHERE MEMBER_EMAIL = #{memberEmail }
    </select>
+
+   <!--관리자 전체 멤버 리스트 조회-->
+<select id="adminShowAllMember" resultMap="memberResultMap">
+   SELECT * FROM MEMBER_TBL WHERE M_STATUS = 'Y' ORDER BY MEMBER_ID DESC
+</select>
+
+   <!-- 관리자 멤버 삭제 -->
+   <update id="adminDeleteMember" parameterType="string">
+      UPDATE MEMBER_TBL
+      SET M_STATUS = 'N'
+      WHERE MEMBER_ID = #{memberId }
+   </update>
+
+
+
 </mapper>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.jeju.member.domain.Member;
 import com.jeju.member.store.MemberStore;
 
+import java.util.List;
+
 @Repository
 public class MemberStoreLogic implements MemberStore{
 
@@ -49,4 +51,10 @@ public class MemberStoreLogic implements MemberStore{
 		return result;
 	}
 
+	// 관리자 전체멤버 조회
+	@Override
+	public List<Member> showAllMember(SqlSession session){
+		List<Member> memberList = session.selectList("MemberMapper.adminShowAllMember");
+		return memberList;
+	}
 }

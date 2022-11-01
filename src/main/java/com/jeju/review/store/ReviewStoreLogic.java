@@ -27,4 +27,10 @@ public class ReviewStoreLogic implements ReviewStore{
 		return rList;
 	}
 
+	@Override
+	public List<Review> showAllReview(SqlSession session) {
+		List<Review> reviewList = session.selectList("ReviewMapper.adminShowAllReview");
+		return reviewList;
+	}
+
 }

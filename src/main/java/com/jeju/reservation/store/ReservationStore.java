@@ -16,4 +16,6 @@ public interface ReservationStore {
 
 	Room selectOneByRoom(SqlSession session, Integer roomNo);
 
+	// 관리자페이지 전체예약조회
+	List<Reservation> showAllReservation(SqlSession session);
 }

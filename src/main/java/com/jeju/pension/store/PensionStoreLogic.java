@@ -149,5 +149,12 @@ public class PensionStoreLogic implements PensionStore{
 		return reviewList;
 	}
 
+	// 관리자페이지 전체 펜션목록 조회
+	@Override
+	public List<Pension> showAllPension(SqlSession session) {
+		List<Pension> pensionList = session.selectList("PensionMapper.adminShowAllPension");
+		return pensionList;
+	}
+
 
 }

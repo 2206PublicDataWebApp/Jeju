@@ -30,4 +30,10 @@ public class ReviewServiceImpl implements ReviewService{
 		List<Review> rList = rStore.selectReview(session, memberId, currentPage, boardLimit);
 		return rList;
 	}
+
+	@Override
+	public List<Review> showAllReview() {
+		List<Review> reviewList = rStore.showAllReview(session);
+		return reviewList;
+	}
 }

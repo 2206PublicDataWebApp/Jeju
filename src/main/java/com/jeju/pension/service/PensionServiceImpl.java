@@ -162,7 +162,12 @@ public class PensionServiceImpl implements PensionService{
 		return priceList;
 	}
 
-
+	// 관리자페이지 전체 펜션목록 조회
+	@Override
+	public List<Pension> showAllPension() {
+		List<Pension> pensionList = pStore.showAllPension(session);
+		return pensionList;
+}
 
 
 }

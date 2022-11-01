@@ -66,4 +66,6 @@ public interface PensionStore {
 	// 리뷰 전부 가져오기
 	List<Review> selectAllReview(SqlSession session, Integer pensionNo);
 
+	// 관리자페이지 전체 펜션목록 조회
+	List<Pension> showAllPension(SqlSession session);
 }

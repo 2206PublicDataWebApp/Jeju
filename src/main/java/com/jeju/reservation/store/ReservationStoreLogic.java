@@ -29,5 +29,12 @@ public class ReservationStoreLogic implements ReservationStore{
 		Room room = session.selectOne("RoomMapper.selectOneByRoom", roomNo);
 		return room;
 	}
-	
+
+	// 관리자페이지 전체예약조회
+	@Override
+	public List<Reservation> showAllReservation(SqlSession session) {
+		List<Reservation> reservationList = session.selectList("ReservationMapper.adminShowAllReservation");
+		return reservationList;
+	}
+
 }

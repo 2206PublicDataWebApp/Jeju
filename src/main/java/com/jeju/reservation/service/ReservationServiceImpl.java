@@ -63,5 +63,12 @@ public class ReservationServiceImpl implements ReservationService{
 		Room room = aStore.selectOneByRoom(session, roomNo);
 		return room;
 	}
-	
+
+	// 관리자페이지 전체예약조회
+	@Override
+	public List<Reservation> showAllReservation() {
+		List<Reservation> reservationList = aStore.showAllReservation(session);
+		return reservationList;
+	}
+
 }

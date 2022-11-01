@@ -14,4 +14,6 @@ public interface ReviewStore {
 	// 해당 아이디 후기 전부 가져오기
 	List<Review> selectReview(SqlSession session, String memberId, int currentPage, int boardLimit);
 
+	// 관리자페이지 리뷰 전체조회
+	List<Review> showAllReview(SqlSession session);
 }

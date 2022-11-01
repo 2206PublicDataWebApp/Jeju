@@ -44,4 +44,9 @@
 		SELECT DISTINCT REVIEW_COUNT FROM REVIEW_TBL WHERE PENSION_NO = #{pensionNo}
 	</select>
 
+	<!-- 관리자페이지 리뷰 전체조회 -->
+	<select id="adminShowAllReview" resultMap="reviewResultMap">
+		SELECT MEMBER_ID, REGDATE, REVIEW_CONTENTS FROM REVIEW_TBL ORDER BY REVIEW_NO DESC
+	</select>
+
 </mapper>

@@ -16,4 +16,9 @@
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 1, #{roomNo}, #{rePensionNo}, 0, #{rePrice})
 	</insert>
+
+	<!-- 관리자페이지 , SELECT 내용 추가하기 -->
+	<select id="adminShowAllReservation" resultMap="reservationResultMap">
+		SELECT 	RESERVATION_NO, MEMBER_ID, R_STATUS, ROOM_NO, RE_PENSION_NO, USE_HISTORY, USE_HISTORY, RE_PRICE FROM RESERVATION_TBL ORDER BY RESERVATION_NO DESC
+	</select>
 </mapper>

@@ -40,7 +40,6 @@
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-		<mapper resource="mappers/admin-mapper.xml"/>
 
 		<mapper resource="mappers/jjim-mapper.xml"/>
 	</mappers>

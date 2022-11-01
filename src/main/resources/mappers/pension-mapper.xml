@@ -92,6 +92,12 @@
 		SELECT PENSION_NAME, PENSION_ADDR, FILE_PATH, REGEXP_REPLACE(PENSION_PRICE, '[^0-9]') AS PENSION_PRICE, PENSION_NO, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_PRICE DESC
 	</select>
 
+	<!-- 관리자페이지 전체 펜션목록 조회 -->
+	<select id="adminShowAllPension" resultMap="pensionResultMap">
+		SELECT PENSION_NAME, PENSION_ADDR, PENSION_PRICE, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_NO DESC
+	</select>
+
+
 	<!-- 	재민 카테고리2 맵 -->
 	<resultMap type="CATEGORY2" id="category2ResultMap">
 		<result property="refPensionNumber" 		column="REF_PENSION_NUMBER" />

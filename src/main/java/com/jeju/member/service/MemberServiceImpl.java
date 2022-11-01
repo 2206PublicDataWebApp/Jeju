@@ -8,6 +8,8 @@ import com.jeju.member.domain.Member;
 import com.jeju.member.service.MemberService;
 import com.jeju.member.store.MemberStore;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -54,6 +56,14 @@ public class MemberServiceImpl implements MemberService {
 		= mStore.deleteMember(session
 				, memberId);
 		return result;
+	}
+
+
+	// 관리자 전체멤버 조회
+	@Override
+	public List<Member> showAllMember() {
+		List<Member> memberList = mStore.showAllMember(session);
+		return memberList;
 	}
 
 }
