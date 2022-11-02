@@ -222,7 +222,11 @@ public class PensionServiceImpl implements PensionService{
 		return pList;
 	}
 
-
+	// 관리자 펜션 삭제
+	@Override
+	public void removeAdminPension(Integer pensionNo) {
+		pStore.removeAdminPension(session, pensionNo);
+	}
 
 
 }

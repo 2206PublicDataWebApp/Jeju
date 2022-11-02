@@ -81,10 +81,14 @@ public interface PensionService {
 	// 관리자페이지 전체 펜션목록 조회
 	List<Pension> showAllPension();
 
+	// 관리자 펜션 삭제
+	void removeAdminPension(Integer pensionNo);
+
 	//펜션 제목 검색
 	List<Pension> searchPensionTitle(String pensionName);
 	//모든 펜션 조회
 	List<Pension> priceSet();
+
 
 
 }

@@ -66,4 +66,16 @@ public class MemberServiceImpl implements MemberService {
 		return memberList;
 	}
 
+	// 관리자 회원탈퇴
+	@Override
+	public void removeAdminMember(String memberId) {
+		mStore.removeAdminMember(session, memberId);
+	}
+
+	// 관리자 강제 회원탈퇴
+	/*@Override
+	public void deleteAdminMember() {
+
+	}*/
+
 }

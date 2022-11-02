@@ -87,5 +87,10 @@ public class Review {
 				+ pensionNo + "]";
 	}
 
-	
+	public String setContentsBySize(int size){
+			String contents = getReviewContents();
+			contents.substring(0,size);
+			contents = contents + "...";
+			return contents;
+		}
 }

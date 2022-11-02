@@ -18,4 +18,7 @@ public interface ReviewService {
 
 	//관리자페이지 리뷰전체조회
     List<Review> showAllReview();
+
+	// 관리자페이지 리뷰삭제
+	void removeAdminReview(Integer reviewNo);
 }

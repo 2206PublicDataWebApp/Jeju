@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -376,13 +378,16 @@
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>
                                         <td>${adminMember.memberPhone}</td>
-                                        <td>${adminMember.memberAddr}</td>
+
+                                        <td>${fn:substring(adminMember.memberAddr, 0, 40)} </td>
+                                        <%--<td>${adminMember.memberAddr}</td>--%>
+
                                         <td>${adminMember.enrollDate}</td>
                                         <td>${adminMember.birthDate}</td>
                                         <td>${adminMember.gender}</td>
                                         <td>0</td>
                                         <td>0</td>
-                                        <td><a href="#">강제탈퇴</a></td>
+                                        <td><a href="#" onclick="removeAdminMember(${adminMember.memberId})">탈퇴</a></td>
                                     </tr>
                                     </c:forEach>
                                     </thead>
@@ -454,13 +459,16 @@
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${pensionList }" var="adminPension" varStatus="i">
+                                            <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
                                             <tr>
                                                 <th>${i.count}</th>
                                                 <th>${adminPension.pensionName}</th>
+
                                                 <th>${adminPension.pensionAddr}</th>
+
                                                 <th>${adminPension.pensionPrice}</th>
                                                 <th>${adminPension.reviewCount}</th>
-                                                <th><a href="#">삭제</a></th>
+                                                <th><a href="#" onclick="removeAdminPension(${adminPension.pensionNo});">삭제</a></th>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -484,13 +492,17 @@
                                         <tr>
                                             <td>아이디</td>
                                             <td>내용</td>
-                                            <td>작성날짜</td>
+                                            <td>작성일</td>
+                                            <td>기타</td>
                                         </tr>
                                             <c:forEach items="${reviewList }" var="adminReview" varStatus="i">
                                         <tr>
+                                            <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
                                             <td>${adminReview.memberId}</td>
-                                            <td>${adminReview.reviewContents}</td>
+                                            <td>${fn:substring(adminReview.reviewContents, 0, 40)} ... </td>
+                                            <%--<td>${adminReview.reviewContents}</td>--%>
                                             <td>${adminReview.regDate}</td>
+                                            <td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>
                                         </tr>
                                             </c:forEach>
                                         </tbody>
@@ -588,6 +600,32 @@
 
 </body>
 
+<script>
+        function removeAdminMember(memberId){
+            if(confirm("회원을 탈퇴시키겠습니까?")){
+                location.href="/admin/member/remove?memberId="+memberId;
+            }
+        }
+
+    	function removeAdminPension(pensionNo){
+    		if(confirm("숙소를 삭제하시겠습니까?")) {
+                location.href="/admin/pension/remove?pensionNo="+pensionNo;
+            }
+    	}
+
+        function removeAdminReview(reviewNo){
+            if(confirm("리뷰를 삭제하시겠습니까?")){
+                location.href="/admin/review/remove?reviewNo="+reviewNo;
+            }
+        }
+
+    function setReviewContentsBySize(reviewContents) {
+        var str = "${reviewContents}"
+        var result = str.substring(0, 10) + "...";
+        return result;
+    }
+   </script>
+
 </html>
-<!-- end document-->
+
 

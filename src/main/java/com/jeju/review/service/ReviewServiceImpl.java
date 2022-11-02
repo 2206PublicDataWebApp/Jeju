@@ -41,9 +41,16 @@ public class ReviewServiceImpl implements ReviewService{
 		rStore.deleteReview(session, reviewNo);
 	}
 
+	// 관리자페이지 리뷰전체조회
 	@Override
 	public List<Review> showAllReview() {
 		List<Review> reviewList = rStore.showAllReview(session);
 		return reviewList;
+	}
+
+	// 관리자페이지 리뷰삭제
+	@Override
+	public void removeAdminReview(Integer reviewNo) {
+		rStore.deleteAdminReview(session, reviewNo);
 	}
 }

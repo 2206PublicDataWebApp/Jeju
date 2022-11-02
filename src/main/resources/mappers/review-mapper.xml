@@ -42,12 +42,6 @@
 		SELECT DISTINCT REVIEW_COUNT FROM REVIEW_TBL WHERE PENSION_NO = #{pensionNo}
 	</select>
 
-	<!-- 관리자페이지 리뷰 전체조회 -->
-	<select id="adminShowAllReview" resultMap="reviewResultMap">
-		SELECT MEMBER_ID, REGDATE, REVIEW_CONTENTS FROM REVIEW_TBL ORDER BY REVIEW_NO DESC
-	</select>
-
-
 	<!-- 리뷰 수정 -->
 	<update id="updateReview">
 		UPDATE REVIEW_TBL SET REVIEW_CONTENTS = #{reviewContents}, REGDATE = DEFAULT
@@ -55,6 +49,17 @@
 	</update>
 	<!-- 리뷰 삭제 -->
 	<delete id="deleteReview">
+		DELETE FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
+	</delete>
+
+
+	<!-- 관리자페이지 리뷰 전체조회 -->
+	<select id="adminShowAllReview" resultMap="reviewResultMap">
+		SELECT REVIEW_NO, MEMBER_ID, REGDATE, REVIEW_CONTENTS FROM REVIEW_TBL ORDER BY REVIEW_NO DESC
+	</select>
+
+	<!-- 관리자페이지 리뷰삭제 -->
+	<delete id="deleteAdminReview">
 		DELETE FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
 	</delete>
 </mapper>

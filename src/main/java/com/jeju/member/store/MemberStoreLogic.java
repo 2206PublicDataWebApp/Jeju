@@ -2,6 +2,7 @@ package com.jeju.member.store;
 
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jeju.member.domain.Member;
@@ -56,5 +57,10 @@ public class MemberStoreLogic implements MemberStore{
 	public List<Member> showAllMember(SqlSession session){
 		List<Member> memberList = session.selectList("MemberMapper.adminShowAllMember");
 		return memberList;
+	}
+
+	@Override
+	public void removeAdminMember(SqlSessionTemplate session, String memberId) {
+		session.delete("MemberMapper.deleteAdminMember", memberId);
 	}
 }

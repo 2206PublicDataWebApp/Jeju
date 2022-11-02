@@ -131,8 +131,14 @@
 
 	<!-- 관리자페이지 전체 펜션목록 조회 -->
 	<select id="adminShowAllPension" resultMap="pensionResultMap">
-		SELECT PENSION_NAME, PENSION_ADDR, PENSION_PRICE, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_NO DESC
+		SELECT PENSION_NO, PENSION_NAME, PENSION_ADDR, PENSION_PRICE, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_NO DESC
 	</select>
+
+	<!-- 관리자 펜션 삭제 -->
+	<delete id="deleteAdminPension">
+			DELETE FROM PENSION_TBL WHERE PENSION_NO = #{pensionNo}
+		</delete>
+
 
 
 	<!-- 	재민 카테고리2 맵 -->

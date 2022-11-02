@@ -14,9 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -57,26 +59,24 @@ public class AdminController {
         return modelAndView;
     }
 
-
-  /*  @GetMapping("/adminPage")
-    public ModelAndView showAdminPension(ModelAndView modelAndView){
-        //log.info("펜션목록 접근 시도 {}", modelAndView);
-        List<Pension> pensionList = pensionService.showAllPension();
-        modelAndView.addObject("pensionList", pensionList);
-        modelAndView.setViewName("admin/adminPage");
-        return modelAndView;
-    }*/
-
-
     // 관리자페이지 회원탈퇴
-    public void deleteAdminMember(){
+    @GetMapping("/member/remove")
+    public String removeAdminMember(@RequestParam("memberId") String memberId){
+        memberService.removeAdminMember(memberId);
+        return "redirect:/admin/adminPage";
     }
 
     // 관리자페이지 숙소 삭제
-    public void deleteAdminPension(){
+    @GetMapping("/pension/remove")
+    public String removeAdminPension(@RequestParam("pensionNo") Integer pensionNo){
+        pensionService.removeAdminPension(pensionNo);
+        return "redirect:/admin/adminPage";
     }
 
     //관리자페이지 리뷰 삭제
-    public void deleteAdminReview(){
+    @GetMapping("/review/remove")
+    public String removeAdminReview(@RequestParam("reviewNo") Integer reviewNo){
+        reviewService.removeAdminReview(reviewNo);
+        return "redirect:/admin/adminPage";
     }
 }

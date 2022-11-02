@@ -37,10 +37,17 @@ public class ReviewStoreLogic implements ReviewStore{
 		session.delete("ReviewMapper.deleteReview", reviewNo);
 	}
 
+	// 관리자페이지 리뷰전체조회
 	@Override
 	public List<Review> showAllReview(SqlSession session) {
 		List<Review> reviewList = session.selectList("ReviewMapper.adminShowAllReview");
 		return reviewList;
+	}
+
+	// 관리자페이지 리뷰삭제
+	@Override
+	public void deleteAdminReview(SqlSession session, Integer reviewNo) {
+		session.delete("ReviewMapper.deleteAdminReview", reviewNo);
 	}
 
 }

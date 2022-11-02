@@ -200,6 +200,13 @@ public class PensionStoreLogic implements PensionStore{
 		List<Pension> pensionList = session.selectList("PensionMapper.adminShowAllPension");
 		return pensionList;
 	}
+
+	// 관리자 펜션 삭제
+	@Override
+	public void removeAdminPension(SqlSession session, Integer pensionNo) {
+		session.delete("PensionMapper.deleteAdminPension", pensionNo);
+	}
+
 	@Override
 	public List<Pension> searchPensionName(SqlSession session, String pensionName) {
 		List<Pension> pList = session.selectList("PensionMapper.searchPensionName", pensionName);

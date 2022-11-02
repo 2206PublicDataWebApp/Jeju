@@ -20,4 +20,7 @@ public interface ReviewStore {
 
 	// 관리자페이지 리뷰 전체조회
 	List<Review> showAllReview(SqlSession session);
+
+	// 관리자페이지 리뷰삭제
+    void deleteAdminReview(SqlSession session, Integer reviewNo);
 }

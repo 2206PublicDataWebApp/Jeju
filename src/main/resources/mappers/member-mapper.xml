@@ -62,10 +62,8 @@
 </select>
 
    <!-- 관리자 멤버 삭제 -->
-   <update id="adminDeleteMember" parameterType="string">
-      UPDATE MEMBER_TBL
-      SET M_STATUS = 'N'
-      WHERE MEMBER_ID = #{memberId }
+   <update id="deleteAdminMember" parameterType="string">
+      DELETE FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId }
    </update>
 
 

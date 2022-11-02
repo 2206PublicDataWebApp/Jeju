@@ -87,4 +87,7 @@ public interface PensionStore {
 
 	// 관리자페이지 전체 펜션목록 조회
 	List<Pension> showAllPension(SqlSession session);
+
+	// 관리자 펜션 삭제
+	void removeAdminPension(SqlSession session, Integer pensionNo);
 }

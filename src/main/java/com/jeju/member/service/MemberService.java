@@ -24,7 +24,8 @@ public interface MemberService {
 	// 관리자 전체멤버 조회
 	public List<Member> showAllMember();
 
-	// 관리자 멤버 삭제
+	// 관리자 회원탈퇴
+    void removeAdminMember(String memberId);
 
 
 }
