@@ -388,6 +388,7 @@
                                         <td>0</td>
                                         <td>0</td>
                                         <td><a href="#" onclick="removeAdminMember(${adminMember.memberId})">탈퇴</a></td>
+                                        <%--<td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>--%>
                                     </tr>
                                     </c:forEach>
                                     </thead>
@@ -602,8 +603,8 @@
 
 <script>
         function removeAdminMember(memberId){
-            if(confirm("회원을 탈퇴시키겠습니까?")){
-                location.href="/admin/member/remove?memberId="+memberId;
+            if(confirm("회원을 탈퇴시키겠습니까?")) {
+                location.href="/admin/member/remove?memberId="+memberId; // 이부분... 수정
             }
         }
 

@@ -36,6 +36,7 @@ public class AdminController {
     private final ReviewService reviewService;
     private final ReservationService reservationService;
 
+
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
     public ModelAndView showAdminPage(ModelAndView modelAndView){
@@ -49,6 +50,8 @@ public class AdminController {
         List<Reservation> reservationList = reservationService.showAllReservation();
         // 리뷰내역조회
         List<Review> reviewList = reviewService.showAllReview();
+
+
 
         modelAndView.addObject("memberList", memberList);
         modelAndView.addObject("pensionList", pensionList);

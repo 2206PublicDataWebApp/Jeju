@@ -27,7 +27,7 @@
    </select>
    <insert id="insertMember">
       INSERT INTO MEMBER_TBL
-      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT)
+      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT, SEQ_MEMBER_NO.NEXTVAL)
    </insert>
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
