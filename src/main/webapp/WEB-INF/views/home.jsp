@@ -88,7 +88,7 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item ">
-                    <img class="d-block w-100" src="/resources/assets/images/slider/slid_1.jpg" alt="First slide">
+                    <img class="d-block w-100" src="/resources/assets/images/slider/slider-5.jpg" alt="First slide">
                     <div class="carousel-caption fvgb d-none d-md-block">
                         <h5 class="animated bounceInDown">여러분의 숙소를 보여주세요 ! </h5>
                         <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="/resources/assets/images/slider/slid_2.jpg" alt="Third slide">
+                    <img class="d-block w-100" src="/resources/assets/images/slider/slider-3.jpg" alt="Third slide">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <h5 class="animated bounceInDown">자신의 숙소를 등록하고 싶다면?</h5>
                         <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>

@@ -152,7 +152,7 @@
                     <img class="d-block w-80" src="/resources/images/쿠폰2.PNG" alt="Third slide" style="margin : 0 auto;">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <div class="row vbh">
-                            <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="" style="color:white">내 쿠폰 확인하기</a></div>
+                            <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="myCoupon();" style="color:white">내 쿠폰 확인하기</a></div>
                         </div>
                     </div>
                 </div>
@@ -671,7 +671,7 @@
 			type : "post",
 			success : function(result) {
 				if(result != "") {
-					location.href="/coupon/couponList";
+					location.href="/coupon/couponEventList";
 				}else {
 					alert("로그인 후 이용가능합니다.");
 				}
@@ -701,6 +701,11 @@
 	   };
 	   window.onload = init;
 	})();
+	
+	function myCoupon() {
+		location.href="/coupon/couponList";
+	}
+	
 </script>
 </body>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>

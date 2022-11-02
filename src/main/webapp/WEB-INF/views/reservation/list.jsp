@@ -418,7 +418,6 @@
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
- 	     		        				console.log("제발 되라" + result);
  	     		        				location.href = "/pension/list";
  	     		        			},
  	     		        			error : function() {

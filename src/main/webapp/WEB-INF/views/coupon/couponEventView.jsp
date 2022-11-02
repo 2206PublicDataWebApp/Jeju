@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>마이페이지 이용내역</title>
+    <title>쿠폰 이벤트</title>
     <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
@@ -81,10 +81,10 @@
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
-                <h2>내 쿠폰함</h2>
+                <h2>쿠폰 이벤트</h2>
                 <ul>
-                    <li> <a href="#"><i class="fas fa-home"></i>마이페이지</a></li>
-                    <li><i class="fas fa-angle-double-right"></i>내 쿠폰함</li>
+                    <li> <a href="#"><i class="fas fa-home"></i>Home</a></li>
+                    <li><i class="fas fa-angle-double-right"></i> About Us</li>
                 </ul>
             </div>
         </div>
@@ -96,7 +96,7 @@
     <div class="destinations container-fluid">
        <div class="container">
             <div class="session-title">
-                <h2>내 쿠폰함</h2>
+                <h2>진행중인 쿠폰 이벤트</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sollicitudin nisi id consequat bibendum. Phasellus at convallis elit. In purus enim, scelerisque id arcu vitae</p>
             </div>
             <div class="dest-row row">

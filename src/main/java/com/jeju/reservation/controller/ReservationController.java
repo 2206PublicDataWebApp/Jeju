@@ -88,10 +88,17 @@ public class ReservationController {
 	@RequestMapping(value = "/reservation/success", method = RequestMethod.POST)
 	public String addReservation(
 			@ModelAttribute Reservation reservation
-			,HttpSession session) {		
+			,HttpSession session) {	
+		String memberId = "";
 		Member member = (Member) session.getAttribute("loginUser");
-		String memberId = member.getMemberId();
-		reservation.setMemberId(memberId);
+		if(member != null) {
+			memberId = member.getMemberId();
+			reservation.setMemberId(memberId);
+		}else {
+			memberId = "비회원";
+			reservation.setMemberId(memberId);
+		}
+		
 		Pension imageList = aService.selectImage(reservation.getRePensionNo());
 		reservation.setReFilePath(imageList.getFilePath());
 		reservation.setRePensionName(imageList.getPensionName());
