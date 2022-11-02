@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Travelet Free Website Tempalte | Smarteyeapps.com</title>
+    <title>제주어때 예약페이지</title>
     <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
@@ -14,151 +15,70 @@
     <link rel="stylesheet" href="/resources/assets/css/all.min.css">
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/assets/css/reservation.css" />
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
-    <style>
-        .myGrade {
-            font-size: 13px;
-            margin-bottom: 5px;
-            color: rgb(154, 153, 153);
-        }
-        
-        .card-title {
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .test15 {
-            font-size: 13px;
-            font-weight: 540;
-        }
-
-        .list-group-item {
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        #price {
-            color: red;
-        }
-        .card {
-            margin-top: 15px;
-            margin-bottom: 70px;
-        }
-        .reserve {
-            font-size: 15px;
-            font-weight: bold;
-            color: rgb(191, 191, 191);
-        }
-        #reserveInfo {
-            margin-bottom: 23px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .info {
-            margin-bottom: 10px;
-        } 
-
-        .inputInfo {
-            margin-bottom: 10px;
-        }
-/*         .inputInfo1 { */
-/*             margin-bottom: 10px; */
-/*         } */
-/*         #info2 { */
-/*             margin-top: 2px; */
-/*         } */
-        .login {
-            font-size: 15px;
-            font-weight: bold;
-            color: white;
-        }
-        #check1 {
-            font-size: 15px;
-            font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-        .check6 {
-            font-size: 13px;
-            font-weight: bold;
-        }
-        .check7 {
-            margin-left: 6px;
-        }
-
-        #price1 {
-            font-weight: bold;
-        }
-
-        .test5 {
-            color: red;
-        }
-		
-/* 		fieldset { */
-/* 			width : 500px; */
-/* 			height : 500px; */
-			
-/* 		} */
-    </style>
-    
+	<link rel="stylesheet" href="/resources/assets/css/reservationStyle.css">   
 </head>
-
     <body>
-        <header class="container-flui">
-           <div class="header-top">
-               <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 d-none d-md-block mail-detail">
-                            <ul>
-                                <li>Call US : +12 878 777 76765</li>
-                                <li>Email : info@thetraveller.com</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4 logo">
-                            <img src="/resources/assets/images/logo.png" alt="">
-                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-                        </div>
-                        <div class="col-md-4 d-none d-md-block social-link ">
-                            <ul>
-                                <li>
-                                    <i class="fab fa-facebook-square"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-twitter-square"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-instagram"></i>
-                                </li>
-                                <li>
-                                    <i class="fab fa-linkedin"></i>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-           </div>
-           <div id="menu-jk" class="header-nav d-none d-md-block">
+         <header class="container-flui">
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-4 d-none d-md-block mail-detail"></div>
+					<div class="col-md-4 logo">
+						<img src="/resources/assets/images/logo.png" alt=""> <a
+							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
+							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+					</div>
+					
+					<div class="col-md-4 d-none d-md-block social-link ">
+						<c:if test="${empty sessionScope.loginUser  }">
+							<div class="login-area">
+								<table align="right">
+									<tr>
+										<td rowspan="2">
+											<button onclick="location.href='/member/loginView.kh'"
+												class="btn btn-primary">로그인</button>
+											<button onclick="location.href='/member/joinView.kh'"
+												class="btn btn-secondary">회원가입</button>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</c:if>
+						<c:if test="${not empty sessionScope.loginUser }">
+							<table align="right">
+								<tr>
+									<td><a href="/">${sessionScope.loginUser.memberId }</a>님
+										환영합니다</td>
+								</tr>
+								<tr>
+									<td><a href="/member/logout.kh">로그아웃</a></td>
+								</tr>
+							</table>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="menu-jk" class="header-nav d-none d-md-block">
                <div class="container">
                    <div class="row nav-row">
                        <ul>
-                           <li><a href="index.html">Home</a></li>
+                           <li><a href="/home">홈</a></li>
+                           <li><a href="/notice/list">공지사항</a></li>
                            <li><a href="/pension/list">숙소 리스트</a></li>
-                           <li><a href="destinations.html">Destinations</a></li>
-                           <li><a href="blog.html">Blog</a></li>
-                           <li><a href="gallery.html">Gallery</a></li>
-                           <li><a href="contact_us.html">Contact Us</a></li>
+                           <li><a href="/community/chat">커뮤니티</a></li>
+                           <li><a href="/mypage/myPage">마이페이지</a></li>
+                           <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
                        </ul>
                    </div>
                </div>
            </div>
-            
-        </header>   
-        
-        
- <!--  ************************* Page Title Starts Here ************************** -->
+        </header>      
+
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
@@ -171,9 +91,6 @@
         </div>
     </div>
 
-  
-
-      <!--  ************************* Contact Us Starts Here ************************** -->
     <div class="row contact-rooo no-margin">
         
         <div class="container">
@@ -182,7 +99,7 @@
             <div class="row">
 
 
-                <div style="padding:20px; " class="col-sm-9" >
+                <div style="padding:20px; margin-bottom : -50px; height : " class="col-sm-9" >
                     <div id="reserveInfo">예약자 정보</div>
                     <div class="row cont-row info">
                         <div class="col-sm-3 reserve"><label>예약자 이름</label></div>
@@ -219,32 +136,30 @@
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
                     <br><br>
                     
-               
+               		<c:if test="${sessionScope.loginUser eq null }">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
 							class="col-sm-9">
 							<br>
 							<div class="login">로그인 후 예약하시면</div>
 							<div class="login">등급할인이 적용됩니다.</div>
-							<div class="login" style="margin-top: 10px;">로그인</div>
+							<a href="/member/loginView.kh"><div class="login" style="margin-top: 10px;">로그인</div></a>
 							<br>
 						</div>
 					</div>
-				
-					
-					
+					</c:if>
+					<c:if test="${not empty sessionScope.loginUser}">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
 							class="col-sm-9">
 							<br>
-							<div class="login">등급할인 혜택을 누리세요!</div>
-<!-- 							<div class="login">등급할인이 적용됩니다.</div> -->
-<!-- 							<div class="login" style="margin-top: 10px;">로그인</div> -->
+							<div class="login">숙소를 예약하기전</div>
+							<div class="login">등급할인 혜택을 누려보세요!</div>
+ 							<div class="login" style="margin-top: 10px;">나의 등급</div>
 							<br>
 						</div>
 					</div>
-
-					
+					</c:if>					
                 </div>
                 
                 <div class="card" style="width: 18rem;">
@@ -279,17 +194,13 @@
                     </ul>
 
                   </div>
-            </div>
-            
-        </div>
-
-    </div>
-	<form action="" style="position: relative; bottom: 60px; left: 180px;">
-		<div id="check1">이용 약관</div>
-		<ul>
-			<li class="check6"><input type="checkbox"><span
-				class="check7">전체동의</span></li>
-			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1"><span class="check7 closed"
+<!--                   <div id="check1"></div> -->
+	
+		<ul style="position : relative; bottom : 30px;">
+			<li id="check1">이용 약관</li>
+			<li class="check6"><input type="checkbox" onclick="checkAll();" id="allCheck"><span
+				class="check7"><label for="allCheck">전체동의</label></span></li>
+			<li class="check6"><input id="agreement1" type="checkbox" name="agreement1" class="agree1"><span class="check7 closed"
 				onclick="clickshow(this,'categories1');"><label for="agreement1">개인정보 수집/이용 동의</label></span><span
 				class="test5">(필수)</span><span id="successChk1" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
@@ -333,14 +244,12 @@
 있음을 알려드립니다.
 </textarea>
 						</p>
-
-
 						</div>
 				</div>
 			</fieldset>
 			</div>
 			
-			<li class="check6"><input id="agreement2" type="checkbox" name="agreement2"><span class="check7 closed" onclick="clickshow(this,'categories2');" style="display : inline-block"><label for="agreement2">숙소 이용규칙 및 환불 규정</label></span><span
+			<li class="check6"><input id="agreement2" type="checkbox" name="agreement2"  class="agree2"><span class="check7 closed" onclick="clickshow(this,'categories2');" style="display : inline-block"><label for="agreement2">숙소 이용규칙 및 환불 규정</label></span><span
 				class="test5">(필수)</span><span id="successChk2" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
 			<div>
@@ -370,7 +279,7 @@
 			</fieldset>				
 			</div>
 			
-			<li class="check6" ><input id="agreement3" type="checkbox" name="agreement3"><span class="check7 closed" onclick="clickshow(this,'categories3');"><label for="agreement3">만 14세 이상 확인</label></span><span
+			<li class="check6" ><input id="agreement3" type="checkbox" name="agreement3"  class="agree3"><span class="check7 closed" onclick="clickshow(this,'categories3');"><label for="agreement3">만 14세 이상 확인</label></span><span
 				class="test5">(필수)</span><span id="successChk3" style="font-size : 13px; margin-left : 5px;"></span></li>
 			
 			<div>
@@ -406,60 +315,64 @@
 			</fieldset>
 			</div>	
 		</ul>
-	</form>
-
-
-
-
-
-	<!--*************** Footer  Starts Here *************** -->   
-
-   <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 fotblog">
-                <p class="fab fa-instagram"></p>
-                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Instagram</a> <br>
-                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EB%A7%9B%EC%A7%91/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Restaurant</a> <br>
-                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EC%B9%B4%ED%8E%98/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Cafe</a>
+                  
             </div>
-            <div class="col-md-3 fotblog">
-                <p class="fab fa-facebook-square"></p>
-                <a href="https://www.facebook.com/happyjejudo" style="color: white;" target="_blank">Facebook</a>
-            </div>
-            <div class="col-md-3 glink">
-                <p class="fab fa-twitter-square"></p>
-                <a href="https://twitter.com/happyjejudo" style="color: white;" target="_blank">Twiter</a>
-            </div>
-            <div class="col-md-3 tags">
-                <h2>Contect</h2>
-                <p>email@email.com</p>
-            </div>
+            
         </div>
+
     </div>
-</footer>
-<div class="copy">
+   <footer>
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-3 fotblog">
+	                <p class="fab fa-instagram"></p>
+	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Instagram</a> <br>
+	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EB%A7%9B%EC%A7%91/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Restaurant</a> <br>
+	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EC%B9%B4%ED%8E%98/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Cafe</a>
+	            </div>
+	            <div class="col-md-3 fotblog">
+	                <p class="fab fa-facebook-square"></p>
+	                <a href="https://www.facebook.com/happyjejudo" style="color: white;" target="_blank">Facebook</a>
+	            </div>
+	            <div class="col-md-3 glink">
+	                <p class="fab fa-twitter-square"></p>
+	                <a href="https://twitter.com/happyjejudo" style="color: white;" target="_blank">Twiter</a>
+	            </div>
+	            <div class="col-md-3 tags">
+	                <h2>Contect</h2>
+	                <p>email@email.com</p>
+	            </div>
+	        </div>
+	    </div>
+	</footer>
+		<div class="copy">
             <div class="container">
-                <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>
-                
+                <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>              
                 <span>
-                <a><i class="fab fa-github"></i></a>
-                <a><i class="fab fa-google-plus-g"></i></a>
-                <a><i class="fab fa-pinterest-p"></i></a>
-                <a><i class="fab fa-twitter"></i></a>
-                <a><i class="fab fa-facebook-f"></i></a>
-        </span>
+	                <a><i class="fab fa-github"></i></a>
+	                <a><i class="fab fa-google-plus-g"></i></a>
+	                <a><i class="fab fa-pinterest-p"></i></a>
+	                <a><i class="fab fa-twitter"></i></a>
+	                <a><i class="fab fa-facebook-f"></i></a>
+        		</span>
             </div>
 
         </div>
    
     </body>
      <script>
-     
+     function checkAll() {
+    	 if($("#allCheck").is(':checked')) {
+    			$("input[type=checkbox]").prop("checked", true);
+    		} else {
+    			$("input[type=checkbox]").prop("checked", false);
+    		}
+     }
 
+     //바로 결제
 //      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#nameChk").val() != null){
+ 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
  	     		//가맹점 식별코드
  	     		IMP.init('imp28778843');
  	     		IMP.request_pay({
@@ -496,9 +409,12 @@
  	     		        		$.ajax({
  	     		        			url : "/reservation/success",
  	     		        			data : {
+ 	     		        				"reservationName" : $("#nameChk").val(),
  	     		        				"roomNo" : '${r.roomNo}',
  	     		        				"rePensionNo" : '${r.refPensionNo}',
- 	     		        				"rePrice" : rsp.paid_amount
+ 	     		        				"rePrice" : rsp.paid_amount,
+ 	     		        				"reStartDate" : '${startDate}',
+ 	     		        				"reEndDate" : '${endDate}'
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
@@ -551,6 +467,203 @@
  	    	return false
  	    }    	    	
      });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     
+     //나중에 결제 
+     $("#button2").click(function() {
+    	 $.ajax({
+    		url : "/reservation/checkSessionId",
+    		type : "post",
+    		success : function(result) {   
+    			var sessionId = "";
+    			if(result != "") {
+    			 sessionId = result;
+    			 $.ajax({
+    				url : "/reservation/waitAvailability",
+    				data : {
+    					"memberId" : sessionId
+    				},
+    			 	type : "post",
+    			 	success : function(result) {
+    			 		if(result == "1") {
+    			 			alert("이미 결제해야할 예약건이 있습니다! 결제 완료 후 다시 시도해주세요.");
+    			 			location.href="/pension/list";
+    			 		}else {
+    			 			 if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null){
+    		   	        		 $.ajax({
+    		   	        			url : "/reservation/waiting",
+    		   	        			type : "post",
+    		   	        			data : {
+    		   	        				"reservationName" : $("#nameChk").val(),
+    		   	        				"roomNo" : '${r.roomNo}',
+    		   	        				"rePensionNo" : '${r.refPensionNo}',
+    		   	        				"rePrice" : '${price}',
+    		   	        				"reStartDate" : '${startDate}',
+    		   	        				"reEndDate" : '${endDate}'  	       	        				
+    		   	        			},
+    		   	        			success : function(result) {	
+    		   	     		    			var keyName = sessionId;	// 키이름은 time
+    		   	   	        				var keyValue = 	$("#nameChk").val();// 저장할 값은 30분에서 0분까지 줄어드는 기능        		 	    		
+    		   	   	        				console.log("keyName : " + keyName);
+    		   	   	        				console.log("keyValue : " + keyValue);
+//    		   	    	        				var tts = 1800000;	// 만료시간 30분
+    		   								var tts = 10000;
+//    		    	   	        			 	let min=30;			//분 
+//    		    		        		 	    let sec=60;			//초
+    		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
+    		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
+    		   		        		 	    	const date = new Date();
+    		   		        		 	    	
+    		   									const obj = {
+    		   											value : keyValue,	// obj객체에 value는 time
+    		   											expire : Date.now() + tts,
+    		   											time : tts,
+    		   											name : keyName
+    		   									}
+    		   									console.log(obj);
+    		   									
+    		   									//local에는 객체를 저장할 수 없어서 JSON으로 문자열 변환							
+    		   									const objString = JSON.stringify(obj);	// JSON으로 문자열 변환
+    		   									//변환한 객체를 파라미터로 입력받은 name과 함께 localStorage에 저장
+    		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
+    		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
+    		   									console.log("로컬 저장 완료! 로컬확인해봐");
+    		   					
+    		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");
+    		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
+    		   	        			}
+    		   	        		 });
+    		   	        	 }else {
+    		   	        		alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
+    		   	  	    	if(!$(".agree1").prop("checked")){
+    		   	  	    		$("#successChk1").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk1").css("color", "red");
+    		   	  	    	}
+    		   	  	    	if(!$(".agree2").prop("checked")) {
+    		   	  	    		$("#successChk2").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk2").css("color", "red");
+    		   	  	    	}
+    		   	  	    	if(!$(".agree3").prop("checked")) {
+    		   	  	    		$("#successChk3").text("동의 해주시기 바랍니다.");
+    		   	  				$("#successChk3").css("color", "red");
+    		   	 	    	}
+    		   	  	    	var nameChk = $("#nameChk").val();
+    		   	  	    	if(nameChk == ""){
+    		   	  	    		console.log($("#nameChk").val());
+    		   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
+    		   	  				$("#successNameChk").css("color", "red");
+    		   	  	    	}
+//    		   	   	    	if($("#phoneDoubleChk").val() != "true"){
+//    		   	   	    		console.log($("#phoneDoubleChk").val());
+//    		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//    		   	   				$(".successPhoneChk").css("color", "red");	    		
+//    		   	   	    	}
+    		   	  	    	return false
+    		   	        	 }
+    			 		}
+    			 	}
+    			 });
+    			}else {
+    				alert("로그인 후 이용가능합니다.");
+    			}
+    		},
+    		error : function() {
+    			alert("왜안돼");
+    		}
+    	 });
+     });
+    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////     
+    
+     //예약자명 적었냐 안적었냐 체크ajax
+     $('#nameChk').focusout(function(){
+    	 var nameChk = $("#nameChk").val();
+ 		$.ajax({
+ 			url : "/reservation/idNullCheck",
+ 			type : "post",
+ 			data : {"nameChk": nameChk},
+ 			success : function(result){
+					if(nameChk == "") {
+						$("#successNameChk").text("예약자 이름을 입력해주세요");
+		 				$("#successNameChk").css("color", "red");
+					}else {
+						$("#successNameChk").text("");
+		 				$("#successNameChk").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+     
+     //동의 체크했는지 안했는디 ajax
+     $('.agree1').change(function(){
+    	 var agree1 = $(".agree1").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck1",
+ 			type : "post",
+ 			data : {"agree1": agree1
+ 			},
+ 			success : function(result){
+					if(agree1 == true) {
+						$("#successChk1").text("");
+		 				$("#successChk1").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		}) 
+ 	});
+     
+   //동의 체크했는지 안했는디 ajax
+     $('.agree2').change(function(){
+    	 var agree2 = $(".agree2").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck2",
+ 			type : "post",
+ 			data : {"agree2": agree2
+ 			},
+ 			success : function(result){
+					if(agree2 == true) {
+						$("#successChk2").text("");
+		 				$("#successChk2").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+     
+   //동의 체크했는지 안했는디 ajax
+     $('.agree3').change(function(){
+    	 var agree3 = $(".agree3").is(":checked");
+ 		$.ajax({
+ 			url : "/reservation/agreeCheck3",
+ 			type : "post",
+ 			data : {"agree3": agree3
+ 			},
+ 			success : function(result){
+					if(agree3 == true) {
+						$("#successChk3").text("");
+		 				$("#successChk3").css("color", "");
+					}
+					console.log(result);
+ 			},
+ 			error : function(){
+ 				alert("서버요청실패");
+ 			}
+ 		})
+ 		 
+ 	});
+	
 	
      
      
@@ -599,6 +712,7 @@
 // 	    	}
 // 	    });
 
+		//약관 내용 열고 닫기
 	    function clickshow(elem,ID) {
 	    	 var menu = document.getElementById(ID);
 	    	 if (elem.className !='closed') {

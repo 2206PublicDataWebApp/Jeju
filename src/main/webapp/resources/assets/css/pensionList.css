@@ -1,0 +1,35 @@
+@charset "UTF-8";
+#margin_test {
+	margin-top : 27px;
+	margin-bottom: 1px;
+	position: relative;
+	bottom: 25px;
+}
+
+.test2 {
+	margin-bottom: 20px;
+}
+
+.modify {
+	text-align: left;
+}
+
+.test3 {
+	margin-top: 50px;
+}
+
+.test4 {
+	margin-bottom: 12px;
+}
+
+#test5 {
+	margin-top: -90px;
+}
+
+#test6 {
+	margin-top: 20px;
+}
+
+#test9 {
+	color: white;
+}

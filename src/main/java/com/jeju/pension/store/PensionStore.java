@@ -81,6 +81,9 @@ public interface PensionStore {
 	void updatePensionPrice(SqlSession session, Room room);
 	// 숙소 삭제
 	void deletePension(SqlSession session, Integer pensionNo);
+	List<Pension> searchPensionName(SqlSession session, String pensionName);
+	//모든 펜션 조회
+	List<Pension> priceSet(SqlSession session);
 
 	// 관리자페이지 전체 펜션목록 조회
 	List<Pension> showAllPension(SqlSession session);

@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
 import com.jeju.reservation.store.ReservationStore;
@@ -53,6 +54,12 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
+	public int addReservationWait(Reservation reservation) {
+		int result = aStore.addReserveWati(session, reservation);
+		return result;
+	}
+
+	@Override
 	public Pension selectOneByPension(Integer pensionNo) {
 		Pension pList = aStore.selectOneByPension(session, pensionNo);
 		return pList;
@@ -70,5 +77,54 @@ public class ReservationServiceImpl implements ReservationService{
 		List<Reservation> reservationList = aStore.showAllReservation(session);
 		return reservationList;
 	}
+
+
+	//결제대기 리스트 불러오기
+	@Override
+	public List<Reservation> selectWaitList(String memberId) {
+		List<Reservation> wList = aStore.selectWaitList(session, memberId);
+		return wList;
+	}
+
+	//결제대기 추가전 이미지 경로 불러오기
+	@Override
+	public Pension selectImage(Integer rePensionNo) {
+		Pension imageList = aStore.selectImage(session, rePensionNo);
+		return imageList;
+	}
+
+	@Override
+	public List<Reservation> selectReserveList(String memberId) {
+		List<Reservation> rList = aStore.selectReserveList(session, memberId);
+		return rList;
+	}
+
+	@Override
+	public Reservation selectOneByWaitList(Integer reservationNo) {
+		Reservation rList = aStore.selectOneByWaitList(session, reservationNo);
+		return rList;
+	}
+
+	//결제대기 수동삭제
+	@Override
+	public int deleteWaitReserve(Integer reservationNo) {
+		int result = aStore.deleteWaitReserve(session, reservationNo);
+		return result;
+	}
+
+	//결제대기 자동삭제
+	@Override
+	public int removeWaitReserve(String reservationName) {
+		int result = aStore.removeWaitReserve(session, reservationName);
+		return result;
+	}
+
+	@Override
+	public int selectRstatus(String memberId) {
+		int result = aStore.selectWaitRstatus(session, memberId);
+		return result;
+	}
+
+
 
 }

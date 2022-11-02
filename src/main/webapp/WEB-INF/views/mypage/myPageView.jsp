@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/resources/assets/css/all.min.css">
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 	<header class="container-flui">
@@ -65,7 +66,7 @@
 		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 		                        </div>
 		                        <h3>이용내역</h3>
-		                        <a class="btn btn-outline-success" href="#">바로가기</a>
+		                        <a class="btn btn-outline-success" id="rservationList">바로가기</a>
 		                    </div>
 		                </div>
 	            	<c:if test="${!empty sessionScope.loginUser }">
@@ -86,7 +87,7 @@
 		                        <h3>숙소관리</h3>
 		                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>
 		                    </div>
-		                </div> 
+		                </div>
 		                <div class="col-lg-4 col-md-6">
 		                    <br><br><br><br><br>
 		                    <div class="dest-col">
@@ -137,7 +138,22 @@
 	        </div>
 	    </footer>
 </body>
-    <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
+
+	<script>
+		$("#reservationList").click(function() {
+			 $.ajax({
+		    		url : "/reservation/checkSessionId",
+		    		type : "post",
+		    		success : function(result) {
+		    			if(result != "") {
+		    				location.href="/reservation/myPage";
+		    			}else {
+		    				alert("로그인 후 이용가능합니다.");
+		    			}
+		    		}
+			});
+		});
+	</script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>

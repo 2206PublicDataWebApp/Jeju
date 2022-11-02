@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
 import com.jeju.room.domain.Room;
@@ -29,6 +30,59 @@ public class ReservationStoreLogic implements ReservationStore{
 		Room room = session.selectOne("RoomMapper.selectOneByRoom", roomNo);
 		return room;
 	}
+
+	@Override
+	public int addReserveWati(SqlSession session, Reservation reservation) {
+		int result = session.insert("ReservationMapper.insertReservationWait", reservation);
+		return result;
+	}
+
+	//결제대기 리스트 불러오기
+	@Override
+	public List<Reservation> selectWaitList(SqlSession session, String memberId) {
+		List<Reservation> wList = session.selectList("ReservationMapper.selectWaitList", memberId);
+		return wList;
+	}
+
+	@Override
+	public Pension selectImage(SqlSession session, Integer rePensionNo) {
+		Pension imageList = session.selectOne("PensionMapper.selectImage", rePensionNo);
+ 		return imageList;
+	}
+
+	@Override
+	public List<Reservation> selectReserveList(SqlSession session, String memberId) {
+		List<Reservation> rList = session.selectList("ReservationMapper.selectReserveList", memberId);
+		return rList;
+	}
+
+	@Override
+	public Reservation selectOneByWaitList(SqlSession session, Integer reservationNo) {
+		Reservation rList = session.selectOne("ReservationMapper.selectOneByWaitList", reservationNo);
+		return rList;
+	}
+
+	//결제대기 수동삭제
+	@Override
+	public int deleteWaitReserve(SqlSession session, Integer reservationNo) {
+		int result = session.delete("ReservationMapper.deleteWaitReserve", reservationNo);
+		return result;
+	}
+
+	//결제대기 자동삭제
+	@Override
+	public int removeWaitReserve(SqlSession session, String reservationName) {
+		int result = session.delete("ReservationMapper.removeWaitReserve", reservationName);
+		return result;
+	}
+
+	@Override
+	public int selectWaitRstatus(SqlSession session, String memberId) {
+		int result = session.selectOne("ReservationMapper.selectRstatus", memberId);
+		return result;
+	}
+
+
 
 	// 관리자페이지 전체예약조회
 	@Override

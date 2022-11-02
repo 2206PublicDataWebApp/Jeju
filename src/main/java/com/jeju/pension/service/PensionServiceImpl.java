@@ -210,6 +210,18 @@ public class PensionServiceImpl implements PensionService{
 	public void removePension(Integer pensionNo) {
 		pStore.deletePension(session, pensionNo);
 	}
+	@Override
+	public List<Pension> searchPensionTitle(String pensionName) {
+		List<Pension> pList = pStore.searchPensionName(session, pensionName);
+		return pList;
+	}
+	//모든 펜션 조회
+	@Override
+	public List<Pension> priceSet() {
+		List<Pension> pList = pStore.priceSet(session);
+		return pList;
+	}
+
 
 
 

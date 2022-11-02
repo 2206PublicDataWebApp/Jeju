@@ -200,6 +200,17 @@ public class PensionStoreLogic implements PensionStore{
 		List<Pension> pensionList = session.selectList("PensionMapper.adminShowAllPension");
 		return pensionList;
 	}
+	@Override
+	public List<Pension> searchPensionName(SqlSession session, String pensionName) {
+		List<Pension> pList = session.selectList("PensionMapper.searchPensionName", pensionName);
+		return pList;
+	}
+	//모든 펜션 조회(카테고리체크하지 않았을때 가격 설정 조회)
+	@Override
+	public List<Pension> priceSet(SqlSession session) {
+		List<Pension> pList = session.selectList("PensionMapper.selectAllPension");
+		return pList;
+	}
 
 
 }
