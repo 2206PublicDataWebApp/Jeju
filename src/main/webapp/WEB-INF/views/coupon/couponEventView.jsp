@@ -100,77 +100,26 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sollicitudin nisi id consequat bibendum. Phasellus at convallis elit. In purus enim, scelerisque id arcu vitae</p>
             </div>
             <div class="dest-row row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰1.PNG" alt="">
-                        </div>
-                        <h3>신규회원 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰2.PNG" alt="">
-                        </div>
-                        <h3>VIP 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰7.PNG" alt="">
-                        </div>
-                        <h3>우수고객께 드리는 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
-                
-               <hr>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰4.PNG" alt="">
-                        </div>
-                        <h3>우수고객께 드리는 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰5.PNG" alt="">
-                        </div>
-                        <h3>우수고객께 드리는 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="dest-col">
-                        <div class="dest-img">
-                            <img src="/resources/images/쿠폰6.PNG" alt="">
-                        </div>
-                        <h3>우수고객께 드리는 쿠폰</h3>
-                        <p>Duis neque sem, ultrices et erat</p>
-                        <button class="btn btn-outline-success">Book Now</button>
-                    </div>
-                </div>
+            <c:if test="${!empty cList }">
+            	<c:forEach items="${cList }" var="coupon">
+	                <div class="col-lg-4 col-md-6">
+	                    <div class="dest-col">
+	                        <div class="dest-img">
+	                            <img src="${coupon.couponImage }" alt="">
+	                        </div>
+	                        <br>
+	                        <h4 style="font-size : 18px; font-weight : bold;">${coupon.couponTitle }</h4>
+	                        <p>${coupon.couponComments }</p>
+	                        <button class="btn btn-outline-success" onclick="downloadCoupon(${coupon.couponCode});">내려받기</button>
+	                    </div>
+	                </div>
+	             </c:forEach>   
+             </c:if>   
             </div>
        </div>
        
     </div>   
-    
-      
-      
-       
-   <!--*************** Footer  Starts Here *************** -->   
+
 
    <footer>
     <div class="container">
@@ -269,7 +218,16 @@
     </body>
     
     <script>
-	    
+	    function downloadCoupon(code) {
+	    	console.log(code);
+	    	$.ajax({
+	    		url : "/coupon/downCoupon",
+	    		type : "post",
+	    		success : function() {
+	    			
+	    		}
+	    	});
+	    }
     </script>
 
     
