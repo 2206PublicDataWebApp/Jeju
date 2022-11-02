@@ -148,7 +148,20 @@
         <hr>
       <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
            <div class="blog-row row">
-            
+            	<c:if test="${!empty sList}">
+                   	<c:forEach items="${sList }" var="end">
+                    	<div class="col-lg-4 col-md-6 ">
+	                    	<div class="blog-col">
+	                            <img src="${end.reFilePath}">
+	                            <span>${end.rePayDate} 결제</span>	                     
+	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
+	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${end.rePensionName }</div>
+	                            <div style="text-align: center;">${end.reStartDate } ~ ${end.reEndDate }</div>
+	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div>
+	                        </div>
+	                     </div>  
+                   	</c:forEach>                  
+                 </c:if>
        </div>
    </div>
         

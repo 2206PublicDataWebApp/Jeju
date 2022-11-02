@@ -58,4 +58,7 @@
 		SELECT COUNT(*) FROM RESERVATION_TBL WHERE MEMBER_ID = #{memberId} AND R_STATUS = 0
 	</select>
 
+	<select id="selectExpirationList" resultMap="reservationResultMap">
+		SELECT * FROM RESERVATION_TBL WHERE MEMBER_ID = #{memberId} AND R_STATUS = 2
+	</select>
 </mapper>

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 public class AdminMemberController {
 
-    private final MemberService memberService;
+//    private final MemberService memberService;
 
     // 관리자페이지 회원조회
    /* @GetMapping("/memberList")

@@ -91,4 +91,10 @@ public class ReservationStoreLogic implements ReservationStore{
 		return reservationList;
 	}
 
+	@Override
+	public List<Reservation> expirationList(SqlSession session, String memberId) {
+		List<Reservation> sList = session.selectList("ReservationMapper.selectExpirationList", memberId);
+		return sList;
+	}
+
 }
