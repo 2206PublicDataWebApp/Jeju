@@ -21,7 +21,7 @@
 		  <c:if test="${search ne null}">
 				<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
 					<img src="${search.filePath}" alt="Image" class="img-fluid"
-						style="width : 370px; height : 250px; border-radius: 15px;">
+						style="width : 370px; height : 250px; border-radius: 8px;">
 				</div>
 				<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 					<ul class="modify">
@@ -50,7 +50,7 @@
 			  <c:if test="${priceSet.filePath ne null}">
 					<div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
 						<img src="${priceSet.filePath}" alt="Image" class="img-fluid"
-							style="width : 370px; height : 250px; border-radius: 15px;">
+							style="width : 370px; height : 250px; border-radius: 8px;">
 					</div>
 					<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 						<ul class="modify">
@@ -79,7 +79,7 @@
 	<c:if test="${!empty drList }">
                   <c:forEach items="${drList }" var="dateSearch" >
                      <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 15px;">
+                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 8px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">

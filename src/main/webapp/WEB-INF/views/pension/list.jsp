@@ -170,7 +170,7 @@
 <section id="about" class="contianer-fluid about-us" style="position : relative; left : 50px;">
    <div class="container-fluid" id="test5">
       <div class="row">
-         <div class="col-md-8 center image" >
+         <div class="col-md-7 center image" >
             
             <hr id="margin_test">
             <div class="row g-0 position-relative test2" id="test_first">
@@ -181,7 +181,7 @@
                   <c:forEach items="${pList }" var="pension" varStatus="i">
                   	<c:if test="${pension ne null}">
                      <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-                        <img src="${pension.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 15px;">
+                        <img src="${pension.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 8px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
@@ -197,7 +197,7 @@
                <c:if test="${!empty prList }">
                   <c:forEach items="${prList }" var="dateSearch" >
                      <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
-                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 15px;">
+                        <img src="${dateSearch.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 8px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
@@ -217,7 +217,7 @@
             </div>
          </div>
 
-         <div class="col-md-4 text" id="test3">
+         <div class="col-md-5 text" id="test3">
             <div class="col-lg-10 sidebar">
                <div class="sidebar-box">
                	  <form action="/pension/searchName" method="get">
@@ -228,6 +228,7 @@
                   </form>
                   <br>
                   <h3 class="heading" style="font-size : 20px; font-weight : bold;">정렬</h3>
+                  <br>
             	  <div class="gallery-filter d-none d-sm-block" id="test_second">
 		               <button class="btn btn-default filter-button" data-filter="all" value="popular" onclick="searchPopular(this);" style="width : 140px;">인기순</button>
 		               <button class="btn btn-default filter-button" data-filter="hdpe" value="asc" onclick="searchPopular(this);" style="width : 140px;">낮은 가격 순</button>
