@@ -48,10 +48,21 @@
 		INNER JOIN (SELECT * FROM JJIM_TBL WHERE MEMBER_ID = #{memberId}) J
 		ON P.PENSION_NO = J.PENSION_NO
 	</select>
+	<!-- 마이페이지 회원이 등록한 펜션 갯수 가져오기 -->
+	<select id="selectPnesionCount" resultType="_int">
+		SELECT COUNT(*) FROM PENSION_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+	<!-- 마이페이지 회원이 등록한 펜션 전부 가져오기 -->
+	<select id="selectMyPension" resultMap="pensionResultMap">
+		SELECT * FROM PENSION_TBL WHERE MEMBER_ID = #{memberId}
+	</select>
+	
 	<!-- 숙소 등록-->
 	<insert id="insertPension">
 		INSERT INTO PENSION_TBL
-		VALUES(SEQ_PENSION_NO.NEXTVAL,NULL, #{pensionName},#{pensionAddr},#{pensionComments},'0',NULL,NULL,DEFAULT,#{pensionCheckin},#{pensionCheckout},#{filePath},DEFAULT,#{pensionFileName},#{pensionFileRename} )
+		VALUES(SEQ_PENSION_NO.NEXTVAL,#{memberId}, #{pensionName},#{pensionAddr},#{pensionComments}
+			,'0',#{hardness},#{latitude},DEFAULT,#{pensionCheckin},#{pensionCheckout},#{filePath},DEFAULT
+			,#{pensionFileName},#{pensionFileRename},DEFAULT,DEFAULT)
 	</insert>
 	<!-- 숙소 찜 총 갯수 + 1 -->
 	<update id="updateJjimCount">
@@ -62,6 +73,24 @@
 	<update id="deleteJjimCount">
 		UPDATE PENSION_TBL SET JJIM_COUNT = JJIM_COUNT - 1
 		WHERE PENSION_NO = #{pensionNo}
+	</update>
+	<!-- 숙소 수정 -->
+	<update id="updatePension">
+		UPDATE PENSION_TBL 
+		SET PENSION_NAME = #{pensionName}, PENSION_ADDR = #{pensionAddr}
+			,PENSION_COMMENTS = #{pensionComments}, PENSION_PRICE = #{pensionPrice}
+			,HARDNESS = #{hardness}, LATITUDE = #{latitude}, PENSION_CHECKIN = #{pensionCheckin}
+			,PENSION_CHECKOUT = #{pensionCheckout},FILE_PATH = #{filePath}, PENSION_FILE_NAME = #{pensionFileName}
+			,PENSION_FILE_RENAME = #{pensionFileRename}
+		WHERE PENSION_NO = #{pensionNo}
+	</update>
+	<!-- 숙소 삭제 -->
+	<delete id="deletePension">
+		DELETE FROM PENSION_TBL WHERE PENSION_NO = #{pensionNo}
+	</delete>
+	<!-- 숙소 최저가 업데이트 -->
+	<update id="updatePensionPrice">
+		UPDATE PENSION_TBL SET PENSION_PRICE = #{price} WHERE PENSION_NO = #{refPensionNo}
 	</update>
 	
 	<select id="selectAllPension" resultMap="pensionResultMap">

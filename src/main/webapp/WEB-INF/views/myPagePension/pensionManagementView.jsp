@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/resources/assets/css/all.min.css">
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header class="container-flui">
@@ -55,31 +56,53 @@
 	            </div>
 	        </div>
 	    </div>
+	    <c:if test="${empty pList }">
+	    	<div class="destinations container-fluid">
+	       		<div class="container">
+	       			<div class="row session-title"><h2>등록하신 숙소가 존재하지않습니다.</h2></div>
+	       		</div>
+	       	</div>
+	    </c:if>
 	    <div class="destinations container-fluid">
 	       <div class="container">
-	       <div class="row session-title"><h2>${sessionScope.loginUser }님이 등록하신 숙소</h2></div>
+	            <div class="session-title"></div>
 	            <div class="dest-row row">
-	                <div class="col-lg-4 col-md-6">
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>숙소 1</h3>
-	                        <a class="btn btn-outline-success" href="#">바로가기</a>
-	                    </div>
-	                </div>
-	                <div class="col-lg-4 col-md-6">
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>숙소 2</h3>
-	                        
-	                        <button class="btn btn-outline-success" onclick=""location.href="#">바로가기</button>
-	                    </div>
-	                </div>
+	            	<c:forEach items="${pList }" var="pension">
+		                <div class="col-lg-4 col-md-6">
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="${pension.filePath }" alt="숙소 사진이 존재하지 않습니다.">
+		                        </div>
+		                        <a href="/pension/detailView2?pensionNo=${pension.pensionNo }"><h3>${pension.pensionName }</h3></a>
+		                      	<h5><i class="fa-solid fa-comments"></i>후기 ${pension.reviewCount }개</h5>
+		                        <a class="btn btn-outline-success" href="/pension/modifyForm?pensionNo=${pension.pensionNo }">수정</a>
+		                        <a class="btn btn-outline-danger" href="#" onclick="removePension(${pension.pensionNo});">삭제</a>
+		                    </div>
+		                </div>
+	                </c:forEach>
 	            </div>
-	       </div>
+	       </div><br><br><br>
+	       <nav aria-label="Page navigation example" >
+				<ul class="pagination" style="justify-content: center;">
+					<li class="page-item">
+						<c:if test="${currentPage > 5}">
+							<a class="page-link" href="/mypage/${urlVal }?page=${startNavi - 1 }" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+					  		</a>
+					  	</c:if>
+					</li>
+					<c:forEach var="p" begin="${startNavi }" end="${endNavi }">	
+					    <li class="page-item"><a class="page-link" href="/mypage/${urlVal }?page=${p }">${p }</a></li>
+					</c:forEach>
+					<c:if test="${maxPage-4 > currentPage }">
+					    <li class="page-item">
+					    	<a class="page-link" href="/mypage/${urlVal }?page=${endNavi + 1 }" aria-label="Next">
+					     		<span aria-hidden="true">&raquo;</span>
+					   		</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
 	    </div> 
 	     
 		<footer>
@@ -113,4 +136,11 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
+    <script>
+    	function removePension(pensionNo){
+    		if(confirm("숙소를 삭제하시겠습니까?")) {
+    			location.href="/pension/remove?pensionNo="+pensionNo;
+    		}
+    	}
+    </script>
 </html>

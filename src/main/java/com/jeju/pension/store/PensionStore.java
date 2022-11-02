@@ -65,5 +65,21 @@ public interface PensionStore {
 	List<Room> selectRoom(SqlSession session, Integer pensionNo);
 	// 리뷰 전부 가져오기
 	List<Review> selectAllReview(SqlSession session, Integer pensionNo);
+	// 마이페이지 회원이 등록한 펜션 갯수 가져오기
+	int selectPensionCount(SqlSession session, String memberId);
+	// 마이페이지 회원이 등록한 펜션 전부 가져오기
+	List<Pension> selectMyPension(SqlSession session, String memberId, int currentPage, int boardLimit);
+	// 숙소 수정
+	void updatePension(SqlSession session, Pension pension);
+	// 객실 수정
+	void updateRoom(SqlSession session, Room room);
+	// 객실 사진 수정
+	void updateRoomAttach(SqlSession session, RoomAttach roomAttach);
+	// 숙소 카테고리 수정
+	void updateCategory(SqlSession session, Category category);
+	// 숙소 최저가 업데이트
+	void updatePensionPrice(SqlSession session, Room room);
+	// 숙소 삭제
+	void deletePension(SqlSession session, Integer pensionNo);
 
 }

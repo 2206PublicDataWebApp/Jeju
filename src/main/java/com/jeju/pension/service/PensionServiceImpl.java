@@ -161,7 +161,48 @@ public class PensionServiceImpl implements PensionService{
 		List<Pension> priceList = pStore.descPriceSort(session);
 		return priceList;
 	}
-
+	// 마이페이지 회원이 등록한 펜션 갯수 가져오기
+	@Override
+	public int getTotalCount(String memberId) {
+		int result = pStore.selectPensionCount(session, memberId);
+		return result;
+	}
+	// 마이페이지 회원이 등록한 펜션 전부 가져오기
+	@Override
+	public List<Pension> printMyPension(String memberId, int currentPage, int boardLimit) {
+		List<Pension> pList = pStore.selectMyPension(session, memberId, currentPage, boardLimit);
+		return pList;
+	}
+	// 숙소 수정
+	@Override
+	public void modifyPension(Pension pension) {
+		pStore.updatePension(session, pension);
+	}
+	// 객실 수정
+	@Override
+	public void modifyRoom(Room room) {
+		pStore.updateRoom(session, room);
+	}
+	// 객실 사진 수정
+	@Override
+	public void modifyRoomAttach(RoomAttach roomAttach) {
+		pStore.updateRoomAttach(session, roomAttach);
+	}
+	// 숙소 카테고리 수정
+	@Override
+	public void modifyCategory(Category category) {
+		pStore.updateCategory(session, category);
+	}
+	// 숙소 최저가 업데이트
+	@Override
+	public void modifyPensionPrice(Room room) {
+		pStore.updatePensionPrice(session, room);
+	}
+	// 숙소 삭제
+	@Override
+	public void removePension(Integer pensionNo) {
+		pStore.deletePension(session, pensionNo);
+	}
 
 
 

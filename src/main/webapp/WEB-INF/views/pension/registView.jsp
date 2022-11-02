@@ -45,7 +45,7 @@
                        <ul>
                            <li><a href="/home">홈</a></li>
                            <li><a href="/notice/list">공지사항</a></li>
-                           <li><a href="/pension1/list">숙소 리스트</a></li>
+                           <li><a href="/pension/list">숙소 리스트</a></li>
                            <li><a href="destinations.html">커뮤니티</a></li>
                            <li><a href="/mypage/myPage">마이페이지</a></li>
                        </ul>
@@ -69,6 +69,7 @@
 
           <!--*************** About Us Starts Here ***************-->
    <form action="/pension/regist" method="post" enctype="multipart/form-data">
+   <input type="hidden" name="memberId" value="${sessionScope.loginUser.memberId }">
    <section id="about" class="contianer-fluid about-us">
        <div class="container">
             <div class="row">
@@ -144,9 +145,12 @@
         <div class="destinations container-fluid">
         <div class="row session-title"><h2>주소</h2></div>
    		<div>
-   		<input class="form-control form-control-lg" type="text" id="sample5_address" placeholder="주소를 입력해주세요." name="pensionAddr"></div>
+	   		<input class="form-control form-control-lg" type="text" id="sample5_address" placeholder="주소를 입력해주세요." name="pensionAddr" required>
+	   		위도<input class="form-control form-control-lg" type="text" placeholder="위도를 입력해주세요." name="hardness" required>
+	   		경도<input class="form-control form-control-lg" type="text" placeholder="경도를 입력해주세요." name="latitude" required>
+   		</div>
    		<div style="text-align: center;">
-		<input class="btn btn-outline-success" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br><br><br>
+			<input class="btn btn-outline-success" type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br><br><br>
    		</div>
 		<div id="map" style="width:1420px;height:400px;margin-top:10px;display:none"></div><br><br><br><br><hr>
             <div class="container">               
@@ -175,7 +179,7 @@
                                   <option value="15">15명</option>
                                 </select>                           
                             </div>
-                             <p>₩ <input type="text" placeholder="000,000" name="price" required> x 박</p>
+                             <p>₩ <input type="text" placeholder="숫자만 입력해주세요." name="price" required> x 박</p>
                          </div>
                      </div>
                  </div>
@@ -222,8 +226,8 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
-   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=758e7cab4812bbb68bb37b0a19e22d0f&libraries=services"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce0b65b35053a74c5f16b289cf432142&libraries=services"></script>
     <script>
         $(function() {
             $(".roomAdd").click(function() {

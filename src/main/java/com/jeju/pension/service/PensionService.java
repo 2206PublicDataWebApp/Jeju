@@ -61,6 +61,22 @@ public interface PensionService {
 
 	// 리뷰 전부 불러오기
 	List<Review> selectAllReview(Integer pensionNo);
+	// 마이페이지 회원이 등록한 펜션 갯수 가져오기
+	int getTotalCount(String memberId);
+	// 마이페이지 회원이 등록한 펜션 전부 가져오기
+	List<Pension> printMyPension(String memberId, int currentPage, int boardLimit);
+	// 숙소 수정
+	void modifyPension(Pension pension);
+	// 객실 수정
+	void modifyRoom(Room room);
+	// 객실 사진 수정
+	void modifyRoomAttach(RoomAttach roomAttach);
+	// 숙소 카테고리 수정
+	void modifyCategory(Category category);
+	// 숙소 최저가 업데이트
+	void modifyPensionPrice(Room room);
+	// 숙소 삭제
+	void removePension(Integer pensionNo);
 
 
 }

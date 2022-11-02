@@ -3,6 +3,7 @@ package com.jeju.pension.store;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -147,6 +148,50 @@ public class PensionStoreLogic implements PensionStore{
 	public List<Review> selectAllReview(SqlSession session, Integer pensionNo) {
 		List<Review> reviewList = session.selectList("ReviewMapper.selectAllReview", pensionNo);
 		return reviewList;
+	}
+	// 마이페이지 회원이 등록한 펜션 갯수 가져오기
+	@Override
+	public int selectPensionCount(SqlSession session, String memberId) {
+		int result = session.selectOne("PensionMapper.selectPensionCount", memberId);
+		return result;
+	}
+	// 마이페이지 회원이 등록한 펜션 전부 가져오기
+	@Override
+	public List<Pension> selectMyPension(SqlSession session, String memberId, int currentPage, int boardLimit) {
+		int offset = (currentPage - 1) * boardLimit;
+		RowBounds rowBounds = new RowBounds(offset, boardLimit);
+		List<Pension> pList = session.selectList("PensionMapper.selectMyPension",memberId, rowBounds);
+		return pList;
+	}
+	// 숙소 수정
+	@Override
+	public void updatePension(SqlSession session, Pension pension) {
+		session.update("PensionMapper.updatePension", pension);
+	}
+	// 객실 수정
+	@Override
+	public void updateRoom(SqlSession session, Room room) {
+		session.update("RoomMapper.updateRoom", room);
+	}
+	// 객실 사진 수정
+	@Override
+	public void updateRoomAttach(SqlSession session, RoomAttach roomAttach) {
+		session.update("RoomAttachMapper.updateRoomAttach", roomAttach);
+	}
+	// 숙소 카테고리 수정
+	@Override
+	public void updateCategory(SqlSession session, Category category) {
+		session.update("CategoryMapper.updateCategory", category);
+	}
+	// 숙소 최저가 업데이트
+	@Override
+	public void updatePensionPrice(SqlSession session, Room room) {
+		session.update("PensionMapper.updatePensionPrice", room);
+	}
+	// 숙소 삭제
+	@Override
+	public void deletePension(SqlSession session, Integer pensionNo) {
+		session.delete("PensionMapper.deletePension", pensionNo);
 	}
 
 

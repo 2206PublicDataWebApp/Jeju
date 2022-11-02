@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +31,8 @@ public class ReviewController {
 			ModelAndView mv
 			,HttpSession session
 			,@RequestParam(value="page", required=false) Integer page) {
-//		Member member = (Member)session.getAttribute("loginUser");
-//		String memberId = member.getMemberId();
-		String memberId = "MEMBERID1";
-//		System.out.println(memberId);
+		Member member = (Member)session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = rService.getTotalCount(memberId);
 		int boardLimit = 6;
@@ -54,8 +54,23 @@ public class ReviewController {
 		mv.addObject("endNavi", endNavi);
 		mv.addObject("rList", rList);
 		mv.addObject("totalCount", totalCount);
-		mv.setViewName("mypage/reviewView");
+		mv.setViewName("myPageReview/reviewView");
 		return mv;
 	}
-		
+	// 리뷰 수정
+	@PostMapping("/review/modify")
+	public ModelAndView ReviewModify(
+			ModelAndView mv
+			,@ModelAttribute Review review) {
+		rService.modifyReview(review);
+		mv.setViewName("redirect:/mypage/review");
+		return mv;
+	}
+	
+	// 리뷰 삭제
+	@GetMapping("/review/remove")
+	public String ReviewRemove(@RequestParam("reviewNo") Integer reviewNo) {
+		rService.removeReview(reviewNo);
+		return "redirect:/mypage/review";
+	}
 }

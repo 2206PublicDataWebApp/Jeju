@@ -26,23 +26,14 @@ public class JjimController {
 	@Autowired
 	private JjimService jService;
 	
-//	// 마이페이지 찜 내역 조회
-//	@RequestMapping(value="/mypage/jjim", method=RequestMethod.GET)
-//	public ModelAndView jjimView(ModelAndView mv) {
-//		mv.setViewName("mypage/jjimView");
-//		return mv;
-//	}
 			
 	// 찜 여부 확인, 등록, 삭제, PENSION_TBL의 JJIM_COUNT 업데이트
-	@PostMapping("/jjim/jjim")
+	@GetMapping("/jjim/jjim")
 	public ModelAndView JjimManagement(
 			ModelAndView mv
-			,HttpSession session
 			,@RequestParam("pensionNo") Integer pensionNo
 			,@ModelAttribute Jjim jjim) {
-		String memberId = session.getId();
 		int jjimCheck = jService.jjimCount(jjim);
-//		System.out.println(jjimCheck);
 		if(jjimCheck == 0) {
 			jService.registerJjim(jjim);
 			jService.modifyJjimCount(pensionNo);
@@ -53,14 +44,14 @@ public class JjimController {
 		mv.setViewName("redirect:/pension/detailView?pensionNo="+pensionNo);
 		return mv;
 	}
+	// 마이페이지 찜 내역 조회
 	@GetMapping("/mypage/jjimView")
 	public ModelAndView MypageJjim(
 			ModelAndView mv
 			,HttpSession session
 			,@RequestParam(value="page", required=false) Integer page) {
-//		Member member = (Member)session.getAttribute("loginUser");
-		String memberId = "MEMBERID1";
-//		System.out.println(memberId);
+		Member member = (Member)session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
 		int currentPage = (page != null) ? page : 1;
 		int totalCount = jService.getTotalCount(memberId);
 		int boardLimit = 6;

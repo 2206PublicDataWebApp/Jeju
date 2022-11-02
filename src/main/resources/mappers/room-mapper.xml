@@ -55,7 +55,13 @@
 
 	<insert id="insertRoom">
 		INSERT INTO ROOM_TBL
-		VALUES(SEQ_ROOM_NO.NEXTVAL,SYSDATE,NULL, DEFAULT,#{price},#{roomName},DEFAULT,#{refPensionNo},#{maxPersonnel} )
+		VALUES(SEQ_ROOM_NO.NEXTVAL,DEFAULT,#{price},#{roomName},DEFAULT,#{refPensionNo},#{maxPersonnel} )
 	</insert>
+	
+	<update id="updateRoom">
+		UPDATE ROOM_TBL 
+		SET ROOM_NAME = #{roomName},PRICE = #{price}, MAX_PERSONNEL = #{maxPersonnel}
+		WHERE ROOM_NO = #{roomNo}
+	</update>
 	
 </mapper>

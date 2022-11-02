@@ -11,5 +11,9 @@ public interface ReviewService {
 	int getTotalCount(String memberId);
 	// 해당 아이디 후기 전부 가져오기
 	List<Review> printReviewAll(String memberId, int currentPage, int boardLimit);
+	// 리뷰 수정
+	void modifyReview(Review review);
+	// 리뷰 삭제
+	void removeReview(Integer reviewNo);
 
 }

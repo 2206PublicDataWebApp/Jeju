@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -56,57 +57,57 @@
 	    </div>
 	    <div class="destinations container-fluid">
 	       <div class="container">
-	            <div class="session-title">
-	                           </div>
+	            <div class="session-title"></div>
 	            <div class="dest-row row">
-	                <div class="col-lg-4 col-md-6">
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>내 정보</h3>
-	                        <a class="btn btn-outline-success" href="#">바로가기</a>
-	                    </div>
-	                </div>
-	                <div class="col-lg-4 col-md-6">
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>이용내역</h3>
-	                        <a class="btn btn-outline-success" href="#">바로가기</a>
-	                    </div>
-	                </div>
-	                <div class="col-lg-4 col-md-6">
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>숙소관리</h3>
-	                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>
-	                    </div>
-	                </div> 
-	                <div class="col-lg-4 col-md-6">
-	                    <br><br><br><br><br>
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>후기 조회</h3>
-	                        <a class="btn btn-outline-success" href="/mypage/review">바로가기</a>
-	                    </div>
-	                </div>
-	
-	                <div class="col-lg-4 col-md-6">
-	                    <br><br><br><br><br>
-	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-	                        </div>
-	                        <h3>찜 내역</h3>
-	                        <a class="btn btn-outline-success" href="/mypage/jjimView">바로가기</a>
-	                    </div>
-	                </div>
+		            <div class="col-lg-4 col-md-6">
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>이용내역</h3>
+		                        <a class="btn btn-outline-success" href="#">바로가기</a>
+		                    </div>
+		                </div>
+	            	<c:if test="${!empty sessionScope.loginUser }">
+		                <div class="col-lg-4 col-md-6">
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>내 정보</h3>
+		                        <a class="btn btn-outline-success" href="#">바로가기</a>
+		                    </div>
+		                </div>
+		                <div class="col-lg-4 col-md-6">
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>숙소관리</h3>
+		                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>
+		                    </div>
+		                </div> 
+		                <div class="col-lg-4 col-md-6">
+		                    <br><br><br><br><br>
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>후기 조회</h3>
+		                        <a class="btn btn-outline-success" href="/mypage/review">바로가기</a>
+		                    </div>
+		                </div>
+		                <div class="col-lg-4 col-md-6">
+		                    <br><br><br><br><br>
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>찜 내역</h3>
+		                        <a class="btn btn-outline-success" href="/mypage/jjimView">바로가기</a>
+		                    </div>
+		                </div>
+		        	</c:if>
 	            </div>
 	       </div>
 	    </div> 

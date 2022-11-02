@@ -19,7 +19,9 @@ public interface JjimStore {
 	void deleteJjim(SqlSession session, Jjim jjim);
 	// PENSION_TBL에 찜 -1
 	void deleteJjimCount(SqlSession session, Integer pensionNo);
+	// 찜 한 숙소 갯수 가져오기
 	int selectPensionCount(SqlSession session, String memberId);
+	// 찜 한 숙소 전부 가져오기
 	List<Pension> selectJjimPension(SqlSession session, String memberId, int currentPage, int boardLimit);
 
 }
