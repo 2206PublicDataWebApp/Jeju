@@ -40,4 +40,12 @@
 		,#{refrigerator},#{bathtub},#{dry},#{tv},'1')
 	</insert>
 	
+	<update id="updateCategory">
+		UPDATE CATEGORY_TBL
+		SET SWIMMING = #{swimming},BARBECUE = #{barbecue},SING = #{sing}, PARK = #{park},CONVENIENCE_STORE = #{convenienceStore}
+		,SMOKING_ROOM = #{smokingRoom},DOG = #{dog},HANDICAP_PERSON = #{handicapPerson},COOK = #{cook},BREAKFAST = #{breakfast},WIFI = #{wifi}
+		,AIRCON = #{aircon} ,REFRIGERATOR = #{refrigerator},BATHTUB = #{bathtub},DRY = #{dry},TV = #{tv}
+		WHERE REF_PENSION_NUMBER = #{refPensionNumber}
+	</update>
+	
 </mapper>

@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +44,33 @@ public class PensionController {
 	
 	// 마이페이지 숙소 관리 페이지로 이동
 	@RequestMapping(value="/mypage/pensionManagement", method=RequestMethod.GET)
-	public ModelAndView pensionManagement(ModelAndView mv) {
-		mv.setViewName("mypage/pensionManagementView");
+	public ModelAndView pensionManagement(
+			ModelAndView mv
+			,HttpSession session
+			,@RequestParam(value="page", required=false) Integer page) {
+		Member member = (Member)session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		int currentPage = (page != null) ? page : 1;
+		int totalCount = pService.getTotalCount(memberId);
+		int boardLimit = 6;
+		int naviLimit = 5;
+		int maxPage;
+		int startNavi;
+		int endNavi;
+		maxPage = (int)((double)totalCount/boardLimit + 0.9);
+		startNavi = ((int)((double)currentPage/naviLimit+0.9)-1)*naviLimit+1;
+		endNavi = startNavi + naviLimit - 1;
+		if(maxPage < endNavi) {
+			endNavi = maxPage;
+		}
+		List<Pension> pList = pService.printMyPension(memberId,currentPage,boardLimit);
+		mv.addObject("urlVal", "pensionManagement");
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("startNavi", startNavi);
+		mv.addObject("endNavi", endNavi);
+		mv.addObject("pList", pList);
+		mv.setViewName("myPagePension/pensionManagementView");
 		return mv;
 	}
 	// 숙소 등록 페이지로 이동
@@ -104,21 +131,111 @@ public class PensionController {
 					roomAttach.setRoomPath("/resources/files/room/"+roomFileRename);
 					}
 				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
 			}
 			pService.registerPension(pension); 
 			int pensionNo = pService.selectePensionNo(pension);
+			System.out.println("펜션 : "+pension);
 			room.setRefPensionNo(pensionNo);
 			pService.registerRoom(room);
+//			String price = room.getPrice();
 			int roomNo = pService.selecteRoomNo(room);
+			room.setRoomNo(roomNo);
+			System.out.println("객실 : "+room);
 			roomAttach.setRoomNo(roomNo);
 			pService.registerRoomAttach(roomAttach);
 			category.setRefPensionNumber(pensionNo);
 			pService.registerCategory(category);
-
-			mv.setViewName("redirect:/mypage/pensionManagementView");
+			DecimalFormat decFormat = new DecimalFormat("###,###원");
+			String price = room.getPrice();
+			String priceFormat = decFormat.format(Integer.parseInt(price));
+			room.setPrice(priceFormat);
+			pService.modifyPensionPrice(room);
+			mv.setViewName("redirect:/mypage/pensionManagement");
 			return mv;
 		}
+	// 숙소 수정 페이지
+	@GetMapping("/pension/modifyForm")
+	public ModelAndView modifyForm(ModelAndView mv
+			,@RequestParam("pensionNo") Integer pensionNo
+			) {
+		List<Category> category = pService.selectCategoryCheck(pensionNo);
+		Pension pension = pService.selecteOnePension(pensionNo);
+		List<Room> rList = pService.selecteRoom(pensionNo);
+		mv.addObject("category", category);
+		mv.addObject("pension", pension);
+		mv.addObject("rList", rList);
+		mv.setViewName("myPagePension/modifyView");
+		return mv;
+	}
+	// 숙소 수정
+	@PostMapping("/pension/modify")
+	public ModelAndView modifyPension(
+			ModelAndView mv
+			,@ModelAttribute Pension pension
+			,@ModelAttribute Room room
+			,@ModelAttribute Category category
+			,@ModelAttribute RoomAttach roomAttach
+			,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			,@RequestParam(value="uploadRoomFile", required=false) MultipartFile uploadRoomFile
+			,HttpServletRequest request) {
+		try {
+			String pensionFileName = uploadFile.getOriginalFilename();
+			if(uploadFile != null && !pensionFileName.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savedPath = root + "\\files/pension";
+				File file = new File(savedPath + "\\"+pension.getPensionFileRename());
+				if(file.exists()) {
+					file.delete();
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+				String pensionFileRename = sdf.format(new Date(System.currentTimeMillis()))
+						+"." + pensionFileName.substring(pensionFileName.lastIndexOf(".")+1);
+				String pensionFilePath = savedPath + "\\" + pensionFileRename;
+				uploadFile.transferTo(new File(pensionFilePath));
+				pension.setPensionFileName(pensionFileName);
+				pension.setPensionFileRename(pensionFileRename);
+				pension.setFilePath("/resources/files/pension/"+pensionFileRename);
+			}
+		}catch (Exception e) {
+		}
+		try {
+			String roomFileName = uploadRoomFile.getOriginalFilename();
+			if(uploadRoomFile != null && !roomFileName.equals("")) {
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String savedPath = root + "\\files/room";
+				File file = new File(savedPath + "\\"+roomAttach.getRoomFileRename());
+				if(file.exists()) {
+					file.delete();
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+				String roomFileRename = sdf.format(new Date(System.currentTimeMillis()))
+						+"." + roomFileName.substring(roomFileName.lastIndexOf(".")+1);
+				String roomFilePath = savedPath + "\\" + roomFileRename;
+				uploadRoomFile.transferTo(new File(roomFilePath));
+				roomAttach.setRoomFileName(roomFileName);
+				roomAttach.setRoomFileRename(roomFileRename);
+				roomAttach.setRoomPath("/resources/files/room/"+roomFileRename);
+			}
+			pService.modifyRoom(room);
+			DecimalFormat decFormat = new DecimalFormat("###,###원");
+			String price = room.getPrice();
+			String priceFormat = decFormat.format(Integer.parseInt(price));
+			room.setPrice(priceFormat);
+			pension.setPensionPrice(priceFormat);
+			pService.modifyPension(pension);
+			pService.modifyRoomAttach(roomAttach);
+			pService.modifyCategory(category);
+			mv.setViewName("redirect:/mypage/pensionManagement");
+		}catch (Exception e) {
+		}
+		return mv; 
+	}
+	// 숙소 삭제
+	@GetMapping("/pension/remove")
+	public String removePension(@RequestParam("pensionNo") Integer pensionNo) {
+		pService.removePension(pensionNo);
+		return "redirect:/mypage/pensionManagement";
+	}
 
 	// 숙소 이름 중복 체크
 	@ResponseBody
@@ -131,32 +248,62 @@ public class PensionController {
 	@RequestMapping(value="/pension/detailView", method=RequestMethod.GET)
 	public ModelAndView pensionDetailView(
 			ModelAndView mv
-			,@RequestParam("startDate") String startDate
-			,@RequestParam("endDate") String endDate
+			,@RequestParam(value="startDate", required=false) String startDate
+			,@RequestParam(value="endDate", required=false) String endDate
 			,@RequestParam("pensionNo") Integer pensionNo
 			,Model model
-			,HttpSession session) {
+			,HttpSession session) throws java.text.ParseException{
 		List<Review> reviewList = pService.selectAllReview(pensionNo);
 		Pension pension = pService.selecteOnePension(pensionNo);
 		List<Category> category = pService.selectCategoryCheck(pensionNo);
 		List<Room> rList = pService.selecteRoom(pensionNo);
-//			List<Integer> roomNo = pService.selecteRoomAttachNo(pensionNo);
-//			System.out.println(roomNo);
+		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
+		long diffDays = diffSec / (24*60*60); //일자수 차이
+		//가격리스트 가져옴
+		for(int i=0; i<rList.size(); i++) {
+			if(diffDays == 0) {
+				diffDays = 1;
+			}
+			DecimalFormat decFormat = new DecimalFormat("###,###");
+			String result = String.valueOf(Integer.parseInt(rList.get(i).getPrice()) * diffDays);
+			String str = decFormat.format(Integer.parseInt(result));
+			rList.get(i).setPrice(str);
+		}
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		List<String> roomImg = pService.selecteRoomAttach(pensionNo);
-//		Member loginMember = (Member)session.getAttribute("loginUser");
-//		System.out.println(roomImg);
-//		System.out.println(reviewList);
 		mv.addObject("rList", rList);
-//		mv.addObject("roomImg", roomImg);
 		mv.addObject("pension", pension);
 		mv.addObject("category", category);
 		mv.addObject("reviewList", reviewList);
 		mv.setViewName("/pension/detailView");
 		return mv;
 	}
-
+	// 숙소 상세페이지 (마이페이지에서 숙소 관리,후기 내역 조회용)
+		@RequestMapping(value="/pension/detailView2", method=RequestMethod.GET)
+		public ModelAndView pensionDetailView2(
+				ModelAndView mv
+				,@RequestParam("pensionNo") Integer pensionNo){
+			List<Review> reviewList = pService.selectAllReview(pensionNo);
+			Pension pension = pService.selecteOnePension(pensionNo);
+			List<Category> category = pService.selectCategoryCheck(pensionNo);
+			List<Room> rList = pService.selecteRoom(pensionNo);
+			List<String> roomImg = pService.selecteRoomAttach(pensionNo);
+			for(int i=0; i<rList.size(); i++) {
+				DecimalFormat decFormat = new DecimalFormat("###,###");
+				String str = decFormat.format(Integer.parseInt(rList.get(i).getPrice()));
+				rList.get(i).setPrice(str);
+			}
+			mv.addObject("rList", rList);
+			mv.addObject("pension", pension);
+			mv.addObject("category", category);
+			mv.addObject("reviewList", reviewList);
+			mv.setViewName("/pension/detailView");
+			return mv;
+		}
+	
 	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
 	public ModelAndView pensionListView(
 			ModelAndView mv

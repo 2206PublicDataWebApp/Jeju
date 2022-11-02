@@ -44,11 +44,13 @@ public class JjimServiceImpl implements JjimService{
 	public void removeJjimCount(Integer pensionNo) {
 		jStore.deleteJjimCount(session, pensionNo);
 	}
+	// 찜 한 숙소 갯수 가져오기
 	@Override
 	public int getTotalCount(String memberId) {
 		int result = jStore.selectPensionCount(session, memberId);
 		return result;
 	}
+	// 찜 한 숙소 전부 가져오기
 	@Override
 	public List<Pension> printJjimPension(String memberId, int currentPage, int boardLimit) {
 		List<Pension> pList = jStore.selectJjimPension(session, memberId, currentPage, boardLimit);

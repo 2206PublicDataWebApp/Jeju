@@ -38,11 +38,13 @@ public class JjimStoreLogic implements JjimStore{
 	public void deleteJjimCount(SqlSession session, Integer pensionNo) {
 		session.update("PensionMapper.deleteJjimCount", pensionNo);
 	}
+	// 찜 한 숙소 갯수 가져오기
 	@Override
 	public int selectPensionCount(SqlSession session, String memberId) {
 		int result = session.selectOne("PensionMapper.selectPensionCount", memberId);
 		return result;
 	}
+	// 찜 한 숙소 전부 가져오기
 	@Override
 	public List<Pension> selectJjimPension(SqlSession session, String memberId, int currentPage, int boardLimit) {
 		int offset = (currentPage - 1) * boardLimit;

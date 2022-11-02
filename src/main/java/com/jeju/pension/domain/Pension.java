@@ -11,8 +11,8 @@ public class Pension implements Comparable<Pension>{
 	private String pensionAddr;
 	private String pensionComments;
 	private String pensionPrice;
-	private int hardness;
-	private int latitude;
+	private String hardness;
+	private String latitude;
 	private String cancelPension;
 	private int pensionCheckin;
 	private int pensionCheckout;
@@ -26,7 +26,7 @@ public class Pension implements Comparable<Pension>{
 	public Pension() {}
 
 	public Pension(Integer pensionNo, String memberId, String pensionName, String category, String pensionAddr,
-			String pensionComments, String pensionPrice, int hardness, int latitude, String cancelPension,
+			String pensionComments, String pensionPrice, String hardness, String latitude, String cancelPension,
 			int pensionCheckin, int pensionCheckout, String filePath, String fileImage, String pensionFileName,
 			String pensionFileRename, Integer reviewCount, Integer jjimCount) {
 		this.pensionNo = pensionNo;
@@ -106,19 +106,19 @@ public class Pension implements Comparable<Pension>{
 		this.pensionPrice = pensionPrice;
 	}
 
-	public int getHardness() {
+	public String getHardness() {
 		return hardness;
 	}
 
-	public void setHardness(int hardness) {
+	public void setHardness(String hardness) {
 		this.hardness = hardness;
 	}
 
-	public int getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(int latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
@@ -203,5 +203,17 @@ public class Pension implements Comparable<Pension>{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
+				+ ", category=" + category + ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments
+				+ ", pensionPrice=" + pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude
+				+ ", cancelPension=" + cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout="
+				+ pensionCheckout + ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName="
+				+ pensionFileName + ", pensionFileRename=" + pensionFileRename + ", reviewCount=" + reviewCount
+				+ ", jjimCount=" + jjimCount + "]";
+	}
+
+	
 
 }

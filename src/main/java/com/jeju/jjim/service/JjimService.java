@@ -19,6 +19,7 @@ public interface JjimService {
 	void removeJjimCount(Integer pensionNo);
 	// 찜 총 갯수 가져오기(페이징 처리)
 	int getTotalCount(String memberId);
+	// 찜 한 숙소 전부 가져오기
 	List<Pension> printJjimPension(String memberId, int currentPage, int boardLimit);
 	
 }

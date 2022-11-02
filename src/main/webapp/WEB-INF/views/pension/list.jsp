@@ -249,7 +249,7 @@
                                     <h5>${rank.pensionName }</h5>
                                     <div class="post-meta">
                                     <span class="mr-2"><fmt:formatNumber type="number"
-                                                                         maxFractionDigits="3" value="${rank.pensionPrice}" />${rank.pensionPrice }</span>
+                                        maxFractionDigits="3" value="${rank.pensionPrice}" />${rank.pensionPrice }</span>
                                     </div>
                                  </div></li>
                            </c:forEach>

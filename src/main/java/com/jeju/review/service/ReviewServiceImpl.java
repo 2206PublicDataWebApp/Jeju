@@ -30,6 +30,16 @@ public class ReviewServiceImpl implements ReviewService{
 		List<Review> rList = rStore.selectReview(session, memberId, currentPage, boardLimit);
 		return rList;
 	}
+	// 리뷰 수정
+	@Override
+	public void modifyReview(Review review) {
+		rStore.updateReview(session, review);
+	}
+	// 리뷰 삭제
+	@Override
+	public void removeReview(Integer reviewNo) {
+		rStore.deleteReview(session, reviewNo);
+	}
 
 	@Override
 	public List<Review> showAllReview() {

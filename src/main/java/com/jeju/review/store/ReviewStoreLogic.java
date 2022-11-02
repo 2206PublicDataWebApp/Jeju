@@ -26,6 +26,16 @@ public class ReviewStoreLogic implements ReviewStore{
 		List<Review> rList = session.selectList("ReviewMapper.selectReview", memberId, rowBounds);
 		return rList;
 	}
+	// 리뷰 수정
+	@Override
+	public void updateReview(SqlSession session, Review review) {
+		session.update("ReviewMapper.updateReview", review);
+	}
+	// 리뷰 삭제
+	@Override
+	public void deleteReview(SqlSession session, Integer reviewNo) {
+		session.delete("ReviewMapper.deleteReview", reviewNo);
+	}
 
 	@Override
 	public List<Review> showAllReview(SqlSession session) {

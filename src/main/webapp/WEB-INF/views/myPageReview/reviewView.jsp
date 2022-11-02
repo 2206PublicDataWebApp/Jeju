@@ -69,10 +69,35 @@
 	                    </div>
 	                    <div class="cust-det row">
 	                        <div class="col-sm-3 col-3 img-circl">
-	                            <a class="btn btn-outline-success" href="/pension/detailView?pensionNo=${review.pensionNo }&page=${currentPage}">작성일 ${review.regDate } 숙소로 이동</a>
+	                            <a class="btn btn-outline-success" href="/pension/detailView2?pensionNo=${review.pensionNo }">작성일 ${review.regDate } 숙소로 이동</a>
 	                        </div><br><br>
 	                    </div>
+	                    <button class="btn btn-outline-success" data-toggle='modal' data-target='#modifyModal'>수정</button>
+	                    <button class="btn btn-outline-danger" onclick="removeReview(${review.reviewNo})">삭제</button>
 	                </div>
+                    <form action="/review/modify" method="post">
+                    	<input type="hidden" name="reviewNo" value="${review.reviewNo }">
+			            <div class="modal fade" id="modifyModal" role="dialog">
+						  <div class="modal-dialog">
+						      <div class="modal-content">
+						          <div class="modal-header">
+						              <h4 class="modal-title">수정</h4>
+						              <button type="button" class="close" data-dismiss="modal">&times;</button>
+						          </div>
+						          <div class="modal-body">
+						              <div class="form-group">
+						                  <label for="replyText">후기</label>
+						                  <textarea class="form-control" name="reviewContents" rows="18" cols="20" placeholder="후기를 입력해주세요." style="resize:none" required>${review.reviewContents }</textarea>
+						              </div>
+						          </div>
+						          <div class="modal-footer">
+						              <input type="submit" value="수정" class="btn btn-success modalModBtn" >
+						              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+						          </div>
+						      </div>
+						  </div>
+						</div>
+				   </form>
                 </c:forEach>
             </div>
             <nav aria-label="Page navigation example" >
@@ -131,4 +156,11 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
+    <script>
+    	function removeReview(reviewNo){
+    		if(confirm("후기를 삭제하시겠습니까?")){
+    			location.href="/review/remove?reviewNo="+reviewNo;
+    		}
+    	}
+    </script>
 </html>

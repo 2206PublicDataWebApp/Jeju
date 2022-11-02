@@ -97,7 +97,7 @@
 
                         <div class="row vbh">
 
-                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                             언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
 
                         <div class="row vbh">
-                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension();" style="color:white">숙소 등록 하러가기</a></div>
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
                 </div>
@@ -486,8 +486,14 @@
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
     <script>
-       function registPension() {
-          location.href="/pension/registForm";
+       function registPension(memberId) {
+    	   if(memberId == "") {
+    		   if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+    			   location.href="/member/loginView.kh"
+    		   }
+    	   }else{
+	          location.href="/pension/registForm";
+    	   }
        }
     </script>
 </html>

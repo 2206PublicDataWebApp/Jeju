@@ -13,6 +13,10 @@ public interface ReviewStore {
 	int selectRivewCount(SqlSession session, String memberId);
 	// 해당 아이디 후기 전부 가져오기
 	List<Review> selectReview(SqlSession session, String memberId, int currentPage, int boardLimit);
+	// 리뷰 수정
+	void updateReview(SqlSession session, Review review);
+	// 리뷰 삭제
+	void deleteReview(SqlSession session, Integer reviewNo);
 
 	// 관리자페이지 리뷰 전체조회
 	List<Review> showAllReview(SqlSession session);
