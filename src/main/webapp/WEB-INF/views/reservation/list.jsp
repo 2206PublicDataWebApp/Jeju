@@ -180,7 +180,7 @@
                       <p class="card-text">${endDate1 }월 ${endDate2 }일 11:00시</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price">${changePrice }원</h5>
+                      <h5 class="card-title" id="price">${price }원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
