@@ -38,7 +38,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int registerMember(Member member) {
-	
 		// SqlSession session = SqlSessionTemplate.getSqlSession();
 		int result = mStore.insertMember(session, member);
 		return result;
@@ -84,10 +83,32 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
+	
+
 	@Override
-	public int idChk(String memberId) {
-		int result = mStore.idChk(session,memberId);
+	public String findId(String memberName, String memberPhone) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int checkDupEmail(String memberEmail) {
+		int result = mStore.checkDupEmail(session, memberEmail);
 		return result;
 	}
 
+//	@Override
+//	public String findId(String memberName, String memberPhone) {
+//String result = "";
+//		
+//		try {
+//		 result= mStore.findId(memberName, \memhone);
+//		 
+//		} catch(Exception e) {
+//			
+//			e.printStackTrace();
+//		}
+//		
+//		return result ;
+//	}
 }

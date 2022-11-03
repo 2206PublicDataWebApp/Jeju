@@ -10,6 +10,8 @@ public interface MemberService {
 	public Member loginMember(Member member);
 	// checkIdDuplicate
 	public int checkDupId(String memberId);
+	// checkIdDuplicate
+	public int checkDupEmail(String memberEmail);
 	// printOneById
 	public Member printOneById(String memberId);
 	// registerMember
@@ -18,7 +20,10 @@ public interface MemberService {
 	public int modifyMember(Member member);
 	// removeMember
 	public int removeMember(String memberId);
-
+	
+		// 아이디 찾기
+		public String findId(String memberName, String memberPhone);
+	
 
 
 	// 관리자 전체멤버 조회
@@ -27,11 +32,9 @@ public interface MemberService {
 	// 관리자 회원탈퇴
     void removeAdminMember(String memberId);
 
-
-
-
+    
 	public Member selectMemberInfo(String memberId);
 
-	public int idChk(String memberId);
+	
 
 }

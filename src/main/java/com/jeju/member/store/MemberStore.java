@@ -15,6 +15,8 @@ public interface MemberStore {
 	public Member selectLoginMember(SqlSession session, Member member);
 	// checkIdDuplicate
 	public int checkDupId(SqlSession session, String memberId);
+	// checkEmailDuplicate
+	public int checkDupEmail(SqlSession session, String memberEmail);
 	// selectOneById
 	public Member selectOneById(SqlSession session, String memberId);
 	// insertMember
@@ -32,5 +34,4 @@ public interface MemberStore {
 
 	public Member selectMemberInfo(SqlSessionTemplate session, String memberId);
 
-	public int idChk(SqlSession session, String memberId);
 }

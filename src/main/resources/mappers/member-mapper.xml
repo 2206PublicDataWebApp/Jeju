@@ -52,10 +52,12 @@
       , MEMBER_ADDR = #{memberAddr }
       WHERE MEMBER_ID = #{memberId }
    </update>
+   
    <update id="deleteMember" parameterType="string">
-     	DELETE FROM MEMBER_TBL
+      DELETE FROM MEMBER_TBL
 
       WHERE MEMBER_ID = #{memberId }
+      AND MEMBER_PWD = #{memberPwd}
 
    </update>
    <select id="selectLoginOne" resultMap="memberResultMap">
@@ -68,6 +70,9 @@
    </select>
    <select id="checkIdDuplicate" resultType="_int">
       SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId} AND M_STATUS = 'Y'
+   </select>
+   <select id="checkEmailDuplicate" resultType="_int">
+      SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail} AND M_STATUS = 'Y'
    </select>
    <select id="selectOneByEmail" resultMap="memberResultMap">
       SELECT * FROM MEMBER_TBL

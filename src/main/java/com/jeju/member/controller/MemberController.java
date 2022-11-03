@@ -58,6 +58,8 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
+			
+			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
@@ -112,7 +114,7 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@ResponseBody
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
-	public String emailAuth(String email) {
+	public String emailAuth(@RequestParam("email") String email) {
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
 
@@ -214,6 +216,7 @@ public class MemberController {
 			String memberId = member.getMemberId();
 			int result = mService.removeMember(memberId);
 //			return "redirect:/member/logout.kh";
+			
 			mv.setViewName("redirect:/member/logout.kh");
 		} catch (Exception e) {
 //			model.addAttribute("msg", e.toString());
@@ -255,15 +258,28 @@ public class MemberController {
 		}
 		return mv;
 	}
+//	
+//	//아이디 중복검사
+//	@ResponseBody
+//	@RequestMapping(value="/idChk",method=RequestMethod.POST)
+//	public String idChk(
+//			@RequestParam("memberId") String memberId) {
+//		int result = mService.idChk(memberId);
+//		return String.valueOf(result);
+//}
+	//email 중복검사
+	@ResponseBody
+	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
+	public String duplicateEmailCheck(
+			@RequestParam("memberEmail") String memberEmail) {
+		// 데이터가 있으면 객체 or 1 or true
+		// 데이터가 없으면 null or 0 or false
+		int result = mService.checkDupEmail(memberEmail);
+//			return result+"";
+		return String.valueOf(result);
+	}
 	
 	//아이디 중복검사
-	@ResponseBody
-	@RequestMapping(value="/idChk",method=RequestMethod.POST)
-	public String idChk(
-			@RequestParam("memberId") String memberId) {
-		int result = mService.idChk(memberId);
-		return String.valueOf(result);
-}
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
 	public String duplicateIdCheck(
@@ -280,8 +296,27 @@ public class MemberController {
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
+//	//아이디 찾는화면
+//	@RequestMapping(value="/member/findId.kh", method=RequestMethod.GET)
+//	public String findId() {
+//		return "member/findId";
+//	}
+	//아이디를 찾아서 보여주는 컨트롤러
+//	@RequestMapping(value="/member/findMember", method=RequestMethod.POST)
+//	public ModelAndView findMember(
+//		@RequestParam("memberName") String memberName
+//		,@RequestParam("memberPwd") String memberPwd
+//		, ModelAndView mv
+//		, HttpServletRequest request
+//		,HttpServletResponse response) {
+//		try
+//		
+//		return mv;
+//	}
 	
 }
-
+	
+	
+	
 
 

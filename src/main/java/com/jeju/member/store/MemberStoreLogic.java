@@ -34,7 +34,6 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int insertMember(SqlSession session, Member member) {
-		
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
@@ -58,11 +57,7 @@ public class MemberStoreLogic implements MemberStore{
 		return null;
 	}
 
-	@Override
-	public int idChk(SqlSession session, String memberId) {
-		int result = session.selectOne("memberMapper.idChk",memberId);
-		return result;
-	}
+	
 
 	// 관리자 전체멤버 조회
 	@Override
@@ -74,5 +69,12 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public void removeAdminMember(SqlSessionTemplate session, String memberId) {
 		session.delete("MemberMapper.deleteAdminMember", memberId);
+	}
+
+	
+	@Override
+	public int checkDupEmail(SqlSession session, String memberEmail) {
+		int result = session.selectOne("MemberMapper.checkEmailDuplicate", memberEmail);
+		return result;
 	}
 }
