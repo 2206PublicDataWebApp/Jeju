@@ -28,9 +28,17 @@ public interface MemberStore {
 	public List<Member> showAllMember(SqlSession session);
 
 	// 관리자 회원탈퇴
-    void removeAdminMember(SqlSessionTemplate session, String memberId);
+
+
+	// 관리자페이지 회원수 총합
+	int countAllMember(SqlSessionTemplate session, String searchCondition, String searchValue);
 
 	public Member selectMemberInfo(SqlSessionTemplate session, String memberId);
 
 	public int idChk(SqlSession session, String memberId);
+
+
+	List<Member> pagingShowAllMember(SqlSessionTemplate session, int currentPage, int memberLimit);
+
+	void removeAdminMember(SqlSessionTemplate session, Integer memberNo);
 }

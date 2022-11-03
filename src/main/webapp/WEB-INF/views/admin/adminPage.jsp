@@ -191,7 +191,7 @@
                                         </div>
                                         <div class="mess__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-06.jpg" alt="Michelle Moreno" />
+
                                             </div>
                                             <div class="content">
                                                 <h6>Michelle Moreno</h6>
@@ -201,7 +201,7 @@
                                         </div>
                                         <div class="mess__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Diane Myers" />
+
                                             </div>
                                             <div class="content">
                                                 <h6>Diane Myers</h6>
@@ -222,9 +222,7 @@
                                             <p>You have 3 New Emails</p>
                                         </div>
                                         <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey" />
-                                            </div>
+
                                             <div class="content">
                                                 <p>Meeting about new dashboard...</p>
                                                 <span>Cynthia Harvey, 3 min ago</span>
@@ -232,7 +230,7 @@
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
+
                                             </div>
                                             <div class="content">
                                                 <p>Meeting about new dashboard...</p>
@@ -241,7 +239,7 @@
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey" />
+
                                             </div>
                                             <div class="content">
                                                 <p>Meeting about new dashboard...</p>
@@ -296,7 +294,7 @@
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+
                                     </div>
                                    <%-- <div class="content">
                                         <a class="js-acc-btn" href="#">john doe</a>
@@ -305,8 +303,8 @@
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                                 </a>
+
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
@@ -378,17 +376,14 @@
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>
                                         <td>${adminMember.memberPhone}</td>
-
                                         <td>${fn:substring(adminMember.memberAddr, 0, 40)} </td>
-                                        <%--<td>${adminMember.memberAddr}</td>--%>
-
                                         <td>${adminMember.enrollDate}</td>
                                         <td>${adminMember.birthDate}</td>
                                         <td>${adminMember.gender}</td>
                                         <td>0</td>
                                         <td>0</td>
-                                        <td><a href="#" onclick="removeAdminMember(${adminMember.memberId})">탈퇴</a></td>
-                                        <%--<td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>--%>
+                                        <td><a href="#" onclick="removeAdminMember(${adminMember.memberNo})">탈퇴</a></td>
+
                                     </tr>
                                     </c:forEach>
                                     </thead>
@@ -604,7 +599,7 @@
 <script>
         function removeAdminMember(memberId){
             if(confirm("회원을 탈퇴시키겠습니까?")) {
-                location.href="/admin/member/remove?memberId="+memberId; // 이부분... 수정
+                location.href="/admin/member/remove?memberNo="+memberNo;
             }
         }
 

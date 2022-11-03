@@ -59,24 +59,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	// 관리자 전체멤버 조회
+	// 관리자페이지 전체멤버 조회
 	@Override
 	public List<Member> showAllMember() {
 		List<Member> memberList = mStore.showAllMember(session);
 		return memberList;
 	}
 
-	// 관리자 회원탈퇴
+	// 관리자페이지 회원탈퇴
 	@Override
-	public void removeAdminMember(String memberId) {
-		mStore.removeAdminMember(session, memberId);
+		public void removeAdminMember(Integer memberNo) {
+			mStore.removeAdminMember(session, memberNo);
+		}
+
+	// 관리자페이지 회원수 총합
+	@Override
+	public int countAllMember(String searchCondition, String searchValue) {
+		int count = mStore.countAllMember(session, searchCondition, searchValue);
+		return count;
 	}
 
-	// 관리자 강제 회원탈퇴
-	/*@Override
-	public void deleteAdminMember() {
-
-	}*/
 
 	@Override
 	public Member selectMemberInfo(String memberId) {
@@ -89,5 +91,13 @@ public class MemberServiceImpl implements MemberService {
 		int result = mStore.idChk(session,memberId);
 		return result;
 	}
+
+	@Override
+	public List<Member> pagingShowAllMember(int currentPage, int memberLimit) {
+		List<Member> memberList = mStore.pagingShowAllMember(session, currentPage, memberLimit);
+		return memberList;
+	}
+
+
 
 }
