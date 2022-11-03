@@ -86,8 +86,8 @@
 
    <!-- 관리자 멤버 삭제 -->
    <delete id="deleteAdminMember">
-       	DELETE FROM MEMBER_TBL WHERE MEMBER_NO = #{memberNo }
-     </delete>
+      DELETE FROM MEMBER_TBL WHERE MEMBER_NO = #{memberNo}
+   </delete>
 
    <!-- 관리자 회원수 총합 -->
    <select id="countAllMember" resultMap="memberResultMap">

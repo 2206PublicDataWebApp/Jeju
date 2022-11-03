@@ -371,7 +371,7 @@
                                     </tr>
                                     <c:forEach items="${memberList }" var="adminMember" varStatus="i">
                                     <tr>
-                                        <td>${i.count}</td>
+                                        <td>${adminMember.memberNo}</td>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>
