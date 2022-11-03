@@ -17,6 +17,30 @@
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/reservationStyle.css">   
+	<style>
+		.modal-title{
+ font-size: 17px;
+ text-align:left;
+ font-weight: bold;
+}
+.modal_table{
+  width:100%;
+}
+#modal_userImg{
+  width:170px;
+  height:80px;
+  margin-right : 180px;
+/*   border-radius: 75%; */
+}
+#modal_userId{
+  width:200px;
+}
+#modal_userFollow{
+  margin:10px;
+  text-align: right;
+}
+
+	</style>
 </head>
     <body>
          <header class="container-flui">
@@ -132,9 +156,45 @@
                         <div  class="col-sm-3 reserve"><label>등급 할인</label></div>
                     </div>
                     <div class="myGrade">나의 등급(플래티넘)</div>
-                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : <span id="price1">300,000원</span></div>
+                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : <span id="price1">-300,000원</span></div>
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
-                    <br><br>
+                    <br>
+                    <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
+                    <button class="btn btn-info btn-sm follower" style="font-size: 8px;">쿠폰 선택</button>
+
+				<c:if test="${!empty cList}">
+					<c:forEach items="${cList }" var="mycoupon" varStatus="i">
+						<div class="modal fade" id="followModal" role="dialog">
+							<div class="modal-dialog">
+								<!-- 모달창-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title"></h4>
+										<button type="button" class="close" id="modalClose" data-dismiss="modal">×</button>
+									</div>
+									<div class="modal-body">
+										<table class="modal_table">
+											<tr>
+												<td style="width: 70px;"><img id="modal_userImg"
+													src="/resources/images/5000원.PNG"></td>
+												<td id="modal_userID" style="font-weight : bold; font-size : 22px;">${mycoupon.couponTitle }</td>
+												<td id="modal_userFollow">
+													<button class="btn btn-outline-primary" value="${mycoupon.salePrice}" onclick="applyCoupon(this, '${mycoupon.couponCode}');">
+													적용
+													</button>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div id="count" value="1"></div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+
+
+					<br>
                     
                		<c:if test="${sessionScope.loginUser eq null }">
 					<div style="margin-top: 10px;" class="row">
@@ -180,7 +240,7 @@
                       <p class="card-text">${endDate1 }월 ${endDate2 }일 11:00시</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price">${price }원</h5>
+                      <h5 class="card-title" id="price" value="${price }">${price }원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
@@ -368,20 +428,24 @@
     			$("input[type=checkbox]").prop("checked", false);
     		}
      }
-
+     
+    
+     
      //바로 결제
 //      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
  	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
- 	     		//가맹점 식별코드
+ 	    		var price1 = $("#price").text().replace(",", "");
+ 	    		var price2 = price1.replace("원", "");
+ 	    		//가맹점 식별코드
  	     		IMP.init('imp28778843');
  	     		IMP.request_pay({
  	     		    pg : 'kcp',
  	     		    pay_method : 'card',
  	     		    merchant_uid : 'merchant_' + new Date().getTime(),
  	     		    name : '한재민' ,
-		    		amount : '501',
-//  	     			amount : '${price}',
+		    		amount : price1,
+//  	     		amount : '${price}',
  	     		    buyer_email : 'iamport@siot.do',
  	     		    buyer_name : $("#nameChk").val(),
  	     		    buyer_tel : $("#phone").val()
@@ -417,7 +481,7 @@
  	     		        				"reEndDate" : '${endDate}'
  	     		        			},
  	     		        			type : "post",
- 	     		        			success : function(result) {
+ 	     		        			success : function(result) {	     		        				
  	     		        				location.href = "/pension/list";
  	     		        			},
  	     		        			error : function() {
@@ -663,9 +727,29 @@
  		 
  	});
 	
-	
-     
-     
+     $('.follower').click(function(){
+    	 $.ajax({
+	    		url : "/reservation/checkSessionId",
+	    		type : "post",
+	    		success : function(result) {   
+	    			var sessionId = "";
+	    			if(result != "") {
+    				  $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다.   
+    			      $('.modal-title').text("적용");    //modal 의 header 부분에 "팔로우"라는 값을 넣어준다. 
+	    			}else {
+	    				alert("로그인 후 이용가능합니다.");
+	    			}
+	    		},
+	    		error : function() {
+	    			alert("서버요청 실패!");
+	    		}
+			});
+			
+    	 
+    	 
+       
+     });
+
 // 	    var code2 = "";
 // 	    $("#phoneChk").click(function(){
 // 	    	if($("#phone").val() != "") {
@@ -720,7 +804,41 @@
 	    	 } else {
 	    	    elem.className ='opened';
 	    	    menu.style.display ="block";
-	    	}}
+	    	}
+	    }
+		
+		function applyCoupon(elem, code) {
+			console.log(code);
+			$.ajax({
+				url : "/applyCoupon",
+				data : {
+					"salePrice" : elem.value,
+					"rePrice" : '${price}'
+				},
+				type : "post",
+				success : function(result) {
+ 					$("#price").text("");
+ 					$("#price").text(result + "원");
+ 					$("#price2").text("");
+ 					$("#price2").text(elem.value + "원 할인");
+ 					$.ajax({
+ 						url : "/coupon/decreaseCoupon",
+ 						data : {
+ 							"couponCode" : code
+ 						},
+ 						type : "post",
+ 						success : function(result) {
+ 							if(result == "성공") {
+ 								alert("할인이 적용되었습니다.");
+ 							}else {
+ 								alert("쿠폰감소 실패!");
+ 							}
+ 						}
+ 					});
+					
+				}
+			});
+		}
     </script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>
@@ -728,5 +846,4 @@
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
-    
 </html>

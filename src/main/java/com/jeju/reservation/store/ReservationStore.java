@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.jeju.coupon.domain.Coupon;
+import com.jeju.coupon.domain.MyCoupon;
 import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
@@ -37,6 +39,10 @@ public interface ReservationStore {
 	int selectWaitRstatus(SqlSession session, String memberId);
 	//기간만료 예약내역 불러오기
 	List<Reservation> expirationList(SqlSession session, String memberId);
+	//나의 쿠폰 가져오기
+	List<MyCoupon> selectAllMyCoupon(SqlSession session, String memberId);
+	//나의 쿠폰 정보로 쿠폰 리스트 가져오기
+	Coupon selectAllCouponList(SqlSession session, String couponCode);
 
 
 }

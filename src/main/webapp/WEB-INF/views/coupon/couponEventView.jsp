@@ -101,7 +101,7 @@
             </div>
             <div class="dest-row row">
             <c:if test="${!empty cList }">
-            	<c:forEach items="${cList }" var="coupon">
+            	<c:forEach items="${cList }" var="coupon" varStatus="i">
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
 	                        <div class="dest-img">
@@ -110,7 +110,7 @@
 	                        <br>
 	                        <h4 style="font-size : 18px; font-weight : bold;">${coupon.couponTitle }</h4>
 	                        <p>${coupon.couponComments }</p>
-	                        <button class="btn btn-outline-success" onclick="downloadCoupon(${coupon.couponCode});">내려받기</button>
+	                        <button class="btn btn-outline-success" value="${coupon.couponCode }" onclick="downloadCoupon(this);">내려받기</button>
 	                    </div>
 	                </div>
 	             </c:forEach>   
@@ -218,13 +218,26 @@
     </body>
     
     <script>
-	    function downloadCoupon(code) {
-	    	console.log(code);
+	    function downloadCoupon(elem) {
+	    	console.log(elem.value);
 	    	$.ajax({
 	    		url : "/coupon/downCoupon",
+	    		data : {
+	    			"couponCode" : elem.value,
+	    		},
 	    		type : "post",
-	    		success : function() {
-	    			
+	    		success : function(result) {
+	    			console.log(result);
+	    			if(result == "쿠폰받기 성공!") {
+	    				alert("쿠폰받기 성공! 내 쿠폰함을 확인하세요.");
+	    			}else if(result == "이미 쿠폰을 받으셨습니다.") {
+	    				alert(result);
+	    			}else {
+	    				alert("쿠폰을 받을 수 없습니다.");
+	    			}
+	    		},
+	    		error : function() {
+	    			alert("실패!");
 	    		}
 	    	});
 	    }

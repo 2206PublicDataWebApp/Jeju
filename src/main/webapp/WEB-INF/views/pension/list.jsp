@@ -140,22 +140,24 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item ">
-                    <img class="d-block w-80" src="/resources/images/쿠폰1.PNG" alt="First slide" style="margin : 0 auto;">
+                    <img class="d-block w-80" src="/resources/images/쿠폰7.PNG" alt="First slide" style="margin : 0 auto;">
                     <div class="carousel-caption fvgb d-none d-md-block">
                         <div class="row vbh">
                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="couponPage();" style="color:white">쿠폰 페이지로 이동</a></div>
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="carousel-item active">
-                    <img class="d-block w-80" src="/resources/images/쿠폰2.PNG" alt="Third slide" style="margin : 0 auto;">
+                    <img class="d-block w-80" src="/resources/images/쿠폰5.PNG" alt="Third slide" style="margin : 0 auto;">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <div class="row vbh">
                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="myCoupon();" style="color:white">내 쿠폰 확인하기</a></div>
                         </div>
                     </div>
                 </div>
+                
+                
 
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

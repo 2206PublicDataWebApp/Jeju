@@ -2,6 +2,8 @@ package com.jeju.reservation.service;
 
 import java.util.List;
 
+import com.jeju.coupon.domain.Coupon;
+import com.jeju.coupon.domain.MyCoupon;
 import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
@@ -37,5 +39,9 @@ public interface ReservationService {
 	List<Reservation> showAllReservation();
 	//기한 만료 내역 불러오기
 	List<Reservation> expirationReserveList(String memberId);
+	//나의 쿠폰정보 가져오기
+	List<MyCoupon> selectAllMyCoupon(String memberId);
+	//나의쿠폰정보로 쿠폰테이블의 내용, 제목등 가져오기
+	Coupon selectAllCouponList(String couponCode);
 
 }
