@@ -26,6 +26,8 @@ public class Member {
 	private String gender;
 	private Date birthDate;
 	private String mStatus;
+	private int memberNo;
+	private int couponCount;
 
 
 	public String setAddressBySize(int size){

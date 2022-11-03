@@ -15,7 +15,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public Member selectLoginMember(SqlSession session, Member member) {
-		System.out.println("ddd");
+		
 		Member mOne = session.selectOne("MemberMapper.selectLoginOne", member);
 		return mOne;
 	}
@@ -34,7 +34,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int insertMember(SqlSession session, Member member) {
-		System.out.println("주의 이름을");
+		
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
@@ -47,8 +47,20 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int deleteMember(SqlSession session, String memberId) {
-//		int result = session.delete("MemberMapper.deleteMember", memberId);
-		int result = session.update("MemberMapper.deleteMember", memberId);
+		int result = session.delete("MemberMapper.deleteMember", memberId);
+	//	int result = session.update("MemberMapper.deleteMember", memberId);
+		return result;
+	}
+
+	@Override
+	public Member selectMemberInfo(SqlSessionTemplate session, String memberId) {
+		Member member = session.selectOne("MemberMapper.selectMemberInfo", memberId);
+		return null;
+	}
+
+	@Override
+	public int idChk(SqlSession session, String memberId) {
+		int result = session.selectOne("memberMapper.idChk",memberId);
 		return result;
 	}
 

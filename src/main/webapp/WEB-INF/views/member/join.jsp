@@ -6,16 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<style>
-	#container {width: 100%; height: 100%; position: relative;}
-span.guide {
-		display : none;
-		font-size : 12px;
-		top : 12px;
-		right : 10px;
-	}
-	span.ok { color : green }
-	span.error { color : red }
+<style>	
+#container {width: 100%; height: 100%; position: relative;}
+
+/* 	span.guide { */
+/* 		display : none; */
+/* 		font-size : 12px; */
+/* 		top : 12px; */
+/* 		right : 10px; */
+/* 	} */
+/* 	span.ok { color : green } */
+/* 	span.error { color : red } */
+
+
 
 .dpn {display: none !important;}
 .join_wrap {width:550px; margin: 0 auto; border: 1px solid #dadada; padding: 24px; border-radius: 5px;}
@@ -66,9 +69,8 @@ span.guide {
 				<form action="/member/register.kh" method="post">
 				아이디 
 				<input type="text" id="memberId" name="memberId">
-					<span class="guide ok">이 아이디는 사용 가능합니다.</span> 
- 						<span class="guide error">이 아이디는 이미 사용중입니다.</span> 
-
+					<span class="guide ok" style="green">이 아이디는 사용 가능합니다.</span> 
+ 						<span class="guide error" style="red">이 아이디는 이미 사용중입니다.</span> 
 								
 			<input type="password" placeholder="비밀번호" name="memberPwd" id="memberPwd">
 			
@@ -146,7 +148,7 @@ span.guide {
 // 				console.log(data);
 // 			}
 // 		});
-// 	 }
+
 	 
 	
 // 	 $(function() { 
@@ -182,10 +184,18 @@ span.guide {
 		
 // 			fn_join();
 // 		});
+		$(document).ready(function inputCheck(){
+				var chk = $("#memberId").val();
+				if(chk == "") {
+					$(".ok").hide();
+					$(".error").hide();
+				}
+			});
 	
 		$("#memberId").on("blur", function() {
 			var memberId = $("#memberId").val();
-			if(memberId == "") {
+			if(memberId == '') {
+			console.log("들어옴")
 				$(".ok").hide();
 				$(".error").hide();
 			}else{
@@ -214,6 +224,22 @@ span.guide {
 			}
 		});
 		
+// 		function fn_idChk(){
+// 			$.ajax({
+// 				url : "/member/idChk",
+// 				type : "post",
+// 				dataType : "json",
+// 				data : {"memberId" : $("#memberId").val()},
+// 				success : function(data){
+// 					if(data == 1){
+// 						alert("중복된 아이디입니다.");
+// 					}else if(data == 0){
+// 						$("#idChk").attr("value", "Y");
+// 						alert("사용가능한 아이디입니다.");
+// 					}
+// 				}
+// 			})
+// 		}
 		
 		$(".email_auth_btn").click(function(){	     	 
 	    	 var email = $('#email').val();
@@ -237,25 +263,25 @@ span.guide {
 			}); 
 		});
 		
-		$('#id').focusout(function(){
-			var id = $('#id').val();
+// 		$('#id').focusout(function(){
+// 			var id = $('#id').val();
 		
-			$.ajax({
-				type : "POST",
-				url : "/idCheck",
-				data : {id : id},
-				success: function(data){
-					console.log(data);
-					if(data == "Y"){
-						$('#id_ck').removeClass("dpn");
-					}else{
-						$('#id_ck').addClass("dpn");
-					}
-				},
-				error: function(data){
-				}
-			}); 
-		});
+// 			$.ajax({
+// 				type : "POST",
+// 				url : "/idCheck",
+// 				data : {id : id},
+// 				success: function(data){
+// 					console.log(data);
+// 					if(data == "Y"){
+// 						$('#id_ck').removeClass("dpn");
+// 					}else{
+// 						$('#id_ck').addClass("dpn");
+// 					}
+// 				},
+// 				error: function(data){
+// 				}
+// 			}); 
+// 		});
 		
 		
 	</script>
