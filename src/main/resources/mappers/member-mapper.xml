@@ -21,13 +21,30 @@
       <result property="gender"       column="GENDER"/>   
       <result property="birthDate"    column="BIRTH_DATE"/>
       <result property="mStatus"       column="M_STATUS"/>   
+       <result property="memberNo"       column="MEMBER_NO"/>
+       <result property="couponCount"       column="COUPON_COUNT"/>
    </resultMap>
+   	<!-- 아이디 중복 체크 -->
+<select id="idChk" resultType="int">
+	SELECT COUNT(*) FROM MEMBER_TBL
+	WHERE MEMBER_ID = #{memberId}
+</select>
+   	<!-- 비밀번호 중복 체크 -->
+<select id="passChk" resultType="int">
+	SELECT COUNT(*) FROM MEMBER_TBL
+	WHERE MEMBER_ID = #{memberId}
+	AND MEMBER_PWD= #{memberPwd}
+</select>
+   
+   <select id="selectMemberInfo" resultMap="memberResultMap">
+   		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
+   		</select>
    <select id="selectCheckOne" resultType="_int">
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
    <insert id="insertMember">
       INSERT INTO MEMBER_TBL
-      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT)
+      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT, NULL, 0)
    </insert>
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
@@ -36,9 +53,10 @@
       WHERE MEMBER_ID = #{memberId }
    </update>
    <update id="deleteMember" parameterType="string">
-      UPDATE MEMBER_TBL
-      SET M_STATUS = 'N'
+     	DELETE FROM MEMBER_TBL
+     
       WHERE MEMBER_ID = #{memberId }
+      
    </update>
    <select id="selectLoginOne" resultMap="memberResultMap">
       SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER_TBL

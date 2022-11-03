@@ -16,4 +16,9 @@ public interface MemberService {
 	public int modifyMember(Member member);
 	// removeMember
 	public int removeMember(String memberId);
+	
+	public Member selectMemberInfo(String memberId);
+	
+	public int idChk(String memberId);
+	
 }

@@ -34,6 +34,12 @@ public class MemberController {
 		return "member/join";
 		// /WEB-INF/views/member/join.jsp
 	}
+	//마이페이지 수정
+//		@RequestMapping(value="/mypage/modifyView", method=RequestMethod.GET)
+//		public String memberModifyView(Model model) {
+//			return "mypage/modify";
+//			// /WEB-INF/views/member/join.jsp
+//		}
 	// login 페이지
 	@RequestMapping(value="/member/loginView.kh", method=RequestMethod.GET)
 	public String memberLoginView(Model model) {
@@ -156,11 +162,24 @@ public class MemberController {
 			mv.addObject("msg", "로그아웃 실패");
 			mv.setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
 
+	@RequestMapping(value="/mypage/modifyView", method=RequestMethod.GET)
+	public ModelAndView memberModifyView(ModelAndView mv
+			,HttpSession session) {
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		Member memberInfo = mService.selectMemberInfo(memberId);
+		mv.addObject("member", member);
+		mv.setViewName("mypage/modify");
+		
+		return mv;
+		// /WEB-INF/views/member/join.jsp
+	}
 	// 회원 정보 수정
-	@RequestMapping(value="/member/modify.kh", method=RequestMethod.POST)
+	@RequestMapping(value="/member/modify", method=RequestMethod.POST)
 	public ModelAndView modifyMember(
 			@ModelAttribute Member member
 			, @RequestParam("post") String post
@@ -174,7 +193,7 @@ public class MemberController {
 				// redirect
 				// return "redirect:/home.kh";
 //				return "redirect:/home.kh";
-				mv.setViewName("redirect:/home.kh");
+				mv.setViewName("/home");
 			}else {
 //				model.addAttribute("msg", "회원 정보가 수정되지 않았습니다.");
 //				return "common/errorPage";
@@ -189,7 +208,7 @@ public class MemberController {
 		return mv;
 	}
 	// 회원정보삭제 -> 회원탈퇴 기능
-	@RequestMapping(value="/member/remove.kh", method=RequestMethod.GET)
+	@RequestMapping(value="/member/remove", method=RequestMethod.GET)
 	public ModelAndView removeMember(HttpSession session
 //			, Model model
 			, ModelAndView mv) {
@@ -239,7 +258,15 @@ public class MemberController {
 		}
 		return mv;
 	}
-
+	
+	//아이디 중복검사
+	@ResponseBody
+	@RequestMapping(value="/idChk",method=RequestMethod.POST)
+	public String idChk(
+			@RequestParam("memberId") String memberId) {
+		int result = mService.idChk(memberId);
+		return String.valueOf(result);
+}
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
 	public String duplicateIdCheck(

@@ -28,7 +28,7 @@
             <div class="panel-body">
                 <form id="login-form" method="post" action="/loginProcess.do">
                     <div>
-                        <input type="text"  name="id"	class="form-control" name="아이디 입력" placeholder="Username" autofocus>
+                        <input type="text"  name="id"	class="form-control" name="닉네임 입력" placeholder="닉네임 설정" autofocus>
                     </div>
                     <div>
                         <button type="submit" class="form-control btn btn-primary">로그인</button>

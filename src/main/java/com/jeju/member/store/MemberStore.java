@@ -3,6 +3,7 @@ package com.jeju.member.store;
 
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import com.jeju.member.domain.Member;
 
@@ -19,4 +20,8 @@ public interface MemberStore {
 	public int updateMember(SqlSession session, Member member);
 	// deleteMember
 	public int deleteMember(SqlSession session, String memberId);
+	
+	public Member selectMemberInfo(SqlSessionTemplate session, String memberId);
+
+	public int idChk(SqlSession session, String memberId);
 }
