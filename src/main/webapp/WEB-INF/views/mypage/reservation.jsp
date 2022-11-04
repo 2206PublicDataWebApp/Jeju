@@ -339,6 +339,7 @@
 		    									//삭제 ajax 코드 
 		    									
 		    									$.ajax({
+		    										url : "/coupon/couponUseCheck",
 		    										
 		    									});
 		    								}else {
