@@ -2,14 +2,16 @@ package com.jeju.pagination.domain;
 
 import lombok.*;
 
-@Getter
+/*@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString*/
 public class Pagination {
     private int currentPage;
     private int maxPage;
     private int startNavi;
     private int endNavi;
+
+
 }
