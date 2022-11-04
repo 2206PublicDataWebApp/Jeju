@@ -40,10 +40,20 @@ public class ReviewServiceImpl implements ReviewService{
 	public void removeReview(Integer reviewNo) {
 		rStore.deleteReview(session, reviewNo);
 	}
-
+	
 	@Override
 	public List<Review> showAllReview() {
 		List<Review> reviewList = rStore.showAllReview(session);
 		return reviewList;
+	}
+	// 리뷰 등록
+	@Override
+	public void registerReview(Review review) {
+		rStore.registerReview(session, review);
+	}
+	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
+	@Override
+	public void modifyReviewCheck(Review review) {
+		rStore.updateReviewCheck(session, review);
 	}
 }

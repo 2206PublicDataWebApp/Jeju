@@ -74,8 +74,8 @@
 		                            <img src="${pension.filePath }" alt="">
 		                        </div>
 		                        <h3>${pension.pensionName }</h3>
-		                        <h5><i class="fa-solid fa-comments"></i>후기 ${pension.reviewCount }개</h4>
-		                        <a class="btn btn-outline-success" href="/pension/detailView2?pensionNo=${pension.pensionNo }&page=${currentPage}">바로가기</a>
+		                        <h5><i class="fa-solid fa-comments"></i>후기 ${pension.reviewCount }개</h5>
+		                        <a class="btn btn-outline-success" href="/pension/detailView2?pensionNo=${pension.pensionNo }">바로가기</a>
 		                    </div>
 		                </div>
 	                </c:forEach>

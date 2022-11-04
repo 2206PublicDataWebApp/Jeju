@@ -17,6 +17,7 @@
 		<result property="reStartDate" column="RE_START_DATE"/>
 		<result property="reEndDate" column="RE_END_DATE"/>
 		<result property="rePayDate" column="RE_PAY_DATE"/>
+		<result property="reviewCheck" column="REVIEW_CHECK"/>
 	</resultMap>
 	
 	<insert id="insertReservation">
@@ -29,7 +30,8 @@
 	</select>
 
 	<insert id="insertReservationWait">
-		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 0, #{roomNo}, #{rePensionNo}, 0, #{rePrice}, #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT)
+		INSERT INTO RESERVATION_TBL 
+		VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 0, #{roomNo}, #{rePensionNo}, 0, #{rePrice}, #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT)
 	</insert>
 
 	<!-- 결제대기 수동삭제 -->
@@ -41,7 +43,13 @@
 	<delete id="removeWaitReserve">
 		DELETE FROM RESERVATION_TBL WHERE RESERVATION_NAME = #{reservationName}
 	</delete>
-
+	
+	<!-- 리뷰 작성시 REVIEW_CHECK에 1 넣기 -->
+	<update id="updateReviewCheck">
+		UPDATE RESERVATION_TBL SET REVIEW_CHECK = 1 
+		WHERE RE_PENSION_NO = #{pensionNo} AND MEMBER_ID = #{memberId}
+	</update>
+	
 	<select id="selectWaitList" resultMap="reservationResultMap">
 		SELECT * FROM RESERVATION_TBL WHERE MEMBER_ID = #{memberId} AND R_STATUS = 0
 	</select>

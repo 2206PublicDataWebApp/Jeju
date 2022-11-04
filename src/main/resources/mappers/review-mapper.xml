@@ -26,7 +26,7 @@
 	</select>
 	<!-- 해당 아이디 후기 전부 가져오기 -->
 	<select id="selectReview" resultMap="reviewResultMap">
-		SELECT * FROM REVIEW_TBL WHERE MEMBER_ID = #{memberId}
+		SELECT * FROM REVIEW_TBL WHERE MEMBER_ID = #{memberId} ORDER BY REGDATE DESC
 	</select>
 	
 	<select id="selectReviewRank" resultMap="reviewCountMap">
@@ -46,8 +46,11 @@
 	<select id="adminShowAllReview" resultMap="reviewResultMap">
 		SELECT MEMBER_ID, REGDATE, REVIEW_CONTENTS FROM REVIEW_TBL ORDER BY REVIEW_NO DESC
 	</select>
-
-
+	<!-- 리뷰 등록 -->
+	<insert id="insertReview">
+		INSERT INTO REVIEW_TBL
+		VALUES(SEQ_REPLY.NEXTVAL, #{memberId}, DEFAULT,DEFAULT,#{reviewContents},#{reviewCount},#{pensionNo})
+	</insert>
 	<!-- 리뷰 수정 -->
 	<update id="updateReview">
 		UPDATE REVIEW_TBL SET REVIEW_CONTENTS = #{reviewContents}, REGDATE = DEFAULT

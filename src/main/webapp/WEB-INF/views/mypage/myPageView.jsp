@@ -96,7 +96,7 @@
 		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
 		                        </div>
 		                        <h3>이용내역</h3>
-		                        <a class="btn btn-outline-success" id="reservationList">바로가기</a>
+		                        <a class="btn btn-outline-success" href="#" id="reservationList">바로가기</a>
 		                    </div>
 		                </div>
 	            	<c:if test="${!empty sessionScope.loginUser }">

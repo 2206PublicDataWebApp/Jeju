@@ -57,9 +57,20 @@ public class ReviewController {
 		mv.setViewName("myPageReview/reviewView");
 		return mv;
 	}
+	// 리뷰 등록
+	@PostMapping("/review/regist")
+	public ModelAndView RegistReview(
+			ModelAndView mv
+			,@ModelAttribute Review review) {
+		System.out.println(review);
+		rService.registerReview(review);
+		rService.modifyReviewCheck(review);
+		mv.setViewName("redirect:/mypage/review");
+		return mv;
+	}
 	// 리뷰 수정
 	@PostMapping("/review/modify")
-	public ModelAndView ReviewModify(
+	public ModelAndView ModifyReview(
 			ModelAndView mv
 			,@ModelAttribute Review review) {
 		rService.modifyReview(review);
@@ -69,7 +80,7 @@ public class ReviewController {
 	
 	// 리뷰 삭제
 	@GetMapping("/review/remove")
-	public String ReviewRemove(@RequestParam("reviewNo") Integer reviewNo) {
+	public String RemoveReview(@RequestParam("reviewNo") Integer reviewNo) {
 		rService.removeReview(reviewNo);
 		return "redirect:/mypage/review";
 	}

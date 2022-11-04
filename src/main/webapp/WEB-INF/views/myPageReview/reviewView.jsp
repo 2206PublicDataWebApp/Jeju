@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
+    <style>
+    	p:after {
+		   content: none;
+		}
+    </style>
 </head>
 <body>
     <header class="container-flui">
@@ -62,7 +67,7 @@
         <div class="container">
             <div class="row session-title"><h2>${rList[0].memberId }님의 후기 ${totalCount }개 <i class="fa-solid fa-comments"></i></h2></div>
             <div class="row ro-clo">
-            	<c:forEach items="${rList }" var="review">
+            	<c:forEach items="${rList }" var="review" varStatus="vs">
 	            	<div class="col-12  col-md-6 col-lg-4">
 	                    <div class="shado-2 card-b">
 	                        <p>${review.reviewContents }</p>
@@ -72,12 +77,12 @@
 	                            <a class="btn btn-outline-success" href="/pension/detailView2?pensionNo=${review.pensionNo }">작성일 ${review.regDate } 숙소로 이동</a>
 	                        </div><br><br>
 	                    </div>
-	                    <button class="btn btn-outline-success" data-toggle='modal' data-target='#modifyModal'>수정</button>
+	                    <button class="btn btn-outline-success" data-toggle='modal' data-target='#modifyModal${vs.index }'>수정</button>
 	                    <button class="btn btn-outline-danger" onclick="removeReview(${review.reviewNo})">삭제</button>
 	                </div>
                     <form action="/review/modify" method="post">
                     	<input type="hidden" name="reviewNo" value="${review.reviewNo }">
-			            <div class="modal fade" id="modifyModal" role="dialog">
+			            <div class="modal fade" id="modifyModal${vs.index }" role="dialog">
 						  <div class="modal-dialog">
 						      <div class="modal-content">
 						          <div class="modal-header">
