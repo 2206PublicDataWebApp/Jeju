@@ -77,4 +77,16 @@ public class MemberStoreLogic implements MemberStore{
 		int result = session.selectOne("MemberMapper.checkEmailDuplicate", memberEmail);
 		return result;
 	}
+
+	@Override
+	public List<Member> findIdByEmail(SqlSession session, String memberEmail) {
+		List<Member> sList = session.selectList("MemberMapper.findIdByEmail", memberEmail);
+		return sList;
+	}
+
+	@Override
+	public List<Member> findPwdByEmail(SqlSession session, String memberEmail) {
+		List<Member> sList = session.selectList("MemberMapper.findPwdByEmail", memberEmail);
+		return sList;
+	}
 }

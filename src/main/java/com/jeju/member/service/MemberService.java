@@ -20,9 +20,11 @@ public interface MemberService {
 	public int modifyMember(Member member);
 	// removeMember
 	public int removeMember(String memberId);
+	//아이디찾기 리스트
+	public List<Member> findIdByEmail(String memberId);
+	//비밀번호찾기
+	public List<Member> findPwdByEmail(String memberPwd);
 	
-		// 아이디 찾기
-		public String findId(String memberName, String memberPhone);
 	
 
 

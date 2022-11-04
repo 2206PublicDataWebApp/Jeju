@@ -1,6 +1,7 @@
 
 package com.jeju.member.controller;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -121,7 +122,7 @@ public class MemberController {
 		/* 이메일 보내기 */
 		String setFrom = "lhr7517@naver.com";
 		String toMail = email;
-		String title = "회원가입 인증 이메일 입니다.";
+		String title = " 인증 이메일 입니다.";
 		String content =
 				"홈페이지를 방문해주셔서 감사합니다." +
 						"<br><br>" +
@@ -290,7 +291,38 @@ public class MemberController {
 //			return result+"";
 		return String.valueOf(result);
 	}
+	//아이디 찾기
+	@RequestMapping(value="/member/findId",method=RequestMethod.GET)
+	public String findId() {
+		return "/member/findId";
+	}
 	
+	//어아디 찾기 결과창
+	@RequestMapping(value="/member/findIdResult", method=RequestMethod.POST)
+	public ModelAndView findIdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findIdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findIdResult");
+		return mv;
+	}
+	
+	//비번 찾기 페이지 
+	@RequestMapping("/member/findPwd")
+	public String findPwd() {
+		return "/member/findPwd";
+	}
+	//비번 찾기 결과창
+	@RequestMapping(value="/member/findPwdResult", method=RequestMethod.POST)
+	public ModelAndView findPwdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findPwdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findPwdResult");
+		return mv;
+	}
 	// 마이페이지로 이동
 	@RequestMapping(value="/mypage/myPage", method=RequestMethod.GET)
 	public String myPageView() {

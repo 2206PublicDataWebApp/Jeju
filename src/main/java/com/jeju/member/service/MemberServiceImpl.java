@@ -83,18 +83,23 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-	
-
-	@Override
-	public String findId(String memberName, String memberPhone) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int checkDupEmail(String memberEmail) {
 		int result = mStore.checkDupEmail(session, memberEmail);
 		return result;
+	}
+
+	@Override
+	public List<Member> findIdByEmail(String memberEmail) {
+		List<Member> sList = mStore.findIdByEmail(session, memberEmail);
+		return sList;
+	}
+
+	@Override
+	public List<Member> findPwdByEmail(String memberEmail) {
+		List<Member> sList = mStore.findPwdByEmail(session, memberEmail);
+		return sList;
 	}
 
 //	@Override

@@ -247,7 +247,7 @@ span.error {
 										});				
 							 });
 
-					 
+							 $(".email_auth_btn").click(function() {
 						var email = $('#email').val();
 						if (email == '') {
 							alert("이메일을 입력해주세요.");
@@ -281,6 +281,7 @@ span.error {
 							alert("일치합니다!");
 						}
 					});
+				});
 					
 				</script>
 </body>

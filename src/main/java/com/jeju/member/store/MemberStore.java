@@ -25,7 +25,10 @@ public interface MemberStore {
 	public int updateMember(SqlSession session, Member member);
 	// deleteMember
 	public int deleteMember(SqlSession session, String memberId);
-
+	
+	public List<Member> findIdByEmail(SqlSession session, String memberEmail);
+	
+	public List<Member> findPwdByEmail(SqlSession session, String memberEmail);
 	// 관리자 전체멤버 조회
 	public List<Member> showAllMember(SqlSession session);
 
