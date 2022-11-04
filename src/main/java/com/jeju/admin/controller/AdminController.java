@@ -42,8 +42,8 @@ public class AdminController {
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
     public ModelAndView showAdminPage
-                        (ModelAndView modelAndView/*,
-                         @RequestParam(value = "page", required=false) Integer page*/
+                        (ModelAndView modelAndView,
+                         @RequestParam(value = "page", required=false) Integer page
                          ){
         log.info("어드민 페이지 접속 시도 {}", modelAndView);
 
@@ -65,8 +65,8 @@ public class AdminController {
             List<Member> memberPageList = memberService.pagingShowAllMember(pagination.getCurrentPage(), memberLimit);
             modelAndView.addObject("memberPageList", memberPageList);
         }
-        modelAndView.addObject("pagination", pagination);*/
-
+        modelAndView.addObject("pagination", pagination);
+*/
 
 
 
@@ -82,6 +82,7 @@ public class AdminController {
     // 관리자페이지 회원탈퇴
     @GetMapping("/member/remove")
     public String removeAdminMember(@RequestParam("memberNo") Integer memberNo){
+        log.info("memberNo 데이터 확인 {}", memberNo);
         memberService.removeAdminMember(memberNo);
         return "redirect:/admin/adminPage";
     }

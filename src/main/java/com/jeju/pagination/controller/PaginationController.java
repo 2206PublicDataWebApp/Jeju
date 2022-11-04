@@ -1,12 +1,15 @@
 package com.jeju.pagination.controller;
 
 import com.jeju.pagination.domain.Pagination;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 public class PaginationController {
 
     private final Logger logger = LoggerFactory.getLogger(PaginationController.class);
+
 
     public Pagination paginationList(
             Integer page,
