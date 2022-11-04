@@ -8,6 +8,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeju.coupon.domain.Coupon;
+import com.jeju.coupon.domain.MyCoupon;
 import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
@@ -129,6 +131,18 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<Reservation> expirationReserveList(String memberId) {
 		List<Reservation> sList = aStore.expirationList(session, memberId);
 		return sList;
+	}
+	//내 쿠폰정보 가져오기
+	@Override
+	public List<MyCoupon> selectAllMyCoupon(String memberId) {
+		List<MyCoupon> cList = aStore.selectAllMyCoupon(session, memberId);
+		return cList;
+	}
+
+	@Override
+	public Coupon selectAllCouponList(String couponCode) {
+		Coupon cList = aStore.selectAllCouponList(session, couponCode);
+		return cList;
 	}
 
 

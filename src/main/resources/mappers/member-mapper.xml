@@ -20,9 +20,12 @@
       <result property="useCount"    column="USE_COUNT"/>
       <result property="gender"       column="GENDER"/>   
       <result property="birthDate"    column="BIRTH_DATE"/>
-      <result property="mStatus"       column="M_STATUS"/>   
+      <result property="mStatus"       column="M_STATUS"/>
        <result property="memberNo"       column="MEMBER_NO"/>
        <result property="couponCount"       column="COUPON_COUNT"/>
+      <result property="mStatus"       column="M_STATUS"/>
+      <result property="memberNo"       column="MEMBER_NO"/>
+      <result property="couponCount"       column="COUPON_COUNT"/>
    </resultMap>
    	<!-- 아이디 중복 체크 -->
 <select id="idChk" resultType="int">
@@ -74,16 +77,22 @@
       WHERE MEMBER_EMAIL = #{memberEmail }
    </select>
 
-   <!--관리자 전체 멤버 리스트 조회-->
-<select id="adminShowAllMember" resultMap="memberResultMap">
-   SELECT * FROM MEMBER_TBL WHERE M_STATUS = 'Y' ORDER BY MEMBER_ID DESC
-</select>
+	   <!--관리자 전체 멤버 리스트 조회-->
+	<select id="adminShowAllMember" resultMap="memberResultMap">
+	   SELECT * FROM MEMBER_TBL WHERE M_STATUS = 'Y' ORDER BY MEMBER_ID DESC
+	</select>
 
    <!-- 관리자 멤버 삭제 -->
    <update id="deleteAdminMember" parameterType="string">
       DELETE FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId }
    </update>
 
+   <update id="increaseCouponCount">
+   	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT+1 WHERE MEMBER_ID = #{memberId}
+   </update>
 
+	<update id="decreaseCouponCount">
+   	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT-1 WHERE MEMBER_ID = #{memberId}
+   </update>
 
 </mapper>

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.jeju.coupon.domain.Coupon;
+import com.jeju.coupon.domain.MyCoupon;
 import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
@@ -95,6 +97,18 @@ public class ReservationStoreLogic implements ReservationStore{
 	public List<Reservation> expirationList(SqlSession session, String memberId) {
 		List<Reservation> sList = session.selectList("ReservationMapper.selectExpirationList", memberId);
 		return sList;
+	}
+
+	@Override
+	public List<MyCoupon> selectAllMyCoupon(SqlSession session, String memberId) {
+		List<MyCoupon> cList = session.selectList("MyCouponMapper.selectAllMyCoupon", memberId);
+		return cList;
+	}
+
+	@Override
+	public Coupon selectAllCouponList(SqlSession session, String couponCode) {
+		Coupon cList = session.selectOne("CouponMapper.selectOneByCoupon", couponCode);
+		return cList;
 	}
 
 }

@@ -26,10 +26,17 @@ public class PayController {
 			,@RequestParam("payPrice") int payPrice
 			,@RequestParam("payPensionNo") Integer payPensionNo
 			,HttpSession session) {
+		String memberId = "";
 		Member member = (Member) session.getAttribute("loginUser");
-		String memberId = member.getMemberId();
 		Pay pay = new Pay();
-		pay.setMemberId(memberId);
+		if(member != null) {
+			memberId = member.getMemberId();
+			pay.setMemberId(memberId);
+		}else {
+			memberId = "비회원";
+			pay.setMemberId(memberId);
+		}
+		
 		pay.setPayId(payId);
 		pay.setRoomNo(roomNo);
 		pay.setPayPrice(payPrice);

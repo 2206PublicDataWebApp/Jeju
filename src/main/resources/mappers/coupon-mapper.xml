@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="CouponMapper">
+	<resultMap type="Coupon" id="couponResultMap">
+		<result property="couponCode" 	   column="COUPON_CODE"/>
+		<result property="salePrice" 	   column="SALE_PRICE"/>
+		<result property="cStatus" 		   column="C_STATUS"/>
+		<result property="couponReDate"    column="COUPON_RE_DATE"/>
+		<result property="couponEndDate"   column="COUPON_END_DATE"/>
+		<result property="couponStartDate" column="COUPON_START_DATE"/>
+		<result property="count" 		   column="COUPON_COUNT"/>
+		<result property="couponComments"  column="COUPON_COMMENTS"/>
+		<result property="couponTitle" 	   column="COUPON_TITLE"/>
+		<result property="couponImage" 	   column="COUPON_IMAGE"/>
+	</resultMap>
+	
+	<select id="selectAllEventCoupon" resultMap="couponResultMap">
+		SELECT * FROM COUPON
+	</select>
+
+	<select id="selectOneByCoupon" resultMap="couponResultMap">
+		SELECT * FROM COUPON WHERE COUPON_CODE = #{couponCode}
+	</select>
+	
+	<update id="decreaseCouponCount">
+		UPDATE COUPON SET COUPON_COUNT = COUPON_COUNT-1 WHERE COUPON_CODE = #{couponCode}
+	</update>
+</mapper>

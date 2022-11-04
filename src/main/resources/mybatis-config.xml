@@ -23,7 +23,8 @@
 		<typeAlias type="com.jeju.jjim.domain.Jjim" 				alias="Jjim"/>
 		<typeAlias type="com.jeju.member.domain.Member" 	alias="Member"/>
 		<typeAlias type="com.jeju.admin.domain.Admin" 	alias="Admin"/>
-
+		<typeAlias type="com.jeju.coupon.domain.Coupon" 	alias="Coupon"/>
+		<typeAlias type="com.jeju.coupon.domain.MyCoupon" 	alias="MyCoupon"/>
 		<typeAlias type="com.jeju.pay.domain.Pay" 	alias="Pay"/>
 	</typeAliases>
 
@@ -40,7 +41,8 @@
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/review-mapper.xml"/>
 		<mapper resource="mappers/member-mapper.xml"/>
-
+		<mapper resource="mappers/coupon-mapper.xml"/>
+		<mapper resource="mappers/myCoupon-mapper.xml"/>
 		<mapper resource="mappers/jjim-mapper.xml"/>
 	</mappers>
 

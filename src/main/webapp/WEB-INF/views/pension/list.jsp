@@ -78,6 +78,7 @@
 						<li><a href="/pension/list">숙소 리스트</a></li>
 						<li><a href="/community/chat">커뮤니티</a></li>
 						<li><a href="/mypage/myPage">마이페이지</a></li>
+						<li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
 						<li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
 					</ul>
 				</div>
@@ -131,43 +132,45 @@
    </div>
 </div>
 <br>
-<div class="slider-detail" style="background-color : white;">
+<!-- <div class="slider-detail" style="background-color : white;"> -->
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item ">
-                    <img class="d-block w-80" src="/resources/images/쿠폰1.PNG" alt="First slide" style="margin : 0 auto;">
-                    <div class="carousel-caption fvgb d-none d-md-block">
-                        <div class="row vbh">
-                            <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="couponPage();" style="color:white">쿠폰 페이지로 이동</a></div>
-                        </div>
-                    </div>
-                </div>
+<!--         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"> -->
+<!--             <ol class="carousel-indicators"> -->
+<!--                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
+<!--                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+<!--             </ol> -->
+<!--             <div class="carousel-inner"> -->
+<!--                 <div class="carousel-item "> -->
+<!--                     <img class="d-block w-80" src="/resources/images/쿠폰5.PNG" alt="First slide" style="margin : 0 auto;"> -->
+<!--                     <div class="carousel-caption fvgb d-none d-md-block"> -->
+<!--                         <div class="row vbh"> -->
+<!--                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="couponPage();" style="color:white">쿠폰 페이지로 이동</a></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+                
+<!--                 <div class="carousel-item active"> -->
+<!--                     <img class="d-block w-80" src="/resources/images/쿠폰7.PNG" alt="Third slide" style="margin : 0 auto;"> -->
+<!--                     <div class="carousel-caption vdg-cur d-none d-md-block"> -->
+<!--                         <div class="row vbh"> -->
+<!--                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="myCoupon();" style="color:white">내 쿠폰 확인하기</a></div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+                
+                
 
-                <div class="carousel-item active">
-                    <img class="d-block w-80" src="/resources/images/쿠폰2.PNG" alt="Third slide" style="margin : 0 auto;">
-                    <div class="carousel-caption vdg-cur d-none d-md-block">
-                        <div class="row vbh">
-                            <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="" style="color:white">내 쿠폰 확인하기</a></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
+<!--             </div> -->
+<!--             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> -->
+<!--                 <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+<!--                 <span class="sr-only">Previous</span> -->
+<!--             </a> -->
+<!--             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> -->
+<!--                 <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+<!--                 <span class="sr-only">Next</span> -->
+<!--             </a> -->
+<!--         </div> -->
+<!--     </div> -->
 
 <section id="about" class="contianer-fluid about-us" style="position : relative; left : 50px;">
    <div class="container-fluid" id="test5">
@@ -665,22 +668,6 @@
 	  }
 	}
 
-	function couponPage() {
-	   $.ajax({
-			url : "/reservation/checkSessionId",
-			type : "post",
-			success : function(result) {
-				if(result != "") {
-					location.href="/coupon/couponList";
-				}else {
-					alert("로그인 후 이용가능합니다.");
-				}
-			}
-	});
-	}
-
-
-
 	(function () {
 	   'use strict';
 
@@ -701,6 +688,11 @@
 	   };
 	   window.onload = init;
 	})();
+	
+	function myCoupon() {
+		location.href="/coupon/couponList";
+	}
+	
 </script>
 </body>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>

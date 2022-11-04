@@ -139,6 +139,16 @@
 		                        <a class="btn btn-outline-success" href="/mypage/jjimView">바로가기</a>
 		                    </div>
 		                </div>
+		                <div class="col-lg-4 col-md-6">
+		                    <br><br><br><br><br>
+		                    <div class="dest-col">
+		                        <div class="dest-img">
+		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                        </div>
+		                        <h3>내 쿠폰함</h3>
+		                        <a class="btn btn-outline-success" href="/coupon/couponList">바로가기</a>
+		                    </div>
+		                </div>
 		        	</c:if>
 	            </div>
 	       </div>

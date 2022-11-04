@@ -2,6 +2,7 @@ package com.jeju.reservation.controller;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jeju.coupon.domain.Coupon;
+import com.jeju.coupon.domain.MyCoupon;
 import com.jeju.member.domain.Member;
 import com.jeju.pension.domain.Pension;
 import com.jeju.reservation.domain.Reservation;
@@ -35,13 +39,27 @@ public class ReservationController {
 			,@RequestParam("startDate") String startDate
 			,@RequestParam("endDate") String endDate
 			,@RequestParam("price") String price
-			,Model model) throws ParseException {
+			,Model model
+			,HttpSession session) throws ParseException {
 		//숙소이름 가져오는 작업
 		DecimalFormat decFormat = new DecimalFormat("###,###");
 		String format1 = (startDate.replace("-", "")).substring(4,6);	//현재 20220101에서 앞에 월만 짜름
 		String format2 = (startDate.replace("-", "")).substring(6);	//현재 20220101에서 뒤에 일자만 자름
 		String format3 = (endDate.replace("-", "")).substring(4,6);	//현재 20220101에서 앞에 월만 짜름
 		String format4 = (endDate.replace("-", "")).substring(6);	//현재 20220101에서 뒤에 일자만 자름
+		Member member = (Member) session.getAttribute("loginUser");
+		if(member != null) {
+			String memberId = member.getMemberId();
+			List<Coupon> cList = new ArrayList<Coupon>();
+			//쿠폰 정보 가져옴
+			List<MyCoupon> myList = aService.selectAllMyCoupon(memberId);
+			for(int i=0; i<myList.size(); i++) {
+				Coupon coupon = aService.selectAllCouponList(myList.get(i).getCouponCode());		
+				cList.add(i, coupon);
+			}
+			mv.addObject("cList", cList);
+		}
+		
 		//펜션 정보 가져옴
 		Pension pension = aService.selectOneByPension(pensionNo);
 		//룸 정보 가져옴
@@ -88,10 +106,17 @@ public class ReservationController {
 	@RequestMapping(value = "/reservation/success", method = RequestMethod.POST)
 	public String addReservation(
 			@ModelAttribute Reservation reservation
-			,HttpSession session) {		
+			,HttpSession session) {	
+		String memberId = "";
 		Member member = (Member) session.getAttribute("loginUser");
-		String memberId = member.getMemberId();
-		reservation.setMemberId(memberId);
+		if(member != null) {
+			memberId = member.getMemberId();
+			reservation.setMemberId(memberId);
+		}else {
+			memberId = "비회원";
+			reservation.setMemberId(memberId);
+		}
+		
 		Pension imageList = aService.selectImage(reservation.getRePensionNo());
 		reservation.setReFilePath(imageList.getFilePath());
 		reservation.setRePensionName(imageList.getPensionName());
@@ -192,8 +217,24 @@ public class ReservationController {
 		return String.valueOf(count);		
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="/applyCoupon", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String applyCoupon(
+			@RequestParam("salePrice") String salePrice,
+			@RequestParam("rePrice") String rePrice) {
+		String result = "";
+		DecimalFormat decFormat = new DecimalFormat("###,###");
+		int repriceNum = Integer.parseInt(rePrice.replaceAll("[^0-9]",""));
+		int salePriceNum = Integer.parseInt(salePrice.replaceAll("[^0-9]",""));
+		if(salePrice.contains("%")) {		
+			int no =  repriceNum / 10; 			
+			no = ((no * salePriceNum ));
+			result = String.valueOf(decFormat.format(repriceNum - no));
+		}else {
+			result = String.valueOf(decFormat.format(repriceNum - Integer.parseInt(salePrice)));
+		}	
+		return result;
+	}
 	
 	
 	
