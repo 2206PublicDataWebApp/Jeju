@@ -1,6 +1,7 @@
 package com.jeju.member.store;
 
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jeju.member.domain.Member;
 import com.jeju.member.store.MemberStore;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -64,6 +66,18 @@ public class MemberStoreLogic implements MemberStore{
 		return result;
 	}
 
+	// 관리자 페이징용 전체조회
+	@Override
+	public List<Member> pagingShowAllMember(SqlSessionTemplate session, int currentPage, int memberLimit) {
+		int offset = (currentPage - 1) * memberLimit;
+		RowBounds rowBounds = new RowBounds(offset, memberLimit);
+
+		List<Member> memberList = session.selectList("MemberMapper.pagingShowAllMember", null, rowBounds);
+		return memberList;
+	}
+
+
+
 	// 관리자 전체멤버 조회
 	@Override
 	public List<Member> showAllMember(SqlSession session){
@@ -71,8 +85,20 @@ public class MemberStoreLogic implements MemberStore{
 		return memberList;
 	}
 
+	// 관리자 회원탈퇴
 	@Override
-	public void removeAdminMember(SqlSessionTemplate session, String memberId) {
-		session.delete("MemberMapper.deleteAdminMember", memberId);
+		public void removeAdminMember(SqlSessionTemplate session, Integer memberNo) {
+		session.delete("MemberMapper.deleteAdminMember", memberNo);
+		}
+
+	// 관리자페이지 회원수 총합
+	@Override
+	public int countAllMember(SqlSessionTemplate session, String searchCondition, String searchValue) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchValue", searchValue);
+		int count = session.selectOne("MemberMapper.countAllMember", paramMap);
+		return count;
 	}
+
 }

@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jeju.member.domain.Member;
 import com.jeju.member.service.MemberService;
+import com.jeju.pagination.controller.PaginationController;
+import com.jeju.pagination.domain.Pagination;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.service.PensionService;
 import com.jeju.reservation.domain.Reservation;
@@ -47,8 +49,11 @@ public class AdminController {
 
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
-    public ModelAndView showAdminPage(ModelAndView modelAndView){
-//        log.info("어드민 페이지 접속 시도 {}", modelAndView);
+    public ModelAndView showAdminPage
+                        (ModelAndView modelAndView,
+                         @RequestParam(value = "page", required=false) Integer page
+                         ){
+        log.info("어드민 페이지 접속 시도 {}", modelAndView);
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();
@@ -58,6 +63,18 @@ public class AdminController {
         List<Reservation> reservationList = reservationService.showAllReservation();
         // 리뷰내역조회
         List<Review> reviewList = reviewService.showAllReview();
+
+        // 회원목록 페이징
+        /*int getTotalCount = memberService.countAllMember("", "");
+        int memberLimit = 10;
+        PaginationController paginationController = new PaginationController();
+        Pagination pagination = paginationController.paginationList(page, getTotalCount, memberLimit);
+        if(getTotalCount > 0) {
+            List<Member> memberPageList = memberService.pagingShowAllMember(pagination.getCurrentPage(), memberLimit);
+            modelAndView.addObject("memberPageList", memberPageList);
+        }
+        modelAndView.addObject("pagination", pagination);
+*/
 
 
 
@@ -71,11 +88,12 @@ public class AdminController {
     }
 
     // 관리자페이지 회원탈퇴
-    @GetMapping("/member/remove")
-    public String removeAdminMember(@RequestParam("memberId") String memberId){
-        memberService.removeAdminMember(memberId);
-        return "redirect:/admin/adminPage";
-    }
+        @GetMapping("/member/remove")
+        public String removeAdminMember(@RequestParam("memberNo") Integer memberNo){
+            // log.info("memberNo 데이터 확인 {}", memberNo);
+            memberService.removeAdminMember(memberNo);
+            return "redirect:/admin/adminPage";
+        }
 
     // 관리자페이지 숙소 삭제
     @GetMapping("/pension/remove")
@@ -90,4 +108,6 @@ public class AdminController {
         reviewService.removeAdminReview(reviewNo);
         return "redirect:/admin/adminPage";
     }
+
+
 }
