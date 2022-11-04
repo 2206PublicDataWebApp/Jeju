@@ -482,7 +482,8 @@
  	     		        				"rePensionNo" : '${r.refPensionNo}',
  	     		        				"rePrice" : rsp.paid_amount,
  	     		        				"reStartDate" : '${startDate}',
- 	     		        				"reEndDate" : '${endDate}'
+ 	     		        				"reEndDate" : '${endDate}',
+ 	     		        				"couponCode" : codeBtn2
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
@@ -581,7 +582,8 @@
     		   	        				"rePensionNo" : '${r.refPensionNo}',
     		   	        				"rePrice" : '${price}',
     		   	        				"reStartDate" : '${startDate}',
-    		   	        				"reEndDate" : '${endDate}'  	       	        				
+    		   	        				"reEndDate" : '${endDate}',
+    		   	        				"couponCode" : codeBtn2
     		   	        			},
     		   	        			success : function(result) {   		   	        				
     		   	     		    			var keyName = sessionId;	// 키이름은 time
@@ -610,20 +612,20 @@
     		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
     		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
     		   									console.log("로컬 저장 완료! 로컬확인해봐");
-//     		   									if(codeBtn2 != "") {
-//     	 	     		        					$.ajax({
-//     	 	    	     		   						url : "/coupon/decreaseCoupon",
-//     	 	    	     		   						data : {
-//     	 	    	     		   							"couponCode" : codeBtn2
-//     	 	    	     		   						},
-//     	 	    	     		   						type : "post",
-//     	 	    	     		   						success : function(result) {
-//     	 	    	     		   							if(result != "성공") {
-//     	 	    	     		   							alert("쿠폰감소 실패!");
-//     	 	    	     		   							}
-//     	 	    	     		   						}
-//     	 	    	     		   					});
-//     	 	     		        				}
+    		   									if(codeBtn2 != "") {
+    	 	     		        					$.ajax({
+    	 	    	     		   						url : "/coupon/decreaseCoupon",
+    	 	    	     		   						data : {
+    	 	    	     		   							"couponCode" : codeBtn2
+    	 	    	     		   						},
+    	 	    	     		   						type : "post",
+    	 	    	     		   						success : function(result) {
+    	 	    	     		   							if(result != "성공") {
+    	 	    	     		   							alert("쿠폰감소 실패!");
+    	 	    	     		   							}
+    	 	    	     		   						}
+    	 	    	     		   					});
+    	 	     		        				}
     		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");	
     		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
     		   	        			}

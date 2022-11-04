@@ -337,6 +337,10 @@
 		    									window.localStorage.removeItem(keyName);
 		    									console.log("삭제 완료!!");
 		    									//삭제 ajax 코드 
+		    									
+		    									$.ajax({
+		    										
+		    									});
 		    								}else {
 		    									console.log(result);
 		    								}

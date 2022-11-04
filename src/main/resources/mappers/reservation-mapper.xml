@@ -18,10 +18,11 @@
 		<result property="reEndDate" column="RE_END_DATE"/>
 		<result property="rePayDate" column="RE_PAY_DATE"/>
 		<result property="reviewCheck" 		column="REVIEW_CHECK"/>
+		<result property="couponCode" 		column="COUPON_CODE"/>
 	</resultMap>
 	
 	<insert id="insertReservation">
-		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 1, #{roomNo}, #{rePensionNo}, 0, #{rePrice},  #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT, DEFAULT)
+		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 1, #{roomNo}, #{rePensionNo}, 0, #{rePrice},  #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT, DEFAULT, #{couponCode})
 	</insert>
 
 	<!-- 관리자페이지 , SELECT 내용 추가하기 -->
@@ -30,7 +31,7 @@
 	</select>
 
 	<insert id="insertReservationWait">
-		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 0, #{roomNo}, #{rePensionNo}, 0, #{rePrice}, #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT, DEFAULT)
+		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 0, #{roomNo}, #{rePensionNo}, 0, #{rePrice}, #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT, DEFAULT, #{couponCode})
 	</insert>
 
 	<!-- 결제대기 수동삭제 -->
