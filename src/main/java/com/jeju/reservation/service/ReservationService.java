@@ -35,5 +35,7 @@ public interface ReservationService {
 
 	//관리자페이지 전체예약조회
 	List<Reservation> showAllReservation();
+	//기한 만료 내역 불러오기
+	List<Reservation> expirationReserveList(String memberId);
 
 }

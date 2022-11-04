@@ -290,7 +290,6 @@ public class PensionController {
 			Pension pension = pService.selecteOnePension(pensionNo);
 			List<Category> category = pService.selectCategoryCheck(pensionNo);
 			List<Room> rList = pService.selecteRoom(pensionNo);
-			List<String> roomImg = pService.selecteRoomAttach(pensionNo);
 			for(int i=0; i<rList.size(); i++) {
 				DecimalFormat decFormat = new DecimalFormat("###,###");
 				String str = decFormat.format(Integer.parseInt(rList.get(i).getPrice()));

@@ -352,7 +352,7 @@ header{
 		 padding: 30px 10px !important;
 	}
      padding: 45px;
-     background-color: #fdfdfd;
+     //background-color: #fdfdfd;
      padding-bottom: 120px;
     .ro-clo {
         padding: 40px 0px;
@@ -360,7 +360,6 @@ header{
     }
     .card-b::after {
         box-sizing: border-box;
-        background-color: #FFF;
         content: "";
         position: absolute;
         z-index: 100;
@@ -376,11 +375,11 @@ header{
         text-align: center;
         font-size: 14px;
         background: url(../images/quotes.png) no-repeat bottom right;
-            background-color: rgba(0, 0, 0, 0);
+            //background-color: rgba(0, 0, 0, 0);
             background-position-x: right;
             background-position-y: bottom;
             background-size: auto auto;
-        background-color: #FFF;
+        //background-color: #FFF;
         background-size: 40px;
         background-position: right 10px bottom 5px;
         p{

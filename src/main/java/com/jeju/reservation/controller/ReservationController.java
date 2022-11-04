@@ -38,7 +38,6 @@ public class ReservationController {
 			,Model model) throws ParseException {
 		//숙소이름 가져오는 작업
 		DecimalFormat decFormat = new DecimalFormat("###,###");
-		String changePrice = decFormat.format(Integer.parseInt(price));
 		String format1 = (startDate.replace("-", "")).substring(4,6);	//현재 20220101에서 앞에 월만 짜름
 		String format2 = (startDate.replace("-", "")).substring(6);	//현재 20220101에서 뒤에 일자만 자름
 		String format3 = (endDate.replace("-", "")).substring(4,6);	//현재 20220101에서 앞에 월만 짜름
@@ -49,7 +48,6 @@ public class ReservationController {
 		Room room = aService.selectOneByRoom(roomNo);
 		System.out.println(room.getRoomName());
 		model.addAttribute("price", price);
-		model.addAttribute("changePrice", changePrice);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);		
 		model.addAttribute("startDate1", format1);
@@ -126,21 +124,22 @@ public class ReservationController {
 			,HttpSession session) {
 			DecimalFormat decFormat = new DecimalFormat("###,###");
 			Member member = (Member) session.getAttribute("loginUser");
-			String memberId = member.getMemberId();		
-			
+			String memberId = member.getMemberId();					
 			/////////////////결제 대기 리스트//////////////////
-			List<Reservation> wList = aService.selectWaitList(memberId);				
-			for(int i=0; i<wList.size(); i++) {
-				wList.get(i).setRePrice(decFormat.format(Integer.parseInt(wList.get(i).getRePrice())));
-			}
+			List<Reservation> wList = aService.selectWaitList(memberId);
 			
-			////////////////예약 완료 리스트///////////////////
+//			for(int i=0; i<wList.size(); i++) {
+//				wList.get(i).setRePrice(decFormat.format(Integer.parseInt(wList.get(i).getRePrice())));
+//			}
+//			
+//			////////////////예약 완료 리스트///////////////////
 			List<Reservation> rList = aService.selectReserveList(memberId);
-			for(int i=0; i<rList.size(); i++) {
-				rList.get(i).setRePrice(decFormat.format(Integer.parseInt(rList.get(i).getRePrice())));
-			}
-
+//			for(int i=0; i<rList.size(); i++) {
+//				rList.get(i).setRePrice(decFormat.format(Integer.parseInt(rList.get(i).getRePrice())));
+//			}
+			List<Reservation> sList = aService.expirationReserveList(memberId);
 			
+			mv.addObject("sList", sList);
 			mv.addObject("rList", rList);
 			mv.addObject("wList", wList);
 			mv.setViewName("/mypage/reservation");
@@ -153,8 +152,7 @@ public class ReservationController {
 			@RequestParam("reservationNo") Integer reservationNo
 			) { 
 		Reservation rList = aService.selectOneByWaitList(reservationNo);
-			DecimalFormat decFormat = new DecimalFormat("###,###");
-			rList.setRePrice(decFormat.format(Integer.parseInt(rList.getRePrice())));		
+		
 		mv.addObject("rList", rList);
 		mv.setViewName("mypage/reservationCancel");
 		return mv;

@@ -125,6 +125,12 @@ public class ReservationServiceImpl implements ReservationService{
 		return result;
 	}
 
+	@Override
+	public List<Reservation> expirationReserveList(String memberId) {
+		List<Reservation> sList = aStore.expirationList(session, memberId);
+		return sList;
+	}
+
 
 
 }

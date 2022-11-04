@@ -101,7 +101,7 @@
                     	<c:if test="${category.tv eq 1 }"><p><i class="fa-sharp fa-solid fa-tv"></i> TV</p></c:if>
                     </c:forEach>
                     <br><hr>
-                    <h3>이용 규칙</h4><br>
+                    <h3>이용 규칙</h3><br>
                     <p><i class="fa-solid fa-square-check"></i> 체크인 : ${pension.pensionCheckin }시 </p>
                     <p><i class="fa-solid fa-square-check"></i> 체크아웃 : ${pension.pensionCheckout }시 </p>
                 </div>
@@ -112,7 +112,7 @@
       
   <div class="destinations container-fluid">
   	<div class="row session-title"><h2>주소 <i class="fa-solid fa-location-dot"></i></h2></div>
-  	<div style="text-align:center"><h4>${pension.pensionAddr }</h2></div>
+  	<div style="text-align:center"><h4>${pension.pensionAddr }</h4></div>
 	<div id="map" style="width:1420px;height:400px;margin-top:10px;display:block"></div><br><br><br><br><hr>
     <div class="container">               
     	<div class="row session-title">
@@ -149,7 +149,7 @@
    	  <div class="container">
       	<c:if test="${!empty reviewList[0] }">
         	<div class="row session-title">
-              	<h2>후기 ${reviewList[0].reviewCount}개 <i class="fa-solid fa-comments"></i></h2>
+              	<h2>후기 ${pension.reviewCount}개 <i class="fa-solid fa-comments"></i></h2>
           	</div>
 	        	<div class="row ro-clo">                    
 	            	<div class="col-12  col-md-6 col-lg-4">
@@ -210,7 +210,7 @@
 				      <div class="modal-content">
 				          <div class="modal-header">
 				              <button type="button" class="close" data-dismiss="modal">&times;</button>
-				              <h4 class="modal-title">후기 ${reviewList[0].reviewCount }개</h4>
+				              <h4 class="modal-title">후기 ${pension.reviewCount }개</h4>
 				          </div>
 				          <div class="modal-body">
 				          <c:forEach items="${reviewList }" var="review">

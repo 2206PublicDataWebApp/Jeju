@@ -35,6 +35,8 @@ public interface ReservationStore {
 	int removeWaitReserve(SqlSession session, String reservationName);
 
 	int selectWaitRstatus(SqlSession session, String memberId);
+	//기간만료 예약내역 불러오기
+	List<Reservation> expirationList(SqlSession session, String memberId);
 
 
 }

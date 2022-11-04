@@ -92,7 +92,10 @@
 	<update id="updatePensionPrice">
 		UPDATE PENSION_TBL SET PENSION_PRICE = #{price} WHERE PENSION_NO = #{refPensionNo}
 	</update>
-	
+	<!-- 후기 등록시 숙소 REVIEW_COUNT +1 -->
+	<update id="updateReviewCount">
+		UPDATE PENSION_TBL SET REVIEW_COUNT = REVIEW_COUNT +1 WHERE PENSION_NO = #{pensionNo}
+	</update>
 	<select id="selectAllPension" resultMap="pensionResultMap">
 		SELECT * FROM PENSION_TBL
 	</select>

@@ -43,6 +43,17 @@ public class ReviewStoreLogic implements ReviewStore{
 		List<Review> reviewList = session.selectList("ReviewMapper.adminShowAllReview");
 		return reviewList;
 	}
+	// 리뷰 등록
+	@Override
+	public void registerReview(SqlSession session, Review review) {
+		session.insert("ReviewMapper.insertReview", review);
+	}
+	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
+	@Override
+	public void updateReviewCheck(SqlSession session, Review review) {
+		session.update("ReservationMapper.updateReviewCheck",review);
+		session.update("PensionMapper.updateReviewCount",review);
+	}
 
 	// 관리자페이지 리뷰삭제
 	@Override

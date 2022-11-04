@@ -21,4 +21,8 @@ public interface ReviewService {
 
 	// 관리자페이지 리뷰삭제
 	void removeAdminReview(Integer reviewNo);
+    // 리뷰 등록
+	void registerReview(Review review);
+	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
+	void modifyReviewCheck(Review review);
 }

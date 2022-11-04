@@ -197,5 +197,16 @@ public class Pension implements Comparable<Pension>{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Pension [pensionNo=" + pensionNo + ", memberId=" + memberId + ", pensionName=" + pensionName
+				+ ", pensionAddr=" + pensionAddr + ", pensionComments=" + pensionComments + ", pensionPrice="
+				+ pensionPrice + ", hardness=" + hardness + ", latitude=" + latitude + ", cancelPension="
+				+ cancelPension + ", pensionCheckin=" + pensionCheckin + ", pensionCheckout=" + pensionCheckout
+				+ ", filePath=" + filePath + ", fileImage=" + fileImage + ", pensionFileName=" + pensionFileName
+				+ ", pensionFileRename=" + pensionFileRename + ", reviewCount=" + reviewCount + ", jjimCount="
+				+ jjimCount + "]";
+	}
+
 
 }

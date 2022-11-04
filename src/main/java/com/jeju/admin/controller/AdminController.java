@@ -1,6 +1,12 @@
 package com.jeju.admin.controller;
 
-import com.jeju.admin.service.AdminService;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.jeju.member.domain.Member;
 import com.jeju.member.service.MemberService;
 import com.jeju.pension.domain.Pension;
@@ -9,6 +15,7 @@ import com.jeju.reservation.domain.Reservation;
 import com.jeju.reservation.service.ReservationService;
 import com.jeju.review.domain.Review;
 import com.jeju.review.service.ReviewService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +47,7 @@ public class AdminController {
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
     public ModelAndView showAdminPage(ModelAndView modelAndView){
-        log.info("어드민 페이지 접속 시도 {}", modelAndView);
+//        log.info("어드민 페이지 접속 시도 {}", modelAndView);
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();
