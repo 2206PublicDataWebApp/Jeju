@@ -104,7 +104,7 @@
             	<c:forEach items="${cList }" var="coupon" varStatus="i">
 	                <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
-	                        <div class="dest-img">
+	                        <div class="dest-img" stlye="">
 	                            <img src="${coupon.couponImage }" alt="">
 	                        </div>
 	                        <br>

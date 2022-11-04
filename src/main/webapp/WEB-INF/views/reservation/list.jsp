@@ -162,36 +162,41 @@
                     <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
                     <button class="btn btn-info btn-sm follower" style="font-size: 8px;">쿠폰 선택</button>
 
-				<c:if test="${!empty cList}">
-					<c:forEach items="${cList }" var="mycoupon" varStatus="i">
-						<div class="modal fade" id="followModal" role="dialog">
-							<div class="modal-dialog">
-								<!-- 모달창-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title"></h4>
-										<button type="button" class="close" id="modalClose" data-dismiss="modal">×</button>
-									</div>
-									<div class="modal-body">
-										<table class="modal_table">
-											<tr>
-												<td style="width: 70px;"><img id="modal_userImg"
-													src="/resources/images/5000원.PNG"></td>
-												<td id="modal_userID" style="font-weight : bold; font-size : 22px;">${mycoupon.couponTitle }</td>
-												<td id="modal_userFollow">
-													<button class="btn btn-outline-primary" value="${mycoupon.salePrice}" onclick="applyCoupon(this, '${mycoupon.couponCode}');">
-													적용
-													</button>
-												</td>
-											</tr>
-										</table>
-									</div>
-									<div id="count" value="1"></div>
+
+					<div class="modal fade" id="followModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- 모달창-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title"></h4>
+									<button type="button" class="close" id="modalClose"
+										data-dismiss="modal">×</button>
 								</div>
+								<c:if test="${!empty cList}">
+									<c:forEach items="${cList }" var="mycoupon" varStatus="i">
+										<div class="modal-body">
+											<table class="modal_table">
+												<tr>
+													<td style="width: 70px;"><img id="modal_userImg"
+														src="${mycoupon.couponImage }"></td>
+													<td id="modal_userID"
+														style="font-weight: bold; font-size: 22px;">${mycoupon.couponTitle }</td>
+													<td id="modal_userFollow">
+														<button class="btn btn-outline-primary codeBtn"
+															value="${mycoupon.salePrice}"
+															onclick="applyCoupon(this, '${mycoupon.couponCode}');">
+															적용</button>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</c:forEach>
+								</c:if>
+								<div id="count" value="1"></div>
 							</div>
 						</div>
-					</c:forEach>
-				</c:if>
+					</div>
+
 
 
 					<br>
@@ -429,8 +434,7 @@
     		}
      }
      
-    
-     
+     var codeBtn2 = "";     
      //바로 결제
 //      $("#phoneDoubleChk").val() == "true"
      $("#button1").click(function(){
@@ -444,8 +448,8 @@
  	     		    pay_method : 'card',
  	     		    merchant_uid : 'merchant_' + new Date().getTime(),
  	     		    name : '한재민' ,
-		    		amount : price1,
-//  	     		amount : '${price}',
+// 		    		amount : price1,
+					amount : '501',
  	     		    buyer_email : 'iamport@siot.do',
  	     		    buyer_name : $("#nameChk").val(),
  	     		    buyer_tel : $("#phone").val()
@@ -481,7 +485,22 @@
  	     		        				"reEndDate" : '${endDate}'
  	     		        			},
  	     		        			type : "post",
- 	     		        			success : function(result) {	     		        				
+ 	     		        			success : function(result) {
+ 	     		        				if(codeBtn2 != "") {
+ 	     		        					$.ajax({
+ 	    	     		   						url : "/coupon/decreaseCoupon",
+ 	    	     		   						data : {
+ 	    	     		   							"couponCode" : codeBtn2
+ 	    	     		   						},
+ 	    	     		   						type : "post",
+ 	    	     		   						success : function(result) {
+ 	    	     		   							if(result != "성공") {
+ 	    	     		   							alert("쿠폰감소 실패!");
+ 	    	     		   							}
+ 	    	     		   						}
+ 	    	     		   					});
+ 	     		        				}
+ 	     		        				alert("예약이 완료되었습니다.");
  	     		        				location.href = "/pension/list";
  	     		        			},
  	     		        			error : function() {
@@ -564,7 +583,7 @@
     		   	        				"reStartDate" : '${startDate}',
     		   	        				"reEndDate" : '${endDate}'  	       	        				
     		   	        			},
-    		   	        			success : function(result) {	
+    		   	        			success : function(result) {   		   	        				
     		   	     		    			var keyName = sessionId;	// 키이름은 time
     		   	   	        				var keyValue = 	$("#nameChk").val();// 저장할 값은 30분에서 0분까지 줄어드는 기능        		 	    		
     		   	   	        				console.log("keyName : " + keyName);
@@ -591,8 +610,21 @@
     		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
     		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
     		   									console.log("로컬 저장 완료! 로컬확인해봐");
-    		   					
-    		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");
+//     		   									if(codeBtn2 != "") {
+//     	 	     		        					$.ajax({
+//     	 	    	     		   						url : "/coupon/decreaseCoupon",
+//     	 	    	     		   						data : {
+//     	 	    	     		   							"couponCode" : codeBtn2
+//     	 	    	     		   						},
+//     	 	    	     		   						type : "post",
+//     	 	    	     		   						success : function(result) {
+//     	 	    	     		   							if(result != "성공") {
+//     	 	    	     		   							alert("쿠폰감소 실패!");
+//     	 	    	     		   							}
+//     	 	    	     		   						}
+//     	 	    	     		   					});
+//     	 	     		        				}
+    		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");	
     		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
     		   	        			}
     		   	        		 });
@@ -744,10 +776,6 @@
 	    			alert("서버요청 실패!");
 	    		}
 			});
-			
-    	 
-    	 
-       
      });
 
 // 	    var code2 = "";
@@ -808,37 +836,31 @@
 	    }
 		
 		function applyCoupon(elem, code) {
-			console.log(code);
-			$.ajax({
-				url : "/applyCoupon",
-				data : {
-					"salePrice" : elem.value,
-					"rePrice" : '${price}'
-				},
-				type : "post",
-				success : function(result) {
- 					$("#price").text("");
- 					$("#price").text(result + "원");
- 					$("#price2").text("");
- 					$("#price2").text(elem.value + "원 할인");
- 					$.ajax({
- 						url : "/coupon/decreaseCoupon",
- 						data : {
- 							"couponCode" : code
- 						},
- 						type : "post",
- 						success : function(result) {
- 							if(result == "성공") {
- 								alert("할인이 적용되었습니다.");
- 							}else {
- 								alert("쿠폰감소 실패!");
- 							}
- 						}
- 					});
-					
-				}
-			});
+ 			if(codeBtn2 != code) {
+				$.ajax({
+					url : "/applyCoupon",
+					data : {
+						"salePrice" : elem.value,
+						"rePrice" : '${price}'
+					},
+					type : "post",
+					success : function(result) {
+ 						codeBtn2 = code;
+	 					$("#price").text("");
+	 					$("#price").text(result + "원");
+	 					$("#price2").text("");
+	 					$("#price2").text(elem.value + "원 할인");	
+// 	 					$(".codeBtn").attr('disabled', true);
+	 					alert("쿠폰이 적용되었습니다.");				
+					}
+				});
+ 			}else {
+ 				alert("이미 적용하셨습니다.");
+ 			}	
 		}
+		
+		
+		
     </script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>

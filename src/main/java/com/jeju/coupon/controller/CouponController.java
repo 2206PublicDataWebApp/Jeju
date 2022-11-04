@@ -26,8 +26,15 @@ public class CouponController {
 	
 	
 	@GetMapping("/coupon/couponList")
-	public String showCouponView() {		
-		return "coupon/couponView";
+	public ModelAndView showCouponView(
+			ModelAndView mv
+			,HttpSession session) {	
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		List<MyCoupon> mList = cService.selectMyCouponList(memberId);
+		mv.addObject("mList", mList);
+		mv.setViewName("/coupon/myCouponView");
+		return mv;
 	}
 	
 	//이벤트 진행중인 쿠폰 전체 조회
@@ -66,6 +73,9 @@ public class CouponController {
 				myCoupon.setcStatus(coupon.getcStatus());
 				myCoupon.setCouponStartDate(coupon.getCouponStartDate());
 				myCoupon.setCouponEndDate(coupon.getCouponEndDate());
+				myCoupon.setCouponImage(coupon.getCouponImage());
+				myCoupon.setCouponTitle(coupon.getCouponTitle());
+				myCoupon.setCouponComments(coupon.getCouponComments());
 				int result = cService.addMyCoupon(myCoupon);
 				if(result > 0) {
 					int decrease = cService.decreaseCount(couponCode);

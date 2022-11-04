@@ -24,5 +24,7 @@ public interface CouponService {
 	int decreaseMemberCoupon(String memberId);
 	//쿠폰적용했을때 사용횟수 1로바뀜
 	int updateUseCount(MyCoupon mycoupon);
+	//내 쿠폰함 리스트 조회
+	List<MyCoupon> selectMyCouponList(String memberId);
 
 }

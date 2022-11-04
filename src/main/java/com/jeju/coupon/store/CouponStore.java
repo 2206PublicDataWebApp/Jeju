@@ -26,5 +26,7 @@ public interface CouponStore {
 	int decreaseMemberCoupon(SqlSession session, String memberId);
 	//쿠폰적용시 사용상태 변경
 	int updateUseCount(SqlSession session, MyCoupon mycoupon);
+	//내 쿠폰함 리스트 가져오기
+	List<MyCoupon> selectMyCouponList(SqlSession session, String memberId);
 
 }

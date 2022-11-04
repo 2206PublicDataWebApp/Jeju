@@ -12,6 +12,9 @@
 		<result property="couponEndDate"   column="COUPON_END_DATE"/>
 		<result property="couponGetDate"   column="COUPON_GET_DATE"/>
 		<result property="couponUse"   	   column="COUPON_USE"/>
+		<result property="couponImage"     column="COUPON_IMAGE"/>
+		<result property="couponTitle"     column="COUPON_TITLE"/>
+		<result property="couponComments"     column="COUPON_COMMENTS"/>
 	</resultMap>
 	
 	<select id="confirmCoupon" resultType="_int">
@@ -21,11 +24,18 @@
 	<select id="selectAllMyCoupon" resultMap="myCouponResultMap">
 		SELECT * FROM MY_COUPON_TBL WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="selectMyCoupon" resultMap="myCouponResultMap">
+		SELECT * FROM MY_COUPON_TBL
+	</select>
 
 	<insert id="addMyCoupon">
-		INSERT INTO MY_COUPON_TBL VALUES(#{memberId}, #{couponCode}, #{salePrice}, #{cStatus}, #{couponStartDate}, #{couponEndDate}, SYSDATE, 0)
+		INSERT INTO MY_COUPON_TBL VALUES(#{memberId}, #{couponCode}, #{salePrice}, #{cStatus}, #{couponStartDate}, #{couponEndDate}, SYSDATE, 0, #{couponImage}, #{couponTitle}, #{couponComments})
 	</insert>
 	
+<!-- 	쿠폰 적용후 결제했을때 사용은 1로 바뀐다.  -->
+<!-- 	결제하지않으면 0인상태이고 만약 예약페이지에서 취소하게 된다면 다시 사용할수있는상태인 0으로 바뀌게되고, -->
+<!-- 	결제완료 후 숙박이용 완료되면 쿠폰은 2인상태가 된다. 2는 아예사용할 수 없는상태이다. -->
 	<update id="updateUseCount">
 		UPDATE MY_COUPON_TBL SET COUPON_USE = COUPON_USE+1 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
 	</update>
