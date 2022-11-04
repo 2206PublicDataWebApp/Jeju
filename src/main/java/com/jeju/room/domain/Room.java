@@ -4,8 +4,7 @@ package com.jeju.room.domain;
 
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Room {
 
 	private Integer roomNo;

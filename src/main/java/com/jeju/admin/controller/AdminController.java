@@ -41,10 +41,19 @@ import java.util.logging.Logger;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final MemberService memberService;
+    /*private final MemberService memberService;
     private final PensionService pensionService;
     private final ReviewService reviewService;
-    private final ReservationService reservationService;
+    private final ReservationService reservationService;*/
+
+    @Autowired
+    private MemberService memberService;
+    @Autowired
+    private PensionService pensionService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private ReservationService reservationService;
 
 
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
@@ -75,8 +84,6 @@ public class AdminController {
         }
         modelAndView.addObject("pagination", pagination);
 */
-
-
 
         modelAndView.addObject("memberList", memberList);
         modelAndView.addObject("pensionList", pensionList);

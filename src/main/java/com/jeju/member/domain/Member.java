@@ -3,8 +3,7 @@ import lombok.*;
 
 import java.sql.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class Member {
 	private String memberId;
 	private String memberPwd;
