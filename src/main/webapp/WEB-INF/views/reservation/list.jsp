@@ -18,27 +18,31 @@
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/reservationStyle.css">   
 	<style>
-		.modal-title{
- font-size: 17px;
- text-align:left;
- font-weight: bold;
-}
-.modal_table{
-  width:100%;
-}
-#modal_userImg{
-  width:170px;
-  height:80px;
-  margin-right : 180px;
-/*   border-radius: 75%; */
-}
-#modal_userId{
-  width:200px;
-}
-#modal_userFollow{
-  margin:10px;
-  text-align: right;
-}
+	.modal-title{
+	 font-size: 17px;
+	 text-align:left;
+	 font-weight: bold;
+	}
+	.modal_table{
+	  width:100%;
+	}
+	#modal_userImg{
+	  width:170px;
+	  height:80px;
+	  margin-right : 180px;
+	/*   border-radius: 75%; */
+	}
+	#modal_userId{
+	  width:200px;
+	}
+	#modal_userFollow{
+	  margin:10px;
+	  text-align: right;
+	}
+	
+	#couponCancel {
+	  display : none;
+	}
 
 	</style>
 </head>
@@ -160,8 +164,8 @@
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
                     <br>
                     <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
-                    <button class="btn btn-info btn-sm follower" style="font-size: 8px;">쿠폰 선택</button>
-
+                    <button class="btn btn-info btn-sm follower" id="couponApply" style="font-size: 8px;">쿠폰 선택</button>
+					<button class="btn btn-info btn-sm" id="couponCancel" onclick="couponCancel();" style="font-size: 8px;">적용 해제</button>
 
 					<div class="modal fade" id="followModal" role="dialog">
 						<div class="modal-dialog">
@@ -853,6 +857,8 @@
 	 					$("#price2").text("");
 	 					$("#price2").text(elem.value + "원 할인");	
 // 	 					$(".codeBtn").attr('disabled', true);
+						$("#couponCancel").show();
+						$("#couponApply").hide();
 	 					alert("쿠폰이 적용되었습니다.");				
 					}
 				});
@@ -861,6 +867,29 @@
  			}	
 		}
 		
+		var originPrice = '${price}';
+		
+		
+		function couponCancel() {
+			$.ajax({
+				url : "/coupon/couponCancel",
+				data : {
+					"couponCode" : codeBtn2
+				},
+				type : "get",
+				success : function(result) {
+					if(result == "성공") {
+						console.log("적용해제 성공");
+						$("#couponCancel").hide();
+						$("#couponApply").show();
+						$("#price2").text("0");
+						$("#price").text("");
+						$("#price").text(originPrice+"원");
+						codeBtn2 = "";	
+					}
+				}
+			});
+		}
 		
 		
     </script>

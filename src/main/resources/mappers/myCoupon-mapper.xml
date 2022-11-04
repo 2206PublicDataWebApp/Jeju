@@ -40,6 +40,10 @@
 		UPDATE MY_COUPON_TBL SET COUPON_USE = COUPON_USE+1 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
 	</update>
 	
+	<update id="increaseUseCount">
+		UPDATE MY_COUPON_TBL SET COUPON_USE = COUPON_USE-1 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
+	</update>
+	
 	<delete id="deleteMyCoupon">
 		DELETE FROM MY_COUPON_TBL WHERE COUPON_CODE = #{couponCode}
 	</delete>

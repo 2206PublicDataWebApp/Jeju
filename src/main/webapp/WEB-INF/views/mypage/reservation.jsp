@@ -145,56 +145,31 @@
        </div>
 
        <div class="container">
-       <hr>
-       <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
+        <hr>
+      <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
            <div class="blog-row row">
             	<c:if test="${!empty sList}">
-                   	<c:forEach items="${sList }" var="end" varStatus="vs">
+                   	<c:forEach items="${sList }" var="end">
                     	<div class="col-lg-4 col-md-6 ">
 	                    	<div class="blog-col">
 	                            <img src="${end.reFilePath}">
 	                            <span>${end.rePayDate} 결제</span>	                     
+	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
 	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${end.rePensionName }</div>
 	                            <div style="text-align: center;">${end.reStartDate } ~ ${end.reEndDate }</div>
-	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div><br>
-	                            <c:if test="${end.reviewCheck == 0 }">
-	                            	<div style="text-align: center;"><button class="btn btn-outline-success" data-toggle='modal' data-target='#registModal${vs.index }'>${end.rePensionNo }후기 작성</button></div><br>
-	                        	</c:if>
-	                        	<c:if test="${end.reviewCheck == 1 }">
-	                        		<div style="text-align: center; font-weight: bold; color: green">후기작성완료</div>
-	                        	</c:if>
+	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div>
 	                        </div>
-	                     </div>
-	                     	<form action="/review/regist" method="post">
-	                    	 <input type="hidden" name="pensionNo" value="${end.rePensionNo }">
-	                    	 <input type="hidden" name="memberId" value="${end.memberId }">
-			                     <div class="modal fade" id="registModal${vs.index }" role="dialog">
-									  	<div class="modal-dialog">
-									      <div class="modal-content">
-									          <div class="modal-header">
-									              <h4 class="modal-title">후기 작성</h4>
-									              <button type="button" class="close" data-dismiss="modal">&times;</button>
-									          </div>
-									          <div class="modal-body">
-									              <div class="form-group">
-									                  <label for="replyText">${end.rePensionName } </label>
-									                  <textarea class="form-control" name="reviewContents" rows="18" cols="20" placeholder="후기를 입력해주세요." style="resize:none" required></textarea>
-									              </div>
-									          </div>
-									          <div class="modal-footer">
-									              <input type="submit" value="등록" class="btn btn-success modalModBtn" >
-									              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-									          </div>
-									      </div>
-									  </div>
-								</div>
-							</form> 
-	                     </c:forEach>
+	                     </div>  
+                   	</c:forEach>                  
                  </c:if>
-       		</div>
-   		</div>
-    </div>  
+       </div>
+   </div>
+        
+    </div>    
     
+      
+      
+       
    <!--*************** Footer  Starts Here *************** -->   
 
    <footer>

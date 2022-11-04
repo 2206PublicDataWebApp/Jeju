@@ -23,8 +23,7 @@ import com.jeju.member.domain.Member;
 public class CouponController {
 	@Autowired
 	private CouponService cService;
-	
-	
+
 	@GetMapping("/coupon/couponList")
 	public ModelAndView showCouponView(
 			ModelAndView mv
@@ -111,5 +110,20 @@ public class CouponController {
 		return chk;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/coupon/couponCancel", produces="text/plain;charset=utf-8", method=RequestMethod.GET)
+	public String couponCancel(
+			HttpSession session
+			,@RequestParam("couponCode") String couponCode) {
+		String chk = "";
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
+		int result = cService.increaseUseCount(myCoupon);
+		if(result > 0) {
+			chk = "성공";
+		}
+		return chk;
+	}
 	
 }

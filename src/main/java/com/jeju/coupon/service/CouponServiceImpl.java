@@ -79,4 +79,10 @@ public class CouponServiceImpl implements CouponService{
 		List<MyCoupon> mList = cStore.selectMyCouponList(session, memberId);
 		return mList;
 	}
+
+	@Override
+	public int increaseUseCount(MyCoupon myCoupon) {
+		int result = cStore.increaseUseCount(session, myCoupon);
+		return result;
+	}
 }

@@ -16,18 +16,10 @@ public class Reservation {
 	private Date reStartDate;
 	private Date reEndDate;
 	private Date rePayDate;
-	private Integer reviewCheck;
+	private int reviewCheck;
 	private String couponCode;
-	public Reservation() {}
 
-	@Override
-	public String toString() {
-		return "Reservation [reservationNo=" + reservationNo + ", memberId=" + memberId + ", rStatus=" + rStatus
-				+ ", roomNo=" + roomNo + ", rePensionNo=" + rePensionNo + ", useHistory=" + useHistory + ", rePrice="
-				+ rePrice + ", reservationName=" + reservationName + ", reFilePath=" + reFilePath + ", rePensionName="
-				+ rePensionName + ", reStartDate=" + reStartDate + ", reEndDate=" + reEndDate + ", rePayDate="
-				+ rePayDate + ", reviewCheck=" + reviewCheck + "]";
-	}
+	public Reservation() {}
 
 	public Reservation(Integer reservationNo, String memberId, String rStatus, Integer roomNo, Integer rePensionNo,
 			int useHistory, String rePrice, String reservationName, String reFilePath, String rePensionName,

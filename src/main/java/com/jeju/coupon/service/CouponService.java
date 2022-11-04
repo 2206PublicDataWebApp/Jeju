@@ -26,5 +26,7 @@ public interface CouponService {
 	int updateUseCount(MyCoupon mycoupon);
 	//내 쿠폰함 리스트 조회
 	List<MyCoupon> selectMyCouponList(String memberId);
+	//쿠폰 적용 해제시 use카운트 복귀
+	int increaseUseCount(MyCoupon myCoupon);
 
 }

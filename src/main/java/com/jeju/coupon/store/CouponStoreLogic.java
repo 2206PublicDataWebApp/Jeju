@@ -74,4 +74,10 @@ public class CouponStoreLogic implements CouponStore{
 		return mList;
 	}
 
+	@Override
+	public int increaseUseCount(SqlSession session, MyCoupon myCoupon) {
+		int result = session.update("MyCouponMapper.increaseUseCount", myCoupon);
+		return result;
+	}
+
 }
