@@ -74,7 +74,7 @@ public class AdminController {
         List<Review> reviewList = reviewService.showAllReview();
 
         // 회원목록 페이징
-        /*int getTotalCount = memberService.countAllMember("", "");
+        int getTotalCount = memberService.countAllMember("", "");
         int memberLimit = 10;
         PaginationController paginationController = new PaginationController();
         Pagination pagination = paginationController.paginationList(page, getTotalCount, memberLimit);
@@ -83,7 +83,6 @@ public class AdminController {
             modelAndView.addObject("memberPageList", memberPageList);
         }
         modelAndView.addObject("pagination", pagination);
-*/
 
         modelAndView.addObject("memberList", memberList);
         modelAndView.addObject("pensionList", pensionList);

@@ -389,6 +389,44 @@
                                     </thead>
                                     </tbody>
                                 </table>
+
+                                <!-- 페이징 시작-->
+                                <div>
+                                    <article id = "page-are">
+                                        <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
+                                        <span class="prev">
+                                            <a href="/admin/adminPage?page=${pagination.startNavi -1}"></a>
+                                        </span>
+                                        </c:if>
+                                        <c:forEach var="page" begin="${pagination.startNavi}"
+                                                   end="${pagination.endNavi}">
+                                            <c:if test="${page == pagination.currentPage  }">
+                                            <span class="pageNow">
+                                                    ${page }
+                                            </span>
+                                            </c:if>
+                                            <c:if test="${page == 0  }">
+                                            <span class="pageNow">
+                                                    ${page+1 }
+                                            </span>
+                                            </c:if>
+
+                                            <c:if test="${page != pagination.currentPage && page !=0}">
+                                            <span class="pages"> <a href="/admin/adminPage?page=${page }">${p }</a>
+                                            </span>
+                                            </c:if>
+
+                                        </c:forEach>
+                                        <!-- 다음 페이지 출력 -->
+                                        <c:if test="${pagination.endNavi ne pagination.maxPage  }">
+                                        <span class="next"> <a
+                                                href="/admin/adminPage?page=${pagination.endNavi+1 }"> > </a>
+                                        </span>
+                                        </c:if>
+                                    </article>
+                                </div>
+                                <!-- 페이징 끝 -->
+
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -504,43 +542,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- 페이징 -->
-                                <br><br>
-                                <div>
-                                <article id = "page-are">
-                                    <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
-                                        <span class="prev">
-                                            <a href="/admin/adminPage?page=${pagination.startNavi -1}"></a>
-                                        </span>
-                                    </c:if>
-                                    <c:forEach var="page" begin="${pagination.startNavi}"
-                                    									end="${pagination.endNavi}">
-                                        <c:if test="${page == pagination.currentPage  }">
-                                            <span class="pageNow">
-                                                ${page }
-                                            </span>
-                                        </c:if>
-                                        <c:if test="${page == 0  }">
-                                            <span class="pageNow">
-                                                ${page+1 }
-                                            </span>
-                                        </c:if>
 
-                                        <c:if test="${page != pagination.currentPage && page !=0}">
-                                            <span class="pages"> <a href="/admin/adminPage?page=${page }">${p }</a>
-                                            </span>
-                                        </c:if>
-
-                                    </c:forEach>
-                                    <!-- 다음 페이지 출력 -->
-                                    <c:if test="${pagination.endNavi ne pagination.maxPage  }">
-                                        <span class="next"> <a
-                                            href="/admin/adminPage?page=${pagination.endNavi+1 }"> > </a>
-                                        </span>
-                                    </c:if>
-                                </article>
-
-                            </div>
                             </div>
                         </div>
                     </div>
