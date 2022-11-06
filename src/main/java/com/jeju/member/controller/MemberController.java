@@ -328,6 +328,11 @@ public class MemberController {
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
+	
+	
+	
+	
+	
 //	//아이디 찾는화면
 //	@RequestMapping(value="/member/findId.kh", method=RequestMethod.GET)
 //	public String findId() {
