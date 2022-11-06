@@ -28,5 +28,10 @@ public interface CouponService {
 	List<MyCoupon> selectMyCouponList(String memberId);
 	//쿠폰 적용 해제시 use카운트 복귀
 	int increaseUseCount(MyCoupon myCoupon);
+	//페이지 나갈때 mycoupon useCount 1인애들 0으로 초기화해주기 위해 리스트 가져옴
+	List<MyCoupon> selectCouponCode(String memberId);
+	//쿠폰 사용표기를 0으로 변경
+	int updateStatus(MyCoupon myCoupon);
+
 
 }

@@ -30,5 +30,10 @@ public interface CouponStore {
 	List<MyCoupon> selectMyCouponList(SqlSession session, String memberId);
 	//쿠폰적용해제시 use카운트 값 복귀
 	int increaseUseCount(SqlSession session, MyCoupon myCoupon);
+	//쿠폰코드가져와서 페이지나갈때 count 검사
+	List<MyCoupon> selectCouponCode(SqlSession session, String memberId);
+	//쿠폰 사용 표기 0으로 초기화
+	int updateStatus(SqlSession session, MyCoupon myCoupon);
+
 
 }

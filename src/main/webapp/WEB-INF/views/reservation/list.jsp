@@ -491,16 +491,17 @@
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
+ 	     		        				//쿠폰을 썼을 경우만 실행
  	     		        				if(codeBtn2 != "") {
  	     		        					$.ajax({
- 	    	     		   						url : "/coupon/decreaseCoupon",
+ 	    	     		   						url : "/coupon/updateStatus",
  	    	     		   						data : {
  	    	     		   							"couponCode" : codeBtn2
  	    	     		   						},
  	    	     		   						type : "post",
  	    	     		   						success : function(result) {
  	    	     		   							if(result != "성공") {
- 	    	     		   							alert("쿠폰감소 실패!");
+ 	    	     		   							alert("상태변화 실패!");
  	    	     		   							}
  	    	     		   						}
  	    	     		   					});
@@ -594,10 +595,10 @@
     		   	   	        				var keyValue = 	$("#nameChk").val();// 저장할 값은 30분에서 0분까지 줄어드는 기능        		 	    		
     		   	   	        				console.log("keyName : " + keyName);
     		   	   	        				console.log("keyValue : " + keyValue);
-//    		   	    	        				var tts = 1800000;	// 만료시간 30분
-    		   								var tts = 10000;
-//    		    	   	        			 	let min=30;			//분 
-//    		    		        		 	    let sec=60;			//초
+//												10분은 60만		
+//												1분은   6만 	
+    		   								var tts = 1800000;
+
     		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
     		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
     		   		        		 	    	const date = new Date();
@@ -616,16 +617,17 @@
     		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
     		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
     		   									console.log("로컬 저장 완료! 로컬확인해봐");
-    		   									if(codeBtn2 != "") {
+    		   									//쿠폰을 썼을 경우만 실행
+    	 	     		        				if(codeBtn2 != "") {
     	 	     		        					$.ajax({
-    	 	    	     		   						url : "/coupon/decreaseCoupon",
+    	 	    	     		   						url : "/coupon/updateStatus",
     	 	    	     		   						data : {
     	 	    	     		   							"couponCode" : codeBtn2
     	 	    	     		   						},
     	 	    	     		   						type : "post",
     	 	    	     		   						success : function(result) {
     	 	    	     		   							if(result != "성공") {
-    	 	    	     		   							alert("쿠폰감소 실패!");
+    	 	    	     		   							alert("상태변화 실패!");
     	 	    	     		   							}
     	 	    	     		   						}
     	 	    	     		   					});
@@ -852,6 +854,18 @@
 					type : "post",
 					success : function(result) {
  						codeBtn2 = code;
+	        					$.ajax({
+  		   						url : "/coupon/decreaseCoupon",
+  		   						data : {
+  		   							"couponCode" : codeBtn2
+  		   						},
+  		   						type : "post",
+  		   						success : function(result) {
+  		   							if(result != "성공") {
+  		   							alert("쿠폰감소 실패!");
+  		   							}
+  		   						}
+  		   					});
 	 					$("#price").text("");
 	 					$("#price").text(result + "원");
 	 					$("#price2").text("");
@@ -889,8 +903,8 @@
 					}
 				}
 			});
-		}
-		
+		}	
+
 		
     </script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

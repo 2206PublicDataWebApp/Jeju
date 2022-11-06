@@ -80,4 +80,18 @@ public class CouponStoreLogic implements CouponStore{
 		return result;
 	}
 
+
+	@Override
+	public List<MyCoupon> selectCouponCode(SqlSession session, String memberId) {
+		List<MyCoupon> mList = session.selectList("MyCouponMapper.selectCouponCode", memberId);
+		return mList;
+	}
+
+	@Override
+	public int updateStatus(SqlSession session, MyCoupon myCoupon) {
+		int result = session.update("MyCouponMapper.updateStatus", myCoupon);
+		return result;
+	}
+
+
 }

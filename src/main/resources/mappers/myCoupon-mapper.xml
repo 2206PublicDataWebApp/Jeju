@@ -22,28 +22,35 @@
 	</select>
 	
 	<select id="selectAllMyCoupon" resultMap="myCouponResultMap">
-		SELECT * FROM MY_COUPON_TBL WHERE MEMBER_ID = #{memberId}
+		SELECT * FROM MY_COUPON_TBL WHERE MEMBER_ID = #{memberId} AND C_STATUS = 1
 	</select>
 	
 	<select id="selectMyCoupon" resultMap="myCouponResultMap">
 		SELECT * FROM MY_COUPON_TBL
+	</select>
+	
+	<select id="selectCouponCode" resultMap="myCouponResultMap">
+		SELECT * FROM MY_COUPON_TBL WHERE COUPON_USE = 1
 	</select>
 
 	<insert id="addMyCoupon">
 		INSERT INTO MY_COUPON_TBL VALUES(#{memberId}, #{couponCode}, #{salePrice}, #{cStatus}, #{couponStartDate}, #{couponEndDate}, SYSDATE, 0, #{couponImage}, #{couponTitle}, #{couponComments})
 	</insert>
 	
-<!-- 	쿠폰 적용후 결제했을때 사용은 1로 바뀐다.  -->
-<!-- 	결제하지않으면 0인상태이고 만약 예약페이지에서 취소하게 된다면 다시 사용할수있는상태인 0으로 바뀌게되고, -->
-<!-- 	결제완료 후 숙박이용 완료되면 쿠폰은 2인상태가 된다. 2는 아예사용할 수 없는상태이다. -->
+<!--     쿠폰적용을 누르면 1로바뀌고 적용해제하면 0으로 바뀐다. -->
+    
 	<update id="updateUseCount">
 		UPDATE MY_COUPON_TBL SET COUPON_USE = COUPON_USE+1 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
 	</update>
 	
 	<update id="increaseUseCount">
-		UPDATE MY_COUPON_TBL SET COUPON_USE = COUPON_USE-1 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
+		UPDATE MY_COUPON_TBL SET COUPON_USE = 0 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
 	</update>
 	
+	<update id="updateStatus">
+		UPDATE MY_COUPON_TBL SET C_STATUS = 0 WHERE MEMBER_ID = #{memberId} AND COUPON_CODE = #{couponCode}
+	</update>
+
 	<delete id="deleteMyCoupon">
 		DELETE FROM MY_COUPON_TBL WHERE COUPON_CODE = #{couponCode}
 	</delete>
