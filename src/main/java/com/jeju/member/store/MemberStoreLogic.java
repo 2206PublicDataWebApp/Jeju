@@ -71,7 +71,6 @@ public class MemberStoreLogic implements MemberStore{
 	public List<Member> pagingShowAllMember(SqlSessionTemplate session, int currentPage, int memberLimit) {
 		int offset = (currentPage - 1) * memberLimit;
 		RowBounds rowBounds = new RowBounds(offset, memberLimit);
-
 		List<Member> memberList = session.selectList("MemberMapper.pagingShowAllMember", null, rowBounds);
 		return memberList;
 	}

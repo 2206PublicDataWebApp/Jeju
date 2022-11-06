@@ -15,7 +15,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>관리자페이지 일반</title>
+    <title>Tables</title>
 
     <!-- Fontfaces CSS-->
     <link href="/resources/assets/css/font-face.css" rel="stylesheet" media="all">
@@ -40,51 +40,49 @@
 
 </head>
 
-
-    <!-- 사이드바 -->
-    <aside class="menu-sidebar d-none d-lg-block">
-        <div class="logo">
-            <a href="#">
-                <img src="로고이미지파일" alt="로고" />
-            </a>
-        </div>
-        <div class="menu-sidebar__content js-scrollbar1">
-            <nav class="navbar-sidebar">
-                <ul class="list-unstyled navbar__list">
-                    <li class="active">
-                        <a href="/admin/adminPage">
-                            <i class="fas fa-table"></i>일반</a>
-                    </li>
-                    <li class="active">
-                        <a href="/admin/member">
-                            <i class="fas fa-table"></i>회원관리</a>
-                    </li>
-                    <li>
-                        <a href="/admin/pension">
-                            <i class="far fa-check-square"></i>숙소관리</a>
-                    </li>
-                    <li>
-                        <a href="/admin/review">
-                            <i class="fas fa-calendar-alt"></i>리뷰관리</a>
-                    </li>
-                    <li>
-                        <a href="/admin/reservation">
-                            <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
-                    </li>
-                    <li>
-                        <a href="/admin/coupon">
-                            <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
-                    </li>
-                    <li>
-                        <a href="/admin/Chart">
-                            <i class="fas fa-calendar-alt"></i>통계</a>
-                    </li>
-
-                </ul>
-            </nav>
-        </div>
-    </aside>
-    <!-- END MENU SIDEBAR-->
+<!-- 사이드바 -->
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a href="#">
+            <img src="로고이미지파일" alt="로고" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li class="active">
+                    <a href="/admin/adminPage">
+                        <i class="fas fa-table"></i>일반</a>
+                </li>
+                <li class="active">
+                    <a href="/admin/member">
+                        <i class="fas fa-table"></i>회원관리</a>
+                </li>
+                <li>
+                    <a href="/admin/pension">
+                        <i class="far fa-check-square"></i>숙소관리</a>
+                </li>
+                <li>
+                    <a href="/admin/review">
+                        <i class="fas fa-calendar-alt"></i>리뷰관리</a>
+                </li>
+                <li>
+                    <a href="/admin/reservation">
+                        <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
+                </li>
+                <li>
+                    <a href="/admin/coupon">
+                        <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
+                </li>
+                <li>
+                    <a href="/admin/Chart">
+                        <i class="fas fa-calendar-alt"></i>통계</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -145,9 +143,9 @@
                                     <div class="image">
 
                                     </div>
-                                   <%-- <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
-                                    </div>--%>
+                                    <%-- <div class="content">
+                                         <a class="js-acc-btn" href="#">john doe</a>
+                                     </div>--%>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
@@ -198,7 +196,9 @@
                         <div class="col-lg-9">
                             <div class="table-responsive table--no-card m-b-30">
                                 <h3 class="title-3 m-b-30">
-                                    <i class="zmdi zmdi-account-calendar"></i>최근 등록된 회원</h3>
+
+                                    <!--회원관리 -->
+                                    <i class="zmdi zmdi-account-calendar"></i>회원관리</h3>
                                 <table class="table table-borderless table-striped table-earning">
                                     <thead>
                                     <tbody>
@@ -214,8 +214,9 @@
                                         <td>성별</td>
                                         <td>총결재금액</td>
                                         <td>예약횟수</td>
+                                        <td>탈퇴</td>
                                     </tr>
-                                    <c:forEach items="${memberList }" var="adminMember" begin="0" end="5" step="1" varStatus="i">
+                                    <c:forEach items="${memberList }" var="adminMember" varStatus="i">
                                     <tr>
                                         <td>${adminMember.memberNo}</td>
                                         <td>${adminMember.memberId}</td>
@@ -228,16 +229,56 @@
                                         <td>${adminMember.gender}</td>
                                         <td>0</td>
                                         <td>0</td>
+                                        <td><a href="#" onclick="removeAdminMember(${adminMember.memberNo})">탈퇴</a></td>
+
                                     </tr>
                                     </c:forEach>
                                     </thead>
                                     </tbody>
                                 </table>
+
+                                <!-- 페이징 시작-->
+                                <div>
+                                    <article id = "page-are">
+                                        <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
+                                        <span class="prev">
+                                            <a href="/admin/adminPage?page=${pagination.startNavi -1}"></a>
+                                        </span>
+                                        </c:if>
+                                        <c:forEach var="page" begin="${pagination.startNavi}"
+                                                   end="${pagination.endNavi}">
+                                            <c:if test="${page == pagination.currentPage  }">
+                                            <span class="pageNow">
+                                                    ${page }
+                                            </span>
+                                            </c:if>
+                                            <c:if test="${page == 0  }">
+                                            <span class="pageNow">
+                                                    ${page+1 }
+                                            </span>
+                                            </c:if>
+
+                                            <c:if test="${page != pagination.currentPage && page !=0}">
+                                            <span class="pages"> <a href="/admin/adminPage?page=${page }">${p }</a>
+                                            </span>
+                                            </c:if>
+
+                                        </c:forEach>
+                                        <!-- 다음 페이지 출력 -->
+                                        <c:if test="${pagination.endNavi ne pagination.maxPage  }">
+                                        <span class="next"> <a
+                                                href="/admin/adminPage?page=${pagination.endNavi+1 }"> > </a>
+                                        </span>
+                                        </c:if>
+                                    </article>
+                                </div>
+                                <!-- 페이징 끝 -->
+
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>최근 등록된 문의</h3>
+                                <i class="zmdi zmdi-account-calendar"></i>문의관리</h3>
                             <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
                                 <div class="au-card-inner">
                                     <div class="table-responsive">
@@ -264,7 +305,11 @@
                                                 <td class="text-right">답변</td>
                                             </tr>
                                             <tr>
-                                                <td>민봉식님의 질문</td>
+                                                <td>회원1님의 질문</td>
+                                                <td class="text-right">답변</td>
+                                            </tr>
+                                            <tr>
+                                                <td>회원2님의 질문</td>
                                                 <td class="text-right">답변</td>
                                             </tr>
                                             </tbody>
@@ -279,8 +324,8 @@
                         <div class="col-lg-6">
 
                             <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>최근 등록된 숙소</h3>
-
+                                <i class="zmdi zmdi-account-calendar"></i>숙소관리</h3>
+                            <div class="user-data m-b-30">
                                 <div class="table-responsive table-data">
                                     <table class="table table-borderless table-striped table-earning">
                                         <thead>
@@ -289,18 +334,22 @@
                                             <th>이름</th>
                                             <th>주소</th>
                                             <th>가격</th>
-                                            <th>등록 날짜</th>
+                                            <th>리뷰 개수</th>
+                                            <th>기타</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${pensionList }" var="adminPension"  varStatus="i"  begin="1" end="9" step="1">
+                                        <c:forEach items="${pensionList }" var="adminPension" varStatus="i">
                                             <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
                                             <tr>
                                                 <th>${i.count}</th>
                                                 <th>${adminPension.pensionName}</th>
+
                                                 <th>${adminPension.pensionAddr}</th>
+
                                                 <th>${adminPension.pensionPrice}</th>
-                                                <th> 등록 날짜로 지정</th>
+                                                <th>${adminPension.reviewCount}</th>
+                                                <th><a href="#" onclick="removeAdminPension(${adminPension.pensionNo});">삭제</a></th>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -308,13 +357,15 @@
 
                                 </div>
                                 <div class="user-data__footer">
+
+                                </div>
                             </div>
 
                         </div>
                         <div class="col-lg-6">
 
                             <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>최근 리뷰</h3>
+                                <i class="zmdi zmdi-account-calendar"></i>리뷰관리</h3>
                             <div class="top-campaign">
                                 <div class="table-responsive">
                                     <table class="table table-top-campaign">
@@ -323,15 +374,16 @@
                                             <td>아이디</td>
                                             <td>내용</td>
                                             <td>작성일</td>
-
+                                            <td>기타</td>
                                         </tr>
-                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i" begin="1" end="6" step="1">
+                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
                                             <td>${adminReview.memberId}</td>
-                                            <td><a href="#">${fn:substring(adminReview.reviewContents, 0, 50)} ... </a></td>
+                                            <td>${fn:substring(adminReview.reviewContents, 0, 40)} ... </td>
                                             <%--<td>${adminReview.reviewContents}</td>--%>
                                             <td>${adminReview.regDate}</td>
+                                            <td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>
                                         </tr>
                                             </c:forEach>
                                         </tbody>
@@ -348,7 +400,7 @@
                     <div class="row m-t-30">
                         <div class="col-md-12">
                             <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>최근 등록된 예약/결재</h3>
+                                <i class="zmdi zmdi-account-calendar"></i>예약/결재관리</h3>
                             <!-- DATA TABLE-->
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
@@ -367,7 +419,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="1" end="8" step="1">
+                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i">
                                         <tr>
                                             <th>${i.count}</th>
                                             <th>${adminReservation.roomNo}</th>

@@ -23,9 +23,7 @@
       <result property="mStatus"       column="M_STATUS"/>
        <result property="memberNo"       column="MEMBER_NO"/>
        <result property="couponCount"       column="COUPON_COUNT"/>
-      <result property="mStatus"       column="M_STATUS"/>
-      <result property="memberNo"       column="MEMBER_NO"/>
-      <result property="couponCount"       column="COUPON_COUNT"/>
+
    </resultMap>
    	<!-- 아이디 중복 체크 -->
 <select id="idChk" resultType="int">
