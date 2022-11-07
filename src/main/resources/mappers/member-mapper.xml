@@ -95,6 +95,30 @@
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
 
+   <!-- 관리자 회원 검색 -->
+   <select id="searchAllByValue" resultMap="memberResultMap">
+      SELECT * FROM MEMBER_TBL
+    <where>
+         <if test="searchCondition.toString() == 'name'">
+            MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+         </if>
+         <if test="searchCondition.toString() == 'address'">
+            MEMBER_ADDR LIKE '%'||#{searchValue}||'%'
+         </if>
+       <if test="searchCondition.toString() == 'phone'">
+          MEMBER_PHONE LIKE '%'||#{searchValue}||'%'
+       </if>
+         <if test="searchCondition.toString() == 'all'">
+            MEMBER_NAME LIKE '%'||#{searchValue}||'%'
+            OR
+            MEMBER_ADDR LIKE '%'||#{searchValue}||'%'
+            OR
+            MEMBER_PHONE LIKE '%'||#{searchValue}||'%'
+         </if>
+         ORDER BY MEMBER_NO DESC
+      </where>
+   </select>
+
    <update id="increaseCouponCount">
    	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT+1 WHERE MEMBER_ID = #{memberId}
    </update>

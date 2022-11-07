@@ -1,4 +1,3 @@
-
 package com.jeju.member.controller;
 import java.io.PrintWriter;
 import java.util.Random;
@@ -159,7 +158,7 @@ public class MemberController {
 			mv.addObject("msg", "로그아웃 실패");
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
 
@@ -171,7 +170,7 @@ public class MemberController {
 		Member memberInfo = mService.selectMemberInfo(memberId);
 		mv.addObject("member", member);
 		mv.setViewName("mypage/modify");
-		
+
 		return mv;
 		// /WEB-INF/views/member/join.jsp
 	}
@@ -255,7 +254,7 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
+
 	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/idChk",method=RequestMethod.POST)
@@ -263,7 +262,7 @@ public class MemberController {
 			@RequestParam("memberId") String memberId) {
 		int result = mService.idChk(memberId);
 		return String.valueOf(result);
-}
+	}
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
 	public String duplicateIdCheck(
@@ -274,14 +273,11 @@ public class MemberController {
 //			return result+"";
 		return String.valueOf(result);
 	}
-	
+
 	// 마이페이지로 이동
 	@RequestMapping(value="/mypage/myPage", method=RequestMethod.GET)
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
-	
+
 }
-
-
-

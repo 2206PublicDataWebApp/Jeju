@@ -193,32 +193,34 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-9">
-                            <div class="table-responsive table--no-card m-b-30">
-                                <h3 class="title-3 m-b-30">
+                    </div></div>
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
 
                                     <!--회원관리 -->
-                                    <i class="zmdi zmdi-account-calendar"></i>회원관리</h3>
-                                <table class="table table-borderless table-striped table-earning">
+
+                                <div class="table-responsive m-b-40">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-account-calendar"></i>회원관리</h3>
+                                <table class="table table-borderless table-data3">
                                     <thead>
-                                    <tbody>
                                     <tr>
-                                        <td>회원번호</td>
-                                        <td>아이디</td>
-                                        <td>이메일</td>
-                                        <td>이름</td>
-                                        <td>전화번호</td>
-                                        <td>주소</td>
-                                        <td>가입날짜</td>
-                                        <td>생년월일</td>
-                                        <td>성별</td>
-                                        <td>총결재금액</td>
-                                        <td>예약횟수</td>
-                                        <td>탈퇴</td>
+                                        <th>아이디</th>
+                                        <th>이메일</th>
+                                        <th>이름</th>
+                                        <th>전화번호</th>
+                                        <th>주소</th>
+                                        <th>가입날짜</th>
+                                        <th>생년월일</th>
+                                        <th>성별</th>
+                                        <th>총결재금액</th>
+                                        <th>예약횟수</th>
+                                        <th>탈퇴</th>
                                     </tr>
+                                    </thead>
+                                    <tbody>
                                     <c:forEach items="${memberPageList }" var="adminMember" varStatus="i">
                                     <tr>
-                                        <td>${adminMember.memberNo}</td>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>
@@ -232,19 +234,20 @@
                                         <td><a href="#" onclick="removeAdminMember(${adminMember.memberNo})">탈퇴</a></td>
                                     </tr>
                                     </c:forEach>
-                                    </thead>
                                     </tbody>
                                 </table>
-
+                                </div>
                                 <!-- 페이징 시작-->
                                 <div>
-                                    <article id = "page-are">
+                                    <article>
+                                        <!-- 이전 페이지 -->
                                         <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
                                         <span class="prev">
-                                            <a href="/admin/member?page=${pagination.startNavi -1}"></a>
+                                            <a href="/admin/member?page=${pagination.startNavi - 1}"></a>
                                         </span>
                                         </c:if>
 
+                                        <!-- 번호 -->
                                         <c:forEach var="page" begin="${pagination.startNavi}"
                                                    end="${pagination.endNavi}">
                                             <c:if test="${page == pagination.currentPage  }">
@@ -264,6 +267,7 @@
                                             </c:if>
                                         </c:forEach>
 
+                                        <!-- 다음 페이지 -->
                                         <c:if test="${pagination.endNavi ne pagination.maxPage  }">
                                         <span class="next"> <a
                                                 href="/admin/member?page=${pagination.endNavi+1 }"> > </a>
@@ -273,184 +277,43 @@
                                 </div>
                                 <!-- 페이징 끝 -->
 
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>문의관리</h3>
-                            <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
-                                <div class="au-card-inner">
-                                    <div class="table-responsive">
-                                        <table class="table table-top-countries">
-                                            <tbody>
-                                            <tr>
-                                                <td>조혜원님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>한상일님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>이혁렬님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>한재민님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>민봉식님의 질문</td>
-                                                <td class="text-right">답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>회원1님의 질문</td>
-                                                <td class="text-right">답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>회원2님의 질문</td>
-                                                <td class="text-right">답변</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>숙소관리</h3>
-                            <div class="user-data m-b-30">
-                                <div class="table-responsive table-data">
-                                    <table class="table table-borderless table-striped table-earning">
-                                        <thead>
+                                <!-- 검색 시작 -->
+                                <div style="width:50%";>
+                                    <table>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>이름</th>
-                                            <th>주소</th>
-                                            <th>가격</th>
-                                            <th>리뷰 개수</th>
-                                            <th>기타</th>
+                                            <td>
+                                                <div style="display: inline-block;">
+                                                    <form action="/admin/member/search" method="get" >
+                                                        <div style= "display: inline-block">
+                                                            <select name="searchCondition" >
+                                                                <option value="all"
+                                                                        <c:if test="${searchCondition eq 'all' }">selected</c:if>>전체</option>
+                                                                <option value="name"
+                                                                        <c:if test="${searchCondition eq 'name' }">selected</c:if>>이름</option>
+                                                                <option value="address"
+                                                                        <c:if test="${searchCondition eq 'address' }">selected</c:if>>주소</option>
+                                                                <option value="phone"
+                                                                        <c:if test="${searchCondition eq 'phone' }">selected</c:if>>전화번호</option>                     </select>
+                                                        </div>
+                                                        <div style= "display: inline-block">
+                                                            <input type="text" name="searchValue" placeholder="검색"  value="${searchValue }">
+                                                        </div>
+                                                        <div style= "display: inline-block">
+                                                            <input type="submit" value="검색" class="btn btn-dark">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${pensionList }" var="adminPension" varStatus="i">
-                                            <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
-                                            <tr>
-                                                <th>${i.count}</th>
-                                                <th>${adminPension.pensionName}</th>
-
-                                                <th>${adminPension.pensionAddr}</th>
-
-                                                <th>${adminPension.pensionPrice}</th>
-                                                <th>${adminPension.reviewCount}</th>
-                                                <th><a href="#" onclick="removeAdminPension(${adminPension.pensionNo});">삭제</a></th>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <div class="user-data__footer">
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6">
-
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>리뷰관리</h3>
-                            <div class="top-campaign">
-                                <div class="table-responsive">
-                                    <table class="table table-top-campaign">
-                                        <tbody>
-                                        <tr>
-                                            <td>아이디</td>
-                                            <td>내용</td>
-                                            <td>작성일</td>
-                                            <td>기타</td>
-                                        </tr>
-                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i">
-                                        <tr>
-                                            <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
-                                            <td>${adminReview.memberId}</td>
-                                            <td>${fn:substring(adminReview.reviewContents, 0, 40)} ... </td>
-                                            <%--<td>${adminReview.reviewContents}</td>--%>
-                                            <td>${adminReview.regDate}</td>
-                                            <td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>
-                                        </tr>
-                                            </c:forEach>
-                                        </tbody>
                                     </table>
                                 </div>
+                                <!-- 검색 끝 -->
 
-                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                    <div class="row m-t-30">
-                        <div class="col-md-12">
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>예약/결재관리</h3>
-                            <!-- DATA TABLE-->
-                            <div class="table-responsive m-b-40">
-                                <table class="table table-borderless table-data3">
-                                    <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>숙소</th>
-                                        <th>결재여부</th>
-                                        <th>결재일</th>
-                                        <th>아이디</th>
-                                        <th>가격</th>
-                                        <th>예약상태</th>
-                                        <th>예약기간-시작</th>
-                                        <th>예약기간-마감</th>
-                                        <th>기타</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i">
-                                        <tr>
-                                            <th>${i.count}</th>
-                                            <th>${adminReservation.roomNo}</th>
-                                            <th>0</th>
-                                            <th>0</th>
-                                            <th>${adminReservation.memberId}</th>
-                                            <th>${adminReservation.rePrice}</th>
-                                            <th>${adminReservation.rStatus}</th>
-                                            <th>0</th>
-                                            <th>0</th>
-                                            <th>0</th>
-
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- END DATA TABLE -->
-                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2022 Jeju. All rights reserved.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 </div>
 
@@ -478,7 +341,7 @@
 <!-- Main JS-->
 <script src="/resources/assets/js/main.js"></script>
 
-</body>
+</div>
 
 <script>
         function removeAdminMember(memberNo){
@@ -486,26 +349,8 @@
                 location.href="/admin/member/remove?memberNo="+memberNo;
             }
         }
-
-    	function removeAdminPension(pensionNo){
-    		if(confirm("숙소를 삭제하시겠습니까?")) {
-                location.href="/admin/pension/remove?pensionNo="+pensionNo;
-            }
-    	}
-
-        function removeAdminReview(reviewNo){
-            if(confirm("리뷰를 삭제하시겠습니까?")){
-                location.href="/admin/review/remove?reviewNo="+reviewNo;
-            }
-        }
-
-    function setReviewContentsBySize(reviewContents) {
-        var str = "${reviewContents}"
-        var result = str.substring(0, 10) + "...";
-        return result;
-    }
    </script>
 
+<%--</html>--%>
 </html>
-
 

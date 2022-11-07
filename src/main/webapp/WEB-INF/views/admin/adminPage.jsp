@@ -51,11 +51,11 @@
         <div class="menu-sidebar__content js-scrollbar1">
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar__list">
-                    <li class="active">
+                    <li>
                         <a href="/admin/adminPage">
                             <i class="fas fa-table"></i>일반</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="/admin/member">
                             <i class="fas fa-table"></i>회원관리</a>
                     </li>
@@ -76,7 +76,7 @@
                             <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
                     </li>
                     <li>
-                        <a href="/admin/Chart">
+                        <a href="/admin/chart">
                             <i class="fas fa-calendar-alt"></i>통계</a>
                     </li>
 
@@ -320,6 +320,7 @@
                                     <table class="table table-top-campaign">
                                         <tbody>
                                         <tr>
+                                            <td>숙소</td>
                                             <td>아이디</td>
                                             <td>내용</td>
                                             <td>작성일</td>
@@ -328,8 +329,9 @@
                                             <c:forEach items="${reviewList }" var="adminReview" varStatus="i" begin="1" end="6" step="1">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
+                                            <td>숙소이름</td>
                                             <td>${adminReview.memberId}</td>
-                                            <td><a href="#">${fn:substring(adminReview.reviewContents, 0, 50)} ... </a></td>
+                                            <td><a href="#">${fn:substring(adminReview.reviewContents, 0, 45)} ... </a></td>
                                             <%--<td>${adminReview.reviewContents}</td>--%>
                                             <td>${adminReview.regDate}</td>
                                         </tr>
@@ -367,24 +369,24 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="1" end="8" step="1">
+                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="1" end="6" step="1">
                                         <tr>
-                                            <th>${i.count}</th>
-                                            <th>${adminReservation.roomNo}</th>
-                                            <th>0</th>
-                                            <th>0</th>
-                                            <th>${adminReservation.memberId}</th>
-                                            <th>${adminReservation.rePrice}</th>
-                                            <th>${adminReservation.rStatus}</th>
-                                            <th>0</th>
-                                            <th>0</th>
-                                            <th>0</th>
-
+                                            <td>${adminReservation.reservationNo}</td>
+                                            <td>${adminReservation.roomNo}</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>${adminReservation.memberId}</td>
+                                            <td>${adminReservation.rePrice}</td>
+                                            <td>${adminReservation.rStatus}</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
                             <!-- END DATA TABLE -->
                         </div>
                     </div>

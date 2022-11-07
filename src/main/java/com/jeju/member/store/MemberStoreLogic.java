@@ -1,6 +1,7 @@
 package com.jeju.member.store;
 
 
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,8 +18,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public Member selectLoginMember(SqlSession session, Member member) {
-		
-		Member mOne = session.selectOne("MemberMapper.selectLoginOne", member);
+		Member mOne = session.selectOne("MemberMapper.selectLoginOne",member);
 		return mOne;
 	}
 
@@ -75,8 +75,6 @@ public class MemberStoreLogic implements MemberStore{
 		return memberList;
 	}
 
-
-
 	// 관리자 전체멤버 조회
 	@Override
 	public List<Member> showAllMember(SqlSession session){
@@ -90,6 +88,16 @@ public class MemberStoreLogic implements MemberStore{
 		session.delete("MemberMapper.deleteAdminMember", memberNo);
 		}
 
+	// 관리자페이지 회원검색
+	@Override
+	public List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue) {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchValue", searchValue);
+		List<Member> searchList = session.selectList("MemberMapper.searchAllByValue", paramMap);
+		return searchList;
+	}
+
 	// 관리자페이지 회원수 총합
 	@Override
 	public int countAllMember(SqlSessionTemplate session, String searchCondition, String searchValue) {
@@ -99,5 +107,7 @@ public class MemberStoreLogic implements MemberStore{
 		int count = session.selectOne("MemberMapper.countAllMember", paramMap);
 		return count;
 	}
+
+	// 관리자페이지
 
 }

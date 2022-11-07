@@ -20,11 +20,8 @@ public interface MemberService {
 	public int removeMember(String memberId);
 
 
-
 	// 관리자페이지 전체멤버 조회
 	public List<Member> showAllMember();
-
-	// 관리자페이지 회원탈퇴
 
 
 	// 관리자페이지 회원수 총합
@@ -38,5 +35,9 @@ public interface MemberService {
 
 	List<Member> pagingShowAllMember(int currentPage, int memberLimit);
 
+	// 관리자페이지 회원탈퇴
 	void removeAdminMember(Integer memberNo);
+
+	// 관리자페이지 회원검색
+	List<Member> searchAllByValue(String searchCondition, String searchValue);
 }

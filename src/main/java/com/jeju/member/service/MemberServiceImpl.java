@@ -1,5 +1,6 @@
 package com.jeju.member.service;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,13 @@ public class MemberServiceImpl implements MemberService {
 		public void removeAdminMember(Integer memberNo) {
 			mStore.removeAdminMember(session, memberNo);
 		}
+
+		// 관리자페이지 회원검색
+	@Override
+	public List<Member> searchAllByValue(String searchCondition, String searchValue) {
+		List<Member> searchList = mStore.searchAllByValue(session, searchCondition, searchValue);
+		return searchList;
+	}
 
 	// 관리자페이지 회원수 총합
 	@Override
