@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@Slf4j
-@RequiredArgsConstructor
+/*@Slf4j
+@RequiredArgsConstructor*/
 @RequestMapping("/admin")
 public class AdminMemberController {
 
@@ -29,7 +29,7 @@ public class AdminMemberController {
             (ModelAndView modelAndView,
              @RequestParam(value = "page", required=false) Integer page
             ){
-        log.info("관리자 회원관리 페이지 접속 시도 {}", modelAndView);
+        /*log.info("관리자 회원관리 페이지 접속 시도 {}", modelAndView);*/
 
         int memberTotalCount = memberService.showAllMember().size();
         int memberLimit = 10; // 한 화면에 나타날 회원의 수
@@ -46,7 +46,7 @@ public class AdminMemberController {
     // 관리자페이지 회원탈퇴
     @GetMapping("/member/remove")
     public String removeAdminMember(@RequestParam("memberNo") Integer memberNo){
-        log.info("memberNo 데이터 확인 {}", memberNo);
+        /*log.info("memberNo 데이터 확인 {}", memberNo);*/
         memberService.removeAdminMember(memberNo);
         return "redirect:/admin/member";
     }
@@ -57,8 +57,7 @@ public class AdminMemberController {
             ModelAndView modelAndView,
             @RequestParam("searchCondition") String searchCondition,
             @RequestParam("searchValue") String searchValue) {
-        log.info("관리자 회원관리 검색 시도 {}", modelAndView);
-
+        /*log.info("관리자 회원관리 검색 시도 {}", modelAndView);*/
 
         List<Member> searchList = memberService.searchAllByValue(searchCondition, searchValue);
 

@@ -2,6 +2,7 @@ package com.jeju.admin.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,23 +22,27 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@Slf4j
-@RequiredArgsConstructor
+/*@Slf4j
+@RequiredArgsConstructor*/
 @RequestMapping("/admin")
 public class AdminController {
+
+    /*
     private final MemberService memberService;
     private final PensionService pensionService;
     private final ReviewService reviewService;
     private final ReservationService reservationService;
+    */
 
-    /*@Autowired
+    @Autowired
     private MemberService memberService;
     @Autowired
     private PensionService pensionService;
     @Autowired
     private ReviewService reviewService;
     @Autowired
-    private ReservationService reservationService;*/
+    private ReservationService reservationService;
+
 
     // 관리자페이지 일반 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
@@ -45,7 +50,7 @@ public class AdminController {
                         (ModelAndView modelAndView,
                          @RequestParam(value = "page", required=false) Integer page
                          ){
-        log.info("관리자  일반페이지 접속 시도 {}", modelAndView);
+        /*log.info("관리자  일반페이지 접속 시도 {}", modelAndView);*/
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();

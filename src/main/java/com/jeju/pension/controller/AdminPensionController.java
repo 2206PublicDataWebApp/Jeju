@@ -17,21 +17,21 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@Slf4j
-@RequiredArgsConstructor
+/*@Slf4j
+@RequiredArgsConstructor*/
 @RequestMapping("/admin")
 public class AdminPensionController {
 
-    private final PensionService pensionService;
-   /* @Autowired
-    private PensionService pensionService;*/
+    /*private final PensionService pensionService;*/
+    @Autowired
+    private PensionService pensionService;
 
     @GetMapping("/pension")
     public ModelAndView showAdminPension
             (ModelAndView modelAndView,
              @RequestParam(value = "page", required=false) Integer page
             ){
-        log.info("관리자 펜션관리 페이지 접속 시도 {}", modelAndView);
+        /*log.info("관리자 펜션관리 페이지 접속 시도 {}", modelAndView);*/
 
         List<Pension> pensionList = pensionService.showAllPension();
 

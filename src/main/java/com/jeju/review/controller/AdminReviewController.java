@@ -18,22 +18,22 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@Slf4j
-@RequiredArgsConstructor
+/*@Slf4j
+@RequiredArgsConstructor*/
 @RequestMapping("/admin")
 public class AdminReviewController {
 
-    private final ReviewService reviewService;
+   /* private final ReviewService reviewService;*/
 
-    /*@Autowired
-    private ReservationService reservationService;*/
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping("/review")
     public ModelAndView showAdminReview
             (ModelAndView modelAndView,
              @RequestParam(value = "page", required=false) Integer page
             ){
-        log.info("관리자 리뷰페이지 페이지 접속 시도 {}", modelAndView);
+       /* log.info("관리자 리뷰페이지 페이지 접속 시도 {}", modelAndView);*/
         List<Review> reviewList = reviewService.showAllReview();
         modelAndView.addObject("reviewList", reviewList);
         modelAndView.setViewName("admin/adminReview");
