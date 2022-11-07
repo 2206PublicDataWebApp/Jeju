@@ -102,9 +102,9 @@
                 <input id="memberPwd" type="password" name="memberPwd" placeholder="비밀번호">
                 <label for="memberPwd">비밀번호</label>       
                </div>
-         아이디가 없으신가요?-><td colspan="3"><a href="/member/joinView.kh">회원가입</a></td><br></br>
-         아이디/비밀번호 찾기-><td colspan="6"><a href="/member/findId">찾으로 가기</a></td><br></br>    
-           
+         아이디가 없으신가요?-><td colspan="3"><a href="/member/joinView.kh">회원가입</a></td><br>
+         <td colspan="6"><a href="/member/findId"> ID 찾기</a></td>   
+         <td colspan="6"><a href="/member/findPwd">Pwd 찾기</a></td>  
             <input type="submit" value="로그인">
 
         </form>

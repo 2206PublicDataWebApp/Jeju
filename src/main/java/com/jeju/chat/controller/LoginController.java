@@ -35,6 +35,9 @@ public class LoginController {
     	HttpSession session = request.getSession();
     	session.setAttribute("id", id);
 		return "chat/chat";
+		
+		
 	}
+	
 	
 }

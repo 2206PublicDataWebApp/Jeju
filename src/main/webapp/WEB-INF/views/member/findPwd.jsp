@@ -69,21 +69,12 @@
 								alert("인증번호가 일치하지 않습니다.");
 								return false;
 							} else {
-								alert("일치합니다!");
+								alert("인증 번호가 일치합니다!");
 							}
 						});
 		
 		
-		function numberCheck(){
-			var certificationNumber = $("#certificationNumber").val();
-			if(authNumber ==  certificationNumber){
-				window.alert("해당 이메일로 임시 비밀번호를 전송하였습니다. 확인을 누르면 로그인 페이지로 이동합니다.")
-				return true;
-			}else{
-				window.alert("인증번호가 일치하지 않습니다.")
-				return false;
-			}
-		}
+		
 	</script>
 </body>
 </html>

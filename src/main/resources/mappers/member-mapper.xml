@@ -41,7 +41,7 @@
   	</select>
   	<!-- 비번 찾기 결과 -->
   	<select id="findPwdByEmail" resultMap="memberResultMap">
-  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
+  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail } 
   	</select>
 
    <select id="selectMemberInfo" resultMap="memberResultMap">
