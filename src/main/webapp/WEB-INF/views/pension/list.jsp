@@ -20,6 +20,9 @@
 	<link rel="stylesheet" href="/resources/assets/css/pensionList.css">
 	<script src="/resources/js/rSlider.min.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/rSlider.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> 
 </head>
 
 <body>
@@ -131,46 +134,6 @@
    </div>
 </div>
 <br>
-<!-- <div class="slider-detail" style="background-color : white;"> -->
-
-<!--         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"> -->
-<!--             <ol class="carousel-indicators"> -->
-<!--                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
-<!--                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
-<!--             </ol> -->
-<!--             <div class="carousel-inner"> -->
-<!--                 <div class="carousel-item "> -->
-<!--                     <img class="d-block w-80" src="/resources/images/쿠폰5.PNG" alt="First slide" style="margin : 0 auto;"> -->
-<!--                     <div class="carousel-caption fvgb d-none d-md-block"> -->
-<!--                         <div class="row vbh"> -->
-<!--                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="couponPage();" style="color:white">쿠폰 페이지로 이동</a></div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-                
-<!--                 <div class="carousel-item active"> -->
-<!--                     <img class="d-block w-80" src="/resources/images/쿠폰7.PNG" alt="Third slide" style="margin : 0 auto;"> -->
-<!--                     <div class="carousel-caption vdg-cur d-none d-md-block"> -->
-<!--                         <div class="row vbh"> -->
-<!--                             <div class="btn btn-primary animated bounceInUp" style="position:relative; top:120px; margin : 0 auto;"><a onclick="myCoupon();" style="color:white">내 쿠폰 확인하기</a></div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-                
-                
-
-<!--             </div> -->
-<!--             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> -->
-<!--                 <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
-<!--                 <span class="sr-only">Previous</span> -->
-<!--             </a> -->
-<!--             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> -->
-<!--                 <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
-<!--                 <span class="sr-only">Next</span> -->
-<!--             </a> -->
-<!--         </div> -->
-<!--     </div> -->
-
 <section id="about" class="contianer-fluid about-us" style="position : relative; left : 50px;">
    <div class="container-fluid" id="test5">
       <div class="row">
@@ -184,7 +147,7 @@
                <c:if test="${!empty pList }">
                   <c:forEach items="${pList }" var="pension" varStatus="i">
                   	<c:if test="${pension ne null}">
-                     <div class="col-md-4 mb-md-0 p-md-2" id="tableBody1">
+                     <div class="col-md-4 mb-md-0 p-md-2" id="table1">
                         <img src="${pension.filePath}" alt="Image" class="img-fluid" style="width : 370px; height : 250px; border-radius: 8px;">
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
@@ -352,8 +315,88 @@
       </div>
    </div>
 </footer>
-
+<button id="toastBtn" onclick="toastFunction()"></button>
+</body>
 <script>
+	var socket = null;
+	function autoFunction(obj, sessionId) {
+		function auto() {
+			var data = obj.expire2;	// 몇분남았는지 알려주는 시간 			
+			var url = "${contextPath}";
+			var content = "결제시간 10분 남았습니다.";
+			//현재 시간과 (현재시간+30분)했던 것을 비교
+			if (Date.now() > obj.expire) {
+				$.ajax({
+					url : "/reservation/removeWait",
+					data : {
+						"reservationName" : obj.value
+					},
+					type : "post",
+					success : function(result) {
+						if (result == "삭제 성공!") {
+							//만료시간이 지나면 결제대기상태 삭제
+							window.localStorage.removeItem(sessionId);
+							console.log("삭제 완료!!");
+							//삭제 ajax 코드 
+						}
+					}
+				});
+			}else if(Date.now() > obj.expire2 && Date.now() < obj.expire2 + 1000) {
+				console.log("됬다!!!!!!!!!!");
+				//EchoHandler컨트롤러로 이동
+				socket.send("관리자," + sessionId + "," + content);
+			}							
+		}
+		setInterval(auto, 1000);
+	}
+	function toastFunction(evt){
+		var data = evt.data;
+        toastr.options = {
+        	  "closeButton": false,
+      		  "debug": false,
+      		  "newestOnTop": false,
+      		  "progressBar": false,
+      		  "positionClass": "toast-bottom-right",
+      		  "preventDuplicates": false,
+      		  "onclick": null,
+      		  "showDuration": "300",
+      		  "hideDuration": "1000",
+      		  "extendedTimeOut": 0,
+      		  "showEasing": "swing",
+      		  "hideEasing": "linear",
+      		  "showMethod": "fadeIn",
+      		  "hideMethod": "fadeOut",
+      		  "tapToDismiss": false,
+               timeOut: 4000
+        };
+        toastr.success(data, "알림");
+	}
+	
+
+	$(document).ready(function onMessage() {
+		sock = new SockJS("<c:url value='/echo-ws'/>");
+		socket = sock;
+		sock.onmessage = toastFunction; // toast 생성	
+		$.ajax({
+				url : "/reservation/checkSessionId",
+				type : "post",
+				success : function(result) {	//result는 세션아이디값
+					if (result != "") {
+						const objString = window.localStorage.getItem(result); //local에 저장된 time을 가져와 objString에 저장
+						//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
+						if (!objString) {
+							console.log("로컬값 없음!!!!!!!!");
+							return null;
+						}
+						const obj = JSON.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
+						console.log(obj.expire);
+						console.log(Date.now());
+						autoFunction(obj, result);
+					}
+				}
+			});		
+		// 데이터를 전달 받았을때 		
+	});
 
 	$("#datepicker").datepicker({
 	  dateFormat: 'yy-mm-dd',
@@ -691,6 +734,8 @@
 	function myCoupon() {
 		location.href="/coupon/couponList";
 	}
+	
+	
 	
 </script>
 </body>

@@ -597,7 +597,7 @@
     		   	   	        				console.log("keyValue : " + keyValue);
 //												10분은 60만		
 //												1분은   6만 	
-    		   								var tts = 1800000;
+    		   								var tts = 60000;	//3분
 
     		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
     		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
@@ -607,9 +607,9 @@
     		   											value : keyValue,	// obj객체에 value는 time
     		   											expire : Date.now() + tts,
     		   											time : tts,
-    		   											name : keyName
+    		   											name : keyName,
+    		   											expire2 : Date.now()+tts-30000
     		   									}
-    		   									console.log(obj);
     		   									
     		   									//local에는 객체를 저장할 수 없어서 JSON으로 문자열 변환							
     		   									const objString = JSON.stringify(obj);	// JSON으로 문자열 변환

@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
 <style>
      .modal-title{ 
  	 font-size: 17px; 
@@ -129,7 +131,7 @@
                 <div class="blog-row row">     
                     <c:if test="${!empty wList}">
                     	<c:forEach items="${wList }" var="wait">
-	                    	<div class="col-lg-4 col-md-6 ">
+	                    	<div class="col-lg-4 col-md-6" id="removeTag">
 		                    	<div class="blog-col">
 		                            <img src="${wait.reFilePath}">
 		                            <span>${wait.rePayDate} 결제</span>
@@ -319,194 +321,129 @@
 
 
 
-	<button class="btn btn-info btn-sm follower" style="font-size: 8px;">전송 버튼</button>
-	<div id="msgStack">
-	
-	</div>
-
+<!-- 	<button class="btn btn-info btn-sm follower" style="font-size: 8px;">전송 버튼</button> -->
+<!-- 	<div id="msgStack"> -->
+		
+<!-- 	</div> -->
+		
+<!-- 		<button id="toastBtn">버튼</button> -->
     </body>
     
     <script>
     
 //   메세지 보내는 영역
-	$('#notifySendBtn').click(
-					function(e) {						
-						let modal = $('.modal_table').has(e.target);
-						console.log(modal);
-						let type = '70';
-						let target = modal.find('.inputModal').val();
-						console.log(target);
-						let content = modal.find('.modalTextarea').val();
-						console.log(content);
-						let url = '${contextPath}/member/save';
-						// 전송한 정보를 db에 저장	
- 						$.ajax({
- 									type : 'post',
- 									url : '${contextPath}/member/save',
- 									dataType : 'text',
- 									data : {
- 										"target" : target,
-										"content" : content,
- 										"type" : type,
- 										"url" : url
- 									},
- 									success : function() { // db전송 성공시 실시간 알림 전송
- 										// 소켓에 전달되는 메시지
- 										// 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
- 									console.log("여기까지는 됬어");
- 										socket.send("관리자,"
-												+ target + ","
- 												+ content + ","
-												+ url);
- 									}
- 								});
-						modal.find('.inputModal').val(''); // textarea 초기화
-					});
-
-	//받는영역
-	var socket = null;
-	$(document).ready(function(){
-		// 웹소켓 연결
-		sock = new SockJS("<c:url value="/echo-ws"/>");
-		console.log(sock);
-		console.log("연결");
-		socket = sock;
-		console.log(socket);
-
-		// 데이터를 전달 받았을때 
-		sock.onmessage = onMessage // toast 생성
-	});
-
-	// toast생성 및 추가
-	function onMessage(evt) {
-		var data = evt.data;
-		console.log("data 값 : " + data);
-		console.log("드디어 왔다");
-		// toast
-		let toast = "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>";
-		toast += "<div class='toast-header'><i class='fas fa-bell mr-2'></i><strong class='mr-auto'>알림</strong>";
-		toast += "<small class='text-muted'>just now</small><button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>";
-		toast += "<span aria-hidden='true'>&times;</span></button>";
-		toast += "</div> <div class='toast-body'>" + data
-				+ "</div></div>";
-		$("#msgStack").append(toast); // msgStack div에 생성한 toast 추가
-		console.log(toast);
-// 		$(".toast").toast({
-// 			"animation" : true,
-// 			"autohide" : false
+// 	$('#notifySendBtn').click(
+// 		function(e) {						
+// 			let modal = $('.modal_table').has(e.target);
+// 			console.log(modal);
+// 			let type = '70';
+// 			let target = modal.find('.inputModal').val();	//session 아이디값
+// 			let content = modal.find('.modalTextarea').val();
+// 			let url = '${contextPath}/member/save';
+// 			// 전송한 정보를 db에 저장	
+// 				$.ajax({
+// 						type : 'post',
+// 						url : '${contextPath}/member/save',
+// 						dataType : 'text',
+// 						data : {
+// 							"target" : target,
+// 						"content" : content,
+// 							"type" : type,
+// 							"url" : url
+// 						},
+// 						success : function() { // db전송 성공시 실시간 알림 전송
+// 							// 소켓에 전달되는 메시지
+// 							// 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+// 						console.log("여기까지는 됬어");
+// 							socket.send("관리자," + target + "," + content + "," + url);
+// 						}
+// 					});
 // 		});
-// 		$('.toast').toast('show');
-	};
-	
+
     $('.follower').click(function(){
     	 $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다.   
 	      $('.modal-title').text("보내기");
     });
-    
 
-// 	function CountDownTimer(dt, id) {
-// 		var end = new Date(dt);
-// 		var _second = 1000;
-// 		var _minute = _second * 60;
-// 		var _hour = _minute * 60;
-// 		//         var _day = _hour * 24;
-// 		var timer;
-// 		function showRemaining() {
-// 			var now = new Date();
-// 			var distance = end - now;
-// 			if (distance < 0) {
-// 				clearInterval(timer);
-// 				document.getElementById(id).innerHTML = '결제 대기시간 종료';
-// 				return;
-// 			}
-// 			//             var days = Math.floor(distance / _day);
-// 			//             var hours = Math.floor((distance % _day) / _hour);
-// 			var minutes = Math.floor((distance % _hour)
-// 					/ _minute);
-// 			var seconds = Math.floor((distance % _minute)
-// 					/ _second);
-// 			//             document.getElementById(id).innerHTML = days + '일 ';
-// 			//             document.getElementById(id).innerHTML += hours + '시간 ';
-// 			document.getElementById(id).innerHTML = minutes
-// 					+ '분 ';
-// 			document.getElementById(id).innerHTML += seconds
-// 					+ '초';
-// 		}
-// 		timer = setInterval(showRemaining, 1000);
-// 	}
-
-// 	//로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
-// 	$(document)
-// 			.ready(
-// 					function getItemWithExpireTime() {
-
-// 						$
-// 								.ajax({
-// 									url : "/reservation/checkSessionId",
-// 									type : "post",
-// 									success : function(result) {
-// 										if (result != "") {
-// 											const objString = window.localStorage
-// 													.getItem(result); //local에 저장된 time을 가져와 objString에 저장
-// 											//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
-// 											if (!objString) {
-// 												console
-// 														.log("로컬값 없음!!!!!!!!");
-// 												return null;
-// 											}
-
-// 											const obj = JSON
-// 													.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
-
-// 											console
-// 													.log("parse로 변환된 객체 : "
-// 															+ obj);
-// 											CountDownTimer(
-// 													obj.expire,
-// 													'timeDeal');
-// 											//현재 시간과 (현재시간+30분)했던 것을 비교
-// 											if (Date.now() > obj.expire) {
-// 												$
-// 														.ajax({
-// 															url : "/reservation/removeWait",
-// 															data : {
-// 																"reservationName" : obj.value
-// 															},
-// 															type : "post",
-// 															success : function(
-// 																	result) {
-// 																if (result == "삭제 성공!") {
-// 																	//만료시간이 지나면 결제대기상태 삭제
-// 																	window.localStorage
-// 																			.removeItem(keyName);
-// 																	console
-// 																			.log("삭제 완료!!");
-// 																	//삭제 ajax 코드 
-
-// 																} else {
-// 																	console
-// 																			.log(result);
-// 																}
-// 															}
-// 														});
-
-// 												localStorage
-// 														.removeItem(result);
-// 												//null 리턴
-// 												return null;
-// 											}
-// 											//만료기간이 남아있을땐 value값 리턴
-// 											return obj.value;
-// 										}
-// 									}
-// 								});
-
-// 					});
-
+	function CountDownTimer(dt, id, obj, sessionId) {
+		var end = new Date(dt);
+		var _second = 1000;
+		var _minute = _second * 60;
+		var _hour = _minute * 60;
+//      var _day = _hour * 24;
+		var timer;
+		function showRemaining() {
+			var now = new Date();
+			var distance = end - now;			
+			if (distance < 0) {
+				clearInterval(timer);
+				$.ajax({
+					url : "/reservation/removeWait",
+					data : {
+						"reservationName" : obj.value
+					},
+					type : "post",
+					success : function(result) {
+						document.getElementById(id).innerHTML = '결제 대기시간 종료';	
+						if (result == "삭제 성공!") {
+							//만료시간이 지나면 결제대기상태 삭제
+							window.localStorage.removeItem(sessionId);
+							console.log("삭제 완료!!");
+							//삭제 ajax 코드 
+							$("#removeTag").remove();							
+						}
+					}
+				}); 							
+			}
+			//             var days = Math.floor(distance / _day);
+			//             var hours = Math.floor((distance % _day) / _hour);
+			var minutes = Math.floor((distance % _hour) / _minute);
+			var seconds = Math.floor((distance % _minute) / _second);
+			//             document.getElementById(id).innerHTML = days + '일 ';
+			//             document.getElementById(id).innerHTML += hours + '시간 ';
+			document.getElementById(id).innerHTML = minutes + '분 ';
+			document.getElementById(id).innerHTML += seconds + '초';				
+			var data = obj.expire - 60000;	// 몇분남았는지 알려주는 시간 
+			var url = "${contextPath}";
+			var content = "결제시간 10분 남았습니다.";
+			//현재 시간과 (현재시간+30분)했던 것을 비교
+			if(Date.now() == obj.expire2) {
+				//EchoHandler컨트롤러로 이동
+				socket.send("관리자," + result + "," + content + "," + url);		
+			}								
+		}
+		timer = setInterval(showRemaining, 1000);
+	}
+	
+	//받는영역
+	var socket = null;
+	//로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
+	$(document).ready(	
+		function getItemWithExpireTime() {		
+			// 웹소켓 연결
+			sock = new SockJS("<c:url value='/echo-ws'/>");
+			socket = sock;
+			$.ajax({
+				url : "/reservation/checkSessionId",
+				type : "post",
+				success : function(result) {	//result는 세션아이디값
+					if (result != "") {
+						const objString = window.localStorage.getItem(result); //local에 저장된 time을 가져와 objString에 저장
+						//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
+						if (!objString) {
+							console.log("로컬값 없음!!!!!!!!");
+							return null;
+						}
+						const obj = JSON.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
 					
-				</script>
-
-    
+						console.log("parse로 변환된 객체 : "+ obj);
+						CountDownTimer(obj.expire, 'timeDeal', obj, result);						
+					}
+				}
+			});
+		}
+	);
+	</script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
