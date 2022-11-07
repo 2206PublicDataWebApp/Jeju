@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>
 <!doctype html>
 <html lang="en">
 
@@ -16,6 +17,30 @@
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<style>
+     .modal-title{ 
+ 	 font-size: 17px; 
+ 	 text-align:left; 
+ 	 font-weight: bold; 
+ 	} 
+ 	.modal_table{ 
+ 	  width:100%; 
+ 	} 
+ 	#modal_userImg{ 
+ 	  width:170px; 
+ 	  height:80px; 
+ 	  margin-right : 180px; 
+      border-radius: 75%;
+ 	}
+ 	#modal_userId{
+ 	  width:200px;
+ 	}
+ 	#modal_userFollow{ 
+ 	  margin:10px; 
+ 	  text-align: right; 
+ 	} 
+</style>
 </head>
 
     <body>
@@ -265,97 +290,221 @@
             </div>
 
         </div>
-<!-- 		<input id="set_btn" type="button" value="data set"/> -->
-<!-- 		<input id="get_btn" type="button" value="data get"/> -->
-<!-- 		<div id="result"></div> -->
-		
-		
-		
-		
+        
+	<div class="modal fade" id="followModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- 모달창-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title"></h4>
+									<button type="button" class="close" id="modalClose"
+										data-dismiss="modal">×</button>
+								</div>
+										<div class="modal-body">
+											<table class="modal_table">
+												<tr>
+													<td style="width: 70px;"><input type="text" class="inputModal" placeholder="유저 아이디"/></td>
+													<td><textarea class="modalTextarea"></textarea></td>
+													<td id="modal_userID" style="font-weight: bold; font-size: 22px;"></td>
+													<td id="modal_userFollow">
+														<button class="btn btn-outline-primary codeBtn" id="notifySendBtn">적용</button>
+													</td>
+												</tr>
+											</table>
+										</div>
+								<div id="count" value="1"></div>
+							</div>
+						</div>
+					</div>
+
+
+
+	<button class="btn btn-info btn-sm follower" style="font-size: 8px;">전송 버튼</button>
+	<div id="msgStack">
+	
+	</div>
+
     </body>
     
     <script>
-    function CountDownTimer(dt, id) {
-        var end = new Date(dt);
-        var _second = 1000;
-        var _minute = _second * 60;
-        var _hour = _minute * 60;
-//         var _day = _hour * 24;
-        var timer;
-        function showRemaining() {
-            var now = new Date();
-            var distance = end - now;
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById(id).innerHTML = '결제 대기시간 종료';
-                return;
-            }
-//             var days = Math.floor(distance / _day);
-//             var hours = Math.floor((distance % _day) / _hour);
-            var minutes = Math.floor((distance % _hour) / _minute);
-            var seconds = Math.floor((distance % _minute) / _second);
-//             document.getElementById(id).innerHTML = days + '일 ';
-//             document.getElementById(id).innerHTML += hours + '시간 ';
-            document.getElementById(id).innerHTML = minutes + '분 ';
-            document.getElementById(id).innerHTML += seconds + '초';
-        }
-        timer = setInterval(showRemaining, 1000);
-    }
     
-  //로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
-	$(document).ready(function getItemWithExpireTime(){
-		
-		$.ajax({
-	    		url : "/reservation/checkSessionId",
-	    		type : "post",
-	    		success : function(result) {
-	    				if(result != "") {
-	    					const objString = window.localStorage.getItem(result);	//local에 저장된 time을 가져와 objString에 저장
-	    					//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
-	    					if(!objString) {
-	    						console.log("로컬값 없음!!!!!!!!");
-	    						return null;
-	    					}
-	    					
-	    					const obj = JSON.parse(objString);	//JSON으로 변환했던 문자열을 parse로 객체 변환
-	    					
-	    					console.log("parse로 변환된 객체 : " + obj);	
-	    					CountDownTimer(obj.expire, 'timeDeal');
-	    					//현재 시간과 (현재시간+30분)했던 것을 비교
-	    					if(Date.now() > obj.expire){
-	    						$.ajax({
-	    							url : "/reservation/removeWait",
-	    							data : {
-	    								"reservationName" : obj.value
-	    							},
-	    							type : "post",
-	    							success : function(result) {
-	    								if(result == "삭제 성공!") {
-	    									//만료시간이 지나면 결제대기상태 삭제
-	    									window.localStorage.removeItem(keyName);
-	    									console.log("삭제 완료!!");
-	    									//삭제 ajax 코드 
+//   메세지 보내는 영역
+	$('#notifySendBtn').click(
+					function(e) {						
+						let modal = $('.modal_table').has(e.target);
+						console.log(modal);
+						let type = '70';
+						let target = modal.find('.inputModal').val();
+						console.log(target);
+						let content = modal.find('.modalTextarea').val();
+						console.log(content);
+						let url = '${contextPath}/member/save';
+						// 전송한 정보를 db에 저장	
+ 						$.ajax({
+ 									type : 'post',
+ 									url : '${contextPath}/member/save',
+ 									dataType : 'text',
+ 									data : {
+ 										"target" : target,
+										"content" : content,
+ 										"type" : type,
+ 										"url" : url
+ 									},
+ 									success : function() { // db전송 성공시 실시간 알림 전송
+ 										// 소켓에 전달되는 메시지
+ 										// 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+ 									console.log("여기까지는 됬어");
+ 										socket.send("관리자,"
+												+ target + ","
+ 												+ content + ","
+												+ url);
+ 									}
+ 								});
+						modal.find('.inputModal').val(''); // textarea 초기화
+					});
 
-	    								}else {
-	    									console.log(result);
-	    								}
-	    							}
-	    		 				});			
-	    		 				
-	    						localStorage.removeItem(result);
-	    						//null 리턴
-	    						return null;
-	    					}
-	    					//만료기간이 남아있을땐 value값 리턴
-	    					return obj.value;
-	    				}		     		    				   	     		    				
-	    			}
-				});	
-		
+	//받는영역
+	var socket = null;
+	$(document).ready(function(){
+		// 웹소켓 연결
+		sock = new SockJS("<c:url value="/echo-ws"/>");
+		console.log(sock);
+		console.log("연결");
+		socket = sock;
+		console.log(socket);
+
+		// 데이터를 전달 받았을때 
+		sock.onmessage = onMessage // toast 생성
 	});
 
-	    
-    </script>
+	// toast생성 및 추가
+	function onMessage(evt) {
+		var data = evt.data;
+		console.log("data 값 : " + data);
+		console.log("드디어 왔다");
+		// toast
+		let toast = "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>";
+		toast += "<div class='toast-header'><i class='fas fa-bell mr-2'></i><strong class='mr-auto'>알림</strong>";
+		toast += "<small class='text-muted'>just now</small><button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>";
+		toast += "<span aria-hidden='true'>&times;</span></button>";
+		toast += "</div> <div class='toast-body'>" + data
+				+ "</div></div>";
+		$("#msgStack").append(toast); // msgStack div에 생성한 toast 추가
+		console.log(toast);
+// 		$(".toast").toast({
+// 			"animation" : true,
+// 			"autohide" : false
+// 		});
+// 		$('.toast').toast('show');
+	};
+	
+    $('.follower').click(function(){
+    	 $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다.   
+	      $('.modal-title').text("보내기");
+    });
+    
+
+// 	function CountDownTimer(dt, id) {
+// 		var end = new Date(dt);
+// 		var _second = 1000;
+// 		var _minute = _second * 60;
+// 		var _hour = _minute * 60;
+// 		//         var _day = _hour * 24;
+// 		var timer;
+// 		function showRemaining() {
+// 			var now = new Date();
+// 			var distance = end - now;
+// 			if (distance < 0) {
+// 				clearInterval(timer);
+// 				document.getElementById(id).innerHTML = '결제 대기시간 종료';
+// 				return;
+// 			}
+// 			//             var days = Math.floor(distance / _day);
+// 			//             var hours = Math.floor((distance % _day) / _hour);
+// 			var minutes = Math.floor((distance % _hour)
+// 					/ _minute);
+// 			var seconds = Math.floor((distance % _minute)
+// 					/ _second);
+// 			//             document.getElementById(id).innerHTML = days + '일 ';
+// 			//             document.getElementById(id).innerHTML += hours + '시간 ';
+// 			document.getElementById(id).innerHTML = minutes
+// 					+ '분 ';
+// 			document.getElementById(id).innerHTML += seconds
+// 					+ '초';
+// 		}
+// 		timer = setInterval(showRemaining, 1000);
+// 	}
+
+// 	//로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
+// 	$(document)
+// 			.ready(
+// 					function getItemWithExpireTime() {
+
+// 						$
+// 								.ajax({
+// 									url : "/reservation/checkSessionId",
+// 									type : "post",
+// 									success : function(result) {
+// 										if (result != "") {
+// 											const objString = window.localStorage
+// 													.getItem(result); //local에 저장된 time을 가져와 objString에 저장
+// 											//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
+// 											if (!objString) {
+// 												console
+// 														.log("로컬값 없음!!!!!!!!");
+// 												return null;
+// 											}
+
+// 											const obj = JSON
+// 													.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
+
+// 											console
+// 													.log("parse로 변환된 객체 : "
+// 															+ obj);
+// 											CountDownTimer(
+// 													obj.expire,
+// 													'timeDeal');
+// 											//현재 시간과 (현재시간+30분)했던 것을 비교
+// 											if (Date.now() > obj.expire) {
+// 												$
+// 														.ajax({
+// 															url : "/reservation/removeWait",
+// 															data : {
+// 																"reservationName" : obj.value
+// 															},
+// 															type : "post",
+// 															success : function(
+// 																	result) {
+// 																if (result == "삭제 성공!") {
+// 																	//만료시간이 지나면 결제대기상태 삭제
+// 																	window.localStorage
+// 																			.removeItem(keyName);
+// 																	console
+// 																			.log("삭제 완료!!");
+// 																	//삭제 ajax 코드 
+
+// 																} else {
+// 																	console
+// 																			.log(result);
+// 																}
+// 															}
+// 														});
+
+// 												localStorage
+// 														.removeItem(result);
+// 												//null 리턴
+// 												return null;
+// 											}
+// 											//만료기간이 남아있을땐 value값 리턴
+// 											return obj.value;
+// 										}
+// 									}
+// 								});
+
+// 					});
+
+					
+				</script>
 
     
     <script src="/resources/assets/js/popper.min.js"></script>

@@ -20,7 +20,6 @@
 	<link rel="stylesheet" href="/resources/assets/css/pensionList.css">
 	<script src="/resources/js/rSlider.min.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/rSlider.min.css">
-
 </head>
 
 <body>

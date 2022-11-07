@@ -281,6 +281,14 @@ public class MemberController {
 		return "/mypage/myPageView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/member/save", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String saveMessage() {
+		String chk = "sdfsadf";
+		return chk;
+	}
+	
+	
 }
 
 
