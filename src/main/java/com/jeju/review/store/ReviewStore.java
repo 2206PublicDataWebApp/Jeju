@@ -18,13 +18,18 @@ public interface ReviewStore {
 	// 리뷰 삭제
 	void deleteReview(SqlSession session, Integer reviewNo);
 
-	// 관리자페이지 리뷰 전체조회
-	List<Review> showAllReview(SqlSession session);
-
-	// 관리자페이지 리뷰삭제
-    void deleteAdminReview(SqlSession session, Integer reviewNo);
 	// 리뷰 등록
 	void registerReview(SqlSession session, Review review);
 	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
 	void updateReviewCheck(SqlSession session, Review review);
+
+
+	// 관리자페이지 리뷰 전체조회
+	List<Review> showAllReview(SqlSession session);
+
+	// 관리자페이지 리뷰삭제
+	void deleteAdminReview(SqlSession session, Integer reviewNo);
+
+	// 관리자페이지 페이징용 리뷰조회
+    List<Review> pagingShowAllReview(SqlSession session, int currentPage, int reviewLimit);
 }

@@ -37,12 +37,6 @@ public class ReviewStoreLogic implements ReviewStore{
 		session.delete("ReviewMapper.deleteReview", reviewNo);
 	}
 
-	// 관리자페이지 리뷰전체조회
-	@Override
-	public List<Review> showAllReview(SqlSession session) {
-		List<Review> reviewList = session.selectList("ReviewMapper.adminShowAllReview");
-		return reviewList;
-	}
 	// 리뷰 등록
 	@Override
 	public void registerReview(SqlSession session, Review review) {
@@ -55,10 +49,27 @@ public class ReviewStoreLogic implements ReviewStore{
 		session.update("PensionMapper.updateReviewCount",review);
 	}
 
+
+	// 관리자페이지 리뷰전체조회
+	@Override
+	public List<Review> showAllReview(SqlSession session) {
+		List<Review> reviewList = session.selectList("ReviewMapper.adminShowAllReview");
+		return reviewList;
+	}
+
 	// 관리자페이지 리뷰삭제
 	@Override
 	public void deleteAdminReview(SqlSession session, Integer reviewNo) {
 		session.delete("ReviewMapper.deleteAdminReview", reviewNo);
+	}
+
+	// 관리자페이지 페이징용 리뷰조회
+	@Override
+	public List<Review> pagingShowAllReview(SqlSession session, int currentPage, int reviewLimit) {
+		int offset = (currentPage - 1) * reviewLimit;
+		RowBounds rowBounds = new RowBounds(offset, reviewLimit);
+		List<Review> reviewList = session.selectList("ReviewMapper.pagingShowAllReview", null, rowBounds);
+		return reviewList;
 	}
 
 }

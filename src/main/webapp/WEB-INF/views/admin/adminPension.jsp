@@ -44,7 +44,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="#">
-            <img src="로고이미지파일" alt="로고" />
+            <img src="/resources/images/logo.png" alt="로고" />
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">

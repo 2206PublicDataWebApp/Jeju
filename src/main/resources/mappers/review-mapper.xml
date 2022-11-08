@@ -67,4 +67,10 @@
 	<delete id="deleteAdminReview">
 		DELETE FROM REVIEW_TBL WHERE REVIEW_NO = #{reviewNo}
 	</delete>
+
+	<!-- 관리자 페이징용 전체 리뷰 조회 -->
+	<select id="pagingShowAllReview" resultMap="reviewResultMap">
+		SELECT REVIEW_NO, MEMBER_ID, REGDATE, REVIEW_CONTENTS FROM REVIEW_TBL ORDER BY REVIEW_NO DESC
+	</select>
+
 </mapper>
