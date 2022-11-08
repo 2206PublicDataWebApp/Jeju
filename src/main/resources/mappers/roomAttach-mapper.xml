@@ -22,5 +22,5 @@
 		SET ROOM_PATH = #{roomPath}, ROOM_FILE_RENAME = #{roomFileRename},ROOM_FILE_NAME = #{roomFileName}
 		WHERE ROOM_NO = #{roomNo}
 	</update>
-	
+	 
 </mapper>
