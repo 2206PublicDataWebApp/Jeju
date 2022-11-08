@@ -106,10 +106,10 @@
 		                    <div class="dest-col">
 		                        <div class="dest-img">
 		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
-		                        </div>
-		                        <h3>내 정보</h3>
-		                        <a class="btn btn-outline-success" href="#">바로가기</a>
-		                    </div>
+								</div>
+								  <h3>회원 수정&탈퇴</h3>
+								  <a class="btn btn-outline-success" href="/mypage/modifyView">바로가기</a>
+							  	</div>
 		                </div>
 		                <div class="col-lg-4 col-md-6">
 		                    <div class="dest-col">

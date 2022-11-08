@@ -21,9 +21,11 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminMemberController {
 
+    // private final MemberService memberService;
     @Autowired
     private MemberService memberService;
 
+    // 관리자페이지 회원조회 및 페이징
     @GetMapping("/member")
     public ModelAndView showAdminMember
             (ModelAndView modelAndView,
@@ -58,10 +60,8 @@ public class AdminMemberController {
             @RequestParam("searchCondition") String searchCondition,
             @RequestParam("searchValue") String searchValue) {
         /*log.info("관리자 회원관리 검색 시도 {}", modelAndView);*/
-
         List<Member> searchList = memberService.searchAllByValue(searchCondition, searchValue);
-
-        modelAndView.addObject("searchList", searchList);
+        modelAndView.addObject("memberPageList", searchList);
         modelAndView.setViewName("/admin/adminMember");
 
         return modelAndView;

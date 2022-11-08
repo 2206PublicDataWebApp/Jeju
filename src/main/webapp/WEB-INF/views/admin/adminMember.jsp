@@ -219,7 +219,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${memberPageList }" var="adminMember" varStatus="i">
+                                <c:forEach items="${memberPageList }" var="adminMember" varStatus="i">
                                     <tr>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>
