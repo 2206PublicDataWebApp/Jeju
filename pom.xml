@@ -21,6 +21,12 @@
    </repositories>
 
    <dependencies>
+   		 <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${org.springframework-version}</version>
+		</dependency>
+
   <!--    이메일 인증 코드 -->
       <dependency>
       <groupId>net.nurigo</groupId>

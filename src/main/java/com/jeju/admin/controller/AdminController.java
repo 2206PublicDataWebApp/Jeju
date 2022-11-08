@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jeju.member.domain.Member;
 import com.jeju.member.service.MemberService;
-import com.jeju.pagination.controller.PaginationController;
+//import com.jeju.pagination.controller.PaginationController;
 import com.jeju.pagination.domain.Pagination;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.service.PensionService;
@@ -62,7 +62,7 @@ public class AdminController {
                         (ModelAndView modelAndView,
                          @RequestParam(value = "page", required=false) Integer page
                          ){
-        log.info("어드민 페이지 접속 시도 {}", modelAndView);
+//        log.info("어드민 페이지 접속 시도 {}", modelAndView);
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();
