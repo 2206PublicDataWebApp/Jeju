@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
    <title>제주어때 홈</title>
-   
+   <style>
+   		#logo{
+   			color:white;
+   			font-family:'여기어때 잘난체 OTF', GungsuhChe , "궁서체";
+   		}
+   </style>
 </head>
 
 <body>
@@ -25,7 +30,8 @@
      
                         <div class="col-md-4 d-none d-md-block mail-detail"></div>
                         <div class="col-md-4 logo">
-                            <img src="/resources/assets/images/logo.png" alt="">
+                        	<h1 id="logo">제주어때</h1>
+<!--                             <img src="/resources/assets/images/logo.png" alt=""> -->
                             <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
                         </div>
                         
@@ -96,12 +102,7 @@
                     <img class="d-block w-100" src="/resources/assets/images/slider/slider-5.jpg" alt="First slide">
                     <div class="carousel-caption fvgb d-none d-md-block">
                         <h5 class="animated bounceInDown">여러분의 숙소를 보여주세요 ! </h5>
-                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
-                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
-                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
-
                         <div class="row vbh">
-
                             <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
@@ -111,10 +112,6 @@
                     <img class="d-block w-100" src="/resources/assets/images/slider/slider-3.jpg" alt="Third slide">
                     <div class="carousel-caption vdg-cur d-none d-md-block">
                         <h5 class="animated bounceInDown">자신의 숙소를 등록하고 싶다면?</h5>
-                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
-                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
-                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
-
                         <div class="row vbh">
                             <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
