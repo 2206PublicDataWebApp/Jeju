@@ -2,6 +2,7 @@ package com.jeju.member.store;
 
 
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -46,4 +47,7 @@ public interface MemberStore {
 	List<Member> pagingShowAllMember(SqlSessionTemplate session, int currentPage, int memberLimit);
 
 	void removeAdminMember(SqlSessionTemplate session, Integer memberNo);
+
+	// 관리자페이지 회원검색
+    List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue);
 }

@@ -1,4 +1,3 @@
-
 package com.jeju.member.controller;
 import java.io.PrintWriter;
 import java.util.List;
@@ -59,7 +58,7 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
-			
+
 			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
@@ -162,7 +161,7 @@ public class MemberController {
 			mv.addObject("msg", "로그아웃 실패");
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
 
@@ -174,7 +173,7 @@ public class MemberController {
 		Member memberInfo = mService.selectMemberInfo(memberId);
 		mv.addObject("member", member);
 		mv.setViewName("mypage/modify");
-		
+
 		return mv;
 		// /WEB-INF/views/member/join.jsp
 	}
@@ -217,7 +216,7 @@ public class MemberController {
 			String memberId = member.getMemberId();
 			int result = mService.removeMember(memberId);
 //			return "redirect:/member/logout.kh";
-			
+
 			mv.setViewName("redirect:/member/logout.kh");
 		} catch (Exception e) {
 //			model.addAttribute("msg", e.toString());
@@ -259,16 +258,8 @@ public class MemberController {
 		}
 		return mv;
 	}
-//	
-//	//아이디 중복검사
-//	@ResponseBody
-//	@RequestMapping(value="/idChk",method=RequestMethod.POST)
-//	public String idChk(
-//			@RequestParam("memberId") String memberId) {
-//		int result = mService.idChk(memberId);
-//		return String.valueOf(result);
-//}
-	//email 중복검사
+	
+	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
 	public String duplicateEmailCheck(
@@ -279,7 +270,7 @@ public class MemberController {
 //			return result+"";
 		return String.valueOf(result);
 	}
-	
+
 	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
@@ -296,7 +287,7 @@ public class MemberController {
 	public String findId() {
 		return "/member/findId";
 	}
-	
+
 	//어아디 찾기 결과창
 	@RequestMapping(value="/member/findIdResult", method=RequestMethod.POST)
 	public ModelAndView findIdResult(
@@ -307,8 +298,8 @@ public class MemberController {
 		mv.setViewName("/member/findIdResult");
 		return mv;
 	}
-	
-	//비번 찾기 페이지 
+
+	//비번 찾기 페이지
 	@RequestMapping("/member/findPwd")
 	public String findPwd() {
 		return "/member/findPwd";
@@ -328,11 +319,11 @@ public class MemberController {
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 //	//아이디 찾는화면
 //	@RequestMapping(value="/member/findId.kh", method=RequestMethod.GET)
 //	public String findId() {
@@ -347,13 +338,13 @@ public class MemberController {
 //		, HttpServletRequest request
 //		,HttpServletResponse response) {
 //		try
-//		
+//
 //		return mv;
 //	}
-	
+
 }
-	
-	
-	
+
+
+
 
 
