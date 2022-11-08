@@ -36,7 +36,6 @@ public interface MemberService {
 
 	public Member selectMemberInfo(String memberId);
 
-	public int idChk(String memberId);
 
 
 	List<Member> pagingShowAllMember(int currentPage, int memberLimit);
