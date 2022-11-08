@@ -9,7 +9,7 @@
 	<style>
 	    body {
 	        background: #f8f8f8;
-	        padding: 60px 0;
+	        padding: 100px 0;
 	    }
 	    
 	    #login-form > div {
@@ -23,7 +23,7 @@
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <div class="panel-title">환영합니다!</div>
+                <div class="panel-title">안녕하세요 제주어때 채팅입니다.</div>
             </div>
             <div class="panel-body">
                 <form id="login-form" method="post" action="/loginProcess.do">
@@ -31,7 +31,7 @@
                         <input type="text"  name="id"	class="form-control" name="닉네임 입력" placeholder="닉네임 설정" autofocus>
                     </div>
                     <div>
-                        <button type="submit" class="form-control btn btn-primary">로그인</button>
+                        <button type="submit" class="form-control btn btn-primary">시작</button>
                     </div>
                 </form>
             </div>

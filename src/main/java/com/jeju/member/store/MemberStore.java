@@ -15,6 +15,8 @@ public interface MemberStore {
 	public Member selectLoginMember(SqlSession session, Member member);
 	// checkIdDuplicate
 	public int checkDupId(SqlSession session, String memberId);
+	// checkEmailDuplicate
+	public int checkDupEmail(SqlSession session, String memberEmail);
 	// selectOneById
 	public Member selectOneById(SqlSession session, String memberId);
 	// insertMember
@@ -24,6 +26,9 @@ public interface MemberStore {
 	// deleteMember
 	public int deleteMember(SqlSession session, String memberId);
 
+	public List<Member> findIdByEmail(SqlSession session, String memberEmail);
+
+	public List<Member> findPwdByEmail(SqlSession session, String memberEmail);
 	// 관리자 전체멤버 조회
 	public List<Member> showAllMember(SqlSession session);
 

@@ -54,6 +54,14 @@ public class AdminController {
     private ReviewService reviewService;
     @Autowired
     private ReservationService reservationService;
+	@Autowired
+    private MemberService memberService;
+	@Autowired
+	private PensionService pensionService;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private ReservationService reservationService;
 
 
     // 관리자페이지 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
@@ -62,8 +70,8 @@ public class AdminController {
                         (ModelAndView modelAndView,
                          @RequestParam(value = "page", required=false) Integer page
                          ){
-        log.info("어드민 페이지 접속 시도 {}", modelAndView);
-
+        /*log.info("어드민 페이지 접속 시도 {}", modelAndView);
+*/
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();
         //펜션목록조회
@@ -73,17 +81,7 @@ public class AdminController {
         // 리뷰내역조회
         List<Review> reviewList = reviewService.showAllReview();
 
-        // 회원목록 페이징
-        /*int getTotalCount = memberService.countAllMember("", "");
-        int memberLimit = 10;
-        PaginationController paginationController = new PaginationController();
-        Pagination pagination = paginationController.paginationList(page, getTotalCount, memberLimit);
-        if(getTotalCount > 0) {
-            List<Member> memberPageList = memberService.pagingShowAllMember(pagination.getCurrentPage(), memberLimit);
-            modelAndView.addObject("memberPageList", memberPageList);
-        }
-        modelAndView.addObject("pagination", pagination);
-*/
+
 
         modelAndView.addObject("memberList", memberList);
         modelAndView.addObject("pensionList", pensionList);

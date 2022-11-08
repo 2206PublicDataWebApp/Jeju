@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,19 +74,19 @@ span.guide {
 				<tr>
 					<td> * 비밀번호</td>
 					<td>
-						<input type="password" name="memberPwd">
+						<input type="password" name="memberPwd" >
 					</td>
 				</tr>
 				<tr>
 					<td> * 이메일</td>
 					<td>
-						<input type="text" name="memberEmail" value="${member.memberEmail }">
+						<input type="text" name="memberEmail" value="${member.memberEmail }" readonly>
 					</td>
 				</tr>	
 				<tr>
 					<td> * 이름</td>
 					<td>
-						<input type="text" name="memberName" value="${member.memberName }" readonly>
+						<input type="text" name="memberName" value="${member.memberName }" >
 					</td>
 				</tr>				
 				<tr>
@@ -121,6 +122,9 @@ span.guide {
 				</tr>
 			
 		</form>
+
+ 
+
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>

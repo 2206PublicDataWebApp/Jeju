@@ -38,6 +38,14 @@
 	WHERE MEMBER_ID = #{memberId}
 	AND MEMBER_PWD= #{memberPwd}
 </select>
+<!-- 아이디 찾기 결과 -->
+  	<select id="findIdByEmail" resultMap="memberResultMap">
+  		SELECT MEMBER_ID FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
+  	</select>
+  	<!-- 비번 찾기 결과 -->
+  	<select id="findPwdByEmail" resultMap="memberResultMap">
+  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail } 
+  	</select>
 
    <select id="selectMemberInfo" resultMap="memberResultMap">
    		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
@@ -51,14 +59,16 @@
    </insert>
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
-      SET MEMBER_PWD = #{memberPwd }, MEMBER_EMAIl = #{memberEmail }, MEMBER_PHONE = #{memberPhone}
+      SET MEMBER_PWD = #{memberPwd }, MEMBER_NAME = #{memberName }, MEMBER_PHONE = #{memberPhone}
       , MEMBER_ADDR = #{memberAddr }
       WHERE MEMBER_ID = #{memberId }
    </update>
+   
    <update id="deleteMember" parameterType="string">
-     	DELETE FROM MEMBER_TBL
+      DELETE FROM MEMBER_TBL
 
       WHERE MEMBER_ID = #{memberId }
+      AND MEMBER_PWD = #{memberPwd}
 
    </update>
    <select id="selectLoginOne" resultMap="memberResultMap">
@@ -71,6 +81,9 @@
    </select>
    <select id="checkIdDuplicate" resultType="_int">
       SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId} AND M_STATUS = 'Y'
+   </select>
+   <select id="checkEmailDuplicate" resultType="_int">
+      SELECT COUNT(*) FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail} AND M_STATUS = 'Y'
    </select>
    <select id="selectOneByEmail" resultMap="memberResultMap">
       SELECT * FROM MEMBER_TBL

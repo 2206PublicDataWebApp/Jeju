@@ -1,6 +1,7 @@
 
 package com.jeju.member.controller;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -58,6 +59,8 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
+			
+			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
@@ -112,14 +115,14 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@ResponseBody
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
-	public String emailAuth(String email) {
+	public String emailAuth(@RequestParam("email") String email) {
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
 
 		/* 이메일 보내기 */
 		String setFrom = "lhr7517@naver.com";
 		String toMail = email;
-		String title = "회원가입 인증 이메일 입니다.";
+		String title = " 인증 이메일 입니다.";
 		String content =
 				"홈페이지를 방문해주셔서 감사합니다." +
 						"<br><br>" +
@@ -214,6 +217,7 @@ public class MemberController {
 			String memberId = member.getMemberId();
 			int result = mService.removeMember(memberId);
 //			return "redirect:/member/logout.kh";
+			
 			mv.setViewName("redirect:/member/logout.kh");
 		} catch (Exception e) {
 //			model.addAttribute("msg", e.toString());
@@ -255,15 +259,28 @@ public class MemberController {
 		}
 		return mv;
 	}
+//	
+//	//아이디 중복검사
+//	@ResponseBody
+//	@RequestMapping(value="/idChk",method=RequestMethod.POST)
+//	public String idChk(
+//			@RequestParam("memberId") String memberId) {
+//		int result = mService.idChk(memberId);
+//		return String.valueOf(result);
+//}
+	//email 중복검사
+	@ResponseBody
+	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
+	public String duplicateEmailCheck(
+			@RequestParam("memberEmail") String memberEmail) {
+		// 데이터가 있으면 객체 or 1 or true
+		// 데이터가 없으면 null or 0 or false
+		int result = mService.checkDupEmail(memberEmail);
+//			return result+"";
+		return String.valueOf(result);
+	}
 	
 	//아이디 중복검사
-	@ResponseBody
-	@RequestMapping(value="/idChk",method=RequestMethod.POST)
-	public String idChk(
-			@RequestParam("memberId") String memberId) {
-		int result = mService.idChk(memberId);
-		return String.valueOf(result);
-}
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
 	public String duplicateIdCheck(
@@ -274,14 +291,69 @@ public class MemberController {
 //			return result+"";
 		return String.valueOf(result);
 	}
+	//아이디 찾기
+	@RequestMapping(value="/member/findId",method=RequestMethod.GET)
+	public String findId() {
+		return "/member/findId";
+	}
 	
+	//어아디 찾기 결과창
+	@RequestMapping(value="/member/findIdResult", method=RequestMethod.POST)
+	public ModelAndView findIdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findIdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findIdResult");
+		return mv;
+	}
+	
+	//비번 찾기 페이지 
+	@RequestMapping("/member/findPwd")
+	public String findPwd() {
+		return "/member/findPwd";
+	}
+	//비번 찾기 결과창
+	@RequestMapping(value="/member/findPwdResult", method=RequestMethod.POST)
+	public ModelAndView findPwdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findPwdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findPwdResult");
+		return mv;
+	}
 	// 마이페이지로 이동
 	@RequestMapping(value="/mypage/myPage", method=RequestMethod.GET)
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
 	
+	
+	
+	
+	
+//	//아이디 찾는화면
+//	@RequestMapping(value="/member/findId.kh", method=RequestMethod.GET)
+//	public String findId() {
+//		return "member/findId";
+//	}
+	//아이디를 찾아서 보여주는 컨트롤러
+//	@RequestMapping(value="/member/findMember", method=RequestMethod.POST)
+//	public ModelAndView findMember(
+//		@RequestParam("memberName") String memberName
+//		,@RequestParam("memberPwd") String memberPwd
+//		, ModelAndView mv
+//		, HttpServletRequest request
+//		,HttpServletResponse response) {
+//		try
+//		
+//		return mv;
+//	}
+	
 }
-
+	
+	
+	
 
 
