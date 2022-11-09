@@ -29,7 +29,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 
-
 	// 회원가입할때 회원가입 페이지
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
 	public String memberJoinView(Model model) {
@@ -343,10 +342,6 @@ public class MemberController {
 //	}
 
 }
-
-
-
-
 
 
 

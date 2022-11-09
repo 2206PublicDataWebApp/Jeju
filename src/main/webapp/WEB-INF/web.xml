@@ -44,6 +44,17 @@
 	</filter-mapping>
 
 
+	<!-- Sql Injection filter 정의 -->
+	<filter>
+	  <filter-name>customFilter</filter-name>
+	  <filter-class>com.jeju.filter.sqlInjection.SqlInjectionFilter</filter-class>
+	</filter>
+	<!-- Sql Injection filter 매핑 -->
+	<filter-mapping>
+	  <filter-name>customFilter</filter-name>
+	  <url-pattern>*.do</url-pattern><!-- *.do 요청 -->
+	</filter-mapping>
+
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

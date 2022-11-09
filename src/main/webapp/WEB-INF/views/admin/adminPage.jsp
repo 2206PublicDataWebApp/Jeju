@@ -41,11 +41,11 @@
 </head>
 
 
-    <!-- 사이드바 -->
+<!-- 사이드바 -->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="#">
-                <img src="로고이미지파일" alt="로고" />
+            <a href="/">
+                <img src="/resources/images/logo.png" alt="로고" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -72,10 +72,6 @@
                             <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
                     </li>
                     <li>
-                        <a href="/admin/coupon">
-                            <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
-                    </li>
-                    <li>
                         <a href="/admin/chart">
                             <i class="fas fa-calendar-alt"></i>통계</a>
                     </li>
@@ -84,7 +80,7 @@
             </nav>
         </div>
     </aside>
-    <!-- END MENU SIDEBAR-->
+    <!-- 사이드바 끝 -->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -293,7 +289,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${pensionList }" var="adminPension"  varStatus="i"  begin="1" end="9" step="1">
+                                        <c:forEach items="${pensionList }" var="adminPension"  varStatus="i"  begin="0" end="8" step="1">
                                             <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
                                             <tr>
                                                 <th>${i.count}</th>
@@ -326,7 +322,7 @@
                                             <td>작성일</td>
 
                                         </tr>
-                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i" begin="1" end="6" step="1">
+                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i" begin="0" end="5" step="1">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
                                             <td>숙소이름</td>
@@ -369,7 +365,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="1" end="6" step="1">
+                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="0" end="5" step="1">
                                         <tr>
                                             <td>${adminReservation.reservationNo}</td>
                                             <td>${adminReservation.roomNo}</td>

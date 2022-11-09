@@ -41,48 +41,44 @@
 </head>
 
 <!-- 사이드바 -->
-<aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
-        <a href="#">
-            <img src="로고이미지파일" alt="로고" />
-        </a>
-    </div>
-    <div class="menu-sidebar__content js-scrollbar1">
-        <nav class="navbar-sidebar">
-            <ul class="list-unstyled navbar__list">
-                <li class="active">
-                    <a href="/admin/adminPage">
-                        <i class="fas fa-table"></i>일반</a>
-                </li>
-                <li class="active">
-                    <a href="/admin/member">
-                        <i class="fas fa-table"></i>회원관리</a>
-                </li>
-                <li>
-                    <a href="/admin/pension">
-                        <i class="far fa-check-square"></i>숙소관리</a>
-                </li>
-                <li>
-                    <a href="/admin/review">
-                        <i class="fas fa-calendar-alt"></i>리뷰관리</a>
-                </li>
-                <li>
-                    <a href="/admin/reservation">
-                        <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
-                </li>
-                <li>
-                    <a href="/admin/coupon">
-                        <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
-                </li>
-                <li>
-                    <a href="/admin/Chart">
-                        <i class="fas fa-calendar-alt"></i>통계</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
-<!-- END MENU SIDEBAR-->
+    <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+            <a href="/">
+                <img src="/resources/images/logo.png" alt="로고" />
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+                    <li>
+                        <a href="/admin/adminPage">
+                            <i class="fas fa-table"></i>일반</a>
+                    </li>
+                    <li>
+                        <a href="/admin/member">
+                            <i class="fas fa-table"></i>회원관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/pension">
+                            <i class="far fa-check-square"></i>숙소관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/review">
+                            <i class="fas fa-calendar-alt"></i>리뷰관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/reservation">
+                            <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/chart">
+                            <i class="fas fa-calendar-alt"></i>통계</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <!-- 사이드바 끝 -->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -215,14 +211,12 @@
                                 </tr>
                                 </thead>
                                         <tbody>
-                                            <c:forEach items="${reviewList }" var="adminReview" varStatus="i">
+                                            <c:forEach items="${reviewPagingList }" var="adminReview" varStatus="i">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
-                                            <td>숙소이름넣기</td>
+                                            <td>숙소이름</td>
                                             <td>${adminReview.memberId}</td>
-                                            <td>${fn:substring(adminReview.reviewContents, 0, 70)} ... </td>
-                                            <!-- 제약조건 걸기. 70자 이상이면 내용 자르고 끝에 ... 붙이기 -->
-                                            <%--<td>${adminReview.reviewContents}</td>--%>
+                                            <td>${adminReview.substringReview} </td>
                                             <td>${adminReview.regDate}</td>
                                             <td><a href="#" onclick="removeAdminReview(${adminReview.reviewNo});">삭제</a></td>
                                         </tr>
@@ -230,6 +224,46 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                        <!-- 페이징 시작-->
+                        <div>
+                            <article>
+                                <!-- 이전 페이지 -->
+                                <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
+                                        <span class="prev">
+                                            <a href="/admin/review?page=${pagination.startNavi - 1}"></a>
+                                        </span>
+                                </c:if>
+
+                                <!-- 번호 -->
+                                <c:forEach var="page" begin="${pagination.startNavi}"
+                                           end="${pagination.endNavi}">
+                                    <c:if test="${page == pagination.currentPage  }">
+                                            <span class="pageNow">
+                                                    ${page }
+                                            </span>
+                                    </c:if>
+                                    <c:if test="${page == 0  }">
+                                            <span class="pageNow">
+                                                    ${page+1 }
+                                            </span>
+                                    </c:if>
+
+                                    <c:if test="${page != pagination.currentPage && page !=0}">
+                                            <span class="pages"> <a href="/admin/review?page=${page }">${page }</a>
+                                            </span>
+                                    </c:if>
+                                </c:forEach>
+
+                                <!-- 다음 페이지 -->
+                                <c:if test="${pagination.endNavi ne pagination.maxPage  }">
+                                        <span class="next"> <a
+                                                href="/admin/review?page=${pagination.endNavi+1 }"> > </a>
+                                        </span>
+                                </c:if>
+                            </article>
+                        </div>
+                        <!-- 페이징 끝 -->
 
                             </div>
                         </div>

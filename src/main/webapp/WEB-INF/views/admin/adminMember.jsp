@@ -41,48 +41,45 @@
 </head>
 
 <!-- 사이드바 -->
-<aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
-        <a href="#">
-            <img src="로고이미지파일" alt="로고" />
-        </a>
-    </div>
-    <div class="menu-sidebar__content js-scrollbar1">
-        <nav class="navbar-sidebar">
-            <ul class="list-unstyled navbar__list">
-                <li class="active">
-                    <a href="/admin/adminPage">
-                        <i class="fas fa-table"></i>일반</a>
-                </li>
-                <li class="active">
-                    <a href="/admin/member">
-                        <i class="fas fa-table"></i>회원관리</a>
-                </li>
-                <li>
-                    <a href="/admin/pension">
-                        <i class="far fa-check-square"></i>숙소관리</a>
-                </li>
-                <li>
-                    <a href="/admin/review">
-                        <i class="fas fa-calendar-alt"></i>리뷰관리</a>
-                </li>
-                <li>
-                    <a href="/admin/reservation">
-                        <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
-                </li>
-                <li>
-                    <a href="/admin/coupon">
-                        <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
-                </li>
-                <li>
-                    <a href="/admin/Chart">
-                        <i class="fas fa-calendar-alt"></i>통계</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
-<!-- END MENU SIDEBAR-->
+    <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+            <a href="/">
+                <img src="/resources/images/logo.png" alt="로고" />
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+                    <li>
+                        <a href="/admin/adminPage">
+                            <i class="fas fa-table"></i>일반</a>
+                    </li>
+                    <li>
+                        <a href="/admin/member">
+                            <i class="fas fa-table"></i>회원관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/pension">
+                            <i class="far fa-check-square"></i>숙소관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/review">
+                            <i class="fas fa-calendar-alt"></i>리뷰관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/reservation">
+                            <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/chart">
+                            <i class="fas fa-calendar-alt"></i>통계</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <!-- 사이드바 끝 -->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -219,7 +216,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${memberPageList }" var="adminMember" varStatus="i">
+                                <c:forEach items="${memberPageList }" var="adminMember" varStatus="i">
                                     <tr>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>

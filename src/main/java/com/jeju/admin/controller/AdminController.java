@@ -2,6 +2,7 @@ package com.jeju.admin.controller;
 
 import java.util.List;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,6 +62,8 @@ public class AdminController {
         // 리뷰내역조회
         List<Review> reviewList = reviewService.showAllReview();
 
+
+
         modelAndView.addObject("memberList", memberList);
         modelAndView.addObject("pensionList", pensionList);
         modelAndView.addObject("reservationList", reservationList);
@@ -69,4 +72,6 @@ public class AdminController {
         modelAndView.setViewName("admin/adminPage");
         return modelAndView;
     }
+
+
 }

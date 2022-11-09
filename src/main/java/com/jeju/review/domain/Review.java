@@ -10,6 +10,8 @@ public class Review {
 	private String reviewContents;
 	private Integer reviewCount;
 	private Integer pensionNo;
+	private String substringReview;
+
 
 	public Review () {}
 
@@ -48,6 +50,19 @@ public class Review {
 	public String getReviewContents() {
 		return reviewContents;
 	}
+
+	// 출력되는 리뷰의 글자수 자르기
+	public String getSubstringReview() {
+		return substringReview;
+	}
+	public void setSubstringReview(String contents) {
+		if(contents.length() > 70) {
+			contents = contents.substring(1, 70);
+			contents+= "...";
+		}
+		this.substringReview = contents;
+	}
+	//
 
 	public void setReviewContents(String reviewContents) {
 		this.reviewContents = reviewContents;
