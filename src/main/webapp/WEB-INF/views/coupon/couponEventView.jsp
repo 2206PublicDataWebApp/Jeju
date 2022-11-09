@@ -219,6 +219,14 @@
     </body>
     
     <script>
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+
+    var dateString = year + '/' + month  + '/' + day;
+    
+//     CountDownTimer('11/07/2022 10:50:00', 'timeDeal');
 	    function downloadCoupon(elem) {
 	    	console.log(elem.value);
 	    	$.ajax({

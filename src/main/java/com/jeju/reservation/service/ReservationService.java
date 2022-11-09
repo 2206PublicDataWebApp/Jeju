@@ -43,5 +43,13 @@ public interface ReservationService {
 	List<MyCoupon> selectAllMyCoupon(String memberId);
 	//나의쿠폰정보로 쿠폰테이블의 내용, 제목등 가져오기
 	Coupon selectAllCouponList(String couponCode);
+	//비회원 정보 조회
+	Reservation selectNonMemberInfo(Reservation reservation);
+	//비회원 예약내역 삭제
+	int deleteReserve(Reservation reservation);
+	//회원용 예약내역 조회
+	Reservation selectReservationInfo(Integer reservationNo);
+	//회원용 예약 삭제
+	int deleteReservation(Integer reservationNo);
 
 }

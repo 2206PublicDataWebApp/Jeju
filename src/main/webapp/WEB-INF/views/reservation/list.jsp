@@ -18,27 +18,31 @@
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<link rel="stylesheet" href="/resources/assets/css/reservationStyle.css">   
 	<style>
-		.modal-title{
- font-size: 17px;
- text-align:left;
- font-weight: bold;
-}
-.modal_table{
-  width:100%;
-}
-#modal_userImg{
-  width:170px;
-  height:80px;
-  margin-right : 180px;
-/*   border-radius: 75%; */
-}
-#modal_userId{
-  width:200px;
-}
-#modal_userFollow{
-  margin:10px;
-  text-align: right;
-}
+	.modal-title{
+	 font-size: 17px;
+	 text-align:left;
+	 font-weight: bold;
+	}
+	.modal_table{
+	  width:100%;
+	}
+	#modal_userImg{
+	  width:170px;
+	  height:80px;
+	  margin-right : 180px;
+	/*   border-radius: 75%; */
+	}
+	#modal_userId{
+	  width:200px;
+	}
+	#modal_userFollow{
+	  margin:10px;
+	  text-align: right;
+	}
+	
+	#couponCancel {
+	  display : none;
+	}
 
 	</style>
 </head>
@@ -160,8 +164,8 @@
                     <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
                     <br>
                     <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
-                    <button class="btn btn-info btn-sm follower" style="font-size: 8px;">쿠폰 선택</button>
-
+                    <button class="btn btn-info btn-sm follower" id="couponApply" style="font-size: 8px;">쿠폰 선택</button>
+					<button class="btn btn-info btn-sm" id="couponCancel" onclick="couponCancel();" style="font-size: 8px;">적용 해제</button>
 
 					<div class="modal fade" id="followModal" role="dialog">
 						<div class="modal-dialog">
@@ -435,10 +439,9 @@
      }
      
      var codeBtn2 = "";     
-     //바로 결제
-//      $("#phoneDoubleChk").val() == "true"
+     //바로 결제      
      $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
+ 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null && $("#phoneDoubleChk").val() == "true"){
  	    		var price1 = $("#price").text().replace(",", "");
  	    		var price2 = price1.replace("원", "");
  	    		//가맹점 식별코드
@@ -487,16 +490,17 @@
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
+ 	     		        				//쿠폰을 썼을 경우만 실행
  	     		        				if(codeBtn2 != "") {
  	     		        					$.ajax({
- 	    	     		   						url : "/coupon/decreaseCoupon",
+ 	    	     		   						url : "/coupon/updateStatus",
  	    	     		   						data : {
  	    	     		   							"couponCode" : codeBtn2
  	    	     		   						},
  	    	     		   						type : "post",
  	    	     		   						success : function(result) {
  	    	     		   							if(result != "성공") {
- 	    	     		   							alert("쿠폰감소 실패!");
+ 	    	     		   							alert("상태변화 실패!");
  	    	     		   							}
  	    	     		   						}
  	    	     		   					});
@@ -542,11 +546,11 @@
  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
  				$("#successNameChk").css("color", "red");
  	    	}
-//  	    	if($("#phoneDoubleChk").val() != "true"){
-//  	    		console.log($("#phoneDoubleChk").val());
-//  	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-//  				$(".successPhoneChk").css("color", "red");	    		
-//  	    	}
+ 	    	if($("#phoneDoubleChk").val() != "true"){
+ 	    		console.log($("#phoneDoubleChk").val());
+ 	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+ 				$(".successPhoneChk").css("color", "red");	    		
+ 	    	}
  	    	return false
  	    }    	    	
      });
@@ -590,10 +594,10 @@
     		   	   	        				var keyValue = 	$("#nameChk").val();// 저장할 값은 30분에서 0분까지 줄어드는 기능        		 	    		
     		   	   	        				console.log("keyName : " + keyName);
     		   	   	        				console.log("keyValue : " + keyValue);
-//    		   	    	        				var tts = 1800000;	// 만료시간 30분
-    		   								var tts = 10000;
-//    		    	   	        			 	let min=30;			//분 
-//    		    		        		 	    let sec=60;			//초
+//												10분은 60만		
+//												1분은   6만 	
+     		   								var tts = 60000;	//1분
+// 											var tts = 1800000;
     		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
     		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
     		   		        		 	    	const date = new Date();
@@ -602,9 +606,9 @@
     		   											value : keyValue,	// obj객체에 value는 time
     		   											expire : Date.now() + tts,
     		   											time : tts,
-    		   											name : keyName
+    		   											name : keyName,
+    		   											expire2 : Date.now()+tts-30000
     		   									}
-    		   									console.log(obj);
     		   									
     		   									//local에는 객체를 저장할 수 없어서 JSON으로 문자열 변환							
     		   									const objString = JSON.stringify(obj);	// JSON으로 문자열 변환
@@ -612,16 +616,17 @@
     		   									localStorage.setItem(keyName, objString);	//time과 JSON으로 변환된 문자열을 localStorage에 저장
     		   									////////////////////localStorage 1차 저장 끝/////////////////////// 
     		   									console.log("로컬 저장 완료! 로컬확인해봐");
-    		   									if(codeBtn2 != "") {
+    		   									//쿠폰을 썼을 경우만 실행
+    	 	     		        				if(codeBtn2 != "") {
     	 	     		        					$.ajax({
-    	 	    	     		   						url : "/coupon/decreaseCoupon",
+    	 	    	     		   						url : "/coupon/updateStatus",
     	 	    	     		   						data : {
     	 	    	     		   							"couponCode" : codeBtn2
     	 	    	     		   						},
     	 	    	     		   						type : "post",
     	 	    	     		   						success : function(result) {
     	 	    	     		   							if(result != "성공") {
-    	 	    	     		   							alert("쿠폰감소 실패!");
+    	 	    	     		   							alert("상태변화 실패!");
     	 	    	     		   							}
     	 	    	     		   						}
     	 	    	     		   					});
@@ -650,11 +655,11 @@
     		   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
     		   	  				$("#successNameChk").css("color", "red");
     		   	  	    	}
-//    		   	   	    	if($("#phoneDoubleChk").val() != "true"){
-//    		   	   	    		console.log($("#phoneDoubleChk").val());
-//    		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-//    		   	   				$(".successPhoneChk").css("color", "red");	    		
-//    		   	   	    	}
+	   		   	   	    	if($("#phoneDoubleChk").val() != "true"){
+	   		   	   	    		console.log($("#phoneDoubleChk").val());
+	   		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+	   		   	   				$(".successPhoneChk").css("color", "red");	    		
+	   		   	   	    	}
     		   	  	    	return false
     		   	        	 }
     			 		}
@@ -780,50 +785,50 @@
 			});
      });
 
-// 	    var code2 = "";
-// 	    $("#phoneChk").click(function(){
-// 	    	if($("#phone").val() != "") {
-// 	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-// 		    	var phone = $("#phone").val();
-// 		    	$.ajax({
-// 		            type:"GET",
-// 		            url:"/reservation/phoneCheck?memberPhone=" + phone,
-// 		            cache : false,
-// 		            success:function(data){
-// 		            	if(data == "error"){
-// 		            		alert("휴대폰 번호가 올바르지 않습니다.");
-// 		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-// 		    				$(".successPhoneChk").css("color","red");
-// 		    				$("#phone").attr("autofocus",true);
-// 		            	}else{	        		
-// 		            		$("#phone2").attr("disabled",false);
-// 		            		$("#phoneChk2").css("display","inline-block");
-// 		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-// 		            		$(".successPhoneChk").css("color","green");
-// 		            		$("#phone").attr("readonly",true);
-// 		            		code2 = data;
-// 		            	}
-// 		            }
-// 		        });
-// 	    	}else {
-// 	    		alert("휴대폰 번호를 입력해주세요.");
-// 	    	}
-// 	    });
+	    var code2 = "";
+	    $("#phoneChk").click(function(){
+	    	if($("#phone").val() != "") {
+	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+		    	var phone = $("#phone").val();
+		    	$.ajax({
+		            type:"GET",
+		            url:"/reservation/phoneCheck?memberPhone=" + phone,
+		            cache : false,
+		            success:function(data){
+		            	if(data == "error"){
+		            		alert("휴대폰 번호가 올바르지 않습니다.");
+		    				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+		    				$(".successPhoneChk").css("color","red");
+		    				$("#phone").attr("autofocus",true);
+		            	}else{	        		
+		            		$("#phone2").attr("disabled",false);
+		            		$("#phoneChk2").css("display","inline-block");
+		            		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+		            		$(".successPhoneChk").css("color","green");
+		            		$("#phone").attr("readonly",true);
+		            		code2 = data;
+		            	}
+		            }
+		        });
+	    	}else {
+	    		alert("휴대폰 번호를 입력해주세요.");
+	    	}
+	    });
 
 	    
-// 	    $("#phoneChk2").click(function(){
-// 	    	if($("#phone2").val() == code2){
-// 	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
-// 	    		$(".successPhoneChk").css("color","green");
-// 	    		$("#phoneDoubleChk").val("true");
-// 	    		$("#phone2").attr("disabled",true);
-// 	    	}else{
-// 	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-// 	    		$(".successPhoneChk").css("color","red");
-// 	    		$("#phoneDoubleChk").val("false");
-// 	    		$(this).attr("autofocus",true);
-// 	    	}
-// 	    });
+	    $("#phoneChk2").click(function(){
+	    	if($("#phone2").val() == code2){
+	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
+	    		$(".successPhoneChk").css("color","green");
+	    		$("#phoneDoubleChk").val("true");
+	    		$("#phone2").attr("disabled",true);
+	    	}else{
+	    		$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+	    		$(".successPhoneChk").css("color","red");
+	    		$("#phoneDoubleChk").val("false");
+	    		$(this).attr("autofocus",true);
+	    	}
+	    });
 
 		//약관 내용 열고 닫기
 	    function clickshow(elem,ID) {
@@ -848,11 +853,25 @@
 					type : "post",
 					success : function(result) {
  						codeBtn2 = code;
+	        					$.ajax({
+  		   						url : "/coupon/decreaseCoupon",
+  		   						data : {
+  		   							"couponCode" : codeBtn2
+  		   						},
+  		   						type : "post",
+  		   						success : function(result) {
+  		   							if(result != "성공") {
+  		   							alert("쿠폰감소 실패!");
+  		   							}
+  		   						}
+  		   					});
 	 					$("#price").text("");
 	 					$("#price").text(result + "원");
 	 					$("#price2").text("");
 	 					$("#price2").text(elem.value + "원 할인");	
 // 	 					$(".codeBtn").attr('disabled', true);
+						$("#couponCancel").show();
+						$("#couponApply").hide();
 	 					alert("쿠폰이 적용되었습니다.");				
 					}
 				});
@@ -861,7 +880,30 @@
  			}	
 		}
 		
+		var originPrice = '${price}';
 		
+		
+		function couponCancel() {
+			$.ajax({
+				url : "/coupon/couponCancel",
+				data : {
+					"couponCode" : codeBtn2
+				},
+				type : "get",
+				success : function(result) {
+					if(result == "성공") {
+						console.log("적용해제 성공");
+						$("#couponCancel").hide();
+						$("#couponApply").show();
+						$("#price2").text("0");
+						$("#price").text("");
+						$("#price").text(originPrice+"원");
+						codeBtn2 = "";	
+					}
+				}
+			});
+		}	
+
 		
     </script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

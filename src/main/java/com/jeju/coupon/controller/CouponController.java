@@ -23,8 +23,7 @@ import com.jeju.member.domain.Member;
 public class CouponController {
 	@Autowired
 	private CouponService cService;
-	
-	
+
 	@GetMapping("/coupon/couponList")
 	public ModelAndView showCouponView(
 			ModelAndView mv
@@ -101,15 +100,74 @@ public class CouponController {
 		MyCoupon mycoupon = new MyCoupon(memberId, couponCode);
 //		int result = cService.deleteMyCoupon(couponCode);
 //		int result2 = cService.decreaseMemberCoupon(memberId);
-		int result = cService.updateUseCount(mycoupon);
+			int result = cService.updateUseCount(mycoupon);
+			if(result > 0) {
+				System.out.println("감소 성공");
+				chk = "성공";
+			}else {
+				chk = "실패";
+			}	
+		return chk;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/coupon/couponCancel", produces="text/plain;charset=utf-8", method=RequestMethod.GET)
+	public String couponCancel(
+			HttpSession session
+			,@RequestParam("couponCode") String couponCode) {
+		String chk = "";
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
+		int result = cService.increaseUseCount(myCoupon);
 		if(result > 0) {
-			System.out.println("감소 성공");
 			chk = "성공";
+		}
+		return chk;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/coupon/updateStatus", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String countCheck(
+			HttpSession session
+			,@RequestParam("couponCode") String couponCode) {
+		Member member = (Member) session.getAttribute("loginUser");
+		String chk = "";
+		if(member != null) {			
+			String memberId = member.getMemberId();
+			MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
+			int result = cService.updateStatus(myCoupon);
+			if(result > 0) {
+				chk = "성공";
+			}else {
+				chk = "실패";
+			}			
 		}else {
 			chk = "실패";
 		}
 		return chk;
 	}
 	
+//	@ResponseBody
+//	@RequestMapping(value="/coupon/updateStatusPossible", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+//	public String countCheck(
+//			HttpSession session
+//			,@RequestParam("couponCode") String couponCode) {
+//		Member member = (Member) session.getAttribute("loginUser");
+//		String chk = "";
+//		if(member != null) {			
+//			String memberId = member.getMemberId();
+//			MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
+//			int result = cService.updateStatus(myCoupon);
+//			if(result > 0) {
+//				chk = "성공";
+//			}else {
+//				chk = "실패";
+//			}			
+//		}else {
+//			chk = "실패";
+//		}
+//		return chk;
+//	}
 	
 }

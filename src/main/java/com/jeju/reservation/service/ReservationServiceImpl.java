@@ -34,10 +34,10 @@ public class ReservationServiceImpl implements ReservationService{
 
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", userPhoneNumber);    // ������ȭ��ȣ
-	    params.put("from", "01032888503");    // �߽���ȭ��ȣ. �׽�Ʈ�ÿ��� �߽�,���� �Ѵ� ���� ��ȣ�� �ϸ� ��
+	    params.put("to", userPhoneNumber);    //
+	    params.put("from", "01032888503");    //
 	    params.put("type", "SMS");
-	    params.put("text", "[TEST] ������ȣ��" + "["+randomNumber+"]" + "�Դϴ�."); // ���� ���� �Է�
+	    params.put("text", "[TEST]" + "["+randomNumber+"]");
 	    params.put("app_version", "test app 1.2"); // application name and version
 
 	    try {
@@ -143,6 +143,30 @@ public class ReservationServiceImpl implements ReservationService{
 	public Coupon selectAllCouponList(String couponCode) {
 		Coupon cList = aStore.selectAllCouponList(session, couponCode);
 		return cList;
+	}
+
+	@Override
+	public Reservation selectNonMemberInfo(Reservation reservation) {
+		Reservation reserveInfo = aStore.selectNonMember(session, reservation);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReserve(Reservation reservation) {
+		int result = aStore.deleteReserve(session, reservation);
+		return result;
+	}
+
+	@Override
+	public Reservation selectReservationInfo(Integer reservationNo) {
+		Reservation reserveInfo = aStore.selectReservationInfo(session, reservationNo);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReservation(Integer reservationNo) {
+		int result = aStore.deleteReservation(session, reservationNo);
+		return result;
 	}
 
 

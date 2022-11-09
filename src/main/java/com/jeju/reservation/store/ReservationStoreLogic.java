@@ -111,4 +111,28 @@ public class ReservationStoreLogic implements ReservationStore{
 		return cList;
 	}
 
+	@Override
+	public Reservation selectNonMember(SqlSession session, Reservation reservation) {
+		Reservation reserveInfo = session.selectOne("ReservationMapper.selectNonMemberReserve", reservation);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReserve(SqlSession session, Reservation reservation) {
+		int result = session.delete("ReservationMapper.deleteReservation", reservation);
+		return result;
+	}
+
+	@Override
+	public Reservation selectReservationInfo(SqlSession session, Integer reservationNo) {
+		Reservation reserveInfo = session.selectOne("ReservationMapper.selectOneReservation", reservationNo);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReservation(SqlSession session, Integer reservationNo) {
+		int result = session.delete("ReservationMapper.deleteReserve",reservationNo);
+		return result;
+	}
+
 }

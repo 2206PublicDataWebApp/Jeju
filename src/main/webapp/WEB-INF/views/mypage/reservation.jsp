@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>
 <!doctype html>
 <html lang="en">
 
@@ -16,6 +17,32 @@
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>  
+<style>
+     .modal-title{ 
+ 	 font-size: 17px; 
+ 	 text-align:left; 
+ 	 font-weight: bold; 
+ 	} 
+ 	.modal_table{ 
+ 	  width:100%; 
+ 	} 
+ 	#modal_userImg{ 
+ 	  width:170px; 
+ 	  height:80px; 
+ 	  margin-right : 180px; 
+      border-radius: 75%;
+ 	}
+ 	#modal_userId{
+ 	  width:200px;
+ 	}
+ 	#modal_userFollow{ 
+ 	  margin:10px; 
+ 	  text-align: right; 
+ 	} 
+</style>
 </head>
 
     <body>
@@ -105,10 +132,12 @@
                 <div class="blog-row row">     
                     <c:if test="${!empty wList}">
                     	<c:forEach items="${wList }" var="wait">
-	                    	<div class="col-lg-4 col-md-6 ">
+	                    	<div class="col-lg-4 col-md-6" id="removeTag">
 		                    	<div class="blog-col">
 		                            <img src="${wait.reFilePath}">
 		                            <span>${wait.rePayDate} 결제</span>
+		                            <br>
+		                            <em id="timeDeal" style="color : red; font-weight : bold;"></em>
 <!-- 		                            <br> -->
 <!-- 		                           	 남은 시간: -->
 <!--  									<input id="Timer" type="text" value="" style="border:none; border-right:0px; border-top:0px; border-left:0px; border-bottom:0px; color : red; font-wieght : bold;" readonly/> -->
@@ -135,7 +164,7 @@
 	                            <img src="${success.reFilePath}">
 	                            <span>${success.rePayDate} 결제</span>	                     
 	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
-	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${success.rePensionName }</div>
+	                            <a href="/reservation/reservationDetail?reservationNo=${success.reservationNo }"><div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${success.rePensionName }</div></a>
 	                            <div style="text-align: center;">${success.reStartDate } ~ ${success.reEndDate }</div>
 	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${success.rePrice }원</span></div>
 	                        </div>
@@ -146,56 +175,31 @@
        </div>
 
        <div class="container">
-       <hr>
-       <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
+        <hr>
+      <div style="font-size: 16px; font-weight : bold; margin-bottom: 15px;">이용 내역</div>
            <div class="blog-row row">
             	<c:if test="${!empty sList}">
-                   	<c:forEach items="${sList }" var="end" varStatus="vs">
+                   	<c:forEach items="${sList }" var="end">
                     	<div class="col-lg-4 col-md-6 ">
 	                    	<div class="blog-col">
 	                            <img src="${end.reFilePath}">
 	                            <span>${end.rePayDate} 결제</span>	                     
+	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">이용 완료</button></div>
 	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${end.rePensionName }</div>
 	                            <div style="text-align: center;">${end.reStartDate } ~ ${end.reEndDate }</div>
-	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div><br>
-	                            <c:if test="${end.reviewCheck == 0 }">
-	                            	<div style="text-align: center;"><button class="btn btn-outline-success" data-toggle='modal' data-target='#registModal${vs.index }'>${end.rePensionNo }후기 작성</button></div><br>
-	                        	</c:if>
-	                        	<c:if test="${end.reviewCheck == 1 }">
-	                        		<div style="text-align: center; font-weight: bold; color: green">후기작성완료</div>
-	                        	</c:if>
+	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div>
 	                        </div>
-	                     </div>
-	                     	<form action="/review/regist" method="post">
-	                    	 <input type="hidden" name="pensionNo" value="${end.rePensionNo }">
-	                    	 <input type="hidden" name="memberId" value="${end.memberId }">
-			                     <div class="modal fade" id="registModal${vs.index }" role="dialog">
-									  	<div class="modal-dialog">
-									      <div class="modal-content">
-									          <div class="modal-header">
-									              <h4 class="modal-title">후기 작성</h4>
-									              <button type="button" class="close" data-dismiss="modal">&times;</button>
-									          </div>
-									          <div class="modal-body">
-									              <div class="form-group">
-									                  <label for="replyText">${end.rePensionName } </label>
-									                  <textarea class="form-control" name="reviewContents" rows="18" cols="20" placeholder="후기를 입력해주세요." style="resize:none" required></textarea>
-									              </div>
-									          </div>
-									          <div class="modal-footer">
-									              <input type="submit" value="등록" class="btn btn-success modalModBtn" >
-									              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-									          </div>
-									      </div>
-									  </div>
-								</div>
-							</form> 
-	                     </c:forEach>
+	                     </div>  
+                   	</c:forEach>                  
                  </c:if>
        		</div>
    		</div>
-    </div>  
+        
+    </div>    
     
+      
+      
+       
    <!--*************** Footer  Starts Here *************** -->   
 
    <footer>
@@ -289,117 +293,158 @@
             </div>
 
         </div>
-		<input id="set_btn" type="button" value="data set"/>
-		<input id="get_btn" type="button" value="data get"/>
-		<div id="result"></div>
+        
+	<div class="modal fade" id="followModal" role="dialog">
+						<div class="modal-dialog">
+							<!-- 모달창-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title"></h4>
+									<button type="button" class="close" id="modalClose"
+										data-dismiss="modal">×</button>
+								</div>
+										<div class="modal-body">
+											<table class="modal_table">
+												<tr>
+													<td style="width: 70px;"><input type="text" class="inputModal" placeholder="유저 아이디"/></td>
+													<td><textarea class="modalTextarea"></textarea></td>
+													<td id="modal_userID" style="font-weight: bold; font-size: 22px;"></td>
+													<td id="modal_userFollow">
+														<button class="btn btn-outline-primary codeBtn" id="notifySendBtn">적용</button>
+													</td>
+												</tr>
+											</table>
+										</div>
+								<div id="count" value="1"></div>
+							</div>
+						</div>
+					</div>
+
+
+
+<!-- 	<button class="btn btn-info btn-sm follower" style="font-size: 8px;">전송 버튼</button> -->
+<!-- 	<div id="msgStack"> -->
+		
+<!-- 	</div> -->
+		
+<!-- 		<button id="toastBtn">버튼</button> -->
     </body>
     
     <script>
     
-	    const Timer=document.getElementById('Timer'); //스코어 기록창-분
-// 	    let time= 1800000;
-// 	    let min=30;
-// 	    let sec=60;
-	
-// 	    Timer.value=min+":"+'00'; 
-	
-	   
-// 	    function TIMER(){
-// 	        PlAYTIME=setInterval(function(){
-// 	            time=time-1000; //1초씩 줄어듦
-// 	            min=time/(60*1000); 
-	
-// 	           if(sec>0){ //sec=60 에서 1씩 빼서 출력해준다.
-// 	                sec=sec-1;
-// 	                Timer.value=Math.floor(min)+':'+sec; //실수로 계산되기 때문에 소숫점 아래를 버리고 출력해준다.
-	               
-// 	            }
-// 	            if(sec===0){
-// 	             	// 0에서 -1을 하면 -59가 출력된다.
-// 	                // 그래서 0이 되면 바로 sec을 60으로 돌려주고 value에는 0을 출력하도록 해준다.
-// 	                sec=60;
-// 	                Timer.value=Math.floor(min)+':'+'00'
-// 	            }     
-	       
-// 	        },1000); //1초마다 
-// 	    }
-	    
-// 	    TIMER();
-// 	    setTimeout(function(){
-// 	        clearInterval(PlAYTIME);
-	        
-// 	        //여기다 ajax로 예약내역 삭제하면 됨.
-// 	    },1800000);//이 함수가 30분뒤에 실행될것이다.
-
-		//로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
-		$(document).ready(function getItemWithExpireTime(){
-			$.ajax({
-		    		url : "/reservation/checkSessionId",
-		    		type : "post",
-		    		success : function(result) {
-		    				if(result != "") {
-		    					const objString = window.localStorage.getItem(result);	//local에 저장된 time을 가져와 objString에 저장
-		    					//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
-		    					if(!objString) {
-		    						console.log("로컬값 없음!!!!!!!!");
-		    						return null;
-		    					}
-		    					
-		    					const obj = JSON.parse(objString);	//JSON으로 변환했던 문자열을 parse로 객체 변환
-		    					
-		    					console.log("parse로 변환된 객체 : " + obj);	
-		    					
-		    					//현재 시간과 (현재시간+30분)했던 것을 비교
-		    					if(Date.now() > obj.expire){
-		    						$.ajax({
-		    							url : "/reservation/removeWait",
-		    							data : {
-		    								"reservationName" : obj.value
-		    							},
-		    							type : "post",
-		    							success : function(result) {
-		    								if(result == "삭제 성공!") {
-		    									//만료시간이 지나면 결제대기상태 삭제
-		    									window.localStorage.removeItem(keyName);
-		    									console.log("삭제 완료!!");
-		    									//삭제 ajax 코드 
-		    									
-		    									$.ajax({
-		    										url : "/coupon/couponUseCheck",
-		    										
-		    									});
-		    								}else {
-		    									console.log(result);
-		    								}
-		    							}
-		    		 				});			
-		    		 				
-		    						localStorage.removeItem(result);
-		    						//null 리턴
-		    						return null;
-		    					}
-		    					//만료기간이 남아있을땐 value값 리턴
-		    					return obj.value;
-		    				}		     		    				   	     		    				
-		    			}
-					});
-			
-		});
-	
-		
-// 		$("#get_btn").click(function() {
-// 			const value = getItemWithExpireTime("time");
-			
-// 			const resultDiv = document.getElementById("result");
-// 			resultDiv.innerText = value + Date.now();
+//   메세지 보내는 영역
+// 	$('#notifySendBtn').click(
+// 		function(e) {						
+// 			let modal = $('.modal_table').has(e.target);
+// 			console.log(modal);
+// 			let type = '70';
+// 			let target = modal.find('.inputModal').val();	//session 아이디값
+// 			let content = modal.find('.modalTextarea').val();
+// 			let url = '${contextPath}/member/save';
+// 			// 전송한 정보를 db에 저장	
+// 				$.ajax({
+// 						type : 'post',
+// 						url : '${contextPath}/member/save',
+// 						dataType : 'text',
+// 						data : {
+// 							"target" : target,
+// 						"content" : content,
+// 							"type" : type,
+// 							"url" : url
+// 						},
+// 						success : function() { // db전송 성공시 실시간 알림 전송
+// 							// 소켓에 전달되는 메시지
+// 							// 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+// 						console.log("여기까지는 됬어");
+// 							socket.send("관리자," + target + "," + content + "," + url);
+// 						}
+// 					});
 // 		});
-		
-	
-	    
-	    
-    </script>
 
-    
+    $('.follower').click(function(){
+    	 $('#followModal').modal();   //id가 "followModal"인 모달창을 열어준다.   
+	      $('.modal-title').text("보내기");
+    });
+
+	function CountDownTimer(dt, id, obj, sessionId) {
+		var end = new Date(dt);
+		var _second = 1000;
+		var _minute = _second * 60;
+		var _hour = _minute * 60;
+//      var _day = _hour * 24;
+		var timer;
+		function showRemaining() {
+			var now = new Date();
+			var distance = end - now;			
+			if (distance < 0) {
+				clearInterval(timer);
+				$.ajax({
+					url : "/reservation/removeWait",
+					data : {
+						"reservationName" : obj.value
+					},
+					type : "post",
+					success : function(result) {
+						document.getElementById(id).innerHTML = '결제 대기시간 종료';	
+						if (result == "삭제 성공!") {
+							//만료시간이 지나면 결제대기상태 삭제
+							window.localStorage.removeItem(sessionId);
+							console.log("삭제 완료!!");
+							//삭제 ajax 코드 
+							$("#removeTag").remove();							
+						}
+					}
+				}); 							
+			}
+			//             var days = Math.floor(distance / _day);
+			//             var hours = Math.floor((distance % _day) / _hour);
+			var minutes = Math.floor((distance % _hour) / _minute);
+			var seconds = Math.floor((distance % _minute) / _second);
+			//             document.getElementById(id).innerHTML = days + '일 ';
+			//             document.getElementById(id).innerHTML += hours + '시간 ';
+			document.getElementById(id).innerHTML = minutes + '분 ';
+			document.getElementById(id).innerHTML += seconds + '초';				
+			var data = obj.expire - 60000;	// 몇분남았는지 알려주는 시간 
+			var url = "${contextPath}";
+			var content = "결제시간 10분 남았습니다.";
+			//현재 시간과 (현재시간+30분)했던 것을 비교
+			if(Date.now() == obj.expire2) {
+				//EchoHandler컨트롤러로 이동
+				socket.send("관리자," + result + "," + content + "," + url);		
+			}								
+		}
+		timer = setInterval(showRemaining, 1000);
+	}
+	
+	//받는영역
+	var socket = null;
+	//로컬에서 가져오고싶은 아이템의 키를 파라미터로 입력받음
+	$(document).ready(	
+		function getItemWithExpireTime() {		
+			// 웹소켓 연결
+			sock = new SockJS("<c:url value='/echo-ws'/>");
+			socket = sock;
+			$.ajax({
+				url : "/reservation/checkSessionId",
+				type : "post",
+				success : function(result) {	//result는 세션아이디값
+					if (result != "") {
+						const objString = window.localStorage.getItem(result); //local에 저장된 time을 가져와 objString에 저장
+						//로컬에서 가지고온 값이 존재하지 않으면 null 리턴
+						if (!objString) {
+							console.log("로컬값 없음!!!!!!!!");
+							return null;
+						}
+						const obj = JSON.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
+					
+						console.log("parse로 변환된 객체 : "+ obj);
+						CountDownTimer(obj.expire, 'timeDeal', obj, result);						
+					}
+				}
+			});
+		}
+	);
+	</script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
