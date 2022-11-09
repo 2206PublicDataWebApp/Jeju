@@ -41,10 +41,10 @@
 </head>
 
 
-    <!-- 사이드바 -->
+<!-- 사이드바 -->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="#">
+            <a href="/">
                 <img src="/resources/images/logo.png" alt="로고" />
             </a>
         </div>
@@ -72,10 +72,6 @@
                             <i class="fas fa-calendar-alt"></i>예약/결재관리</a>
                     </li>
                     <li>
-                        <a href="/admin/coupon">
-                            <i class="fas fa-calendar-alt"></i>쿠폰관리</a>
-                    </li>
-                    <li>
                         <a href="/admin/chart">
                             <i class="fas fa-calendar-alt"></i>통계</a>
                     </li>
@@ -84,7 +80,7 @@
             </nav>
         </div>
     </aside>
-    <!-- END MENU SIDEBAR-->
+    <!-- 사이드바 끝 -->
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">

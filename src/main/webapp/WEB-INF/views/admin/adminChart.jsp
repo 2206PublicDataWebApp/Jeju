@@ -15,7 +15,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>통계</title>
 
     <!-- Fontfaces CSS-->
     <link href="/resources/assets/css/font-face.css" rel="stylesheet" media="all">
@@ -40,7 +40,8 @@
 
 </head>
 
-<!-- 사이드바 -->
+
+    <!-- 사이드바 -->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="/">
@@ -140,9 +141,9 @@
                                     <div class="image">
 
                                     </div>
-                                    <%-- <div class="content">
-                                         <a class="js-acc-btn" href="#">john doe</a>
-                                     </div>--%>
+                                   <%-- <div class="content">
+                                        <a class="js-acc-btn" href="#">john doe</a>
+                                    </div>--%>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
@@ -185,55 +186,58 @@
         </header>
         <!-- END HEADER DESKTOP-->
 
-        <!-- MAIN CONTENT-->
         <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="row">
-                    </div></div>
-                <div class="row m-t-30">
-                    <div class="col-md-12">
+                        <div class="section__content section__content--p30">
+                            <div class="container-fluid">
+                                <div class="row">
 
-                        <div class="table-responsive m-b-40">
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>예약/결재관리</h3>
-                            <div class="table-responsive m-b-40">
-                                <table class="table table-borderless table-data3">
-                                    <thead>
-                                    <tr>
-                                        <th>예약번호</th>
-                                        <th>숙소</th>
-                                        <th>결재여부</th>
-                                        <th>결재일</th>
-                                        <th>아이디</th>
-                                        <th>가격</th>
-                                        <th>예약상태</th>
-                                        <th>예약기간-시작</th>
-                                        <th>예약기간-마감</th>
-                                        <th>기타</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${reservationList }" var="adminReservation" varStatus="i">
-                                        <tr>
-                                            <td>${adminReservation.reservationNo}</td>
-                                            <td>${adminReservation.roomNo}</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>${adminReservation.memberId}</td>
-                                            <td>${adminReservation.rePrice}</td>
-                                            <td>${adminReservation.rStatus}</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+
+                                    <div class="col-lg-6">
+
+                                        <div class="au-card m-b-30">
+                                            <h3 class="title-2 m-b-40">신규회원가입</h3>
+                                            <div class="au-card-inner">
+                                                <canvas id="꺾은선그래프"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="au-card m-b-30">
+                                            <div class="au-card-inner">
+                                                <h3 class="title-2 m-b-40">성비</h3>
+                                                <canvas id="파이차트"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                           <div class="au-card m-b-30">
+                                               <div class="au-card-inner">
+                                                   <h3 class="title-2 m-b-40">숙소등록현황</h3>
+                                                   <canvas id="막대그래프"></canvas>
+                                               </div>
+                                           </div>
+                                       </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="au-card m-b-30">
+                                            <div class="au-card-inner">
+                                                <h3 class="title-2 m-b-40">결재금액</h3>
+                                                <canvas id="막대그래프"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div></div>
+
+
+                    <!-- END MAIN CONTENT-->
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -266,14 +270,19 @@
 </script>
 <script src="/resources/assets/vendor/circle-progress/circle-progress.min.js"></script>
 <script src="/resources/assets/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="/resources/assets/vendor/chartjs/Chart.bundle.min.js"></script>
+
 <script src="/resources/assets/vendor/select2/select2.min.js">
 </script>
 
 <!-- Main JS-->
 <script src="/resources/assets/js/main.js"></script>
 
+<!-- chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!-- vendor 부트스트랩 chart -->
+<%--<script src="/resources/assets/vendor/chartjs/Chart.bundle.min.js"></script>--%>
 </body>
+
 
 </html>
 

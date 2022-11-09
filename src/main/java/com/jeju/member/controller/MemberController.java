@@ -257,7 +257,7 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
+
 	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
@@ -342,7 +342,6 @@ public class MemberController {
 //	}
 
 }
-
 
 
 
