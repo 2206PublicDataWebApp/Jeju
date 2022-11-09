@@ -257,6 +257,12 @@ public class PensionController {
 		Pension pension = pService.selecteOnePension(pensionNo);
 		List<Category> category = pService.selectCategoryCheck(pensionNo);
 		List<Room> rList = pService.selecteRoom(pensionNo);
+		List<String> roomAttachList = new ArrayList<String>();
+		for(int i = 0; i < rList.size(); i++) {
+			Integer roomNo = rList.get(i).getRoomNo();
+			List<String> roomAttach = pService.printAttach(roomNo);
+			roomAttachList.addAll(roomAttach);
+		}
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
 		Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
 		long diffSec = (format2.getTime() - format1.getTime()) / 1000; //초 차이
@@ -271,14 +277,16 @@ public class PensionController {
 			String str = decFormat.format(Integer.parseInt(result));
 			rList.get(i).setPrice(str);
 		}
+		int check = 0;
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		List<String> roomImg = pService.selecteRoomAttach(pensionNo);
+		mv.addObject("roomAttachList", roomAttachList);
 		mv.addObject("rList", rList);
 		mv.addObject("pension", pension);
 		mv.addObject("category", category);
 		mv.addObject("reviewList", reviewList);
-		mv.setViewName("/pension/detailView");
+		mv.addObject("check", check);
+		mv.setViewName("pension/detailView");
 		return mv;
 	}
 	// 숙소 상세페이지 (마이페이지에서 숙소 관리,후기 내역 조회용)
@@ -290,20 +298,29 @@ public class PensionController {
 			Pension pension = pService.selecteOnePension(pensionNo);
 			List<Category> category = pService.selectCategoryCheck(pensionNo);
 			List<Room> rList = pService.selecteRoom(pensionNo);
+			List<String> roomAttachList = new ArrayList<String>();
+			for(int i = 0; i < rList.size(); i++) {
+				Integer roomNo = rList.get(i).getRoomNo();
+				List<String> roomAttach = pService.printAttach(roomNo);
+				roomAttachList.addAll(roomAttach);
+			}
 			for(int i=0; i<rList.size(); i++) {
 				DecimalFormat decFormat = new DecimalFormat("###,###");
 				String str = decFormat.format(Integer.parseInt(rList.get(i).getPrice()));
 				rList.get(i).setPrice(str);
 			}
+			int check = 1;
 			mv.addObject("rList", rList);
+			mv.addObject("roomAttachList", roomAttachList);
 			mv.addObject("pension", pension);
 			mv.addObject("category", category);
 			mv.addObject("reviewList", reviewList);
-			mv.setViewName("/pension/detailView");
+			mv.addObject("check", check);
+			mv.setViewName("pension/detailView");
 			return mv;
 		}
 	
-	@RequestMapping(value="/pension/list", method=RequestMethod.GET)
+	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public ModelAndView pensionListView(
 			ModelAndView mv
 			,String startDate

@@ -17,68 +17,8 @@
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="/resources/js/jquery-3.6.1.min.js"></script>
 </head>
-
-    <body>
-         <header class="container-flui">
-           <div class="header-top">
-               <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 d-none d-md-block mail-detail"></div>
-                        <div class="col-md-4 logo">
-                            <img src="/resources/assets/images/logo.png" alt="">
-                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-                        </div>
-                        
-                        <div class="col-md-4 d-none d-md-block social-link ">
-                               <c:if test="${empty sessionScope.loginUser  }">
-         <div class="login-area">
-            <table align="right">
-               <tr>
-                  <td rowspan="2">
-                     <button onclick="location.href='/member/loginView.kh'" class="btn btn-primary">로그인</button>
-                     <button onclick="location.href='/member/joinView.kh'" class="btn btn-secondary">회원가입</button>
-                  </td>
-               </tr>
-            </table>
-         </div>
-      </c:if>
-      <c:if test="${not empty sessionScope.loginUser }">
-         <table align="right">
-            <tr>
-               <td>
-                  <a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
-               </td>
-            </tr>
-            <tr>
-               <td><a href="/member/logout.kh">로그아웃</a></td>
-            </tr>
-         </table>
-      </c:if>
-                        </div>
-                    </div>
-                </div>
-           </div>
-        
-      
-           <div id="menu-jk" class="header-nav d-none d-md-block">
-               <div class="container">
-                   <div class="row nav-row">
-                       <ul>
-                           <li><a href="/home">홈</a>
-                            <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/pension/list">숙소 리스트</a></li>
-                            <li><a href="/community/chat">커뮤니티</a></li>
-                            <li><a href="/mypage/myPage">마이페이지</a></li>
-                            <li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
-                            <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-        </header>      
-        
-        
- <!--  ************************* Page Title Starts Here ************************** -->
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
@@ -90,10 +30,6 @@
             </div>
         </div>
     </div>
-
-       
-         <!--*************** Blog Starts Here ***************-->
-                     
     <div class="destinations container-fluid">
        <div class="container">
             <div class="session-title">
@@ -118,104 +54,8 @@
              </c:if>   
             </div>
        </div>
-       
     </div>   
-
-
-   <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 about">
-                <h2>About Us</h2>
-                <p>Phasellus scelerisque ornare nisl sit amet pulvinar. Nunc non scelerisque augue. Proin et sollicitudin velit. </p>
-                
-                <div class="foot-address">
-                    <div class="icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="addet">
-                        BlueDart
-                        Marthandam (K.K District)
-                        Tamil Nadu, IND 
-                    </div>
-                </div>
-                <div class="foot-address">
-                    <div class="icon">
-                        <i class="far fa-envelope-open"></i>
-                    </div>
-                    <div class="addet">
-                        info@smarteyeapps.com <br>
-                        sales@smarteyeapps.com
-                    </div>
-                </div>
-                <div class="foot-address">
-                    <div class="icon">
-                         <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="addet">
-                        +23 323 43434 <br>
-                        +1 3232 434 55
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 fotblog">
-                <h2>From latest Blog</h2>
-                <div class="blohjb">
-                    <p>dignissim. Integer tempor facilisis malesuada. Proin ac varius velit, tincidunt condimentum</p>
-                    <span>22-1-2019</span>
-                </div>
-                <div class="blohjb">
-                    <p>dignissim. Integer tempor facilisis malesuada. Proin ac varius velit, tincidunt condimentum</p>
-                    <span>22-1-2019</span>
-                </div>
-                <div class="blohjb">
-                    <p>dignissim. Integer tempor facilisis malesuada. Proin ac varius velit, tincidunt condimentum</p>
-                    <span>22-1-2019</span>
-                </div>
-            </div>
-            <div class="col-md-3 glink">
-                <h2>Quick Links</h2>
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-angle-double-right"></i>Home</a></li>
-                    <li><a href="about_us.html"><i class="fas fa-angle-double-right"></i>About Us</a></li>
-                    <li><a href="services.html"><i class="fas fa-angle-double-right"></i>Services</a></li>
-                    <li><a href="blog.html"><i class="fas fa-angle-double-right"></i>Blog</a></li>
-                    <li><a href="pricing.html"><i class="fas fa-angle-double-right"></i>Gallery</a></li>
-                    <li><a href="contact_us.html"><i class="fas fa-angle-double-right"></i>Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 tags">
-                <h2>Easy Tags</h2>
-                <ul>
-                    <li>Finance</li>
-                    <li>Web Design</li>
-                    <li>Internet Pro</li>
-                    <li>Node Js</li>
-                    <li>Java Swing</li>
-                    <li>Angular Js</li>
-                    <li>Vue Js</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-<div class="copy">
-            <div class="container">
-                <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>
-                
-                <span>
-                <a><i class="fab fa-github"></i></a>
-                <a><i class="fab fa-google-plus-g"></i></a>
-                <a><i class="fab fa-pinterest-p"></i></a>
-                <a><i class="fab fa-twitter"></i></a>
-                <a><i class="fab fa-facebook-f"></i></a>
-        </span>
-            </div>
-
-        </div>
-		<input id="set_btn" type="button" value="data set"/>
-		<input id="get_btn" type="button" value="data get"/>
-		<div id="result"></div>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     </body>
     
     <script>
@@ -251,8 +91,6 @@
 	    	});
 	    }
     </script>
-
-    
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
     <script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>

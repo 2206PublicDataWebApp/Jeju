@@ -57,7 +57,7 @@ public class NoticeController {
 	public ModelAndView noticeDetailView(
 			ModelAndView mv
 			, @RequestParam("noticeNo") Integer noticeNo
-			, @RequestParam("page") int page
+			, @RequestParam("page") Integer page
 			, HttpServletRequest request
 			, HttpServletResponse response) {
 		Notice notice = nService.selectOneNo(noticeNo);
@@ -109,9 +109,11 @@ public class NoticeController {
 	@RequestMapping(value="/notice/modifyForm", method=RequestMethod.GET)
 	public ModelAndView noticeModifyForm(
 			ModelAndView mv
-			, @RequestParam("noticeNo") Integer noticeNo) {
+			, @RequestParam("noticeNo") Integer noticeNo
+			, @RequestParam("page") Integer page) {
 		Notice notice = nService.selectOneNo(noticeNo);
 		mv.addObject("notice", notice);
+		mv.addObject("page", page);
 		mv.setViewName("notice/modifyView");
 		return mv;
 	}
@@ -120,17 +122,18 @@ public class NoticeController {
 	public ModelAndView noticeModify(
 			ModelAndView mv
 			,@RequestParam("noticeNo") Integer noticeNo
+			,@RequestParam("page") Integer page
 			,@ModelAttribute Notice notice) {
-		int result = nService.modifyNotice(notice);
-		mv.setViewName("redirect:/notice/detail?noticeNo="+noticeNo);
+		nService.modifyNotice(notice);
+		mv.setViewName("redirect:/notice/detail?noticeNo="+noticeNo+"&page="+page);
 		return mv;
 	}
 	// 공지사항 삭제
 	@RequestMapping(value="/notice/remove", method=RequestMethod.GET)
 	public ModelAndView noticeRemove(
 			ModelAndView mv
-			, @RequestParam("page") int page
-			, @RequestParam("noticeNo") int noticeNo) {
+			, @RequestParam("page") Integer page
+			, @RequestParam("noticeNo") Integer noticeNo) {
 		nService.removeNotice(noticeNo);
 		mv.setViewName("redirect:/notice/list?page="+page);
 		return mv;

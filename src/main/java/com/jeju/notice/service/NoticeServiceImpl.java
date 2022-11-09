@@ -47,9 +47,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	// 공지사항 수정
 	@Override
-	public int modifyNotice(Notice notice) {
-		int result = nStore.updateNotice(session, notice);
-		return result;
+	public void modifyNotice(Notice notice) {
+		nStore.updateNotice(session, notice);
 	}
 
 	// 공지사항 삭제

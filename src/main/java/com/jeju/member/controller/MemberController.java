@@ -47,6 +47,15 @@ public class MemberController {
 		return "member/login";
 		// /WEB-INF/views/member/join.jsp
 	}
+	// 찜 login 페이지
+		@RequestMapping(value="/member/loginView.kh2", method=RequestMethod.GET)
+		public ModelAndView memberLoginView2(
+				ModelAndView mv
+				,@RequestParam("pensionNo") Integer pensionNo) {
+			mv.addObject("pensionNo", pensionNo);
+			mv.setViewName("member/login");
+			return mv;
+		}
 	//  회원정보를 DB에 저장하는 URL
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)
 	public ModelAndView memberJoin(
@@ -79,6 +88,7 @@ public class MemberController {
 	public ModelAndView memberLogin(
 			@RequestParam("memberId") String memberId
 			,@RequestParam("memberPwd") String memberPwd
+			,@RequestParam(value="pensionNo", required = false) Integer pensionNo
 			, ModelAndView mv
 			, HttpServletRequest request
 			,HttpServletResponse response) {
@@ -95,9 +105,11 @@ public class MemberController {
 				HttpSession session = request.getSession();
 
 				session.setAttribute("loginUser", loginUser);
-
-				mv.setViewName("redirect:/home");
-
+				if(pensionNo != null) {
+					mv.setViewName("redirect:/pension/detailView2?pensionNo=" + pensionNo);
+				}else {
+					mv.setViewName("redirect:/home");
+				}
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");

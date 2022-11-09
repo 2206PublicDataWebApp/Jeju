@@ -14,7 +14,7 @@ public interface NoticeService {
 	// 공지사항 하나 가져오기
 	Notice selectOneNo(Integer noticeNo);
 	// 공지사항 수정
-	int modifyNotice(Notice notice);
+	void modifyNotice(Notice notice);
 	// 공지사항 삭제
 	void removeNotice(int noticeNo);
 	// 공지사항 조회수

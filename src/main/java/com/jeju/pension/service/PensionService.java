@@ -88,6 +88,8 @@ public interface PensionService {
 	List<Pension> searchPensionTitle(String pensionName);
 	//모든 펜션 조회
 	List<Pension> priceSet();
+	// 임시
+	List<String> printAttach(Integer roomNo);
 
 
 

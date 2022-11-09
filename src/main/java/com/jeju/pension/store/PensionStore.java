@@ -90,4 +90,6 @@ public interface PensionStore {
 
 	// 관리자 펜션 삭제
 	void removeAdminPension(SqlSession session, Integer pensionNo);
+	// 임시
+	List<String> printAttach(SqlSession session, Integer roomNo);
 }
