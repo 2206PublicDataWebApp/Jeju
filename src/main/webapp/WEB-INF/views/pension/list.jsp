@@ -367,7 +367,7 @@
       		  "showMethod": "fadeIn",
       		  "hideMethod": "fadeOut",
       		  "tapToDismiss": false,
-               timeOut: 4000
+               timeOut: 5000
         };
         toastr.success(data, "알림");
 	}
