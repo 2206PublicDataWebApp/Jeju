@@ -42,9 +42,8 @@ public class NoticeStoreLogic implements NoticeStore{
 
 	// 공지사항 수정
 	@Override
-	public int updateNotice(SqlSessionTemplate session, Notice notice) {
-		int result = session.update("NoticeMapper.updateNotice", notice);
-		return result;
+	public void updateNotice(SqlSessionTemplate session, Notice notice) {
+		session.update("NoticeMapper.updateNotice", notice);
 	}
 
 	// 공지사항 삭제

@@ -41,7 +41,7 @@ public class JjimController {
 			jService.removeJjim(jjim);
 			jService.removeJjimCount(pensionNo);
 		}
-		mv.setViewName("redirect:/pension/detailView?pensionNo="+pensionNo);
+		mv.setViewName("redirect:/pension/detailView2?pensionNo="+pensionNo);
 		return mv;
 	}
 	// 마이페이지 찜 내역 조회

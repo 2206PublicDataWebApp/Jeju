@@ -227,6 +227,12 @@ public class PensionServiceImpl implements PensionService{
 	public void removeAdminPension(Integer pensionNo) {
 		pStore.removeAdminPension(session, pensionNo);
 	}
+	//임시
+	@Override
+	public List<String> printAttach(Integer roomNo) {
+		List<String> roomAttach = pStore.printAttach(session, roomNo);
+		return roomAttach;
+	}
 
 
 }

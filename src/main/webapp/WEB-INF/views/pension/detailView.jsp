@@ -19,37 +19,7 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
     <body>
-        <header class="container-flui">
-           <div class="header-top">
-               <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 d-none d-md-block mail-detail">
-                            
-                        </div>
-                        <div class="col-md-4 logo">
-                            <img src="/resources/assets/images/logo.png" alt="">
-                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-                        </div>                        
-                    </div>
-                </div>
-           </div>
-           <div id="menu-jk" class="header-nav d-none d-md-block">
-               <div class="container">
-                   <div class="row nav-row">
-                       <ul>
-                           <li><a href="/home">홈</a>
-                            <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/pension/list">숙소 리스트</a></li>
-                            <li><a href="/community/chat">커뮤니티</a></li>
-                            <li><a href="/mypage/myPage">마이페이지</a></li>
-                            <li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
-                            <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-        </header>   
-        
+    	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
  <!--  ************************* Page Title Starts Here ************************** -->
     <div class="page-nav no-margin row">
         <div class="container">
@@ -120,12 +90,34 @@
     	<div class="row session-title">
         	<h2>객실 안내 <i class="fa-solid fa-key"></i></h2>
         </div>  
+        <div align="center">
+        	<button class="btn btn-outline-success" data-toggle='modal' data-target='#modifyModal'><i class="fa-solid fa-image fa-4x"></i></button>
+       	</div>
+       	<br><br>
         <div class="dest-row row">
         	<c:forEach items="${rList }" var="room">
             	<div class="col-lg-4 col-md-6">
                     <div class="dest-col">
                         <div class="dest-img">
                             <img src="${room.roomAttach.roomPath }" alt="객실 사진이 존재하지 않습니다.">
+                            <div class="modal fade" id="modifyModal" role="dialog">
+							  	<div class="modal-dialog">
+							      <div class="modal-content">
+							          <div class="modal-header">
+							              <h4 class="modal-title">객실 사진</h4>
+							              <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          </div>
+							          <div class="modal-body">
+			                          	<c:forEach items="${roomAttachList }" var="roomAttachList" varStatus="i">
+							        		<img src="${roomAttachList.roomPath }" alt="객실 사진이 존재하지 않습니다.">
+										</c:forEach>
+							          </div>
+							          <div class="modal-footer">
+							              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+							          </div>
+							      </div>
+						  		</div>
+							</div>
                         </div>
                         <h3>${room.roomName }</h3>
                         <p>최대인원 ${room.maxPersonnel } 명</p>
@@ -241,37 +233,17 @@
   </div>
   <div>
       <div style="text-align: center; margin-bottom: 100px;">
-          <a class="btn btn-outline-success" href="/pension/list" >목록으로</a>
+      	<c:if test="${check == 0 }">
+          	<a class="btn btn-outline-success" href="/pension/list" >목록으로</a>
+         </c:if>
+         <c:if test="${check == 1 }">
+          	<a class="btn btn-outline-success" href="/mypage/pensionManagement" >목록으로</a>
+         </c:if>
       </div>
   </div>
-        
    <!--*************** Footer  Starts Here *************** -->   
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 fotblog">
-                    <p class="fab fa-instagram"></p>
-                    <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Instagram</a> <br>
-                    <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EB%A7%9B%EC%A7%91/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Restaurant</a> <br>
-                    <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EC%B9%B4%ED%8E%98/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Cafe</a>
-                </div>
-                <div class="col-md-3 fotblog">
-                    <p class="fab fa-facebook-square"></p>
-                    <a href="https://www.facebook.com/happyjejudo" style="color: white;" target="_blank">Facebook</a>
-                </div>
-                <div class="col-md-3 glink">
-                    <p class="fab fa-twitter-square"></p>
-                    <a href="https://twitter.com/happyjejudo" style="color: white;" target="_blank">Twiter</a>
-                </div>
-                <div class="col-md-3 tags">
-                    <h2>Contect</h2>
-                    <p>email@email.com</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    </body>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+</body>
     <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>
@@ -282,7 +254,7 @@
 		function jjimLogin(memberId, pensionNo){
 			if(memberId == ""){
 				if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")) {
-					location.href="/member/loginView.kh";
+					location.href="/member/loginView.kh2?pensionNo="+pensionNo;
 				}
 			}else{
 				location.href="/jjim/jjim?memberId="+memberId+"&pensionNo="+pensionNo;

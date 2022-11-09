@@ -16,7 +16,7 @@ public interface NoticeStore {
 	// 공지사항 하나 가져오기
 	Notice selectOneNo(SqlSessionTemplate session, Integer noticeNo);
 	// 공지사항 수정
-	int updateNotice(SqlSessionTemplate session, Notice notice);
+	void updateNotice(SqlSessionTemplate session, Notice notice);
 	// 공지사항 삭제
 	void deleteNotice(SqlSessionTemplate session, int noticeNo);
 	// 공지사항 조회수

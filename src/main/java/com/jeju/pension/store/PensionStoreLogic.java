@@ -218,6 +218,12 @@ public class PensionStoreLogic implements PensionStore{
 		List<Pension> pList = session.selectList("PensionMapper.selectAllPension");
 		return pList;
 	}
+	//임시
+	@Override
+	public List<String> printAttach(SqlSession session, Integer roomNo) {
+		List<String> roomAttach = session.selectList("RoomAttachMapper.selectAttach",roomNo);
+		return roomAttach;
+	}
 
 
 }
