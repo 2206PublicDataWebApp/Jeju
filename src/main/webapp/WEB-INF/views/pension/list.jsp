@@ -27,69 +27,121 @@
 
 <body>
 
-	<header class="container-fluid">
-		<div class="header-top">
-			<div class="container">
-				<div class="row">
+	<header class="container-flui">
+           <div class="header-top">
+               <div class="container">
+                    <div class="row">
+     
+                        <div class="col-md-4 d-none d-md-block mail-detail"></div>
+                        <div class="col-md-4 logo">
+                            <img src="/resources/assets/images/logo.png" alt="">
+                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+                        </div>
+                        
+                        <div class="col-md-4 d-none d-md-block social-link ">
+                               <c:if test="${empty sessionScope.loginUser  }">
+         <div class="login-area">
+            <table align="right">
+               <tr>
+                  <td rowspan="2">
+                     <button onclick="location.href='/member/loginView.kh'" class="btn btn-primary">로그인</button>
+                     <button onclick="location.href='/member/joinView.kh'" class="btn btn-secondary">회원가입</button>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </c:if>
+      <c:if test="${not empty sessionScope.loginUser }">
+         <table align="right">
+            <tr>
+               <td>
+                  <a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
+                  
+                <a href="#"><img onclick="location.href='/chat/login2.do'"
+					src="/resources/images/chatting.png"style="width:30px; height:30px; background-color: white;">
+					
+					</a>
+               </td>
+            </tr>
+            <tr>
+               <td><a href="/member/logout.kh">로그아웃</a></td>
+            </tr>
+         </table>
+      </c:if>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        
+      
+           <div id="menu-jk" class="header-nav d-none d-md-block">
+               <div class="container">
+                   <div class="row nav-row">
+                       <ul>
+                           <li><a href="/home">홈</a></li>
+                           <li><a href="/notice/list">공지사항</a></li>
+                           <li><a href="/pension/list">숙소 리스트</a></li>
+                           <li><a href="/community/chat">커뮤니티</a></li>
+                           <li><a href="/mypage/myPage">마이페이지</a></li>
+                           <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+        </header>  
+        <div class="slider-detail">
 
-					<div class="col-md-4 d-none d-md-block mail-detail"></div>
-					<div class="col-md-4 logo">
-						<img src="/resources/assets/images/logo.png" alt=""> <a
-							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
-							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-					</div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item ">
+                    <img class="d-block w-100" src="/resources/assets/images/slider/slider-5.jpg" alt="First slide">
+                    <div class="carousel-caption fvgb d-none d-md-block">
+                        <h5 class="animated bounceInDown">여러분의 숙소를 보여주세요 ! </h5>
+                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
+                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
+                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
 
-					<div class="col-md-4 d-none d-md-block social-link ">
-						<c:if test="${empty sessionScope.loginUser  }">
-							<div class="login-area">
-								<table align="right">
-									<tr>
-										<td rowspan="2">
-											<button onclick="location.href='/member/loginView.kh'"
-												class="btn btn-primary">로그인</button>
-											<button onclick="location.href='/member/joinView.kh'"
-												class="btn btn-secondary">회원가입</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</c:if>
-						<c:if test="${not empty sessionScope.loginUser }">
-							<table align="right">
-								<tr>
-									<td><a href="/">${sessionScope.loginUser.memberId}</a>님
-										환영합니다</td>
-								</tr>
-								<tr>
-									<td><a href="/member/logout.kh">로그아웃</a></td>
-								</tr>
-							</table>
-						</c:if>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div class="row vbh">
+
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="/resources/assets/images/slider/slider-3.jpg" alt="Third slide">
+                    <div class="carousel-caption vdg-cur d-none d-md-block">
+                        <h5 class="animated bounceInDown">자신의 숙소를 등록하고 싶다면?</h5>
+                        <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
+                            전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
+                            언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
+
+                        <div class="row vbh">
+                            <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
 
 
-		<div id="menu-jk" class="header-nav d-none d-md-block">
-			<div class="container">
-				<div class="row nav-row">
-					<ul>
-						<li><a href="/home">홈</a></li>
-						<li><a href="/notice/list">공지사항</a></li>
-						<li><a href="/pension/list">숙소 리스트</a></li>
-						<li><a href="/community/chat">커뮤니티</a></li>
-						<li><a href="/mypage/myPage">마이페이지</a></li>
-						<li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
-						<li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="page-nav no-margin row">
-   <div class="container-fluid">
+    </div> 
+<br>
+<!-- 	<div class="page-nav no-margin row"> -->
+   <div class="container-fluid" style="position : relative; right : 140px;">
       <div class="row">
          <div class="col-12">
             <form class="form mt-1" action="/pension/dateSearch" name="filterFrm" method="post">
@@ -97,7 +149,6 @@
                   <div class="col-sm-12 col-md-12 col-lg-3 py-2">
                      <h5 class="my-2 pl-2" id="test9">
                         <i class="far fa-calendar-alt"></i>
-                        예약날짜 선택 :
                      </h5>
                   </div>
                   <!--                      <div class="col-sm-12 col-md-6 col-lg-5"> -->
@@ -132,8 +183,7 @@
          </div>
       </div>
    </div>
-</div>
-<br>
+<!-- </div> -->
 <section id="about" class="contianer-fluid about-us" style="position : relative; left : 50px;">
    <div class="container-fluid" id="test5">
       <div class="row">
@@ -342,7 +392,6 @@
 					}
 				});
 			}else if(Date.now() > obj.expire2 && Date.now() < obj.expire2 + 1000) {
-				console.log("됬다!!!!!!!!!!");
 				//EchoHandler컨트롤러로 이동
 				socket.send("관리자," + sessionId + "," + content);
 			}							
@@ -389,8 +438,6 @@
 							return null;
 						}
 						const obj = JSON.parse(objString); //JSON으로 변환했던 문자열을 parse로 객체 변환
-						console.log(obj.expire);
-						console.log(Date.now());
 						autoFunction(obj, result);
 					}
 				}

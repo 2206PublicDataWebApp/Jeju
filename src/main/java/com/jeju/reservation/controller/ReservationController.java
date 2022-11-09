@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,6 +77,32 @@ public class ReservationController {
 		mv.setViewName("/reservation/list");		
 		return mv;
 	}
+	
+	@RequestMapping(value="/reservation/nonMemberList", method=RequestMethod.GET)
+	public String nonMemberList() {
+		return "/mypage/noMember";
+	}
+	
+	@RequestMapping(value="/reservation/reservationDetail", method=RequestMethod.GET)
+	public ModelAndView reservationDetail(
+			ModelAndView mv,
+			@RequestParam("reservationNo") Integer reservationNo
+			) {
+		Reservation reserveInfo = aService.selectReservationInfo(reservationNo);
+		mv.addObject("reserveInfo", reserveInfo);
+		mv.setViewName("/mypage/reservationDetail");
+		return mv;
+	}
+	
+	@RequestMapping(value="/reservation/searchNonMember", method=RequestMethod.POST)
+	public ModelAndView searchNonMember(
+			ModelAndView mv,
+			@ModelAttribute Reservation reservation) {
+		Reservation reserveInfo = aService.selectNonMemberInfo(reservation);
+		mv.addObject("reserveInfo", reserveInfo);
+		mv.setViewName("/mypage/nonReservation");
+		return mv;
+	}
 
 	@ResponseBody
 	@RequestMapping(value="/reservation/checkSessionId", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
@@ -94,8 +120,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/reservation/phoneCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public String sendSMS(@RequestParam("memberPhone") String userPhoneNumber) { // �޴��� ���ں�����
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//���� ����
+	public String sendSMS(@RequestParam("memberPhone") String userPhoneNumber) {
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
 
 		aService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		
@@ -110,11 +136,25 @@ public class ReservationController {
 		String memberId = "";
 		Member member = (Member) session.getAttribute("loginUser");
 		if(member != null) {
+			String resultNum = "회원";
 			memberId = member.getMemberId();
 			reservation.setMemberId(memberId);
+			reservation.setReservationCode(resultNum);
 		}else {
 			memberId = "비회원";
 			reservation.setMemberId(memberId);
+			
+			Random random = new Random();		//랜덤 함수 선언
+			int createNum = 0;  			//1자리 난수
+			String ranNum = ""; 			//1자리 난수 형변환 변수
+	        	int letter    = 6;			//난수 자릿수:6
+			String resultNum = "";  		//결과 난수			
+			for (int i=0; i<letter; i++) { 	            		
+				createNum = random.nextInt(9);		//0부터 9까지 올 수 있는 1자리 난수 생성
+				ranNum =  Integer.toString(createNum);  //1자리 난수를 String으로 형변환
+				resultNum += ranNum;			//생성된 난수(문자열)을 원하는 수(letter)만큼 더하며 나열
+			}	
+	        reservation.setReservationCode(resultNum);		            
 		}
 		
 		Pension imageList = aService.selectImage(reservation.getRePensionNo());
@@ -124,11 +164,13 @@ public class ReservationController {
 		if(result > 0) {
 			System.out.println("예약 성공!");
 		}
-		return "예약 성공!";	
+		return memberId;	
 	}
 	
+	
+	
 	@ResponseBody
-	@RequestMapping(value = "/reservation/waiting", method = RequestMethod.POST)
+	@RequestMapping(value = "/reservation/waiting", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
 	public String reservationWaiting(
 			@ModelAttribute Reservation reservation
 			,HttpSession session) {
@@ -176,11 +218,22 @@ public class ReservationController {
 			ModelAndView mv,
 			@RequestParam("reservationNo") Integer reservationNo
 			) { 
-		Reservation rList = aService.selectOneByWaitList(reservationNo);
-		
+		Reservation rList = aService.selectOneByWaitList(reservationNo);		
 		mv.addObject("rList", rList);
 		mv.setViewName("mypage/reservationCancel");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservation/reservationCancel", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String reservationCancel(
+			@RequestParam("reservationNo") Integer reservationNo) {
+		String chk = "";
+		int result = aService.deleteReservation(reservationNo);
+		if(result > 0) {
+			chk = "삭제완료";
+		}
+		return chk;		
 	}
 	
 	
@@ -210,6 +263,17 @@ public class ReservationController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/reservation/deleteReserve", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String deleteReserve(@ModelAttribute Reservation reservation) {
+		String chk = "";
+		int result = aService.deleteReserve(reservation);
+		if(result > 0) {
+			chk = "삭제성공";
+		}
+		return chk;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/reservation/waitAvailability", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
 	public String waitAvailability(@RequestParam("memberId") String memberId) {
 		int count = aService.selectRstatus(memberId);
@@ -235,13 +299,7 @@ public class ReservationController {
 		}	
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value="/reservation/idNullCheck", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
 	public String idCheck(

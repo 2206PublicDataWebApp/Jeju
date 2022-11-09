@@ -199,19 +199,19 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                       <h5 class="card-title">숙소 이름</h5>
-                      <p class="card-text">${rList.rePensionName }</p>
+                      <p class="card-text">${reserveInfo.rePensionName }</p>
                       <br>
                       <h5 class="card-title">객실 타입 / 기간</h5>
-                      <p class="card-text">${rList.rePensionNo }</p>
+                      <p class="card-text">${reserveInfo.rePensionNo }</p>
                       <br>
                       <h5 class="card-title">체크인</h5>
-                      <p class="card-text">${rList.reStartDate }</p>
+                      <p class="card-text">${reserveInfo.reStartDate }</p>
                       <br>
                       <h5 class="card-title">체크 아웃</h5>
-                      <p class="card-text">${rList.reEndDate }</p>
+                      <p class="card-text">${reserveInfo.reEndDate }</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price">${rList.rePrice }원</h5>
+                      <h5 class="card-title" id="price">${reserveInfo.rePrice }원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
@@ -220,8 +220,7 @@
                     </div>
                     
                     <ul class="list-group list-group-flush">
-                       <li class="list-group-item" id="button1" title="결제하기 버튼">결제하기</li>
-                      <li class="list-group-item" onclick="cancel();">결제대기 취소</li>
+                      <li class="list-group-item" onclick="cancel();">예약 취소</li>
                     </ul>
 
                   </div>
@@ -270,99 +269,104 @@
    
     </body>
      <script>
-     $("#button1").click(function(){
-  	     		//가맹점 식별코드
-  	     		IMP.init('imp28778843');
-  	     		IMP.request_pay({
-  	     		    pg : 'kcp',
-  	     		    pay_method : 'card',
-  	     		    merchant_uid : 'merchant_' + new Date().getTime(),
-  	     		    name : '한재민' ,
- 		    		amount : '501',
-//   	     			amount : '${price}',
-  	     		    buyer_email : 'iamport@siot.do',
-  	     		    buyer_name : '${rList.memberId}'
-//   	     		    buyer_tel : $("#phone").val()
-//  	      		    buyer_addr : '서울 강남구 도곡동',
-//  	      		    buyer_postcode : '123-456'
-  	     		},function(rsp) {
-  	     			console.log(rsp);
-  	     		    if ( rsp.success ) {
-  	     		        msg += '고유ID : ' + rsp.imp_uid;
-  	     		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-  	     		        msg += '결제 금액 : ' + rsp.paid_amount;
-  	     		        msg += '카드 승인번호 : ' + rsp.apply_num;  
+//      $("#button1").click(function(){
+//   	     		//가맹점 식별코드
+//   	     		IMP.init('imp28778843');
+//   	     		IMP.request_pay({
+//   	     		    pg : 'kcp',
+//   	     		    pay_method : 'card',
+//   	     		    merchant_uid : 'merchant_' + new Date().getTime(),
+//   	     		    name : '한재민' ,
+//  		    		amount : '501',
+// //   	     			amount : '${price}',
+//   	     		    buyer_email : 'iamport@siot.do',
+//   	     		    buyer_name : '${rList.memberId}'
+// //   	     		    buyer_tel : $("#phone").val()
+// //  	      		    buyer_addr : '서울 강남구 도곡동',
+// //  	      		    buyer_postcode : '123-456'
+//   	     		},function(rsp) {
+//   	     			console.log(rsp);
+//   	     		    if ( rsp.success ) {
+//   	     		        msg += '고유ID : ' + rsp.imp_uid;
+//   	     		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+//   	     		        msg += '결제 금액 : ' + rsp.paid_amount;
+//   	     		        msg += '카드 승인번호 : ' + rsp.apply_num;  
   	     		        
-  	     		        $.ajax({
-  	     		        	url : "/pay/success",
-  	     		        	data : {
-  	     		        		"payId" : rsp.imp_uid,
-  	     		        		"roomNo" : '${rList.roomNo}',
-  	     		        		"payPensionNo" : '${rList.rePensionNo}',
-  	     		        		"payPrice" : rsp.paid_amount        		
-  	     		        	},
-  	     		        	type : "post",
-  	     		        	success : function(result) {
-  	     		        		$.ajax({
-  	     		        			url : "/reservation/success",
-  	     		        			data : {
-  	     		        				"reservationName" : '${rList.reservationName}',
-  	     		        				"roomNo" : '${rList.roomNo}',
-  	     		        				"rePensionNo" : '${rList.rePensionNo}',
-  	     		        				"rePrice" : rsp.paid_amount,
-  	     		        				"reStartDate" : '${rList.reStartDate}',
-  	     		        				"reEndDate" : '${rList.reEndDate}'
-  	     		        			},
-  	     		        			type : "post",
-  	     		        			success : function(result) {
-  	     		        				$.ajax({
-  	     		        					url : "/reservation/deleteWaitReserve",
-  	     		        					data : {
-  	     		        						"reservationNo" : '${rList.reservationNo}'
-  	     		        					},
-  	     		        					type : "post",
-  	     		        					success : function(result) {
-  	     		        						window.localStorage.removeItem(result);
-  	     		        						alert("예약이 완료되었습니다.");
-  	     		        						location.href = "/pension/list";
-  	     		        					}
-  	     		        				});
+//   	     		        $.ajax({
+//   	     		        	url : "/pay/success",
+//   	     		        	data : {
+//   	     		        		"payId" : rsp.imp_uid,
+//   	     		        		"roomNo" : '${rList.roomNo}',
+//   	     		        		"payPensionNo" : '${rList.rePensionNo}',
+//   	     		        		"payPrice" : rsp.paid_amount        		
+//   	     		        	},
+//   	     		        	type : "post",
+//   	     		        	success : function(result) {
+//   	     		        		$.ajax({
+//   	     		        			url : "/reservation/success",
+//   	     		        			data : {
+//   	     		        				"reservationName" : '${rList.reservationName}',
+//   	     		        				"roomNo" : '${rList.roomNo}',
+//   	     		        				"rePensionNo" : '${rList.rePensionNo}',
+//   	     		        				"rePrice" : rsp.paid_amount,
+//   	     		        				"reStartDate" : '${rList.reStartDate}',
+//   	     		        				"reEndDate" : '${rList.reEndDate}'
+//   	     		        			},
+//   	     		        			type : "post",
+//   	     		        			success : function(result) {
+//   	     		        				$.ajax({
+//   	     		        					url : "/reservation/deleteWaitReserve",
+//   	     		        					data : {
+//   	     		        						"reservationNo" : '${rList.reservationNo}'
+//   	     		        					},
+//   	     		        					type : "post",
+//   	     		        					success : function(result) {
+//   	     		        						alert("예약이 완료되었습니다.");
+//   	     		        						location.href = "/pension/list";
+//   	     		        					}
+//   	     		        				});
   	     		        				
-  	     		        			}
-  	     		        		});
-  	     		        	}
-  	     		        });
-  	     		    } else {
-  	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
-  	     		         msg += '에러내용 : ' + rsp.error_msg;
-  	     		       alert(msg);
-  	     		     location.href = "/pension/list";
-  	     		    }	
-//   	     		  location.href = "/pension/list";
-  	     		});	
+//   	     		        			},
+//   	     		        			error : function() {
+//   	    	     		        		alert("예약 등록 실패!");
+//   	    	     		        	}
+//   	     		        		});
+
+//   	     		        	},
+//   	     		        	error : function() {
+//   	     		        		alert("결제 등록 실패!");
+//   	     		        	}
+//   	     		        });
+//   	     		    } else {
+//   	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
+//   	     		         msg += '에러내용 : ' + rsp.error_msg;
+//   	     		       alert(msg);
+//   	     		     location.href = "/pension/list";
+//   	     		    }	
+// //   	     		  location.href = "/pension/list";
+//   	     		});	
   	  
-  	    	return false
+//   	    	return false
   	       	    	
-      });     
+//       });     
      
      function cancel() {
     	 if(confirm("정말 결제진행을 취소하시겠습니까?")) {
     		 $.ajax({
-    			url :  "/reservation/deleteWaitReserve",
+    			url :  "/reservation/reservationCancel",
     			data : {
-    				"reservationNo" : '${rList.reservationNo}'
+    				"reservationNo" : '${reserveInfo.reservationNo}'
     			},
     		 	type : "post",
     		 	success : function(result) {
-    		 		alert("취소되었습니다.");
-    		 		location.href = "/pension/list";
-    		 	},
-    		 	error : function() {
-    		 		alert("취소에 실패했습니다.");
+    		 		if(result == "삭제완료") {
+    		 			alert("취소되었습니다.");
+        		 		location.href = "/pension/list";
+    		 		}  		 		
     		 	}
     		 });
     	 }else {
-    		 location.href="/reservation/cancel?reservationNo=${rList.reservationNo}";
+    		 location.href="/reservation/reservationDetail?reservationNo=${reserveInfo.reservationNo}";
     	 }
      }
 

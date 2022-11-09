@@ -163,7 +163,7 @@
 	                            <img src="${success.reFilePath}">
 	                            <span>${success.rePayDate} 결제</span>	                     
 	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
-	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${success.rePensionName }</div>
+	                            <a href="/reservation/reservationDetail?reservationNo=${success.reservationNo }"><div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${success.rePensionName }</div></a>
 	                            <div style="text-align: center;">${success.reStartDate } ~ ${success.reEndDate }</div>
 	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${success.rePrice }원</span></div>
 	                        </div>
@@ -183,7 +183,7 @@
 	                    	<div class="blog-col">
 	                            <img src="${end.reFilePath}">
 	                            <span>${end.rePayDate} 결제</span>	                     
-	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">예약 완료</button></div>
+	                            <div style="text-align: center;"><button class="btn btn-info btn-sm" style="font-size: 8px;">이용 완료</button></div>
 	                            <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;">${end.rePensionName }</div>
 	                            <div style="text-align: center;">${end.reStartDate } ~ ${end.reEndDate }</div>
 	                            <div style="text-align: center; font-size: 15px; font-weight: bold; margin-top: 10px;">결제 금액 <span style="font-size: 15px; color: red;">${end.rePrice }원</span></div>
@@ -191,8 +191,8 @@
 	                     </div>  
                    	</c:forEach>                  
                  </c:if>
-       </div>
-   </div>
+       		</div>
+   		</div>
         
     </div>    
     
