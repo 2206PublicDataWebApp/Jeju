@@ -1,9 +1,15 @@
 package com.jeju.filter.crossScripting;
 
+import com.jeju.admin.controller.AdminController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 public final class RequestWrapper extends HttpServletRequestWrapper {
+
+    private static final Logger logger = LoggerFactory.getLogger(HttpServletRequestWrapper.class);
 
     public RequestWrapper(HttpServletRequest servletRequest) {
         super(servletRequest);
@@ -36,18 +42,17 @@ public final class RequestWrapper extends HttpServletRequestWrapper {
         if (value == null)
             return null;
         return cleanXSS(value);
-
     }
 
     private String cleanXSS(String value) {
-    	System.out.println("XSS Filter before : " + value);
+    	logger.info("XSS Filter before : " + value);
         value = value.replaceAll("<", "& lt;").replaceAll(">", "& gt;");
         value = value.replaceAll("\\(", "& #40;").replaceAll("\\)", "& #41;");
         value = value.replaceAll("'", "& #39;");
         value = value.replaceAll("eval\\((.*)\\)", "");
         value = value.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "\"\"");
         value = value.replaceAll("script", "");
-        System.out.println("XSS Filter after : " + value);
+        logger.info("XSS Filter after : " + value);
         return value;
     }
 }

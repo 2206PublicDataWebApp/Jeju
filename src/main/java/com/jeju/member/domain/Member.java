@@ -29,9 +29,9 @@ public class Member {
 	public Member () {}
 
 	public Member(String memberId, String memberPwd, String memberEmail, String adminCheck, String memberName,
-			String memberPhone, String memberAddr, String phone2, String phone3, String authEmail, String authToken,
-			Date enrollDate, Date updateDate, String useCount, String gender, Date birthDate, String mStatus,
-			int memberNo, int couponCount) {
+				  String memberPhone, String memberAddr, String phone2, String phone3, String authEmail, String authToken,
+				  Date enrollDate, Date updateDate, String useCount, String gender, Date birthDate, String mStatus,
+				  int memberNo, int couponCount) {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
 		this.memberEmail = memberEmail;

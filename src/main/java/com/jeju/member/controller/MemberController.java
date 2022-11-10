@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +31,8 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 
 	// 회원가입할때 회원가입 페이지
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
@@ -37,13 +40,7 @@ public class MemberController {
 		return "member/join";
 		// /WEB-INF/views/member/join.jsp
 	}
-	//마이페이지 수정
-//		@RequestMapping(value="/mypage/modifyView", method=RequestMethod.GET)
-//		public String memberModifyView(Model model) {
-//			return "mypage/modify";
-//			// /WEB-INF/views/member/join.jsp
-//		}
-	// login 페이지
+
 	@RequestMapping(value="/member/loginView.kh", method=RequestMethod.GET)
 	public String memberLoginView(Model model) {
 		return "member/login";
@@ -65,14 +62,13 @@ public class MemberController {
 			, @RequestParam("post") String post
 			, @RequestParam("address1") String address1
 			, @RequestParam("address2") String address2
-//			, Model model
 			, ModelAndView mv) {
 		try {
+			// 비밀번호 암호화
+			String securePw = passwordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(securePw);
 
-
-			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);
-			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
 			if(result > 0) {
 				mv.setViewName("redirect:/member/loginView.kh");
@@ -81,11 +77,11 @@ public class MemberController {
 				mv.setViewName("common/errorPage");
 			}
 		} catch (Exception e) {
-
 			mv.addObject("msg", e.toString()).setViewName("common/errorPage");
 		}
 		return mv;
 	}
+
 	// 로그인 기능
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public ModelAndView memberLogin(
@@ -99,11 +95,10 @@ public class MemberController {
 			Member member = new Member();
 			member.setMemberId(memberId);
 			member.setMemberPwd(memberPwd);
-			System.out.println(memberId);
-			System.out.println(memberPwd);
+
 			Member loginUser = mService.loginMember(member);
-			System.out.println(loginUser);
-			if(loginUser != null) {
+
+			if(loginUser != null || passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
 				System.out.println("성공");
 				HttpSession session = request.getSession();
 
