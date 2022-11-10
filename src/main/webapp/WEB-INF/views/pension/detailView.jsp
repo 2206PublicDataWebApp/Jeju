@@ -91,7 +91,7 @@
         	<h2>객실 안내 <i class="fa-solid fa-key"></i></h2>
         </div>  
         <div align="center">
-        	<button class="btn btn-outline-success" data-toggle='modal' data-target='#modifyModal'><i class="fa-solid fa-image fa-4x"></i></button>
+        	<button class="btn btn-outline-success" data-toggle='modal' data-target='#imgModal'><i class="fa-solid fa-image fa-4x"></i></button>
        	</div>
        	<br><br>
         <div class="dest-row row">
@@ -100,7 +100,7 @@
                     <div class="dest-col">
                         <div class="dest-img">
                             <img src="${room.roomAttach.roomPath }" alt="객실 사진이 존재하지 않습니다.">
-                            <div class="modal fade" id="modifyModal" role="dialog">
+                            <div class="modal fade" id="imgModal" role="dialog">
 							  	<div class="modal-dialog">
 							      <div class="modal-content">
 							          <div class="modal-header">
@@ -234,7 +234,7 @@
   <div>
       <div style="text-align: center; margin-bottom: 100px;">
       	<c:if test="${check == 0 }">
-          	<a class="btn btn-outline-success" href="/pension/list" >목록으로</a>
+          	<a class="btn btn-outline-success" href="/home" >목록으로</a>
          </c:if>
          <c:if test="${check == 1 }">
           	<a class="btn btn-outline-success" href="/mypage/pensionManagement" >목록으로</a>
