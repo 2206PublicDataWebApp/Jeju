@@ -211,7 +211,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${pensionList }" var="adminPension" varStatus="i">
+                                <c:forEach items="${pensionPageList }" var="adminPension" varStatus="i">
                                     <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
                                     <tr>
                                         <td>${i.count}</td>
@@ -226,6 +226,46 @@
                             </table>
 
                         </div>
+
+                        <!-- 페이징 시작-->
+                        <div>
+                            <article>
+                                <!-- 이전 페이지 -->
+                                <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
+                                        <span class="prev">
+                                            <a href="/admin/pension?page=${pagination.startNavi - 1}"></a>
+                                        </span>
+                                </c:if>
+
+                                <!-- 번호 -->
+                                <c:forEach var="page" begin="${pagination.startNavi}"
+                                           end="${pagination.endNavi}">
+                                    <c:if test="${page == pagination.currentPage  }">
+                                            <span class="pageNow">
+                                                    ${page }
+                                            </span>
+                                    </c:if>
+                                    <c:if test="${page == 0  }">
+                                            <span class="pageNow">
+                                                    ${page+1 }
+                                            </span>
+                                    </c:if>
+
+                                    <c:if test="${page != pagination.currentPage && page !=0}">
+                                            <span class="pages"> <a href="/admin/pension?page=${page }">${page }</a>
+                                            </span>
+                                    </c:if>
+                                </c:forEach>
+
+                                <!-- 다음 페이지 -->
+                                <c:if test="${pagination.endNavi ne pagination.maxPage  }">
+                                        <span class="next"> <a
+                                                href="/admin/pension?page=${pagination.endNavi+1 }"> > </a>
+                                        </span>
+                                </c:if>
+                            </article>
+                        </div>
+                        <!-- 페이징 끝 -->
                     </div>
                 </div>
             </div></div>

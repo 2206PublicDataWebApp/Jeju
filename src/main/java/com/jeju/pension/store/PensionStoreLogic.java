@@ -225,5 +225,14 @@ public class PensionStoreLogic implements PensionStore{
 		return roomAttach;
 	}
 
+	// 관리자 페이징용 모든 숙소 조회
+	@Override
+	public List<Pension> pagingShowAllMember(SqlSession session, int currentPage, int pensionLimit) {
+		int offset = (currentPage - 1) * pensionLimit;
+		RowBounds rowBounds = new RowBounds(offset, pensionLimit);
+		List<Pension> pensionList = session.selectList("PensionMapper.pagingShowAllPension", null, rowBounds);
+		return pensionList;
+	}
+
 
 }

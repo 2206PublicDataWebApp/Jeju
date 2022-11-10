@@ -1,6 +1,7 @@
 package com.jeju.pension.controller;
 
 import com.jeju.member.domain.Member;
+import com.jeju.pagination.Pagination;
 import com.jeju.pension.domain.Pension;
 import com.jeju.pension.service.PensionService;
 import com.jeju.reservation.domain.Reservation;
@@ -37,10 +38,16 @@ public class AdminPensionController {
             ){
         logger.info("관리자 펜션관리 페이지 접속 시도 {}", modelAndView);
 
-        List<Pension> pensionList = pensionService.showAllPension();
+        int pensionTotalCount = pensionService.showAllPension().size();
+        int pensionLimit = 10;
 
-        modelAndView.addObject("pensionList", pensionList);
+        Pagination pagination = new Pagination(page, pensionTotalCount, pensionLimit);
 
+        List<Pension> pensionPageList = pensionService.pagingShowAllPension(pagination.getCurrentPage(), pensionLimit);
+        /*List<Pension> pensionList = pensionService.showAllPension();*/
+
+        modelAndView.addObject("pensionPageList", pensionPageList);
+        modelAndView.addObject("pagination", pagination);
         modelAndView.setViewName("admin/adminPension");
         return modelAndView;
     }

@@ -142,6 +142,10 @@
 			DELETE FROM PENSION_TBL WHERE PENSION_NO = #{pensionNo}
 		</delete>
 
+	<!-- 관리자 페이징용 모든 숙소 조회 -->
+	<select id="pagingShowAllPension" resultMap="pensionResultMap">
+		SELECT PENSION_NO, PENSION_NAME, PENSION_ADDR, PENSION_PRICE, REVIEW_COUNT FROM PENSION_TBL ORDER BY PENSION_NO DESC
+	</select>
 
 
 	<!-- 	재민 카테고리2 맵 -->

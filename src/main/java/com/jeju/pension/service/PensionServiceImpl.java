@@ -234,5 +234,12 @@ public class PensionServiceImpl implements PensionService{
 		return roomAttach;
 	}
 
+	// 관리자 페이징용 모든 숙소 조회
+	@Override
+	public List<Pension> pagingShowAllPension(int currentPage, int pensionLimit) {
+		List<Pension> pensionList = pStore.pagingShowAllMember(session, currentPage, pensionLimit);
+		return pensionList;
+	}
+
 
 }

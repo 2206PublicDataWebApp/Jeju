@@ -92,4 +92,7 @@ public interface PensionStore {
 	void removeAdminPension(SqlSession session, Integer pensionNo);
 	// 임시
 	List<String> printAttach(SqlSession session, Integer roomNo);
+
+	// 관리자 페이징용 모든 숙소 조회
+    List<Pension> pagingShowAllMember(SqlSession session, int currentPage, int pensionLimit);
 }

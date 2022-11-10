@@ -1,6 +1,5 @@
-package com.jeju.filter.crossScripting;
+package com.jeju.security.crossScripting;
 
-import com.jeju.admin.controller.AdminController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

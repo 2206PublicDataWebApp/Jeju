@@ -91,6 +91,6 @@ public interface PensionService {
 	// 임시
 	List<String> printAttach(Integer roomNo);
 
-
-
+	// 관리자 페이징용 모든 숙소 조회
+    List<Pension> pagingShowAllPension(int currentPage, int pensionLimit);
 }

@@ -1,4 +1,4 @@
-package com.jeju.filter.sqlInjection;
+package com.jeju.security.sqlInjection;
 
 import java.io.IOException;
 

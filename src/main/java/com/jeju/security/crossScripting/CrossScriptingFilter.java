@@ -1,4 +1,4 @@
-package com.jeju.filter.crossScripting;
+package com.jeju.security.crossScripting;
 
 import java.io.IOException;
 

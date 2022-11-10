@@ -64,6 +64,7 @@ public class MemberController {
 			, @RequestParam("address2") String address2
 			, ModelAndView mv) {
 		try {
+
 			// 비밀번호 암호화
 			String securePw = passwordEncoder.encode(member.getMemberPwd());
 			member.setMemberPwd(securePw);
@@ -98,6 +99,7 @@ public class MemberController {
 
 			Member loginUser = mService.loginMember(member);
 
+			// 조건으로 암호화?
 			if(loginUser != null || passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
 				System.out.println("성공");
 				HttpSession session = request.getSession();
@@ -108,7 +110,7 @@ public class MemberController {
 				}else {
 					mv.setViewName("redirect:/home");
 				}
-			}else {
+			} else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");
 			}
