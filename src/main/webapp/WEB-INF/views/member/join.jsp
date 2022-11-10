@@ -1,12 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
+<html lang="en">
 
-<!DOCTYPE html>
-<html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>회원가입</title>
-<style>
+<link rel="shortcut icon" href="/resources/assets/images/fav.png"
+	type="image/x-icon">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
+	rel="stylesheet">
+<link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/all.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/assets/css/style.css" />
+<script src="https://kit.fontawesome.com/422d96f707.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<header class="container-flui">
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 d-none d-md-block mail-detail"></div>
+					<div class="col-md-4 logo">
+						<img src="/resources/assets/images/logo.png" alt=""> <a
+							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
+							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div div id="menu-jk" class="header-nav d-none d-md-block">
+			<div class="container">
+				<div class="row nav-row">
+					<ul>
+						<li><a href="/home">홈</a></li>
+						<li><a href="/notice/list">공지사항</a></li>
+						<li><a href="/pension/list">숙소 리스트</a></li>
+						<li><a href="destinations.html">커뮤니티</a></li>
+						<li><a href="/mypage/myPage">마이페이지</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="page-nav no-margin row">
+		<div class="container">
+			<div class="row">
+				<h2>회원가입</h2>
+				<ul>
+					<li><a href="/home"><i class="fas fa-home"></i> 홈</a></li>
+					<li><i class="fas fa-angle-double-right"></i> 회원가입</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<style>
 #container {
 	width: 100%;
 	height: 100%;
@@ -111,25 +168,30 @@ span.error {
 </style>
 </head>
 <body>
+	<br></br>
 	<div id="container" class="container">
 		<div class="content">
 			<div class="join_wrap">
 
-				<div class="join_title">회원가입</div>
+				<div class="join_title"></div>
 				<div class="join_box">
 					<form action="/member/register.kh" method="post">
-						아이디 <input type="text" id="memberId" name="memberId"> 
-						<span class="guide ok" style="">이 아이디는 사용 가능합니다.</span> 
-						<span class="guide error" style="">이 아이디는 이미 사용중입니다.</span>
-						 <input
-							type="password" placeholder="비밀번호" name="memberPwd"
-							id="memberPwd">
+					
+						아이디 <input type="text" id="memberId" name="memberId" required> <span
+							class="guide ok" style="">이 아이디는 사용 가능합니다.</span> <span
+							class="guide error" style="">이 아이디는 이미 사용중입니다.</span> 
+							<br></br>
+							<label id="memberPwd" class="text-start">비밀번호</label> 
+							 
+							 <input class="form-control" type="password" name="memberPwd" id="pw"
+							placeholder="비밀번호 입력" onblur="pwCheck()" required> 
+							<div id="pw_input_result"></div>
 
 						<div class="email_auth">
 							<input type="text" placeholder="이메일(*하나의 이메일당 하나의 아이디만 가능)"
-								name="memberEmail" id="email" class="email"> 
-							<span class="test ok" style="">이 메일은 사용 가능합니다.</span> 
-							<span class="test error" style="">이 메일 이미 사용중입니다.</span>
+								name="memberEmail" id="email" class="email"> <span
+								class="test ok" style="">이 메일은 사용 가능합니다.</span> <span
+								class="test error" style="">이 메일 이미 사용중입니다.</span>
 
 							<button type="button" id="email_auth_btn" class="email_auth_btn">인증번호
 								받기</button>
@@ -139,32 +201,47 @@ span.error {
 							<td>* 이름</td>
 							<td><input type="text" name="memberName"></td>
 						</tr>
+
 						<tr>
 							<td>* 전화번호</td>
-							<td><input type="text" name="memberPhone"></td>
+							<td><input type="text" placeholder="ex>01000000000"
+								name="memberPhone"></td>
 						</tr>
+
 						<tr>
-							<td>우편번호</td>
-							<td><input type="text" name="post"
-								class="postcodify_postcode5">
-								<button type="button" id="postcodify_search_button">검색</button>
-							</td>
+							<td>* 생년월일</td>
+							<td><input type="text" placeholder="ex>19950215"
+								name="birthDate"></td>
 						</tr>
-						<tr>
-							<td>도로명 주소</td>
-							<td><input type="text" name="address1"
-								class="postcodify_address"></td>
-						</tr>
-						<tr>
-							<td>상세 주소</td>
-							<td><input type="text" name="address2"
-								class="postcodify_details"></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center"><input type="submit"
-								value="가입하기"></td>
-						</tr>
-						</table>
+
+						<td>* 성별</td> <label>
+						
+						<input type="radio" value="Woman" name="gender" id="Woman">여자
+      				   <input type="radio" value="Man" name="gender" id="Man">남자
+
+							<tr>
+								<td>우편번호</td>
+								<td><input type="text" name="post"
+									class="postcodify_postcode5">
+									<button type="button" id="postcodify_search_button">검색</button>
+								</td>
+							</tr>
+							<tr>
+								<td>도로명 주소</td>
+								<td><input type="text" name="address1"
+									class="postcodify_address"></td>
+							</tr>
+							<tr>
+								<td>상세 주소</td>
+								<td><input type="text" name="address2"
+									class="postcodify_details"></td>
+							</tr>
+							
+							<tr>
+								<td colspan="2" align="center"><input type="submit"
+									value="가입하기"></td>
+							</tr>
+							</table>
 					</form>
 
 				</div>
@@ -212,7 +289,28 @@ span.error {
 							}
 						});
 					});
-					///////////////////////////////////////메일인증//////////////////////////////////////////		  
+					////////////////////////////비밀번호 검사////////////////////////////////////////////////
+		
+					function pwCheck() {
+
+						const pw = document.getElementById('pw').value;
+						const pwResult = document
+								.getElementById('pw_input_result');
+						const exp2 = /^(?=.*[a-z])(?=.*\d)(?=.*[-_!*])[a-z\d-_!*]{8,20}$/;
+
+						if (pw.match(exp2)) {
+							pwResult.innerHTML = '조건이 만족 되었습니다';
+							pwResult.style.color = 'green';
+
+						} else {
+							pwResult.innerHTML = '8~20자리 소문자, 특수기호(-_!*), 숫자 포함해주세요';
+							pwResult.style.color = 'red';
+
+						}
+					}
+				/////////////이메일 정규식 검사/////////
+		
+// 					///////////////////////////////////////메일인증//////////////////////////////////////////		  
 					var email_auth_cd = '';
 					
 					$(".email_auth_btn").click(function() {

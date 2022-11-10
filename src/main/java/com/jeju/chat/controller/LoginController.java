@@ -21,6 +21,14 @@ public class LoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
+	@RequestMapping(value = "/chat/chatList", method = RequestMethod.GET)
+	public String chatList() {
+		return "chat/chatList";
+	}
+	@RequestMapping(value = "/chat/login1.do", method = RequestMethod.GET)
+	public String login1() {
+		return "chat/login1";
+	}
 	
 	@RequestMapping(value = "/chat/login2.do", method = RequestMethod.GET)
 	public String login() {

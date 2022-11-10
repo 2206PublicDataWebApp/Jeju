@@ -52,11 +52,11 @@
    </select>
    <insert id="insertMember">
       INSERT INTO MEMBER_TBL
-      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT, NULL, 0)
+      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, #{gender}, #{birthDate}, DEFAULT, NULL, 0)
    </insert>
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
-      SET MEMBER_PWD = #{memberPwd }, MEMBER_NAME = #{memberName }, MEMBER_PHONE = #{memberPhone}
+      SET MEMBER_PWD = #{memberPwd }, MEMBER_PHONE = #{memberPhone}
       , MEMBER_ADDR = #{memberAddr }
       WHERE MEMBER_ID = #{memberId }
    </update>

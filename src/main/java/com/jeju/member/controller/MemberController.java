@@ -60,7 +60,7 @@ public class MemberController {
 			, ModelAndView mv) {
 		try {
 			
-			System.out.println("주의 이름은");
+		
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
@@ -259,15 +259,7 @@ public class MemberController {
 		}
 		return mv;
 	}
-//	
-//	//아이디 중복검사
-//	@ResponseBody
-//	@RequestMapping(value="/idChk",method=RequestMethod.POST)
-//	public String idChk(
-//			@RequestParam("memberId") String memberId) {
-//		int result = mService.idChk(memberId);
-//		return String.valueOf(result);
-//}
+
 	//email 중복검사
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
