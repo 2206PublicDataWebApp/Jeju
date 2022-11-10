@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import com.jeju.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService mService;
+
 
 	// 회원가입할때 회원가입 페이지
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
@@ -66,6 +68,7 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
+
 
 			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);

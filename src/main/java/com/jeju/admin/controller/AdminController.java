@@ -2,7 +2,10 @@ package com.jeju.admin.controller;
 
 import java.util.List;
 
+import com.jeju.member.controller.AdminMemberController;
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,7 @@ public class AdminController {
     private final ReviewService reviewService;
     private final ReservationService reservationService;
     */
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     private MemberService memberService;
@@ -51,7 +55,7 @@ public class AdminController {
                         (ModelAndView modelAndView,
                          @RequestParam(value = "page", required=false) Integer page
                          ){
-        /*log.info("관리자  일반페이지 접속 시도 {}", modelAndView);*/
+        logger.info("관리자  일반페이지 접속 시도 {}", modelAndView);
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();
@@ -61,7 +65,6 @@ public class AdminController {
         List<Reservation> reservationList = reservationService.showAllReservation();
         // 리뷰내역조회
         List<Review> reviewList = reviewService.showAllReview();
-
 
 
         modelAndView.addObject("memberList", memberList);
