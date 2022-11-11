@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -30,6 +32,9 @@ import com.jeju.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService mService;
+
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -68,6 +73,7 @@ public class MemberController {
 			// 비밀번호 암호화
 			String securePw = passwordEncoder.encode(member.getMemberPwd());
 			member.setMemberPwd(securePw);
+			logger.info("비밀번호 암호화 시도 {}", securePw);
 
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			int result = mService.registerMember(member);
@@ -93,21 +99,19 @@ public class MemberController {
 			, HttpServletRequest request
 			,HttpServletResponse response) {
 		try {
-			Member member = new Member();
-			member.setMemberId(memberId);
-			member.setMemberPwd(memberPwd);
-
-			Member loginUser = mService.loginMember(member);
-
-			// 조건으로 암호화?
-			if(loginUser != null || passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
-				System.out.println("성공");
+			// 암호화된 비밀번호를 matches를 이용하여 비교
+			Member member = mService.printOneById(memberId);
+			Member loginUser = new Member();
+			loginUser.setMemberId(member.getMemberId());
+			loginUser.setMemberName(member.getMemberName());
+			if(passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
+				/*System.out.println("성공");*/
 				HttpSession session = request.getSession();
 
 				session.setAttribute("loginUser", loginUser);
 				if(pensionNo != null) {
 					mv.setViewName("redirect:/pension/detailView2?pensionNo=" + pensionNo);
-				}else {
+				} else {
 					mv.setViewName("redirect:/home");
 				}
 			} else {
