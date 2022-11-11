@@ -172,7 +172,7 @@ public class MemberController {
 		Member member = (Member) session.getAttribute("loginUser");
 		String memberId = member.getMemberId();
 		Member memberInfo = mService.selectMemberInfo(memberId);
-		mv.addObject("member", member);
+		mv.addObject("member", memberInfo);
 		mv.setViewName("mypage/modify");
 		
 		return mv;

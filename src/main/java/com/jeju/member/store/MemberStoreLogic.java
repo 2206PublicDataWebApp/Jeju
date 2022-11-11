@@ -54,7 +54,7 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public Member selectMemberInfo(SqlSessionTemplate session, String memberId) {
 		Member member = session.selectOne("MemberMapper.selectMemberInfo", memberId);
-		return null;
+		return member;
 	}
 
 	

@@ -1,9 +1,5 @@
 package com.jeju.chat.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.jeju.member.domain.Member;
 
 
 @Controller
@@ -37,11 +34,10 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/loginProcess.do", method = RequestMethod.POST)
-	public String loginProcess(@RequestParam String id, HttpServletRequest request) {		
-		logger.info("Welcome "+id);
-		
-    	HttpSession session = request.getSession();
-    	session.setAttribute("id", id);
+	public String loginProcess(HttpServletRequest request, HttpSession session, Model model) {		
+    	Member member = (Member) session.getAttribute("loginUser");
+    	String memberId = member.getMemberId();
+    	model.addAttribute("member", memberId);
 		return "chat/chat";
 	}
 	

@@ -22,47 +22,6 @@
 	href="/resources/assets/css/style.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js"
 	crossorigin="anonymous"></script>
-</head>
-<body>
-	<header class="container-flui">
-		<div class="header-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 d-none d-md-block mail-detail"></div>
-					<div class="col-md-4 logo">
-						<img src="/resources/assets/images/logo.png" alt=""> <a
-							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
-							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div div id="menu-jk" class="header-nav d-none d-md-block">
-			<div class="container">
-				<div class="row nav-row">
-					<ul>
-						<li><a href="/home">홈</a></li>
-						<li><a href="/notice/list">공지사항</a></li>
-						<li><a href="/pension/list">숙소 리스트</a></li>
-						<li><a href="destinations.html">커뮤니티</a></li>
-						<li><a href="/mypage/myPage">마이페이지</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="page-nav no-margin row">
-		<div class="container">
-			<div class="row">
-				<h2>회원가입</h2>
-				<ul>
-					<li><a href="/home"><i class="fas fa-home"></i> 홈</a></li>
-					<li><i class="fas fa-angle-double-right"></i> 회원가입</li>
-				</ul>
-			</div>
-		</div>
-	</div>
 	<style>
 #container {
 	width: 100%;
@@ -77,12 +36,14 @@ span.guide {
 	right: 10px;
 }
 
-span.ok {
-	color: green
+#idCheck {
+	display : none;
+	color : green;
 }
 
-span.error {
-	color: red
+#nonId {
+	display : none;
+	color : red;
 }
 
 .dpn {
@@ -168,6 +129,45 @@ span.error {
 </style>
 </head>
 <body>
+	<header class="container-flui">
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 d-none d-md-block mail-detail"></div>
+					<div class="col-md-4 logo">
+						<img src="/resources/assets/images/logo.png" alt=""> <a
+							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
+							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div div id="menu-jk" class="header-nav d-none d-md-block">
+			<div class="container">
+				<div class="row nav-row">
+					<ul>
+						<li><a href="/home">홈</a></li>
+						<li><a href="/notice/list">공지사항</a></li>
+						<li><a href="/pension/list">숙소 리스트</a></li>
+						<li><a href="destinations.html">커뮤니티</a></li>
+						<li><a href="/mypage/myPage">마이페이지</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="page-nav no-margin row">
+		<div class="container">
+			<div class="row">
+				<h2>회원가입</h2>
+				<ul>
+					<li><a href="/home"><i class="fas fa-home"></i> 홈</a></li>
+					<li><i class="fas fa-angle-double-right"></i> 회원가입</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 	<br></br>
 	<div id="container" class="container">
 		<div class="content">
@@ -177,9 +177,9 @@ span.error {
 				<div class="join_box">
 					<form action="/member/register.kh" method="post">
 					
-						아이디 <input type="text" id="memberId" name="memberId" required> <span
-							class="guide ok" style="">이 아이디는 사용 가능합니다.</span> <span
-							class="guide error" style="">이 아이디는 이미 사용중입니다.</span> 
+						아이디 <input type="text" id="memberId" name="memberId" required> 
+							<span id="idCheck">이 아이디는 사용 가능합니다.</span> 
+							<span id="nonId">이 아이디는 이미 사용중입니다.</span> 
 							<br></br>
 							<label id="memberPwd" class="text-start">비밀번호</label> 
 							 
@@ -255,7 +255,7 @@ span.error {
 
 					/////////////////////////////아이디 ////////////////////////////
 					$(document).ready(function inputCheck() {
-						var chk = $("#memberId").val();
+						var chk = $("#email").val();
 						if (chk == "") {
 							$(".ok").hide();
 							$(".error").hide();
@@ -276,12 +276,12 @@ span.error {
 									// 아이디를 사용할 수 없습니다.
 									// $(".guide.ok").css("display", "none");
 									// $(".guide.ok").css("display", "inline-block");
-									$(".guide.ok").hide();
-									$(".guide.error").show();
+									$("#idCheck").css("display", "none");
+									$("#nonId").css("display", "block");
 								} else {
 									// 아이디를 사용할 수 있습니다.
-									$(".guide.error").hide();
-									$(".guide.ok").show();
+									$("#idCheck").css("display", "block");
+									$("#nonId").css("display", "none");
 								}
 							},
 							error : function() {

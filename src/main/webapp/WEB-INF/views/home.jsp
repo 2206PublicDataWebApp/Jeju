@@ -48,7 +48,7 @@
                <td>
                   <a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
                   
-                <a href="#"><img onclick="location.href='/chat/chatList'"
+                <a href="#"><img onclick="location.href='/chat/login2.do'"
 					src="/resources/images/chatting.png"style="width:30px; height:30px; background-color: white;">
 					
 					</a>

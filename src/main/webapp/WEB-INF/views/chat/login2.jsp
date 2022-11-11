@@ -26,10 +26,7 @@
                 <div class="panel-title">안녕하세요 제주어때 상담입니다.</div>
             </div>
             <div class="panel-body">
-                <form id="login-form" method="post" action="/loginProcess.do">
-                    <div>
-                        <input type="text"  name="id"	class="form-control" name="닉네임 입력" placeholder="닉네임 설정" autofocus>
-                    </div>
+                <form id="login-form" method="post" action="/loginProcess.do">                  
                     <div>
                         <button type="submit" class="form-control btn btn-primary">시작</button>
                     </div>

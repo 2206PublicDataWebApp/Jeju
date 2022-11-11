@@ -143,28 +143,6 @@ public class Member {
 	public void setCouponCount(int couponCount) {
 		this.couponCount = couponCount;
 	}
-	public Member() {
-		
-		this.memberId = memberId;
-		this.memberPwd = memberPwd;
-		this.memberEmail = memberEmail;
-		this.adminCheck = adminCheck;
-		this.memberName = memberName;
-		this.memberPhone = memberPhone;
-		this.memberAddr = memberAddr;
-		this.phone2 = phone2;
-		this.phone3 = phone3;
-		this.authEmail = authEmail;
-		this.authToken = authToken;
-		this.enrollDate = enrollDate;
-		this.updateDate = updateDate;
-		this.useCount = useCount;
-		this.gender = gender;
-		this.birthDate = birthDate;
-		this.mStatus = mStatus;
-		this.memberNo = memberNo;
-		this.couponCount = couponCount;
-	}
 	
 	
 
