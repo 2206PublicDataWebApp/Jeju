@@ -13,8 +13,8 @@ public class Pagination {
 
         int currentPage = (page != null) ? page : 1; // 현재페이지, page값이 없으면 1로 출력, 아니면 받아온 page값 출력
 
-        int naviLimit = 5; // 한 화면에 출력한 게시판 페이지 수
-        int maxPage; // 게시판의 총 페이지 수
+        int naviLimit = 5;
+        int maxPage; //  총 페이지 수
         int startNavi; // 한 화면에 출력되는 게시판 페이지의 처음 수
         int endNavi; // 한 화면에 출력되는 게시판 페이지의 마지막 수
 

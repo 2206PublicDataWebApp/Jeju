@@ -105,9 +105,9 @@ public class MemberController {
 			loginUser.setMemberId(member.getMemberId());
 			loginUser.setMemberName(member.getMemberName());
 			if(passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
-				/*System.out.println("성공");*/
-				HttpSession session = request.getSession();
 
+				logger.info("로그인 성공");
+				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
 				if(pensionNo != null) {
 					mv.setViewName("redirect:/pension/detailView2?pensionNo=" + pensionNo);

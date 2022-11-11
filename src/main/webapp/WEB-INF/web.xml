@@ -80,7 +80,7 @@
 	<!-- Sql Injection filter 매핑 -->
 	<filter-mapping>
 	  <filter-name>customFilter</filter-name>
-	  <url-pattern>*.do</url-pattern><!-- *.do 요청 -->
+	  <url-pattern>*</url-pattern><!-- *.do 요청 -->
 	</filter-mapping>
 
 	<filter>
