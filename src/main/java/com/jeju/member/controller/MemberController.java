@@ -201,6 +201,10 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
+			String securePw = passwordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(securePw);
+			logger.info("비밀번호 암호화 시도 {}", securePw);
+
 			member.setMemberAddr(post + "," + memberAddr);
 			int result = mService.modifyMember(member);
 			if(result > 0) {

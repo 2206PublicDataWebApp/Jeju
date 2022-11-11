@@ -80,7 +80,7 @@
 	<!-- Sql Injection filter 매핑 -->
 	<filter-mapping>
 	  <filter-name>customFilter</filter-name>
-	  <url-pattern>*</url-pattern><!-- *.do 요청 -->
+	  <url-pattern>*.do</url-pattern><!-- *.do 로 임시로 해둠 -->
 	</filter-mapping>
 
 	<filter>
