@@ -64,7 +64,7 @@
     	<br/><br/><br/>
     	
   		메세지 입력 : 
-        <input type="text" id="sender" value="${sessionScope.id}" style="display: none;">
+        <input type="text" id="sender" value="${member}" style="display: none;">
         <input type="text" id="messageinput">
         </textarea>
         <button type="button" onclick="send();">메세지 전송</button>

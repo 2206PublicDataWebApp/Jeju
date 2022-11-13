@@ -22,6 +22,98 @@
 	href="/resources/assets/css/style.css" />
 <script src="https://kit.fontawesome.com/422d96f707.js"
 	crossorigin="anonymous"></script>
+	<style>
+#container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+span.guide {
+	display: none;
+	font-size: 12px;
+	top: 12px;
+	right: 10px;
+}
+#idCheck {
+	display : none;
+	color : green;
+}
+#nonId {
+	display : none;
+	color : red;
+}
+.dpn {
+	display: none !important;
+}
+.join_wrap {
+	width: 550px;
+	margin: 0 auto;
+	border: 1px solid #dadada;
+	padding: 24px;
+	border-radius: 5px;
+}
+.join_title {
+	width: 100%;
+	height: 35px;
+	font-size: 19px;
+	font-weight: bold;
+	padding-left: 10px;
+	padding: 0 0 10px 10px;
+}
+.join_box {
+	width: 100%;
+}
+.join_box input {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #dadada;
+	padding: 17px;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+.join_box span {
+	display: inline-block;
+	color: red;
+	font-size: 12px;
+	padding-left: 1px;
+	padding-top: 8px;
+}
+.email_auth {
+	width: 100%;
+	margin-top: 10px;
+}
+.email_auth input {
+	display: inline-block;
+	width: calc(100% - 121px);
+	vertical-align: top;
+	margin: 0;
+}
+.email_auth_btn {
+	display: inline-block;
+	width: 115px;
+	height: 50px;
+	padding: 17px 0 15px;
+	border-radius: 6px;
+	border: solid 1px rgba(0, 0, 0, .15);
+	background-color: #03c75a;
+	color: white;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 1;
+}
+.join_btn {
+	display: block;
+	width: 100%;
+	padding: 17px 0 15px;
+	border-radius: 6px;
+	border: solid 1px rgba(0, 0, 0, .15);
+	background-color: #03c75a;
+	color: white;
+	font-size: 19px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 	<header class="container-flui">
@@ -63,111 +155,6 @@
 			</div>
 		</div>
 	</div>
-	<style>
-#container {
-	width: 100%;
-	height: 100%;
-	position: relative;
-}
-
-span.guide {
-	display: none;
-	font-size: 12px;
-	top: 12px;
-	right: 10px;
-}
-
-span.ok {
-	color: green
-}
-
-span.error {
-	color: red
-}
-
-.dpn {
-	display: none !important;
-}
-
-.join_wrap {
-	width: 550px;
-	margin: 0 auto;
-	border: 1px solid #dadada;
-	padding: 24px;
-	border-radius: 5px;
-}
-
-.join_title {
-	width: 100%;
-	height: 35px;
-	font-size: 19px;
-	font-weight: bold;
-	padding-left: 10px;
-	padding: 0 0 10px 10px;
-}
-
-.join_box {
-	width: 100%;
-}
-
-.join_box input {
-	width: 100%;
-	height: 50px;
-	border: 1px solid #dadada;
-	padding: 17px;
-	border-radius: 5px;
-	margin-top: 20px;
-}
-
-.join_box span {
-	display: inline-block;
-	color: red;
-	font-size: 12px;
-	padding-left: 1px;
-	padding-top: 8px;
-}
-
-.email_auth {
-	width: 100%;
-	margin-top: 10px;
-}
-
-.email_auth input {
-	display: inline-block;
-	width: calc(100% - 121px);
-	vertical-align: top;
-	margin: 0;
-}
-
-.email_auth_btn {
-	display: inline-block;
-	width: 115px;
-	height: 50px;
-	padding: 17px 0 15px;
-	border-radius: 6px;
-	border: solid 1px rgba(0, 0, 0, .15);
-	background-color: #03c75a;
-	color: white;
-	font-size: 17px;
-	font-weight: bold;
-	line-height: 1;
-}
-
-.join_btn {
-	display: block;
-	width: 100%;
-	padding: 17px 0 15px;
-	border-radius: 6px;
-	border: solid 1px rgba(0, 0, 0, .15);
-	background-color: #03c75a;
-	color: white;
-	font-size: 19px;
-	font-weight: bold;
-	margin-top: 20px;
-}
-</style>
-</head>
-<body>
 	<br></br>
 	<div id="container" class="container">
 		<div class="content">
@@ -177,9 +164,9 @@ span.error {
 				<div class="join_box">
 					<form action="/member/register.kh" method="post">
 					
-						아이디 <input type="text" id="memberId" name="memberId" required> <span
-							class="guide ok" style="">이 아이디는 사용 가능합니다.</span> <span
-							class="guide error" style="">이 아이디는 이미 사용중입니다.</span> 
+						아이디 <input type="text" id="memberId" name="memberId" required> 
+							<span id="idCheck">이 아이디는 사용 가능합니다.</span> 
+							<span id="nonId">이 아이디는 이미 사용중입니다.</span> 
 							<br></br>
 							<label id="memberPwd" class="text-start">비밀번호</label> 
 							 
@@ -252,16 +239,14 @@ span.error {
 					/**
 					 *  회원가입 관련 처리
 					 */
-
 					/////////////////////////////아이디 ////////////////////////////
 					$(document).ready(function inputCheck() {
-						var chk = $("#memberId").val();
+						var chk = $("#email").val();
 						if (chk == "") {
 							$(".ok").hide();
 							$(".error").hide();
 						}
 					});
-
 					$("#memberId").on("blur", function() {
 						var memberId = $("#memberId").val();
 						$.ajax({
@@ -276,12 +261,12 @@ span.error {
 									// 아이디를 사용할 수 없습니다.
 									// $(".guide.ok").css("display", "none");
 									// $(".guide.ok").css("display", "inline-block");
-									$(".guide.ok").hide();
-									$(".guide.error").show();
+									$("#idCheck").css("display", "none");
+									$("#nonId").css("display", "block");
 								} else {
 									// 아이디를 사용할 수 있습니다.
-									$(".guide.error").hide();
-									$(".guide.ok").show();
+									$("#idCheck").css("display", "block");
+									$("#nonId").css("display", "none");
 								}
 							},
 							error : function() {
@@ -292,20 +277,16 @@ span.error {
 					////////////////////////////비밀번호 검사////////////////////////////////////////////////
 		
 					function pwCheck() {
-
 						const pw = document.getElementById('pw').value;
 						const pwResult = document
 								.getElementById('pw_input_result');
 						const exp2 = /^(?=.*[a-z])(?=.*\d)(?=.*[-_!*])[a-z\d-_!*]{8,20}$/;
-
 						if (pw.match(exp2)) {
 							pwResult.innerHTML = '조건이 만족 되었습니다';
 							pwResult.style.color = 'green';
-
 						} else {
 							pwResult.innerHTML = '8~20자리 소문자, 특수기호(-_!*), 숫자 포함해주세요';
 							pwResult.style.color = 'red';
-
 						}
 					}
 				/////////////이메일 정규식 검사/////////
@@ -321,7 +302,6 @@ span.error {
 								$(".error").hide();
 							}				
 						});	
-
 							 $("#email").on("blur", function() {
 									var memberEmail = $("#email").val();
 										$.ajax({
@@ -344,7 +324,6 @@ span.error {
 											}
 										});				
 							 });
-
 							 $(".email_auth_btn").click(function() {
 						var email = $('#email').val();
 						if (email == '') {
@@ -359,7 +338,6 @@ span.error {
 									"email" : email
 								},
 								success : function(data) {
-
 									alert("인증번호가 발송되었습니다.");
 									email_auth_cd = data;
 								},
@@ -368,9 +346,7 @@ span.error {
 								}
 							});
 						}
-
 					});
-
 					$("#email_auth_key").blur(function() {
 						if ($('#email_auth_key').val() != email_auth_cd || $('#email_auth_key').val() =='') {
 							alert("인증번호가 일치하지 않습니다.");
