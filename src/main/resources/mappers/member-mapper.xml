@@ -132,6 +132,11 @@
       </where>
    </select>
 
+   <select id="newResgisterChart" resultMap="memberResultMap">
+    SELECT
+
+   </select>
+
    <update id="increaseCouponCount">
    	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT+1 WHERE MEMBER_ID = #{memberId}
    </update>

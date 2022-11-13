@@ -197,7 +197,9 @@
                                         <div class="au-card m-b-30">
                                             <h3 class="title-2 m-b-40">신규회원가입</h3>
                                             <div class="au-card-inner">
-                                                <canvas id="꺾은선그래프"></canvas>
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -206,7 +208,11 @@
                                         <div class="au-card m-b-30">
                                             <div class="au-card-inner">
                                                 <h3 class="title-2 m-b-40">성비</h3>
-                                                <canvas id="파이차트"></canvas>
+                                                <div>
+
+
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +221,9 @@
                                            <div class="au-card m-b-30">
                                                <div class="au-card-inner">
                                                    <h3 class="title-2 m-b-40">숙소등록현황</h3>
-                                                   <canvas id="막대그래프"></canvas>
+
+
+
                                                </div>
                                            </div>
                                        </div>
@@ -224,7 +232,9 @@
                                         <div class="au-card m-b-30">
                                             <div class="au-card-inner">
                                                 <h3 class="title-2 m-b-40">결재금액</h3>
-                                                <canvas id="막대그래프"></canvas>
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -279,8 +289,22 @@
 
 <!-- chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<!-- vendor 부트스트랩 chart -->
-<%--<script src="/resources/assets/vendor/chartjs/Chart.bundle.min.js"></script>--%>
+
+<!-- 하이차트 -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="/js/highstock.js"></script>
+<script src="/js/highmaps.js"></script>
+<script src="/js/highcharts.js"></script>
+<script src="/js/modules/stock.js"></script>
+<script src="/js/modules/map.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
 </body>
 
 

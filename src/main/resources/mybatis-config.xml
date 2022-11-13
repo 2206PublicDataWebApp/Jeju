@@ -26,6 +26,7 @@
 		<typeAlias type="com.jeju.coupon.domain.Coupon" 	alias="Coupon"/>
 		<typeAlias type="com.jeju.coupon.domain.MyCoupon" 	alias="MyCoupon"/>
 		<typeAlias type="com.jeju.pay.domain.Pay" 	alias="Pay"/>
+		<typeAlias type="com.jeju.chart.domain.Chart" 	alias="Chart"/>
 	</typeAliases>
 
 	<!-- </typeAliases> -->
@@ -44,6 +45,7 @@
 		<mapper resource="mappers/coupon-mapper.xml"/>
 		<mapper resource="mappers/myCoupon-mapper.xml"/>
 		<mapper resource="mappers/jjim-mapper.xml"/>
+		<mapper resource="mappers/chart-mapper.xml"/>
 	</mappers>
 
 </configuration>

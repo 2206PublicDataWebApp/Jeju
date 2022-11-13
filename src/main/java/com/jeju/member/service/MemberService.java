@@ -45,4 +45,6 @@ public interface MemberService {
 
 	// 관리자페이지 회원검색
 	List<Member> searchAllByValue(String searchCondition, String searchValue);
+
+	List<Member> selectNewRegisterChart();
 }

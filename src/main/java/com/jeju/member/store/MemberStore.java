@@ -48,4 +48,6 @@ public interface MemberStore {
 
 	// 관리자페이지 회원검색
     List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue);
+
+	List<Member> selectNewRegisterChart(SqlSessionTemplate session);
 }

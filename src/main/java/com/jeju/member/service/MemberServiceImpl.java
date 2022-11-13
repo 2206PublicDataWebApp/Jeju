@@ -112,7 +112,14 @@ public class MemberServiceImpl implements MemberService {
 			return searchList;
 		}
 
-		// 관리자페이지 회원수 총합
+		// 신규회원 차트 조회
+	@Override
+	public List<Member> selectNewRegisterChart() {
+		List<Member> newResgisterChart = mStore.selectNewRegisterChart(session);
+		return newResgisterChart;
+	}
+
+	// 관리자페이지 회원수 총합
 		@Override
 		public int countAllMember(String searchCondition, String searchValue) {
 			int count = mStore.countAllMember(session, searchCondition, searchValue);

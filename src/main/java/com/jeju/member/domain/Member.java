@@ -28,6 +28,12 @@ public class Member {
 	private String mStatus;
 	private int memberNo;
 	private int couponCount;
+
+
+	private int count;
+
+
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -142,6 +148,14 @@ public class Member {
 	public void setCouponCount(int couponCount) {
 		this.couponCount = couponCount;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public Member() {
 
 		this.memberId = memberId;
@@ -163,6 +177,7 @@ public class Member {
 		this.mStatus = mStatus;
 		this.memberNo = memberNo;
 		this.couponCount = couponCount;
+		this.count = count;
 	}
 
 

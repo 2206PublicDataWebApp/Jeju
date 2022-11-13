@@ -112,6 +112,13 @@ public class MemberStoreLogic implements MemberStore{
 		return searchList;
 	}
 
+	// 신규회원 차트 조회
+	@Override
+	public List<Member> selectNewRegisterChart(SqlSessionTemplate session) {
+		List<Member> newResgisterChart = session.selectList("MemberMapper.newResgisterChart");
+		return newResgisterChart;
+	}
+
 	// 관리자페이지 회원수 총합
 	@Override
 	public int countAllMember(SqlSessionTemplate session, String searchCondition, String searchValue) {
