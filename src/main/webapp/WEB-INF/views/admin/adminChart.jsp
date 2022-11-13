@@ -186,24 +186,82 @@
         </header>
         <!-- END HEADER DESKTOP-->
 
+        <!-- 차트 시작 -->
+        <script src="${pageContext.request.contextPath}/js/highChart/highcharts.js"></script>
+
+        <script type="text/javascript">
+
+            var todayInfo = null;
+
+            $(document).ready(function() {
+                var chart = Highcharts.chart('container', {
+                    title: {
+                        text: '요일별 신규회원가입'
+                    },
+                    subtitle: {
+                        text: '신규회원가입'
+                    },
+
+                    xAxis: {
+                        categories: getPersonCnt("cateArr"),
+                    },
+
+                    series: [{
+                        type: 'column',
+                        colorByPoint: true,
+                        data: getPersonCnt("data"),
+                        /* data: getPersonCnt("data"), */
+                        showInLegend: false
+                    }]
+
+                });
+
+                function getPersonCnt(type){
+                    if(todayInfo==null) todayInfo=${chartJSON};
+                    var todayInfoMap = resultProcLineChart(todayInfo);
+                    if(todayInfoMap==null) return null;
+                    if(type=="data"){
+                        return todayInfoMap.get("data");
+                    }else{
+                        return todayInfoMap.get("cateArr");
+                    }
+                }
+
+                function resultProcLineChart($obj){
+                    if($obj==null) return null;
+                    var resMap = new JqMap();
+                    var cateArr = new Array();
+                    var dataArr = new Array();
+
+                    for(var k in $obj){
+                        var xobj =$obj[k];
+                        cateArr.push(xobj.d);
+                        dataArr.push(xobj.y);
+                    }
+                    resMap.put("cateArr",cateArr);
+                    resMap.put("data",dataArr);
+                    return resMap;
+                }
+            });
+
+        </script>
+        <!-- 차트 끝 -->
+
+            var todayInfo = null;
+        </script>
+
         <div class="main-content">
                         <div class="section__content section__content--p30">
                             <div class="container-fluid">
                                 <div class="row">
-
-
                                     <div class="col-lg-6">
-
                                         <div class="au-card m-b-30">
                                             <h3 class="title-2 m-b-40">신규회원가입</h3>
                                             <div class="au-card-inner">
-
-
-
+                                                <div id="container" style="width:500px; height:400px;"></div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <div class="au-card m-b-30">
                                             <div class="au-card-inner">

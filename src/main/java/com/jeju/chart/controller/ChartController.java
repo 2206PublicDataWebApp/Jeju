@@ -31,22 +31,18 @@ public class ChartController {
         logger.info("관리자페이지 차트 접속시도");
 
         // 신규가입현황 차트 조회
-        List<Member> newResgisterChart = memberService.selectNewRegisterChart(); // ??
-        JSONArray newRegisterChartArray = new JSONArray();
-        JSONObject newRegisterChartObject = new JSONObject();
-        for(Member member : newResgisterChart) {
-            newRegisterChartObject.put("y", member.getCount());
-            newRegisterChartObject.put("d", member.getEnrollDate());
-            newRegisterChartArray.add(newRegisterChartObject);
+        List<Member> result  = memberService.selectNewRegisterChart();
+        JSONArray cJsonArr = new JSONArray();
+        JSONObject cJsonObj = new JSONObject();
+        for(Member member : result ) {
+            cJsonObj.put("y", member.getCount());
+            cJsonObj.put("d", member.getEnrollDate());
+            cJsonArr.add(cJsonObj);
         }
-        modelAndView.addObject("chartJSON", newRegisterChartArray);
+        modelAndView.addObject("chartJSON", cJsonArr);
         //
-
 
         modelAndView.setViewName("/admin/adminChart");
         return modelAndView;
         }
-
-
-
 }

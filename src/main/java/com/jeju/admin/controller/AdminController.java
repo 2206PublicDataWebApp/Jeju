@@ -11,6 +11,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +28,8 @@ import com.jeju.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 @PreAuthorize("hasRole('ADMIN')")
 @EnableWebSecurity
@@ -56,9 +59,26 @@ public class AdminController {
     @GetMapping("/adminPage")
     public ModelAndView showAdminPage
                         (ModelAndView modelAndView,
+                         HttpSession httpSession,
                          @RequestParam(value = "page", required=false) Integer page
                          ){
         logger.info("관리자  일반페이지 접속 시도 {}", modelAndView);
+
+        /*Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
+
+        if(ObjectUtils.isEmpty(member)){
+            String errorMsg = "권한이 없습니다";
+            modelAndView.addObject("errorMsg", errorMsg);
+            modelAndView.setViewName("/member/login");
+            return modelAndView;
+        }
+        if(!"1".equals(member.getAdminCheck())){
+            String errorMsg = "권한이 없습니다";
+            modelAndView.addObject("errorMsg", errorMsg);
+            modelAndView.setViewName("/pension/list");
+        return modelAndView;
+        }
+*/
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();

@@ -133,7 +133,7 @@
    </select>
 
    <select id="newResgisterChart" resultMap="memberResultMap">
-    SELECT
+    SELECT ENROLL_DATE, COUNT(*) FROM MEMBER_TBL GROUP BY ENROLL_DATE
 
    </select>
 

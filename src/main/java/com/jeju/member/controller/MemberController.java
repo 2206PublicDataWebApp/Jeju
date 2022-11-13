@@ -90,7 +90,7 @@ public class MemberController {
 	}
 
 	// 로그인 기능
-	@RequestMapping(value="/member/login", method=RequestMethod.GET)
+	@RequestMapping(value="/member/login", method=RequestMethod.POST)
 	public ModelAndView memberLogin(
 			@RequestParam("memberId") String memberId
 			,@RequestParam("memberPwd") String memberPwd

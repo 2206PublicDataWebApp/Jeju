@@ -737,7 +737,15 @@
    function myCoupon() {
       location.href="/coupon/couponList";
    }
+
 </script>
+
+<c:if test="${errorMsg}">
+	<script>
+		alert("${errorMsg}");
+	</script>
+</c:if>
+
 </body>
 <script src="/resources/js/jquery-3.6.1.min.js"></script>
 <script src="/resources/assets/js/popper.min.js"></script>

@@ -78,7 +78,7 @@
 
    
    <div class="input-box">
-         <form action="/member/login" method="get">
+         <form action="/member/login" method="post">
          	<input type="hidden" name="pensionNo" value="${pensionNo }">
 <!--             <table align="right"> -->
 <!--                <tr> -->
@@ -113,8 +113,11 @@
 
    
    </div>
-   
-   <script>
 
-   </script>
+   <c:if test="${errorMsg}">
+       <script>
+           alert("${errorMsg}");
+       </script>
+   </c:if>
+
 </body>
