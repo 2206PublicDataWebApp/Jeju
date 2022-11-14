@@ -89,6 +89,12 @@ public class CouponStoreLogic implements CouponStore{
 
 	@Override
 	public int updateStatus(SqlSession session, MyCoupon myCoupon) {
+		int result = session.update("MyCouponMapper.updateStatusOrigin", myCoupon);
+		return result;
+	}
+
+	@Override
+	public int updateCouponStatus(SqlSession session, MyCoupon myCoupon) {
 		int result = session.update("MyCouponMapper.updateStatus", myCoupon);
 		return result;
 	}

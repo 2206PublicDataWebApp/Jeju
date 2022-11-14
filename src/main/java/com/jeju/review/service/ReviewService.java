@@ -25,4 +25,7 @@ public interface ReviewService {
 	void registerReview(Review review);
 	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
 	void modifyReviewCheck(Review review);
+
+	//관리자페이지 페이징용 리뷰조회
+	List<Review> pagingShowAllReview(int currentPage, int reviewLimit);
 }

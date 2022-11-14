@@ -12,6 +12,10 @@
 		<result property="roomFileName" 	column="ROOM_FILE_NAME"/>
 	</resultMap>
 	
+	<select id="selectAttach" resultMap="roomAttachResultMap">
+		SELECT ROOM_NO, ROOM_PATH, ROOM_FILE_RENAME FROM ROOM_ATTACH WHERE ROOM_NO = #{roomNo}
+	</select>
+	
 	<insert id="insertRoomAttach">
 		INSERT INTO ROOM_ATTACH
 		VALUES(#{roomPath},DEFAULT,1,#{roomNo},#{roomFileRename},#{roomFileName})

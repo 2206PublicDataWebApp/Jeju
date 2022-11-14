@@ -46,67 +46,8 @@
 
 	</style>
 </head>
-    <body>
-         <header class="container-flui">
-		<div class="header-top">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-md-4 d-none d-md-block mail-detail"></div>
-					<div class="col-md-4 logo">
-						<img src="/resources/assets/images/logo.png" alt=""> <a
-							data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i
-							class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-					</div>
-					
-					<div class="col-md-4 d-none d-md-block social-link ">
-						<c:if test="${empty sessionScope.loginUser  }">
-							<div class="login-area">
-								<table align="right">
-									<tr>
-										<td rowspan="2">
-											<button onclick="location.href='/member/loginView.kh'"
-												class="btn btn-primary">로그인</button>
-											<button onclick="location.href='/member/joinView.kh'"
-												class="btn btn-secondary">회원가입</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</c:if>
-						<c:if test="${not empty sessionScope.loginUser }">
-							<table align="right">
-								<tr>
-									<td><a href="/">${sessionScope.loginUser.memberId }</a>님
-										환영합니다</td>
-								</tr>
-								<tr>
-									<td><a href="/member/logout.kh">로그아웃</a></td>
-								</tr>
-							</table>
-						</c:if>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div id="menu-jk" class="header-nav d-none d-md-block">
-               <div class="container">
-                   <div class="row nav-row">
-                       <ul>
-                           <li><a href="/home">홈</a></li>
-                           <li><a href="/notice/list">공지사항</a></li>
-                           <li><a href="/pension/list">숙소 리스트</a></li>
-                           <li><a href="/community/chat">커뮤니티</a></li>
-                           <li><a href="/mypage/myPage">마이페이지</a></li>
-                           <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
-                       </ul>
-                   </div>
-               </div>
-           </div>
-        </header>      
-
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
@@ -118,9 +59,7 @@
             </div>
         </div>
     </div>
-
     <div class="row contact-rooo no-margin">
-        
         <div class="container">
         	<br>
             <hr>
@@ -159,9 +98,27 @@
                     <div  class="row cont-row info3">
                         <div  class="col-sm-3 reserve"><label>등급 할인</label></div>
                     </div>
-                    <div class="myGrade">나의 등급(플래티넘)</div>
-                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : <span id="price1">-300,000원</span></div>
-                    <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
+                    <div class="myGrade">나의 등급(
+                    <c:if test="${empty mOne }">없음</c:if>                    
+                    <c:if test="${!empty mOne }">
+                    <c:if test="${mOne.useCount >= 0 && mOne.useCount <= 2}">브론즈</c:if>
+                    <c:if test="${mOne.useCount >= 3 && mOne.useCount <= 5}">실버</c:if>
+                    <c:if test="${mOne.useCount >= 6 && mOne.useCount <= 10}">골드</c:if>
+                    <c:if test="${mOne.useCount >= 11 && mOne.useCount <= 15}">플래티넘</c:if>
+                    <c:if test="${mOne.useCount >= 16 && mOne.useCount <= 20}">다이아</c:if>
+                    </c:if>) 
+                    </div>
+                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : 
+	                    <c:if test="${empty mOne }"><span id="price1">0원</span></c:if>                    
+		                <c:if test="${!empty mOne }">
+		                    <c:if test="${mOne.useCount >= 0 && mOne.useCount <= 2}"><span id="price1">2000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 3 && mOne.useCount <= 5}"><span id="price1">3000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 6 && mOne.useCount <= 10}"><span id="price1">5000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 11 && mOne.useCount <= 15}"><span id="price1">7000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 16 && mOne.useCount <= 20}"><span id="price1">10000원</span></c:if>
+	                    </c:if>   
+                    </div>
+                    <button class="btn btn-info btn-sm" style="font-size: 8px;" onclick="gradeApply();">할인 적용</button>
                     <br>
                     <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
                     <button class="btn btn-info btn-sm follower" id="couponApply" style="font-size: 8px;">쿠폰 선택</button>
@@ -200,11 +157,7 @@
 							</div>
 						</div>
 					</div>
-
-
-
-					<br>
-                    
+					<br>                    
                		<c:if test="${sessionScope.loginUser eq null }">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
@@ -249,7 +202,7 @@
                       <p class="card-text">${endDate1 }월 ${endDate2 }일 11:00시</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price" value="${price }">${price }원</h5>
+                      <h5 class="card-title" id="price" value="${price }">${price}원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
@@ -278,7 +231,7 @@
 				<div>
 					<div class="content">
 					<p>
-<textarea style="font-size: 4px; width : 600px; height : 100px;" >						
+<textarea style="font-size: 4px; width : 600px; height : 100px;">						
 Ⅰ. 개인정보의 수집 및 이용 동의서
  - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
 ① 개인정보 수집 항목 및 수집·이용 목적
@@ -340,9 +293,7 @@
 유연한 장기 숙박 환불 정책: 게스트는 체크인 30일 전까지 취소한 경우에만 전액 환불을 받을 수 있습니다. 그 후에 취소하는 경우, 이미 숙박한 날짜의 숙박비 전액과 30일만큼의 추가 숙박비가 호스트에게 지급됩니다. 게스트가 예약을 취소하는 시점에 남은 숙박 일수가 30일 미만이라면, 남은 숙박일 전체에 대한 숙박비가 호스트에게 지급됩니다.
 엄격한 장기 숙박 환불 정책: 게스트는 예약 후 48시간 이내 및 체크인 28일 전까지 취소한 경우에만 전액 환불을 받을 수 있습니다. 그 이후에 예약을 취소하는 경우, 이미 숙박한 날짜의 숙박비와 더불어 취소일로부터 30일만큼의 추가 숙박비가 호스트에게 지급됩니다. 남은 숙박 일수가 30일 미만인 예약을 취소하면, 남은 숙박 일수에 대한 숙박비 100%가 호스트에게 지급됩니다.			
 </textarea>
-						</p>
-
-
+		  			</p>
 						</div>
 				</div>
 			</fieldset>				
@@ -384,50 +335,10 @@
 			</fieldset>
 			</div>	
 		</ul>
-                  
             </div>
-            
         </div>
-
     </div>
-   <footer>
-	    <div class="container">
-	        <div class="row">
-	            <div class="col-md-3 fotblog">
-	                <p class="fab fa-instagram"></p>
-	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Instagram</a> <br>
-	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EB%A7%9B%EC%A7%91/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Restaurant</a> <br>
-	                <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EC%B9%B4%ED%8E%98/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Cafe</a>
-	            </div>
-	            <div class="col-md-3 fotblog">
-	                <p class="fab fa-facebook-square"></p>
-	                <a href="https://www.facebook.com/happyjejudo" style="color: white;" target="_blank">Facebook</a>
-	            </div>
-	            <div class="col-md-3 glink">
-	                <p class="fab fa-twitter-square"></p>
-	                <a href="https://twitter.com/happyjejudo" style="color: white;" target="_blank">Twiter</a>
-	            </div>
-	            <div class="col-md-3 tags">
-	                <h2>Contect</h2>
-	                <p>email@email.com</p>
-	            </div>
-	        </div>
-	    </div>
-	</footer>
-		<div class="copy">
-            <div class="container">
-                <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>              
-                <span>
-	                <a><i class="fab fa-github"></i></a>
-	                <a><i class="fab fa-google-plus-g"></i></a>
-	                <a><i class="fab fa-pinterest-p"></i></a>
-	                <a><i class="fab fa-twitter"></i></a>
-	                <a><i class="fab fa-facebook-f"></i></a>
-        		</span>
-            </div>
-
-        </div>
-   
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     </body>
      <script>
      function checkAll() {
@@ -437,10 +348,10 @@
     			$("input[type=checkbox]").prop("checked", false);
     		}
      }
-     
+
+//       && $("#phoneDoubleChk").val() == "true"
      var codeBtn2 = "";     
-     //바로 결제
-//      $("#phoneDoubleChk").val() == "true"
+     //바로 결제      
      $("#button1").click(function(){
  	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
  	    		var price1 = $("#price").text().replace(",", "");
@@ -477,7 +388,7 @@
  	     		        	},
  	     		        	type : "post",
  	     		        	success : function(result) {
- 	     		        		alert(result);
+ 	     		        		var phone = $("#phone").val();
  	     		        		$.ajax({
  	     		        			url : "/reservation/success",
  	     		        			data : {
@@ -487,14 +398,15 @@
  	     		        				"rePrice" : rsp.paid_amount,
  	     		        				"reStartDate" : '${startDate}',
  	     		        				"reEndDate" : '${endDate}',
- 	     		        				"couponCode" : codeBtn2
+ 	     		        				"couponCode" : codeBtn2,
+ 	     		        				"phone" : phone
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
  	     		        				//쿠폰을 썼을 경우만 실행
  	     		        				if(codeBtn2 != "") {
  	     		        					$.ajax({
- 	    	     		   						url : "/coupon/updateStatus",
+ 	    	     		   						url : "/coupon/updateCouponStatus",
  	    	     		   						data : {
  	    	     		   							"couponCode" : codeBtn2
  	    	     		   						},
@@ -505,9 +417,9 @@
  	    	     		   							}
  	    	     		   						}
  	    	     		   					});
- 	     		        				}
+ 	     		        				}	     		        					
  	     		        				alert("예약이 완료되었습니다.");
- 	     		        				location.href = "/pension/list";
+ 	     		        				location.href = "/";
  	     		        			},
  	     		        			error : function() {
  	    	     		        		alert("예약 등록 실패!");
@@ -523,7 +435,7 @@
  	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
  	     		         msg += '에러내용 : ' + rsp.error_msg;
  	     		       alert(msg);
- 	     		     location.href = "/pension/list";
+ 	     		     location.href = "/";
  	     		    }	
 //  	     		  location.href = "/pension/list";
  	     		});	
@@ -575,7 +487,7 @@
     			 	success : function(result) {
     			 		if(result == "1") {
     			 			alert("이미 결제해야할 예약건이 있습니다! 결제 완료 후 다시 시도해주세요.");
-    			 			location.href="/pension/list";
+    			 			location.href="/";
     			 		}else {
     			 			 if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null){
     		   	        		 $.ajax({
@@ -597,8 +509,8 @@
     		   	   	        				console.log("keyValue : " + keyValue);
 //												10분은 60만		
 //												1분은   6만 	
-    		   								var tts = 60000;	//3분
-
+     		   								var tts = 60000;	//1분
+// 											var tts = 1800000;
     		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
     		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장
     		   		        		 	    	const date = new Date();
@@ -620,7 +532,7 @@
     		   									//쿠폰을 썼을 경우만 실행
     	 	     		        				if(codeBtn2 != "") {
     	 	     		        					$.ajax({
-    	 	    	     		   						url : "/coupon/updateStatus",
+    	 	    	     		   						url : "/coupon/updateCouponStatus",
     	 	    	     		   						data : {
     	 	    	     		   							"couponCode" : codeBtn2
     	 	    	     		   						},
@@ -633,7 +545,7 @@
     	 	    	     		   					});
     	 	     		        				}
     		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");	
-    		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
+    		   	   	        				location.href = "/";   	     		    				   	     		    				
     		   	        			}
     		   	        		 });
     		   	        	 }else {
@@ -656,11 +568,11 @@
     		   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
     		   	  				$("#successNameChk").css("color", "red");
     		   	  	    	}
-//    		   	   	    	if($("#phoneDoubleChk").val() != "true"){
-//    		   	   	    		console.log($("#phoneDoubleChk").val());
-//    		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-//    		   	   				$(".successPhoneChk").css("color", "red");	    		
-//    		   	   	    	}
+// 	   		   	   	    	if($("#phoneDoubleChk").val() != "true"){
+// 	   		   	   	    		console.log($("#phoneDoubleChk").val());
+// 	   		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+// 	   		   	   				$(".successPhoneChk").css("color", "red");	    		
+// 	   		   	   	    	}
     		   	  	    	return false
     		   	        	 }
     			 		}
@@ -669,9 +581,6 @@
     			}else {
     				alert("로그인 후 이용가능합니다.");
     			}
-    		},
-    		error : function() {
-    			alert("왜안돼");
     		}
     	 });
      });
@@ -786,7 +695,7 @@
 			});
      });
 
-// 	    var code2 = "";
+// 	     var code2 = "";
 // 	    $("#phoneChk").click(function(){
 // 	    	if($("#phone").val() != "") {
 // 	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
@@ -843,13 +752,32 @@
 	    	}
 	    }
 		
+		var gradeCount = 0;
+		function gradeApply() {
+			if(gradeCount != 1) {
+				var grade = $("#price1").text();
+				console.log(gradePrice);
+				var regex = /[^0-9]/g;
+				var gradePrice = grade.replace(regex, "");	// 원빼고 숫자만 추출
+				
+				var originPrice = $("#price").text();
+				var changePrice = originPrice.replace(regex, "");
+				var result = changePrice - gradePrice;
+				var lastResult = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');			
+				gradeCount = 1;
+				$("#price").text("");
+				$("#price").text(lastResult + "원");		
+			}				
+		}
+		
+		
 		function applyCoupon(elem, code) {
  			if(codeBtn2 != code) {
 				$.ajax({
 					url : "/applyCoupon",
 					data : {
 						"salePrice" : elem.value,
-						"rePrice" : '${price}'
+						"rePrice" : $("#price").text()
 					},
 					type : "post",
 					success : function(result) {
@@ -870,17 +798,17 @@
 	 					$("#price").text(result + "원");
 	 					$("#price2").text("");
 	 					$("#price2").text(elem.value + "원 할인");	
-// 	 					$(".codeBtn").attr('disabled', true);
 						$("#couponCancel").show();
 						$("#couponApply").hide();
-	 					alert("쿠폰이 적용되었습니다.");				
+	 					alert("쿠폰이 적용되었습니다.");
+	 					$("#modalClose").trigger("click");
 					}
 				});
  			}else {
  				alert("이미 적용하셨습니다.");
  			}	
 		}
-		
+	
 		var originPrice = '${price}';
 		
 		

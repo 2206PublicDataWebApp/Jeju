@@ -111,4 +111,52 @@ public class ReservationStoreLogic implements ReservationStore{
 		return cList;
 	}
 
+	@Override
+	public Reservation selectNonMember(SqlSession session, Reservation reservation) {
+		Reservation reserveInfo = session.selectOne("ReservationMapper.selectNonMemberReserve", reservation);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReserve(SqlSession session, Reservation reservation) {
+		int result = session.delete("ReservationMapper.deleteReservation", reservation);
+		return result;
+	}
+
+	@Override
+	public Reservation selectReservationInfo(SqlSession session, Integer reservationNo) {
+		Reservation reserveInfo = session.selectOne("ReservationMapper.selectOneReservation", reservationNo);
+		return reserveInfo;
+	}
+
+	@Override
+	public int deleteReservation(SqlSession session, Integer reservationNo) {
+		int result = session.delete("ReservationMapper.deleteReserve",reservationNo);
+		return result;
+	}
+
+	@Override
+	public Reservation selectCouponCode(SqlSession session, Integer reservationNo) {
+		Reservation couponCode = session.selectOne("ReservationMapper.selectCouponCode", reservationNo);
+		return couponCode;
+	}
+
+	@Override
+	public int upCouponCount(SqlSession session, Reservation reservation) {
+		int result = session.update("MyCouponMapper.updateStatusOrigin", reservation);
+		return result;
+	}
+
+	@Override
+	public int updateStatus(SqlSession session, Reservation reservation) {
+		int result = session.update("MyCouponMapper.updateStatus", reservation);
+		return result;
+	}
+
+	@Override
+	public Member selectOneByMember(SqlSession session, String memberId) {
+		Member mOne = session.selectOne("MemberMapper.selectOneByMember", memberId);
+		return mOne;
+	}
+
 }

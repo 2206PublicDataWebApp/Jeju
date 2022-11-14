@@ -18,34 +18,7 @@
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
     <body>
-        <header class="container-flui">
-           <div class="header-top">
-               <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 d-none d-md-block mail-detail">
-                        </div>
-                        <div class="col-md-4 logo">
-                            <img src="/resources/assets/images/logo.png" alt="">
-                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div    div id="menu-jk" class="header-nav d-none d-md-block">
-                <div class="container">
-                    <div class="row nav-row">
-                        <ul>
-                            <li><a href="/home">홈</a></li>
-                            <li><a href="/notice/list">공지사항</a></li>
-                            <li><a href="/pension/list">숙소 리스트</a></li>
-                            <li><a href="destinations.html">커뮤니티</a></li>
-                            <li><a href="/mypage/myPage">마이페이지</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> 
-        </header>   
-        
+		<jsp:include page="/WEB-INF/views/common/header.jsp"/>        
  <!--  ************************* Page Title Starts Here ************************** -->
         <div class="page-nav no-margin row">
             <div class="container">
@@ -121,36 +94,15 @@
         </c:if>
         <br>
         <!-- 관리자 ID 체크 후 버튼 뿌려주기 -->
-        <div>
-            <div style="text-align: center; margin-bottom: 100px;">
-                <a class="btn btn-outline-success" href="/notice/writeForm" >공지사항 작성</a>
-            </div>
-        </div>   
+        <c:if test="${sessionScope.loginUser.memberId != admin }">
+	        <div>
+	            <div style="text-align: center; margin-bottom: 100px;">
+	                <a class="btn btn-outline-success" href="/notice/writeForm" >공지사항 작성</a>
+	            </div>
+	        </div>   
+        </c:if>
 <!--*************** Footer  Starts Here *************** -->   
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 fotblog">
-                        <p class="fab fa-instagram"></p>
-                        <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Instagram</a> <br>
-                        <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EB%A7%9B%EC%A7%91/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Restaurant</a> <br>
-                        <a href="https://www.instagram.com/explore/tags/%EC%A0%9C%EC%A3%BC%EB%8F%84%EC%B9%B4%ED%8E%98/?next=%2Fspecial_jejudo%2F" style="color: white;" target="_blank">Cafe</a>
-                    </div>
-                    <div class="col-md-3 fotblog">
-                        <p class="fab fa-facebook-square"></p>
-                        <a href="https://www.facebook.com/happyjejudo" style="color: white;" target="_blank">Facebook</a>
-                    </div>
-                    <div class="col-md-3 glink">
-                        <p class="fab fa-twitter-square"></p>
-                        <a href="https://twitter.com/happyjejudo" style="color: white;" target="_blank">Twiter</a>
-                    </div>
-                    <div class="col-md-3 tags">
-                        <h2>Contect</h2>
-                        <p>email@email.com</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+       <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     </body>
     <script src="/resources/assets/js/jquery-3.2.1.min.js"></script>
     <script src="/resources/assets/js/popper.min.js"></script>

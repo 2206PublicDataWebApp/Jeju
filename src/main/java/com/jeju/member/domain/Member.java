@@ -1,4 +1,5 @@
 package com.jeju.member.domain;
+import java.sql.Date;
 import lombok.*;
 
 import java.sql.Date;
@@ -20,16 +21,16 @@ public class Member {
 	private Date updateDate;
 	private String useCount;
 	private String gender;
-	private Date birthDate;
+	private String birthDate;
 	private String mStatus;
 	private int memberNo;
 	private int couponCount;
 
-	public Member() {}
+	public Member () {}
 
 	public Member(String memberId, String memberPwd, String memberEmail, String adminCheck, String memberName,
 			String memberPhone, String memberAddr, String phone2, String phone3, String authEmail, String authToken,
-			Date enrollDate, Date updateDate, String useCount, String gender, Date birthDate, String mStatus,
+			Date enrollDate, Date updateDate, String useCount, String gender, String birthDate, String mStatus,
 			int memberNo, int couponCount) {
 		this.memberId = memberId;
 		this.memberPwd = memberPwd;
@@ -51,10 +52,6 @@ public class Member {
 		this.memberNo = memberNo;
 		this.couponCount = couponCount;
 	}
-
-	
-
-
 
 	public String getMemberId() {
 		return memberId;
@@ -176,11 +173,11 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -208,10 +205,5 @@ public class Member {
 		this.couponCount = couponCount;
 	}
 
-	public String setAddressBySize(int size){
-		String address = getMemberAddr();
-		address.substring(0,size);
-		address = address + "...";
-		return address;
-	}
+
 }

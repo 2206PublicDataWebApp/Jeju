@@ -99,4 +99,10 @@ public class CouponServiceImpl implements CouponService{
 		return result;
 	}
 
+	@Override
+	public int updateCouponStatus(MyCoupon myCoupon) {
+		int result = cStore.updateCouponStatus(session, myCoupon);
+		return result;
+	}
+
 }

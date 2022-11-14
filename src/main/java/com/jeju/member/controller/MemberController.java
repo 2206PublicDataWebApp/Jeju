@@ -1,6 +1,6 @@
-
 package com.jeju.member.controller;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -29,7 +29,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 
-
 	// 회원가입할때 회원가입 페이지
 	@RequestMapping(value="/member/joinView.kh", method=RequestMethod.GET)
 	public String memberJoinView(Model model) {
@@ -48,6 +47,15 @@ public class MemberController {
 		return "member/login";
 		// /WEB-INF/views/member/join.jsp
 	}
+	// 찜 login 페이지
+		@RequestMapping(value="/member/loginView.kh2", method=RequestMethod.GET)
+		public ModelAndView memberLoginView2(
+				ModelAndView mv
+				,@RequestParam("pensionNo") Integer pensionNo) {
+			mv.addObject("pensionNo", pensionNo);
+			mv.setViewName("member/login");
+			return mv;
+		}
 	//  회원정보를 DB에 저장하는 URL
 	@RequestMapping(value="/member/register.kh", method=RequestMethod.POST)
 	public ModelAndView memberJoin(
@@ -58,6 +66,8 @@ public class MemberController {
 //			, Model model
 			, ModelAndView mv) {
 		try {
+
+			System.out.println("주의 이름은");
 			member.setMemberAddr(post + "," + address1 + "," + address2);
 			System.out.println(member.getMemberAddr());
 			int result = mService.registerMember(member);
@@ -78,6 +88,7 @@ public class MemberController {
 	public ModelAndView memberLogin(
 			@RequestParam("memberId") String memberId
 			,@RequestParam("memberPwd") String memberPwd
+			,@RequestParam(value="pensionNo", required = false) Integer pensionNo
 			, ModelAndView mv
 			, HttpServletRequest request
 			,HttpServletResponse response) {
@@ -94,9 +105,11 @@ public class MemberController {
 				HttpSession session = request.getSession();
 
 				session.setAttribute("loginUser", loginUser);
-
-				mv.setViewName("redirect:/home");
-
+				if(pensionNo != null) {
+					mv.setViewName("redirect:/pension/detailView2?pensionNo=" + pensionNo);
+				}else {
+					mv.setViewName("redirect:/home");
+				}
 			}else {
 				mv.addObject("msg", "회원정보를 찾을 수 없습니다.");
 				mv.setViewName("common/errorPage");
@@ -112,14 +125,14 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@ResponseBody
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
-	public String emailAuth(String email) {
+	public String emailAuth(@RequestParam("email") String email) {
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
 
 		/* 이메일 보내기 */
 		String setFrom = "lhr7517@naver.com";
 		String toMail = email;
-		String title = "회원가입 인증 이메일 입니다.";
+		String title = " 인증 이메일 입니다.";
 		String content =
 				"홈페이지를 방문해주셔서 감사합니다." +
 						"<br><br>" +
@@ -159,7 +172,7 @@ public class MemberController {
 			mv.addObject("msg", "로그아웃 실패");
 			mv.setViewName("common/errorPage");
 		}
-		
+
 		return mv;
 	}
 
@@ -171,7 +184,7 @@ public class MemberController {
 		Member memberInfo = mService.selectMemberInfo(memberId);
 		mv.addObject("member", member);
 		mv.setViewName("mypage/modify");
-		
+
 		return mv;
 		// /WEB-INF/views/member/join.jsp
 	}
@@ -214,6 +227,7 @@ public class MemberController {
 			String memberId = member.getMemberId();
 			int result = mService.removeMember(memberId);
 //			return "redirect:/member/logout.kh";
+
 			mv.setViewName("redirect:/member/logout.kh");
 		} catch (Exception e) {
 //			model.addAttribute("msg", e.toString());
@@ -255,15 +269,20 @@ public class MemberController {
 		}
 		return mv;
 	}
-	
+
 	//아이디 중복검사
 	@ResponseBody
-	@RequestMapping(value="/idChk",method=RequestMethod.POST)
-	public String idChk(
-			@RequestParam("memberId") String memberId) {
-		int result = mService.idChk(memberId);
+	@RequestMapping(value="/member/checkDupEmail.kh", method=RequestMethod.GET)
+	public String duplicateEmailCheck(
+			@RequestParam("memberEmail") String memberEmail) {
+		// 데이터가 있으면 객체 or 1 or true
+		// 데이터가 없으면 null or 0 or false
+		int result = mService.checkDupEmail(memberEmail);
+//			return result+"";
 		return String.valueOf(result);
-}
+	}
+
+	//아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/member/checkDupId.kh", method=RequestMethod.GET)
 	public String duplicateIdCheck(
@@ -274,22 +293,68 @@ public class MemberController {
 //			return result+"";
 		return String.valueOf(result);
 	}
-	
+	//아이디 찾기
+	@RequestMapping(value="/member/findId",method=RequestMethod.GET)
+	public String findId() {
+		return "/member/findId";
+	}
+
+	//어아디 찾기 결과창
+	@RequestMapping(value="/member/findIdResult", method=RequestMethod.POST)
+	public ModelAndView findIdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findIdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findIdResult");
+		return mv;
+	}
+
+	//비번 찾기 페이지
+	@RequestMapping("/member/findPwd")
+	public String findPwd() {
+		return "/member/findPwd";
+	}
+	//비번 찾기 결과창
+	@RequestMapping(value="/member/findPwdResult", method=RequestMethod.POST)
+	public ModelAndView findPwdResult(
+			ModelAndView mv
+			,@RequestParam("memberEmail") String memberEmail) {
+		List<Member> sList = mService.findPwdByEmail(memberEmail);
+		mv.addObject("sList", sList);
+		mv.setViewName("/member/findPwdResult");
+		return mv;
+	}
 	// 마이페이지로 이동
 	@RequestMapping(value="/mypage/myPage", method=RequestMethod.GET)
 	public String myPageView() {
 		return "/mypage/myPageView";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/member/save", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
-	public String saveMessage() {
-		String chk = "sdfsadf";
-		return chk;
-	}
-	
-	
+
+
+
+
+
+//	//아이디 찾는화면
+//	@RequestMapping(value="/member/findId.kh", method=RequestMethod.GET)
+//	public String findId() {
+//		return "member/findId";
+//	}
+	//아이디를 찾아서 보여주는 컨트롤러
+//	@RequestMapping(value="/member/findMember", method=RequestMethod.POST)
+//	public ModelAndView findMember(
+//		@RequestParam("memberName") String memberName
+//		,@RequestParam("memberPwd") String memberPwd
+//		, ModelAndView mv
+//		, HttpServletRequest request
+//		,HttpServletResponse response) {
+//		try
+//
+//		return mv;
+//	}
+
 }
+
 
 
 

@@ -18,12 +18,14 @@ public class Reservation {
 	private Date rePayDate;
 	private int reviewCheck;
 	private String couponCode;
+	private String reservationCode;
 
 	public Reservation() {}
 
 	public Reservation(Integer reservationNo, String memberId, String rStatus, Integer roomNo, Integer rePensionNo,
 			int useHistory, String rePrice, String reservationName, String reFilePath, String rePensionName,
-			Date reStartDate, Date reEndDate, Date rePayDate, int reviewCheck, String couponCode) {
+			Date reStartDate, Date reEndDate, Date rePayDate, int reviewCheck, String couponCode,
+			String reservationCode) {
 		this.reservationNo = reservationNo;
 		this.memberId = memberId;
 		this.rStatus = rStatus;
@@ -39,6 +41,7 @@ public class Reservation {
 		this.rePayDate = rePayDate;
 		this.reviewCheck = reviewCheck;
 		this.couponCode = couponCode;
+		this.reservationCode = reservationCode;
 	}
 
 	public Integer getReservationNo() {
@@ -161,5 +164,12 @@ public class Reservation {
 		this.couponCode = couponCode;
 	}
 
+	public String getReservationCode() {
+		return reservationCode;
+	}
+
+	public void setReservationCode(String reservationCode) {
+		this.reservationCode = reservationCode;
+	}
 
 }
