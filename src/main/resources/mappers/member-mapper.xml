@@ -42,7 +42,7 @@
   	</select>
   	<!-- 비번 찾기 결과 -->
   	<select id="findPwdByEmail" resultMap="memberResultMap">
-  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail } 
+  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
   	</select>
 
    <select id="selectMemberInfo" resultMap="memberResultMap">
@@ -53,11 +53,11 @@
    </select>
    <insert id="insertMember">
       INSERT INTO MEMBER_TBL
-      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, NULL, NULL, DEFAULT, SEQ_MEMBER_NO.NEXTVAL, 0)
+      VALUES(#{memberId}, #{memberPwd}, #{memberEmail}, DEFAULT, #{memberName}, #{memberPhone }, #{memberAddr }, NULL, NULL, DEFAULT, NULL, DEFAULT, DEFAULT, DEFAULT, #{gender}, #{birthDate}, DEFAULT, NULL, 0)
    </insert>
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
-      SET MEMBER_PWD = #{memberPwd }, MEMBER_NAME = #{memberName }, MEMBER_PHONE = #{memberPhone}
+      SET MEMBER_PWD = #{memberPwd }, MEMBER_PHONE = #{memberPhone}
       , MEMBER_ADDR = #{memberAddr }
       WHERE MEMBER_ID = #{memberId }
    </update>
@@ -144,5 +144,7 @@
 	<update id="decreaseCouponCount">
    	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT-1 WHERE MEMBER_ID = #{memberId}
    </update>
+
+
 
 </mapper>

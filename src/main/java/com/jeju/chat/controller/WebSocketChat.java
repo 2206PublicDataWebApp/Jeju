@@ -37,7 +37,7 @@ public class WebSocketChat {
         logger.info("Open session id:"+session.getId());
         try {
             final Basic basic=session.getBasicRemote();
-            basic.sendText("대화방에 연결 되었습니다.");
+            basic.sendText("빠른 시간내에 상담에 응하겠습니다 잠시만 기다려주세요.");
         }catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

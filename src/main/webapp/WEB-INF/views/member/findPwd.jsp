@@ -1,25 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/common.css" />
-<link rel="stylesheet" href="/resources/css/findPassword.css" />
-<link rel="stylesheet" href="/resources/css/header.css" />
-<link rel="stylesheet" href="/resources/css/footer.css" />
-<script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
-<script src="/resources/js/jquery-3.6.1.min.js" defer></script>
-    <script src="/resources/js/header.js" defer></script>
-	<script src="/resources/js/userMember.js" defer></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<title>비밀번호 찾기</title>
-
+<title>스트랩 : 비밀번호 찾기</title>
+<!-- CDN -->
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" />
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="/resources/css/common.css">
+	<style>
+		.findIdResultForm{
+			margin:100px auto;
+			text-align: center;
+			width: 400px;
+			height: 400px;
+			border: 1px solid gray;
+			border-radius: 10px;
+			box-shadow: 5px 5px 5px 5px gray;
+		}
+		.findIdResultForm button,.findIdResultForm input{
+			width: 250px;
+			height: 40px;
+		}
+		.findIdResultForm label{
+			margin-right: 200px;
+		}
+		
+		span.email, #certificationNumber{
+			display:none;
+			font-size:12px;
+			top:12px;
+			right:10px;
+			
+		}
+		span.error{color:red}
+		
+	</style>
 </head>
 <body>
-
 <div class="findIdResultForm">
 		<form action="/member/findPwdResult" method="post">
 			<br>

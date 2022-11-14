@@ -40,7 +40,7 @@
 	</style>
 </head>
 <body>
- <div id="findIdForm">
+ <div class="findIdForm">
         <form action="/member/findIdResult" method="post">
 			<br>
 			<h3>아이디 찾기</h3>
@@ -54,7 +54,6 @@
 						</div>
 						<input type="text" placeholder="인증번호 입력" id="email_auth_key">
 			<button type="submit" id="findIdBtn" onclick=""location.href='/member/findIdResult'" >아이디 찾기</button>
-
 		</form>		
 	</div>
 	
@@ -75,7 +74,6 @@
 										"email" : email
 									},
 									success : function(data) {
-
 										alert("인증번호가 발송되었습니다.");
 										email_auth_cd = data;
 									},
@@ -84,7 +82,6 @@
 									}
 								});
 							}
-
 						});
 	$("#email_auth_key").blur(function() {
 							if ($('#email_auth_key').val() != email_auth_cd || $('#email_auth_key').val() =='') {
