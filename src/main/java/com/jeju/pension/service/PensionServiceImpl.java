@@ -105,12 +105,6 @@ public class PensionServiceImpl implements PensionService{
 		Pension pension = pStore.selectOnePension(session, pensionNo);
 		return pension;
 	}
-	// 숙소 카테고리 가져오기
-//	@Override
-//	public Category selectPensionCategory(Integer pensionNo) {
-//		Category category = pStore.selectPensionCategory(session, pensionNo);
-//		return category;
-//	}
 	// 숙소 이름 중복체크
 	@Override
 	public int checkPensionName(String pensionName) {
@@ -123,12 +117,6 @@ public class PensionServiceImpl implements PensionService{
 		List<String> roomAttack = pStore.selectRoomAttach(session, pensionNo);
 		return roomAttack;
 	}
-	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
-//	@Override
-//	public List<Integer> selecteRoomAttachNo(Integer pensionNo) {
-//		List<Integer> roomNo = pStore.selectRoomAttachNo(session, pensionNo);
-//		return roomNo;
-//	}
 	// 카테고리 가져오기
 	@Override
 	public List<Category> selectCategoryCheck(Integer pensionNo) {

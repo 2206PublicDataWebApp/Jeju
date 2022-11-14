@@ -17,10 +17,8 @@ public interface ReviewStore {
 	void updateReview(SqlSession session, Review review);
 	// 리뷰 삭제
 	void deleteReview(SqlSession session, Integer reviewNo);
-
 	// 관리자페이지 리뷰 전체조회
 	List<Review> showAllReview(SqlSession session);
-
 	// 관리자페이지 리뷰삭제
     void deleteAdminReview(SqlSession session, Integer reviewNo);
 	// 리뷰 등록

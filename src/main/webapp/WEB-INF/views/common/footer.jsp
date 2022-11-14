@@ -31,7 +31,7 @@
 	        </div>
 	    </div>
 	    <div align="center">
-		    <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>
+		    <a href="https://www.smarteyeapps.com/">2022 &copy; 제주어때| Designed and Developed by Smarteyeapps</a>
 	    </div>
 	</footer>
 </body>
