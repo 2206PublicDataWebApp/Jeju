@@ -30,9 +30,9 @@
 	</div>
 	<br><br>
 
-	<div align="center">
-	<script async src="//client.uchat.io/uchat.js"></script>
-	<u-chat room='4man' style="display:inline-block; width:1100px; height:700px;"></u-chat>
+
+
+
 	</div>
 	<br><br>
 	
