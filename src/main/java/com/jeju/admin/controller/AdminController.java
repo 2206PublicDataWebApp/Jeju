@@ -64,21 +64,15 @@ public class AdminController {
                          ){
         logger.info("관리자  일반페이지 접속 시도 {}", modelAndView);
 
-        /*Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
+        Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
 
-        if(ObjectUtils.isEmpty(member)){
+        if(ObjectUtils.isEmpty(member) || !"Y".equals(member.getAdminCheck())){
             String errorMsg = "권한이 없습니다";
             modelAndView.addObject("errorMsg", errorMsg);
-            modelAndView.setViewName("/member/login");
-            return modelAndView;
-        }
-        if(!"1".equals(member.getAdminCheck())){
-            String errorMsg = "권한이 없습니다";
-            modelAndView.addObject("errorMsg", errorMsg);
-            modelAndView.setViewName("/pension/list");
+            modelAndView.addObject("redirectUrl", "/member/loginView.kh");
+            modelAndView.setViewName("/common/error");
         return modelAndView;
         }
-*/
 
         //회원목록조회
         List<Member> memberList = memberService.showAllMember();

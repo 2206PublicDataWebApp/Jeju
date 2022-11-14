@@ -104,6 +104,7 @@ public class MemberController {
 			Member loginUser = new Member();
 			loginUser.setMemberId(member.getMemberId());
 			loginUser.setMemberName(member.getMemberName());
+			loginUser.setAdminCheck(member.getAdminCheck());
 			if(passwordEncoder.matches(memberPwd, member.getMemberPwd())) {
 
 				logger.info("로그인 성공");

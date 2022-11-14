@@ -25,7 +25,6 @@ public class ChartController {
     @Autowired
     private MemberService memberService;
 
-
     @GetMapping("/chart")
         public ModelAndView showAdminChart(ModelAndView modelAndView){
         logger.info("관리자페이지 차트 접속시도");

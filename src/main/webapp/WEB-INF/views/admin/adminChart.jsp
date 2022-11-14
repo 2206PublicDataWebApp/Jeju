@@ -213,7 +213,6 @@
                         /* data: getPersonCnt("data"), */
                         showInLegend: false
                     }]
-
                 });
 
                 function getPersonCnt(type){

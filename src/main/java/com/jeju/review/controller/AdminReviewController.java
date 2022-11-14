@@ -15,11 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @EnableWebSecurity
@@ -38,9 +40,20 @@ public class AdminReviewController {
     @GetMapping("/review")
     public ModelAndView showAdminReview
             (ModelAndView modelAndView,
-             @RequestParam(value = "page", required=false) Integer page
+             @RequestParam(value = "page", required=false) Integer page,
+             HttpSession httpSession
             ){
         logger.info("관리자 리뷰페이지 페이지 접속 시도 {}", modelAndView);
+
+        Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
+
+        if(ObjectUtils.isEmpty(member) || !"Y".equals(member.getAdminCheck())){
+            String errorMsg = "권한이 없습니다";
+            modelAndView.addObject("errorMsg", errorMsg);
+            modelAndView.addObject("redirectUrl", "/member/loginView.kh");
+            modelAndView.setViewName("/common/error");
+            return modelAndView;
+        }
 
         int reviewTotalCount = reviewService.showAllReview().size();
         int reviewLimit = 10; // 한 화면에 나타날 회원의 수
