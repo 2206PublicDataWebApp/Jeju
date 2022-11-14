@@ -187,9 +187,9 @@
                             <div style="text-align: center; background-color: lightblue;"
                                 class="col-sm-9">
                                 <br>
-                                <div class="login">예약정보를 변경하고 싶으시면</div>
-                                <div class="login">예약취소 후 다시 예약해주시기 바랍니다.</div>
-                                <div class="login" style="margin-top: 10px;">로그인</div>
+                                <div class="login">회원가입하고</div>
+                                <div class="login">등급혜택할인 받자!</div>
+                                <a href="/member/joinView.kh"></a><div class="login" style="margin-top: 10px;">회원가입</div>
                                 <br>
                             </div>
                         </div>

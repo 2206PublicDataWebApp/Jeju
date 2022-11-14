@@ -30,14 +30,14 @@ public class ReservationServiceImpl implements ReservationService{
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 //		String api_key = "NCS3TEE3BB7UBS3I";
 //	    String api_secret = "BWNUP67CGPPA7Q96ANWO1PRKYIJBWMJ5";
-		String api_key = "NCSMNYDXGAXNCAIK";
-	    String api_secret = "LCOLBUKCZHX7CQ5YFGE4QIGBN3DHOSVC";
+		String api_key = "NCSILAUCKWP4QXSQ";
+	    String api_secret = "O29BOSR08SXXFTU3ZYSL2JJCU5LOWCTF";
 	    Message coolsms = new Message(api_key, api_secret);
 
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", userPhoneNumber);    // ������ȭ��ȣ
-	    params.put("from", "01032888503");    // �߽���ȭ��ȣ. �׽�Ʈ�ÿ��� �߽�,���� �Ѵ� ���� ��ȣ�� �ϸ� ��
+	    params.put("to", userPhoneNumber); 
+	    params.put("from", "01036674321");
 	    params.put("type", "SMS");
 	    params.put("text", "[TEST]" + "["+randomNumber+"]"); // ���� ���� �Է�
 	    params.put("app_version", "test app 1.2"); // application name and version
@@ -53,13 +53,13 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public void sendReservationCode(String phoneNumber, String reservationCode) {
-		String api_key = "NCSMNYDXGAXNCAIK";
-	    String api_secret = "LCOLBUKCZHX7CQ5YFGE4QIGBN3DHOSVC";
+		String api_key = "NCSILAUCKWP4QXSQ";
+	    String api_secret = "O29BOSR08SXXFTU3ZYSL2JJCU5LOWCTF";
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", phoneNumber);    // ������ȭ��ȣ
-	    params.put("from", "01032888503");    // �߽���ȭ��ȣ. �׽�Ʈ�ÿ��� �߽�,���� �Ѵ� ���� ��ȣ�� �ϸ� ��
+	    params.put("to", phoneNumber);
+	    params.put("from", "01036674321");   
 	    params.put("type", "SMS");
 	    params.put("text", "예약번호" + "["+reservationCode+"]"); // ���� ���� �Է�
 	    params.put("app_version", "test app 1.2"); // application name and version

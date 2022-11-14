@@ -127,7 +127,6 @@
                                 <br>
                                 <div class="login">예약정보를 변경하고 싶으시면</div>
                                 <div class="login">예약취소 후 다시 예약해주시기 바랍니다.</div>
-                                <div class="login" style="margin-top: 10px;">로그인</div>
                                 <br>
                             </div>
                         </div>

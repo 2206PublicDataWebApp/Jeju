@@ -178,7 +178,7 @@
 <section id="about" class="contianer-fluid about-us">
    <div class="container-fluid" id="test5">
       <div class="row">
-         <div class="col-md-8 center image" >
+         <div class="col-md-7 center image" >
 
             <hr id="margin_test">
             <div class="row g-0 position-relative test2" id="test_first">
@@ -225,7 +225,7 @@
             </div>
          </div>
 
-         <div class="col-md-4 text" id="test3">
+         <div class="col-md-5 text" id="test3">
             <div class="col-lg-10 sidebar">
                <div class="sidebar-box">
                	  <form action="/pension/searchName" method="get">
