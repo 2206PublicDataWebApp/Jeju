@@ -29,10 +29,18 @@ public class Member {
 	private int memberNo;
 	private int couponCount;
 
-
 	private int count;
 
+	private int genderCount;
 
+
+	public int getGenderCount() {
+		return genderCount;
+	}
+
+	public void setGenderCount(int genderCount) {
+		this.genderCount = genderCount;
+	}
 
 	public String getMemberId() {
 		return memberId;
@@ -156,6 +164,8 @@ public class Member {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+
 	public Member() {
 
 		this.memberId = memberId;

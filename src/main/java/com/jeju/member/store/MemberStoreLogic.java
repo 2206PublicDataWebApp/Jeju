@@ -119,6 +119,12 @@ public class MemberStoreLogic implements MemberStore{
 		return newResgisterChart;
 	}
 
+	@Override
+	public List<Member> selectGenderChart(SqlSessionTemplate session) {
+		List<Member> genderChart = session.selectList("MemberMapper.genderChart");
+		return genderChart;
+	}
+
 	// 관리자페이지 회원수 총합
 	@Override
 	public int countAllMember(SqlSessionTemplate session, String searchCondition, String searchValue) {

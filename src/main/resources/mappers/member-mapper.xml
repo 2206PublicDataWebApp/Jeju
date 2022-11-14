@@ -138,8 +138,11 @@
    </select>
 
    <select id="newResgisterChart" resultMap="memberResultMap">
-    SELECT ENROLL_DATE, COUNT(*) FROM MEMBER_TBL GROUP BY ENROLL_DATE
+    SELECT ENROLL_DATE, COUNT(ENROLL_DATE) FROM MEMBER_TBL GROUP BY ENROLL_DATE
+   </select>
 
+   <select id="genderChart" resultMap="memberResultMap">
+      SELECT GENDER, COUNT(GENDER) FROM MEMBER_TBL GROUP BY GENDER
    </select>
 
    <update id="increaseCouponCount">

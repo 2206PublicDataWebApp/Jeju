@@ -199,7 +199,7 @@
                                     <thead>
                                     <tbody>
                                     <tr>
-                                        <td>회원번호</td>
+                                        <td>번호</td>
                                         <td>아이디</td>
                                         <td>이메일</td>
                                         <td>이름</td>
@@ -213,7 +213,7 @@
                                     </tr>
                                     <c:forEach items="${memberList }" var="adminMember" begin="0" end="5" step="1" varStatus="i">
                                     <tr>
-                                        <td>${adminMember.memberNo}</td>
+                                        <td>${i.count}</td>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>

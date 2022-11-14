@@ -217,15 +217,15 @@
                                     <c:forEach items="${reservationList }" var="adminReservation" varStatus="i">
                                         <tr>
                                             <td>${adminReservation.reservationNo}</td>
-                                            <td>${adminReservation.roomNo}</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>${adminReservation.rePensionName}</td>
+                                            <td>${adminReservation.rStatus}</td>
+                                            <td>${adminReservation.rePayDate}</td>
                                             <td>${adminReservation.memberId}</td>
                                             <td>${adminReservation.rePrice}</td>
                                             <td>${adminReservation.rStatus}</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>${adminReservation.reStartDate}</td>
+                                            <td>${adminReservation.reEndDate}</td>
+                                            <td></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

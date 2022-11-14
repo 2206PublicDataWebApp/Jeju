@@ -47,4 +47,6 @@ public interface MemberService {
 	List<Member> searchAllByValue(String searchCondition, String searchValue);
 
 	List<Member> selectNewRegisterChart();
+
+    List<Member> selectGenderChart();
 }

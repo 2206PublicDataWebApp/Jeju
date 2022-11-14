@@ -119,6 +119,12 @@ public class MemberServiceImpl implements MemberService {
 		return newResgisterChart;
 	}
 
+	@Override
+	public List<Member> selectGenderChart() {
+		List<Member>  genderChart = mStore.selectGenderChart(session);
+		return genderChart;
+	}
+
 	// 관리자페이지 회원수 총합
 		@Override
 		public int countAllMember(String searchCondition, String searchValue) {

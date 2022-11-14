@@ -50,4 +50,6 @@ public interface MemberStore {
     List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue);
 
 	List<Member> selectNewRegisterChart(SqlSessionTemplate session);
+
+    List<Member> selectGenderChart(SqlSessionTemplate session);
 }
