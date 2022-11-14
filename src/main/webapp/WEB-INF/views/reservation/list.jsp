@@ -98,9 +98,27 @@
                     <div  class="row cont-row info3">
                         <div  class="col-sm-3 reserve"><label>등급 할인</label></div>
                     </div>
-                    <div class="myGrade">나의 등급(플래티넘)</div>
-                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : <span id="price1">-300,000원</span></div>
-                    <button class="btn btn-info btn-sm" style="font-size: 8px;">할인 적용</button>
+                    <div class="myGrade">나의 등급(
+                    <c:if test="${empty mOne }">없음</c:if>                    
+                    <c:if test="${!empty mOne }">
+                    <c:if test="${mOne.useCount >= 0 && mOne.useCount <= 2}">브론즈</c:if>
+                    <c:if test="${mOne.useCount >= 3 && mOne.useCount <= 5}">실버</c:if>
+                    <c:if test="${mOne.useCount >= 6 && mOne.useCount <= 10}">골드</c:if>
+                    <c:if test="${mOne.useCount >= 11 && mOne.useCount <= 15}">플래티넘</c:if>
+                    <c:if test="${mOne.useCount >= 16 && mOne.useCount <= 20}">다이아</c:if>
+                    </c:if>) 
+                    </div>
+                    <div class="myGrade" style="display: inline-block;">할인할 수 있는 금액 : 
+	                    <c:if test="${empty mOne }"><span id="price1">0원</span></c:if>                    
+		                <c:if test="${!empty mOne }">
+		                    <c:if test="${mOne.useCount >= 0 && mOne.useCount <= 2}"><span id="price1">2000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 3 && mOne.useCount <= 5}"><span id="price1">3000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 6 && mOne.useCount <= 10}"><span id="price1">5000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 11 && mOne.useCount <= 15}"><span id="price1">7000원</span></c:if>
+		                    <c:if test="${mOne.useCount >= 16 && mOne.useCount <= 20}"><span id="price1">10000원</span></c:if>
+	                    </c:if>   
+                    </div>
+                    <button class="btn btn-info btn-sm" style="font-size: 8px;" onclick="gradeApply();">할인 적용</button>
                     <br>
                     <div class="myGrade" style="display: inline-block;">쿠폰 적용 : <span id="price2">0</span></div>
                     <button class="btn btn-info btn-sm follower" id="couponApply" style="font-size: 8px;">쿠폰 선택</button>
@@ -139,11 +157,7 @@
 							</div>
 						</div>
 					</div>
-
-
-
-					<br>
-                    
+					<br>                    
                		<c:if test="${sessionScope.loginUser eq null }">
 					<div style="margin-top: 10px;" class="row">
 						<div style="text-align: center; background-color: lightblue;"
@@ -163,7 +177,14 @@
 							<br>
 							<div class="login">숙소를 예약하기전</div>
 							<div class="login">등급할인 혜택을 누려보세요!</div>
- 							<div class="login" style="margin-top: 10px;">나의 등급</div>
+ 							<div class="login" style="margin-top: 10px;">나의 등급(                  
+                    <c:if test="${!empty mOne }">
+                    <c:if test="${mOne.useCount >= 0 && mOne.useCount <= 2}">브론즈</c:if>
+                    <c:if test="${mOne.useCount >= 3 && mOne.useCount <= 5}">실버</c:if>
+                    <c:if test="${mOne.useCount >= 6 && mOne.useCount <= 10}">골드</c:if>
+                    <c:if test="${mOne.useCount >= 11 && mOne.useCount <= 15}">플래티넘</c:if>
+                    <c:if test="${mOne.useCount >= 16 && mOne.useCount <= 20}">다이아</c:if>
+                    </c:if>)</div>
 							<br>
 						</div>
 					</div>
@@ -188,7 +209,7 @@
                       <p class="card-text">${endDate1 }월 ${endDate2 }일 11:00시</p>
                       <hr>
                       <h5 class="card-title">총 결제 금액</h5>
-                      <h5 class="card-title" id="price" value="${price }">${price }원</h5>
+                      <h5 class="card-title" id="price" value="${price }">${price}원</h5>
                       <ul>
                         <li class="test15">ㆍ결제완료 후 내 정보에서 예약 내</li>
                         <li style="margin-left: 16px;" class="test15">역을 확인해주세요.</li>
@@ -217,7 +238,7 @@
 				<div>
 					<div class="content">
 					<p>
-<textarea style="font-size: 4px; width : 600px; height : 100px;" >						
+<textarea style="font-size: 4px; width : 600px; height : 100px;">						
 Ⅰ. 개인정보의 수집 및 이용 동의서
  - 이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
 ① 개인정보 수집 항목 및 수집·이용 목적
@@ -279,9 +300,7 @@
 유연한 장기 숙박 환불 정책: 게스트는 체크인 30일 전까지 취소한 경우에만 전액 환불을 받을 수 있습니다. 그 후에 취소하는 경우, 이미 숙박한 날짜의 숙박비 전액과 30일만큼의 추가 숙박비가 호스트에게 지급됩니다. 게스트가 예약을 취소하는 시점에 남은 숙박 일수가 30일 미만이라면, 남은 숙박일 전체에 대한 숙박비가 호스트에게 지급됩니다.
 엄격한 장기 숙박 환불 정책: 게스트는 예약 후 48시간 이내 및 체크인 28일 전까지 취소한 경우에만 전액 환불을 받을 수 있습니다. 그 이후에 예약을 취소하는 경우, 이미 숙박한 날짜의 숙박비와 더불어 취소일로부터 30일만큼의 추가 숙박비가 호스트에게 지급됩니다. 남은 숙박 일수가 30일 미만인 예약을 취소하면, 남은 숙박 일수에 대한 숙박비 100%가 호스트에게 지급됩니다.			
 </textarea>
-						</p>
-
-
+		  			</p>
 						</div>
 				</div>
 			</fieldset>				
@@ -337,11 +356,11 @@
     		}
      }
 
-	 /*&& $("#phoneDoubleChk").val() == "true"*/
+
      var codeBtn2 = "";     
      //바로 결제      
      $("#button1").click(function(){
- 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null){
+ 	    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null && $("#phoneDoubleChk").val() == "true"){
  	    		var price1 = $("#price").text().replace(",", "");
  	    		var price2 = price1.replace("원", "");
  	    		//가맹점 식별코드
@@ -376,7 +395,7 @@
  	     		        	},
  	     		        	type : "post",
  	     		        	success : function(result) {
- 	     		        		alert(result);
+ 	     		        		var phone = $("#phone").val();
  	     		        		$.ajax({
  	     		        			url : "/reservation/success",
  	     		        			data : {
@@ -386,14 +405,15 @@
  	     		        				"rePrice" : rsp.paid_amount,
  	     		        				"reStartDate" : '${startDate}',
  	     		        				"reEndDate" : '${endDate}',
- 	     		        				"couponCode" : codeBtn2
+ 	     		        				"couponCode" : codeBtn2,
+ 	     		        				"phone" : phone
  	     		        			},
  	     		        			type : "post",
  	     		        			success : function(result) {
  	     		        				//쿠폰을 썼을 경우만 실행
  	     		        				if(codeBtn2 != "") {
  	     		        					$.ajax({
- 	    	     		   						url : "/coupon/updateStatus",
+ 	    	     		   						url : "/coupon/updateCouponStatus",
  	    	     		   						data : {
  	    	     		   							"couponCode" : codeBtn2
  	    	     		   						},
@@ -404,9 +424,9 @@
  	    	     		   							}
  	    	     		   						}
  	    	     		   					});
- 	     		        				}
+ 	     		        				}	     		        					
  	     		        				alert("예약이 완료되었습니다.");
- 	     		        				location.href = "/pension/list";
+ 	     		        				location.href = "/";
  	     		        			},
  	     		        			error : function() {
  	    	     		        		alert("예약 등록 실패!");
@@ -422,7 +442,7 @@
  	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
  	     		         msg += '에러내용 : ' + rsp.error_msg;
  	     		       alert(msg);
- 	     		     location.href = "/pension/list";
+ 	     		     location.href = "/";
  	     		    }	
 //  	     		  location.href = "/pension/list";
  	     		});	
@@ -446,11 +466,11 @@
  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
  				$("#successNameChk").css("color", "red");
  	    	}
- 	    	/*if($("#phoneDoubleChk").val() != "true"){
- 	    		console.log($("#phoneDoubleChk").val());
- 	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
- 				$(".successPhoneChk").css("color", "red");	    		
- 	    	}*/
+//  	    	if($("#phoneDoubleChk").val() != "true"){
+//  	    		console.log($("#phoneDoubleChk").val());
+//  	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//  				$(".successPhoneChk").css("color", "red");	    		
+//  	    	}
  	    	return false
  	    }    	    	
      });
@@ -474,7 +494,7 @@
     			 	success : function(result) {
     			 		if(result == "1") {
     			 			alert("이미 결제해야할 예약건이 있습니다! 결제 완료 후 다시 시도해주세요.");
-    			 			location.href="/pension/list";
+    			 			location.href="/";
     			 		}else {
     			 			 if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null){
     		   	        		 $.ajax({
@@ -519,7 +539,7 @@
     		   									//쿠폰을 썼을 경우만 실행
     	 	     		        				if(codeBtn2 != "") {
     	 	     		        					$.ajax({
-    	 	    	     		   						url : "/coupon/updateStatus",
+    	 	    	     		   						url : "/coupon/updateCouponStatus",
     	 	    	     		   						data : {
     	 	    	     		   							"couponCode" : codeBtn2
     	 	    	     		   						},
@@ -532,7 +552,7 @@
     	 	    	     		   					});
     	 	     		        				}
     		   	   	        				alert("예약되었습니다. 이용내역에서 30분 안에 결제해주세요.");	
-    		   	   	        				location.href = "/pension/list";   	     		    				   	     		    				
+    		   	   	        				location.href = "/";   	     		    				   	     		    				
     		   	        			}
     		   	        		 });
     		   	        	 }else {
@@ -555,11 +575,11 @@
     		   	  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
     		   	  				$("#successNameChk").css("color", "red");
     		   	  	    	}
-	   		   	   	    	/*if($("#phoneDoubleChk").val() != "true"){
+	   		   	   	    	if($("#phoneDoubleChk").val() != "true"){
 	   		   	   	    		console.log($("#phoneDoubleChk").val());
 	   		   	   	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
 	   		   	   				$(".successPhoneChk").css("color", "red");	    		
-	   		   	   	    	}*/
+	   		   	   	    	}
     		   	  	    	return false
     		   	        	 }
     			 		}
@@ -568,9 +588,6 @@
     			}else {
     				alert("로그인 후 이용가능합니다.");
     			}
-    		},
-    		error : function() {
-    			alert("왜안돼");
     		}
     	 });
      });
@@ -685,7 +702,7 @@
 			});
      });
 
-	   /* var code2 = "";
+	     var code2 = "";
 	    $("#phoneChk").click(function(){
 	    	if($("#phone").val() != "") {
 	    		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
@@ -713,10 +730,10 @@
 	    	}else {
 	    		alert("휴대폰 번호를 입력해주세요.");
 	    	}
-	    });*/
+	    });
 
 	    
-	    /*$("#phoneChk2").click(function(){
+	    $("#phoneChk2").click(function(){
 	    	if($("#phone2").val() == code2){
 	    		$(".successPhoneChk").text("인증번호가 일치합니다.");
 	    		$(".successPhoneChk").css("color","green");
@@ -728,7 +745,7 @@
 	    		$("#phoneDoubleChk").val("false");
 	    		$(this).attr("autofocus",true);
 	    	}
-	    });*/
+	    });
 
 		//약관 내용 열고 닫기
 	    function clickshow(elem,ID) {
@@ -742,13 +759,32 @@
 	    	}
 	    }
 		
+		var gradeCount = 0;
+		function gradeApply() {
+			if(gradeCount != 1) {
+				var grade = $("#price1").text();
+				console.log(gradePrice);
+				var regex = /[^0-9]/g;
+				var gradePrice = grade.replace(regex, "");	// 원빼고 숫자만 추출
+				
+				var originPrice = $("#price").text();
+				var changePrice = originPrice.replace(regex, "");
+				var result = changePrice - gradePrice;
+				var lastResult = result.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');			
+				gradeCount = 1;
+				$("#price").text("");
+				$("#price").text(lastResult + "원");		
+			}				
+		}
+		
+		
 		function applyCoupon(elem, code) {
  			if(codeBtn2 != code) {
 				$.ajax({
 					url : "/applyCoupon",
 					data : {
 						"salePrice" : elem.value,
-						"rePrice" : '${price}'
+						"rePrice" : $("#price").text()
 					},
 					type : "post",
 					success : function(result) {
@@ -769,17 +805,17 @@
 	 					$("#price").text(result + "원");
 	 					$("#price2").text("");
 	 					$("#price2").text(elem.value + "원 할인");	
-// 	 					$(".codeBtn").attr('disabled', true);
 						$("#couponCancel").show();
 						$("#couponApply").hide();
-	 					alert("쿠폰이 적용되었습니다.");				
+	 					alert("쿠폰이 적용되었습니다.");
+	 					$("#modalClose").trigger("click");
 					}
 				});
  			}else {
  				alert("이미 적용하셨습니다.");
  			}	
 		}
-		
+	
 		var originPrice = '${price}';
 		
 		

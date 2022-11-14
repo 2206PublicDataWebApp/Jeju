@@ -127,7 +127,6 @@
                                 <br>
                                 <div class="login">예약정보를 변경하고 싶으시면</div>
                                 <div class="login">예약취소 후 다시 예약해주시기 바랍니다.</div>
-                                <div class="login" style="margin-top: 10px;">로그인</div>
                                 <br>
                             </div>
                         </div>
@@ -157,7 +156,7 @@
                        <li class="list-group-item" id="button1" title="결제하기 버튼">결제하기</li>
                       <li class="list-group-item" onclick="cancel();">결제대기 취소</li>
                     </ul>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -218,7 +217,7 @@
   	     		        					success : function(result) {
   	     		        						window.localStorage.removeItem(result);
   	     		        						alert("예약이 완료되었습니다.");
-  	     		        						location.href = "/pension/list";
+  	     		        						location.href = "/";
   	     		        					}
   	     		        				});
   	     		        				
@@ -230,9 +229,8 @@
   	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
   	     		         msg += '에러내용 : ' + rsp.error_msg;
   	     		       alert(msg);
-  	     		     location.href = "/pension/list";
+  	     		     location.href = "/";
   	     		    }	
-//   	     		  location.href = "/pension/list";
   	     		});	
   	  
   	    	return false
@@ -242,14 +240,15 @@
      function cancel() {
     	 if(confirm("정말 결제진행을 취소하시겠습니까?")) {
     		 $.ajax({
-    			url :  "/reservation/deleteWaitReserve",
+    			url :  "/reservation/reservationCancel",
     			data : {
     				"reservationNo" : '${rList.reservationNo}'
     			},
     		 	type : "post",
     		 	success : function(result) {
+    		 		window.localStorage.removeItem(result);
     		 		alert("취소되었습니다.");
-    		 		location.href = "/pension/list";
+    		 		location.href = "/";
     		 	},
     		 	error : function() {
     		 		alert("취소에 실패했습니다.");

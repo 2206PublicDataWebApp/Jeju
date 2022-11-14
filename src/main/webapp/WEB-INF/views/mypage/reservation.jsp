@@ -303,6 +303,7 @@
          });
       }
    );
+   
    </script>
     <script src="/resources/assets/js/popper.min.js"></script>
     <script src="/resources/assets/js/bootstrap.min.js"></script>

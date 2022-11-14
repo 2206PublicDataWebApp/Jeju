@@ -34,6 +34,7 @@ public interface CouponStore {
 	List<MyCoupon> selectCouponCode(SqlSession session, String memberId);
 	//쿠폰 사용 표기 0으로 초기화
 	int updateStatus(SqlSession session, MyCoupon myCoupon);
+	int updateCouponStatus(SqlSession session, MyCoupon myCoupon);
 
 
 }

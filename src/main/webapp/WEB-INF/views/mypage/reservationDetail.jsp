@@ -189,7 +189,6 @@
                                 <br>
                                 <div class="login">예약정보를 변경하고 싶으시면</div>
                                 <div class="login">예약취소 후 다시 예약해주시기 바랍니다.</div>
-                                <div class="login" style="margin-top: 10px;">로그인</div>
                                 <br>
                             </div>
                         </div>
@@ -269,87 +268,7 @@
    
     </body>
      <script>
-//      $("#button1").click(function(){
-//   	     		//가맹점 식별코드
-//   	     		IMP.init('imp28778843');
-//   	     		IMP.request_pay({
-//   	     		    pg : 'kcp',
-//   	     		    pay_method : 'card',
-//   	     		    merchant_uid : 'merchant_' + new Date().getTime(),
-//   	     		    name : '한재민' ,
-//  		    		amount : '501',
-// //   	     			amount : '${price}',
-//   	     		    buyer_email : 'iamport@siot.do',
-//   	     		    buyer_name : '${rList.memberId}'
-// //   	     		    buyer_tel : $("#phone").val()
-// //  	      		    buyer_addr : '서울 강남구 도곡동',
-// //  	      		    buyer_postcode : '123-456'
-//   	     		},function(rsp) {
-//   	     			console.log(rsp);
-//   	     		    if ( rsp.success ) {
-//   	     		        msg += '고유ID : ' + rsp.imp_uid;
-//   	     		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-//   	     		        msg += '결제 금액 : ' + rsp.paid_amount;
-//   	     		        msg += '카드 승인번호 : ' + rsp.apply_num;  
-  	     		        
-//   	     		        $.ajax({
-//   	     		        	url : "/pay/success",
-//   	     		        	data : {
-//   	     		        		"payId" : rsp.imp_uid,
-//   	     		        		"roomNo" : '${rList.roomNo}',
-//   	     		        		"payPensionNo" : '${rList.rePensionNo}',
-//   	     		        		"payPrice" : rsp.paid_amount        		
-//   	     		        	},
-//   	     		        	type : "post",
-//   	     		        	success : function(result) {
-//   	     		        		$.ajax({
-//   	     		        			url : "/reservation/success",
-//   	     		        			data : {
-//   	     		        				"reservationName" : '${rList.reservationName}',
-//   	     		        				"roomNo" : '${rList.roomNo}',
-//   	     		        				"rePensionNo" : '${rList.rePensionNo}',
-//   	     		        				"rePrice" : rsp.paid_amount,
-//   	     		        				"reStartDate" : '${rList.reStartDate}',
-//   	     		        				"reEndDate" : '${rList.reEndDate}'
-//   	     		        			},
-//   	     		        			type : "post",
-//   	     		        			success : function(result) {
-//   	     		        				$.ajax({
-//   	     		        					url : "/reservation/deleteWaitReserve",
-//   	     		        					data : {
-//   	     		        						"reservationNo" : '${rList.reservationNo}'
-//   	     		        					},
-//   	     		        					type : "post",
-//   	     		        					success : function(result) {
-//   	     		        						alert("예약이 완료되었습니다.");
-//   	     		        						location.href = "/pension/list";
-//   	     		        					}
-//   	     		        				});
-  	     		        				
-//   	     		        			},
-//   	     		        			error : function() {
-//   	    	     		        		alert("예약 등록 실패!");
-//   	    	     		        	}
-//   	     		        		});
 
-//   	     		        	},
-//   	     		        	error : function() {
-//   	     		        		alert("결제 등록 실패!");
-//   	     		        	}
-//   	     		        });
-//   	     		    } else {
-//   	     		    	 var msg = '결제에 실패하였습니다. 처음부터 다시 진행해주세요. ';
-//   	     		         msg += '에러내용 : ' + rsp.error_msg;
-//   	     		       alert(msg);
-//   	     		     location.href = "/pension/list";
-//   	     		    }	
-// //   	     		  location.href = "/pension/list";
-//   	     		});	
-  	  
-//   	    	return false
-  	       	    	
-//       });     
-     
      function cancel() {
     	 if(confirm("정말 결제진행을 취소하시겠습니까?")) {
     		 $.ajax({
@@ -361,7 +280,7 @@
     		 	success : function(result) {
     		 		if(result == "삭제완료") {
     		 			alert("취소되었습니다.");
-        		 		location.href = "/pension/list";
+        		 		location.href = "/";
     		 		}  		 		
     		 	}
     		 });

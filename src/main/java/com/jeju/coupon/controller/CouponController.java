@@ -98,8 +98,6 @@ public class CouponController {
 		Member member = (Member) session.getAttribute("loginUser");
 		String memberId = member.getMemberId();
 		MyCoupon mycoupon = new MyCoupon(memberId, couponCode);
-//		int result = cService.deleteMyCoupon(couponCode);
-//		int result2 = cService.decreaseMemberCoupon(memberId);
 			int result = cService.updateUseCount(mycoupon);
 			if(result > 0) {
 				System.out.println("감소 성공");
@@ -148,26 +146,27 @@ public class CouponController {
 		return chk;
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value="/coupon/updateStatusPossible", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
-//	public String countCheck(
-//			HttpSession session
-//			,@RequestParam("couponCode") String couponCode) {
-//		Member member = (Member) session.getAttribute("loginUser");
-//		String chk = "";
-//		if(member != null) {			
-//			String memberId = member.getMemberId();
-//			MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
-//			int result = cService.updateStatus(myCoupon);
-//			if(result > 0) {
-//				chk = "성공";
-//			}else {
-//				chk = "실패";
-//			}			
-//		}else {
-//			chk = "실패";
-//		}
-//		return chk;
-//	}
+	@ResponseBody
+	@RequestMapping(value="/coupon/updateCouponStatus", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
+	public String couponStatusUpdate(
+			HttpSession session
+			,@RequestParam("couponCode") String couponCode) {
+		Member member = (Member) session.getAttribute("loginUser");
+		String chk = "";
+		if(member != null) {			
+			String memberId = member.getMemberId();
+			MyCoupon myCoupon = new MyCoupon(memberId, couponCode);
+			int result = cService.updateCouponStatus(myCoupon);
+			if(result > 0) {
+				chk = "성공";
+			}else {
+				chk = "실패";
+			}			
+		}else {
+			chk = "실패";
+		}
+		return chk;
+	}
+
 	
 }

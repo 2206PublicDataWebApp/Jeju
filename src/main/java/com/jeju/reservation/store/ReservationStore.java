@@ -51,6 +51,14 @@ public interface ReservationStore {
 	Reservation selectReservationInfo(SqlSession session, Integer reservationNo);
 	//회원용 예약 삭제
 	int deleteReservation(SqlSession session, Integer reservationNo);
+	//결제대기 취소시 쿠폰코드 조회
+	Reservation selectCouponCode(SqlSession session, Integer reservationNo);
+	//결제 취소 후 쿠폰 카운트 증가
+	int upCouponCount(SqlSession session, Reservation reservation);
+
+	int updateStatus(SqlSession session, Reservation reservation);
+
+	Member selectOneByMember(SqlSession session, String memberId);
 
 
 }

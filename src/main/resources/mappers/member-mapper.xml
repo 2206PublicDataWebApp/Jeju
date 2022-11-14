@@ -107,6 +107,11 @@
    <select id="countAllMember" resultMap="memberResultMap">
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
+   
+   <select id="selectOneByMember" resultMap="memberResultMap">
+   	  SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
+   </select>
+ 
 
    <!-- 관리자 회원 검색 -->
    <select id="searchAllByValue" resultMap="memberResultMap">

@@ -51,5 +51,15 @@ public interface ReservationService {
 	Reservation selectReservationInfo(Integer reservationNo);
 	//회원용 예약 삭제
 	int deleteReservation(Integer reservationNo);
+	//결제대기 취소시 쿠폰코드 삭제를 위해 조회
+	Reservation selectCouponCode(Integer reservationNo);
+	//쿠폰 다시사용할 수 있게 함
+	int upCouponCount(Reservation reservation);
+
+	int updateStatus(Reservation reservation);
+
+	void sendReservationCode(String phoneNumber, String reservationCode);
+
+	Member selectOneByMember(String memberId);
 
 }

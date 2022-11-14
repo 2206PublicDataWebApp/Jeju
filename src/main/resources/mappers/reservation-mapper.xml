@@ -31,6 +31,10 @@
 		SELECT RESERVATION_NO, MEMBER_ID, R_STATUS, ROOM_NO, RE_PENSION_NO, USE_HISTORY, USE_HISTORY, RE_PRICE FROM RESERVATION_TBL ORDER BY RESERVATION_NO DESC
 	</select>
 	
+	<select id="selectCouponCode" resultMap="reservationResultMap">
+		SELECT COUPON_CODE, MEMBER_ID FROM RESERVATION_TBL WHERE RESERVATION_NO = #{reservationNo}
+	</select>
+	
 	<select id="selectNonMemberReserve" resultMap="reservationResultMap">
 		SELECT * FROM RESERVATION_TBL WHERE RESERVATION_NAME = #{reservationName} AND RESERVATION_CODE = #{reservationCode}
 	</select>

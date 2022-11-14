@@ -50,6 +50,7 @@ public class ReservationController {
 		Member member = (Member) session.getAttribute("loginUser");
 		if(member != null) {
 			String memberId = member.getMemberId();
+			Member mOne = aService.selectOneByMember(memberId);
 			List<Coupon> cList = new ArrayList<Coupon>();
 			//쿠폰 정보 가져옴
 			List<MyCoupon> myList = aService.selectAllMyCoupon(memberId);
@@ -58,6 +59,7 @@ public class ReservationController {
 				cList.add(i, coupon);
 			}
 			mv.addObject("cList", cList);
+			mv.addObject("mOne", mOne);
 		}
 		
 		//펜션 정보 가져옴
@@ -131,7 +133,8 @@ public class ReservationController {
 	@ResponseBody
 	@RequestMapping(value = "/reservation/success", method = RequestMethod.POST)
 	public String addReservation(
-			@ModelAttribute Reservation reservation
+			@ModelAttribute Reservation reservation,
+			@RequestParam(name="phone", required = false) String phoneNumber
 			,HttpSession session) {	
 		String memberId = "";
 		Member member = (Member) session.getAttribute("loginUser");
@@ -147,7 +150,7 @@ public class ReservationController {
 			Random random = new Random();		//랜덤 함수 선언
 			int createNum = 0;  			//1자리 난수
 			String ranNum = ""; 			//1자리 난수 형변환 변수
-	        	int letter    = 6;			//난수 자릿수:6
+	        int letter    = 6;			//난수 자릿수:6
 			String resultNum = "";  		//결과 난수			
 			for (int i=0; i<letter; i++) { 	            		
 				createNum = random.nextInt(9);		//0부터 9까지 올 수 있는 1자리 난수 생성
@@ -160,14 +163,15 @@ public class ReservationController {
 		Pension imageList = aService.selectImage(reservation.getRePensionNo());
 		reservation.setReFilePath(imageList.getFilePath());
 		reservation.setRePensionName(imageList.getPensionName());
-		int result = aService.addReservation(reservation);
+		int result = aService.addReservation(reservation);		
 		if(result > 0) {
 			System.out.println("예약 성공!");
+			if(reservation.getMemberId().equals("비회원")) {
+				aService.sendReservationCode(phoneNumber, reservation.getReservationCode());
+			}
 		}
 		return memberId;	
 	}
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/reservation/waiting", produces="text/plain;charset=utf-8", method = RequestMethod.POST)
@@ -181,7 +185,6 @@ public class ReservationController {
 		reservation.setReFilePath(imageList.getFilePath());
 		reservation.setRePensionName(imageList.getPensionName());
 		int result = aService.addReservationWait(reservation);
-//		Reservation reservationNo = aService.selectReservationNo();
 		return "결제대기 추가 성공!";	
 	}
 	
@@ -195,15 +198,8 @@ public class ReservationController {
 			/////////////////결제 대기 리스트//////////////////
 			List<Reservation> wList = aService.selectWaitList(memberId);
 			
-//			for(int i=0; i<wList.size(); i++) {
-//				wList.get(i).setRePrice(decFormat.format(Integer.parseInt(wList.get(i).getRePrice())));
-//			}
-//			
 //			////////////////예약 완료 리스트///////////////////
 			List<Reservation> rList = aService.selectReserveList(memberId);
-//			for(int i=0; i<rList.size(); i++) {
-//				rList.get(i).setRePrice(decFormat.format(Integer.parseInt(rList.get(i).getRePrice())));
-//			}
 			List<Reservation> sList = aService.expirationReserveList(memberId);
 			
 			mv.addObject("sList", sList);
@@ -227,7 +223,15 @@ public class ReservationController {
 	@ResponseBody
 	@RequestMapping(value="/reservation/reservationCancel", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
 	public String reservationCancel(
-			@RequestParam("reservationNo") Integer reservationNo) {
+			@RequestParam("reservationNo") Integer reservationNo, HttpSession session) {
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		Reservation reservation = aService.selectCouponCode(reservationNo);
+		System.out.println(reservation.getCouponCode());
+		if(reservation.getCouponCode() != null && !reservation.getCouponCode().equals("")) {
+			int result = aService.upCouponCount(reservation);
+			System.out.println("");
+		}		
 		String chk = "";
 		int result = aService.deleteReservation(reservationNo);
 		if(result > 0) {
@@ -240,12 +244,16 @@ public class ReservationController {
 	//사용자가 결제대기 상태에서 직접 결제 취소요청 했을 경우
 	@ResponseBody
 	@RequestMapping(value="/reservation/deleteWaitReserve", method=RequestMethod.POST)
-	public String deleteWaitReserve(@RequestParam("reservationNo") Integer reservationNo) {
-		int result = aService.deleteWaitReserve(reservationNo);
-		if(result > 0) {
-			System.out.println("취소 성공!");
+	public String deleteWaitReserve(@RequestParam("reservationNo") Integer reservationNo
+			,HttpSession session) {
+		Member member = (Member) session.getAttribute("loginUser");
+		String memberId = member.getMemberId();
+		Reservation reservation = aService.selectCouponCode(reservationNo);
+		if(reservation.getCouponCode() != null && !reservation.getCouponCode().equals("")) {
+			int result = aService.updateStatus(reservation);
 		}
-		return "취소 성공";
+		int result = aService.deleteWaitReserve(reservationNo);
+		return memberId;
 	}
 	
 	//사용자가 결제대기 상태에서 30분넘어도 결제를 하지 않았을때 자동삭제
@@ -290,9 +298,12 @@ public class ReservationController {
 		DecimalFormat decFormat = new DecimalFormat("###,###");
 		int repriceNum = Integer.parseInt(rePrice.replaceAll("[^0-9]",""));
 		int salePriceNum = Integer.parseInt(salePrice.replaceAll("[^0-9]",""));
-		if(salePrice.contains("%")) {		
-			int no =  repriceNum / 10; 			
-			no = ((no * salePriceNum ));
+		if(salePrice.contains("%")) {	
+			System.out.println("가격 : "+salePrice);
+			int no =  repriceNum / 10; 	
+			System.out.println(no);
+			char firstNum = salePrice.charAt(0);			
+			no = ((no * Character.getNumericValue(firstNum)));
 			result = String.valueOf(decFormat.format(repriceNum - no));
 		}else {
 			result = String.valueOf(decFormat.format(repriceNum - Integer.parseInt(salePrice)));

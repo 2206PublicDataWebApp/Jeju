@@ -438,7 +438,7 @@ public class PensionController {
 		return mv;
 	}
 	
-	//날짜조회 후 ajax로 카테고리 적용한것도 고려하여 코드 작성
+		//날짜조회 후 ajax로 카테고리 적용한것도 고려하여 코드 작성
 		@RequestMapping(value="/pension/priceSet", method=RequestMethod.POST)
 		public ModelAndView priceSet(
 				@ModelAttribute Pension pension
@@ -580,7 +580,7 @@ public class PensionController {
 		return mv;
 	}
 
-//카테고리 필터링만 적용시키고 인기순 정렬했을때 코
+	//카테고리 필터링만 적용시키고 인기순 정렬했을때 코
 	@ResponseBody
 	@RequestMapping(value="/pension/popular", method=RequestMethod.GET)
 	public ModelAndView searchPopular(
@@ -747,7 +747,7 @@ public class PensionController {
 		return mv;
 	}
 
-	//날짜선택 후 내림차순 가격 정렬
+		//날짜선택 후 내림차순 가격 정렬
 		@ResponseBody
 		@RequestMapping(value="/pension/dateDescPriceSort", method=RequestMethod.POST)
 		public ModelAndView dateDescPriceSort(
@@ -834,7 +834,6 @@ public class PensionController {
 					iNumber++;
 				}
 			}
-
 
 			int pListNum = 0;
 			Pension tmp = new Pension();

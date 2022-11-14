@@ -135,4 +135,28 @@ public class ReservationStoreLogic implements ReservationStore{
 		return result;
 	}
 
+	@Override
+	public Reservation selectCouponCode(SqlSession session, Integer reservationNo) {
+		Reservation couponCode = session.selectOne("ReservationMapper.selectCouponCode", reservationNo);
+		return couponCode;
+	}
+
+	@Override
+	public int upCouponCount(SqlSession session, Reservation reservation) {
+		int result = session.update("MyCouponMapper.updateStatusOrigin", reservation);
+		return result;
+	}
+
+	@Override
+	public int updateStatus(SqlSession session, Reservation reservation) {
+		int result = session.update("MyCouponMapper.updateStatus", reservation);
+		return result;
+	}
+
+	@Override
+	public Member selectOneByMember(SqlSession session, String memberId) {
+		Member mOne = session.selectOne("MemberMapper.selectOneByMember", memberId);
+		return mOne;
+	}
+
 }

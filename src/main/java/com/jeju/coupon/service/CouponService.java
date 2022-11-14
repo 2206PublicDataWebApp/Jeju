@@ -32,6 +32,7 @@ public interface CouponService {
 	List<MyCoupon> selectCouponCode(String memberId);
 	//쿠폰 사용표기를 0으로 변경
 	int updateStatus(MyCoupon myCoupon);
+	int updateCouponStatus(MyCoupon myCoupon);
 
 
 }
