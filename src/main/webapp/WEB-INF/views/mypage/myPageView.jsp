@@ -15,7 +15,12 @@
     <link rel="stylesheet" href="/resources/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
-
+	<style>
+		#img{
+			width:200px;
+			height:170px;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -36,8 +41,8 @@
 	            <div class="dest-row row">
 		            <div class="col-lg-4 col-md-6">
 	                    <div class="dest-col">
-	                        <div class="dest-img">
-	                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+	                        <div class="dest-img" >
+	                            <img id="img" src="/resources/images/bill.png" alt="">
 	                        </div>
 	                        <h3>이용내역</h3>
 	                        <a class="btn btn-outline-success" href="#" id="reservationList">바로가기</a>
@@ -47,7 +52,7 @@
 		                <div class="col-lg-4 col-md-6">
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img id="img" src="/resources/images/my.png" alt="">
 		                        </div>
 		                        <h3>내 정보</h3>
 		                        <a class="btn btn-outline-success" href="#">바로가기</a>
@@ -56,7 +61,7 @@
 		                <div class="col-lg-4 col-md-6">
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img id="img" src="/resources/images/pension.png" alt="">
 		                        </div>
 		                        <h3>숙소관리</h3>
 		                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>
@@ -66,7 +71,7 @@
 		                    <br><br><br><br><br>
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img id="img" src="/resources/images/review.png" alt="">
 		                        </div>
 		                        <h3>후기 조회</h3>
 		                        <a class="btn btn-outline-success" href="/mypage/review">바로가기</a>
@@ -76,7 +81,7 @@
 		                    <br><br><br><br><br>
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img id="img" src="/resources/images/jjim.png" alt="">
 		                        </div>
 		                        <h3>찜 내역</h3>
 		                        <a class="btn btn-outline-success" href="/mypage/jjimView">바로가기</a>
@@ -86,7 +91,7 @@
 		                    <br><br><br><br><br>
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img id="img" src="/resources/images/coupon.png" alt="">
 		                        </div>
 		                        <h3>내 쿠폰함</h3>
 		                        <a class="btn btn-outline-success" href="/coupon/couponList">바로가기</a>
