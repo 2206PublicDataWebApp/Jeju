@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <!--  ************************* Page Title Starts Here ************************** -->
