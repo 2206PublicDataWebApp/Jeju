@@ -56,7 +56,7 @@
 		                <div class="col-lg-4 col-md-6">
 		                    <div class="dest-col">
 		                        <div class="dest-img">
-		                            <img src="/resources/assets/images/destination/d4.jpg" alt="">
+		                            <img src="/resources/assets/images/destination/bottom_icon04.png" alt="">
 		                        </div>
 		                        <h3>숙소관리</h3>
 		                        <a class="btn btn-outline-success" href="/mypage/pensionManagement">바로가기</a>

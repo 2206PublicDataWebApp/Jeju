@@ -25,4 +25,7 @@ public interface ReviewStore {
 	void registerReview(SqlSession session, Review review);
 	// 리뷰 등록시 RESERVATION_TBL REVIEW_CHECK +1
 	void updateReviewCheck(SqlSession session, Review review);
+
+
+    List<Review> pagingShowAllReview(SqlSession session, int currentPage, int reviewLimit);
 }

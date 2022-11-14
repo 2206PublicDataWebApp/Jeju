@@ -93,7 +93,7 @@ body{ background-color: #ededed; }
 
    <div class="loginbox">
      		<h2>로그인</h2>
-         <form action="/member/login" method="get">
+         <form action="/member/login" method="post">
          <fieldset>
           <legend>로그인 구역</legend>
          	<input type="hidden" name="pensionNo" value="${pensionNo }">
