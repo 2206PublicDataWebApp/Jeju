@@ -4,6 +4,7 @@
 <!doctype html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
     <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <!--  ************************* Page Title Starts Here ************************** -->
@@ -30,9 +32,9 @@
 	</div>
 	<br><br>
 
-	<div align="center">
-	<script async src="//client.uchat.io/uchat.js"></script>
-	<u-chat room='4man' style="display:inline-block; width:1100px; height:700px;"></u-chat>
+
+
+
 	</div>
 	<br><br>
 	
