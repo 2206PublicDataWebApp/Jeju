@@ -28,6 +28,7 @@
 	height: 100%;
 	position: relative;
 }
+<<<<<<< HEAD
 span.guide {
 	display: none;
 	font-size: 12px;
@@ -101,6 +102,94 @@ span.guide {
 	font-weight: bold;
 	line-height: 1;
 }
+=======
+
+span.guide {
+	display: none;
+	font-size: 12px;
+	top: 12px;
+	right: 10px;
+}
+
+#idCheck {
+	display : none;
+	color : green;
+}
+
+#nonId {
+	display : none;
+	color : red;
+}
+
+.dpn {
+	display: none !important;
+}
+
+.join_wrap {
+	width: 550px;
+	margin: 0 auto;
+	border: 1px solid #dadada;
+	padding: 24px;
+	border-radius: 5px;
+}
+
+.join_title {
+	width: 100%;
+	height: 35px;
+	font-size: 19px;
+	font-weight: bold;
+	padding-left: 10px;
+	padding: 0 0 10px 10px;
+}
+
+.join_box {
+	width: 100%;
+}
+
+.join_box input {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #dadada;
+	padding: 17px;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+.join_box span {
+	display: inline-block;
+	color: red;
+	font-size: 12px;
+	padding-left: 1px;
+	padding-top: 8px;
+}
+
+.email_auth {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.email_auth input {
+	display: inline-block;
+	width: calc(100% - 121px);
+	vertical-align: top;
+	margin: 0;
+}
+
+.email_auth_btn {
+	display: inline-block;
+	width: 115px;
+	height: 50px;
+	padding: 17px 0 15px;
+	border-radius: 6px;
+	border: solid 1px rgba(0, 0, 0, .15);
+	background-color: #03c75a;
+	color: white;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 1;
+}
+
+>>>>>>> branch 'new_Hyeokddd' of https://github.com/2206PublicDataWebApp/Jeju.git
 .join_btn {
 	display: block;
 	width: 100%;
