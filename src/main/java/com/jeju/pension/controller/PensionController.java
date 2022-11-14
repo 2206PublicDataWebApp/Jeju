@@ -134,13 +134,11 @@ public class PensionController {
 			}
 			pService.registerPension(pension); 
 			int pensionNo = pService.selectePensionNo(pension);
-			System.out.println("펜션 : "+pension);
 			room.setRefPensionNo(pensionNo);
 			pService.registerRoom(room);
 //			String price = room.getPrice();
 			int roomNo = pService.selecteRoomNo(room);
 			room.setRoomNo(roomNo);
-			System.out.println("객실 : "+room);
 			roomAttach.setRoomNo(roomNo);
 			pService.registerRoomAttach(roomAttach);
 			category.setRefPensionNumber(pensionNo);

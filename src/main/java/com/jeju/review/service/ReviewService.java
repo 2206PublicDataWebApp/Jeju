@@ -15,10 +15,8 @@ public interface ReviewService {
 	void modifyReview(Review review);
 	// 리뷰 삭제
 	void removeReview(Integer reviewNo);
-
 	//관리자페이지 리뷰전체조회
     List<Review> showAllReview();
-
 	// 관리자페이지 리뷰삭제
 	void removeAdminReview(Integer reviewNo);
     // 리뷰 등록

@@ -78,7 +78,7 @@
                        <li><a href="/mypage/myPage">마이페이지</a></li>
                        <li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
                        <c:if test="${sessionScope.loginUser.memberId == 'admin' }">
-                       	  <li><a href="/admin/adminPage">관리자페이지(임시)</a></li>
+                       	  <li><a href="/admin/adminPage">관리자페이지</a></li>
                        </c:if>
                    </ul>
                </div>

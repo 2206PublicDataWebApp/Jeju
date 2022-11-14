@@ -38,16 +38,12 @@ public interface PensionService {
 	Pension selectPensionRank(Integer pensionNo);
 	//숙소 상세페이지
 	Pension selecteOnePension(Integer pensionNo);
-	// 숙소 카테고리 가져오기
-//	Category selectPensionCategory(Integer pensionNo);
 	// 숙소 이름 중복체크
 	int checkPensionName(String pensionName);
 	// 객실 가져오기
 	List<Room> selecteRoom(Integer pensionNo);
 
 	List<String> selecteRoomAttach(Integer pensionNo);
-	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
-//	List<Integer> selecteRoomAttachNo(Integer pensionNo);
 	// 카테고리 가져오기
 	List<Category> selectCategoryCheck(Integer pensionNo);
 	//날짜 조회용

@@ -60,7 +60,7 @@
 	        <div>
 	            <div style="text-align: center; margin-bottom: 100px;">
 	                <input type="submit" class="btn btn-outline-success" value="수정"></a>
-	                <a class="btn btn-outline-success" href="#"  onclick="cancle(${notice.noticeNo});">취소</a>
+	                <a class="btn btn-outline-success" href="#"  onclick="cancle(${notice.noticeNo},${page });">취소</a>
 	            </div>
 	        </div>     
         </form> 
@@ -74,9 +74,9 @@
     <script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
     <script src="/resources/assets/js/script.js"></script>
     <script>
-    	function cancle(noticeNo) {
+    	function cancle(noticeNo, page) {
     		if(confirm("수정을 취소하시겠습니까?")) {
-    			location.href="/notice/detail?noticeNo="+noticeNo;
+    			location.href="/notice/detail?noticeNo="+noticeNo+"&page="+page;
     		}
     	}
     </script>

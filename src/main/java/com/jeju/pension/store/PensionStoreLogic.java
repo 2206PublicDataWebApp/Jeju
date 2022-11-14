@@ -112,12 +112,6 @@ public class PensionStoreLogic implements PensionStore{
 		List<String> roomAttach = session.selectList("RoomMapper.selectRoomAttach", pensionNo);
 		return roomAttach;
 	}
-	// 객실 번호 가져오기 (객실 이미지 가져오기위한 번호)
-//	@Override
-//	public List<Integer> selectRoomAttachNo(SqlSession session, Integer pensionNo) {
-//		List<Integer> roomNo = session.selectOne("RoomMapper.selectRoomAttachNo", pensionNo);
-//		return roomNo;
-//	}
 	// 카테고리 가져오기
 	@Override
 	public List<Category> selectCategoryCheck(SqlSession session, Integer pensionNo) {
