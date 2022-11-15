@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class AdminReviewController {
     public ModelAndView showAdminReview
             (ModelAndView modelAndView,
              @RequestParam(value = "page", required=false) Integer page,
-             HttpSession httpSession
+             HttpSession httpSession,
+             HttpServletRequest request
             ){
         logger.info("관리자 리뷰페이지 페이지 접속 시도 {}", modelAndView);
 
@@ -52,6 +54,7 @@ public class AdminReviewController {
             modelAndView.addObject("errorMsg", errorMsg);
             modelAndView.addObject("redirectUrl", "/member/loginView.kh");
             modelAndView.setViewName("/common/error");
+            logger.warn("권한이 없는 사용자의 관리자 페이지 접근 > IP address : {}", request.getRemoteAddr());
             return modelAndView;
         }
 
