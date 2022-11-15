@@ -202,7 +202,6 @@
                             <table class="table table-borderless table-data3">
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
                                     <th>이름</th>
                                     <th>주소</th>
                                     <th>가격</th>
@@ -214,7 +213,7 @@
                                 <c:forEach items="${pensionPageList }" var="adminPension" varStatus="i">
                                     <input type="hidden" name="pensionNo" value="${adminPension.pensionNo}">
                                     <tr>
-                                        <td>${i.count}</td>
+
                                         <td>${adminPension.pensionName}</td>
                                         <td>${adminPension.pensionAddr}</td>
                                         <td>${adminPension.pensionPrice}</td>
@@ -228,42 +227,38 @@
                         </div>
 
                         <!-- 페이징 시작-->
-                        <div>
-                            <article>
+                        <div align="center">
+
                                 <!-- 이전 페이지 -->
                                 <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">
-                                        <span class="prev">
-                                            <a href="/admin/pension?page=${pagination.startNavi - 1}"></a>
-                                        </span>
+                                    <a href="/admin/pension?page=${pagination.startNavi - 1}"></a>
                                 </c:if>
 
                                 <!-- 번호 -->
                                 <c:forEach var="page" begin="${pagination.startNavi}"
                                            end="${pagination.endNavi}">
                                     <c:if test="${page == pagination.currentPage  }">
-                                            <span class="pageNow">
+                                            <span style=display:inline-block;>
                                                     ${page }
                                             </span>
                                     </c:if>
                                     <c:if test="${page == 0  }">
-                                            <span class="pageNow">
+                                            <span>
                                                     ${page+1 }
                                             </span>
                                     </c:if>
 
                                     <c:if test="${page != pagination.currentPage && page !=0}">
-                                            <span class="pages"> <a href="/admin/pension?page=${page }">${page }</a>
-                                            </span>
+                                           <a href="/admin/pension?page=${page }">${page }</a>
                                     </c:if>
                                 </c:forEach>
 
                                 <!-- 다음 페이지 -->
                                 <c:if test="${pagination.endNavi ne pagination.maxPage  }">
-                                        <span class="next"> <a
-                                                href="/admin/pension?page=${pagination.endNavi+1 }"> > </a>
+                                        <span> <a href="/admin/pension?page=${pagination.endNavi+1 }"> > </a>
                                         </span>
                                 </c:if>
-                            </article>
+
                         </div>
                         <!-- 페이징 끝 -->
                     </div>

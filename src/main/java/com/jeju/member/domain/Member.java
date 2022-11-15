@@ -29,8 +29,10 @@ public class Member {
 	private int memberNo;
 	private int couponCount;
 
+	// 차트 신규회원가입수
 	private int count;
 
+	// 차트 성별총합
 	private int genderCount;
 
 

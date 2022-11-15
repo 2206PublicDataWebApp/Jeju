@@ -186,69 +186,13 @@
         </header>
         <!-- END HEADER DESKTOP-->
 
-        <!-- 차트 시작 -->
-        <script src="${pageContext.request.contextPath}/js/highChart/highcharts.js"></script>
+        <!-- 차트 js  -->
 
-        <script type="text/javascript">
 
-            var todayInfo = null;
-
-            $(document).ready(function() {
-                var chart = Highcharts.chart('container', {
-                    title: {
-                        text: '요일별 신규회원가입'
-                    },
-                    subtitle: {
-                        text: '신규회원가입'
-                    },
-
-                    xAxis: {
-                        categories: getPersonCnt("cateArr"),
-                    },
-
-                    series: [{
-                        type: 'column',
-                        colorByPoint: true,
-                        data: getPersonCnt("data"),
-                        /* data: getPersonCnt("data"), */
-                        showInLegend: false
-                    }]
-                });
-
-                function getPersonCnt(type){
-                    if(todayInfo==null) todayInfo=${chartJSON};
-                    var todayInfoMap = resultProcLineChart(todayInfo);
-                    if(todayInfoMap==null) return null;
-                    if(type=="data"){
-                        return todayInfoMap.get("data");
-                    }else{
-                        return todayInfoMap.get("cateArr");
-                    }
-                }
-
-                function resultProcLineChart($obj){
-                    if($obj==null) return null;
-                    var resMap = new JqMap();
-                    var cateArr = new Array();
-                    var dataArr = new Array();
-
-                    for(var k in $obj){
-                        var xobj =$obj[k];
-                        cateArr.push(xobj.d);
-                        dataArr.push(xobj.y);
-                    }
-                    resMap.put("cateArr",cateArr);
-                    resMap.put("data",dataArr);
-                    return resMap;
-                }
-            });
-
-        </script>
         <!-- 차트 끝 -->
 
-            var todayInfo = null;
-        </script>
 
+        <!-- 메인메뉴 -->
         <div class="main-content">
                         <div class="section__content section__content--p30">
                             <div class="container-fluid">
@@ -347,17 +291,6 @@
 <!-- chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-<!-- 하이차트 -->
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script src="/js/highstock.js"></script>
-<script src="/js/highmaps.js"></script>
-<script src="/js/highcharts.js"></script>
-<script src="/js/modules/stock.js"></script>
-<script src="/js/modules/map.js"></script>
-<script type="text/javascript">
 
 
 </script>

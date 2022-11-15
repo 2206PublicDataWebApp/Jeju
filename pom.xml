@@ -21,6 +21,7 @@
    </repositories>
 
    <dependencies>
+
       <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-websocket</artifactId>

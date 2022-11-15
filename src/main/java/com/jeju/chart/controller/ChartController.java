@@ -48,7 +48,7 @@ public class ChartController {
         for(Member member : genderChart){
             cJsonObjGender.put("x", member.getGender());
             cJsonObjGender.put("y", member.getGenderCount());
-            cJsonArrGender.add(cJsonArrGender);
+            cJsonArrGender.add(cJsonObjGender);
         }
         modelAndView.addObject("chartJSONGender", cJsonArrGender);
 
