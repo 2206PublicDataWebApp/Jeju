@@ -188,7 +188,7 @@ span.guide {
 							<td>* 성별</td>
 							<br></br>
 							<td>
-							<input type="radio" value="Woman" name="gender" id="Woman">여자
+							<input type="radio" value="Woman" name="gender" id="Woman">여자 /
 							<input type="radio" value="Man" name="gender" id="Man">남자
 							</td>
 						</tr>
@@ -204,7 +204,7 @@ span.guide {
 						<tr>
 							<td>도로 주소</td>
 							<td><input type="text"
-								name="address1" class="postcodify_address"></td>
+								name="address1" class="postcodify_address" ></td>
 						</tr>
 						<tr>
 						<br></br>
