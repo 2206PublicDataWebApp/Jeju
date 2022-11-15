@@ -12,8 +12,21 @@
 		<result property="roomNo" column="ROOM_NO"/>
 		<result property="payPensionNo" 		column="PAY_PENSION_NO"/>
 	</resultMap>
-	
+
+	<!-- 관리자페이지 차트용 resultMap -->
+	<resultMap id="paymentMap" type="payment">
+		<result property="paydate"       column="PAYDATE"/>
+		<result property="sum"       column="SUM"/>
+	</resultMap>
+
+	<!-- 관리자페이지 신규회원 총합 차트 -->
+	<select id="paymentChart" resultMap="paymentMap">
+		SELECT TO_CHAR(PAY_DATE, 'YYYYMMDD') AS PAYDATE, SUM(PAY_PRICE) * 0.1 as SUM
+		FROM PAYMENT_TBL GROUP BY TO_CHAR(PAY_DATE, 'YYYYMMDD')
+	</select>
+
 	<insert id="insertPayInfo">
 		INSERT INTO PAYMENT_TBL VALUES(#{payId}, #{memberId}, 1, #{payPrice}, DEFAULT, #{roomNo}, #{payPensionNo})
 	</insert>
+
 </mapper>

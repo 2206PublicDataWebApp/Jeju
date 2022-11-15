@@ -207,7 +207,6 @@
                                         <th>결재일</th>
                                         <th>아이디</th>
                                         <th>가격</th>
-                                        <th>예약상태</th>
                                         <th>예약기간-시작</th>
                                         <th>예약기간-마감</th>
                                         <th>기타</th>
@@ -218,11 +217,19 @@
                                         <tr>
                                             <td>${adminReservation.reservationNo}</td>
                                             <td>${adminReservation.rePensionName}</td>
-                                            <td>${adminReservation.rStatus}</td>
+                                            <td>
+                                                <c:choose>
+                                                <c:when test="${adminReservation.rStatus eq 1}" >
+                                                    미결재
+                                                </c:when>
+                                                    <c:when test="${adminReservation.rStatus ne 1}" >
+                                                      결재완료
+                                                    </c:when>
+                                                </c:choose>
+                                            </td>
                                             <td>${adminReservation.rePayDate}</td>
                                             <td>${adminReservation.memberId}</td>
-                                            <td>${adminReservation.rePrice}</td>
-                                            <td>${adminReservation.rStatus}</td>
+                                            <td>${adminReservation.rePrice}원</td>
                                             <td>${adminReservation.reStartDate}</td>
                                             <td>${adminReservation.reEndDate}</td>
                                             <td></td>

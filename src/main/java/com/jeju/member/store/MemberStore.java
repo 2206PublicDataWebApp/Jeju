@@ -3,6 +3,8 @@ package com.jeju.member.store;
 
 
 
+import com.jeju.chart.domain.Enrollment;
+import com.jeju.chart.domain.Gender;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -47,9 +49,9 @@ public interface MemberStore {
 	void removeAdminMember(SqlSessionTemplate session, Integer memberNo);
 
 	// 관리자페이지 회원검색
-    List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue);
+	List<Member> searchAllByValue(SqlSessionTemplate session, String searchCondition, String searchValue);
 
-	List<Member> selectNewRegisterChart(SqlSessionTemplate session);
+	List<Enrollment> selectNewRegisterChart(SqlSessionTemplate session);
 
-    List<Member> selectGenderChart(SqlSessionTemplate session);
+	List<Gender> selectGenderChart(SqlSessionTemplate session);
 }

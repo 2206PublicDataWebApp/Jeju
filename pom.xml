@@ -102,7 +102,7 @@
           <groupId>org.mindrot</groupId>
           <artifactId>jbcrypt</artifactId>
           <version>0.4</version>
-      </dependency>-->
+      </dependency>
 
       <!--스프링시큐리티 web 라이브러리-->
       <dependency>

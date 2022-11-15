@@ -29,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @PreAuthorize("hasRole('ADMIN')")
@@ -58,10 +59,11 @@ public class AdminController {
     // 관리자페이지 일반 화면조회, 회원목록조회, 펜션목록조회, 예약내역조회, 리뷰내역조회
     @GetMapping("/adminPage")
     public ModelAndView showAdminPage
-                        (ModelAndView modelAndView,
-                         HttpSession httpSession,
-                         @RequestParam(value = "page", required=false) Integer page
-                         ){
+    (ModelAndView modelAndView,
+     HttpSession httpSession,
+     HttpServletRequest request,
+     @RequestParam(value = "page", required=false) Integer page
+    ){
         logger.info("관리자  일반페이지 접속 시도 {}", modelAndView);
 
         Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
@@ -71,7 +73,8 @@ public class AdminController {
             modelAndView.addObject("errorMsg", errorMsg);
             modelAndView.addObject("redirectUrl", "/member/loginView.kh");
             modelAndView.setViewName("/common/error");
-        return modelAndView;
+            logger.warn("권한이 없는 사용자의 관리자 페이지 접근 > IP address : {}", request.getRemoteAddr());
+            return modelAndView;
         }
 
         //회원목록조회

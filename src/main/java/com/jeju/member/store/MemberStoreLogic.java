@@ -2,6 +2,8 @@ package com.jeju.member.store;
 
 
 
+import com.jeju.chart.domain.Enrollment;
+import com.jeju.chart.domain.Gender;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,7 +38,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int insertMember(SqlSession session, Member member) {
-		
+
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
@@ -50,7 +52,7 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public int deleteMember(SqlSession session, String memberId) {
 		int result = session.delete("MemberMapper.deleteMember", memberId);
-	//	int result = session.update("MemberMapper.deleteMember", memberId);
+		//	int result = session.update("MemberMapper.deleteMember", memberId);
 		return result;
 	}
 
@@ -98,9 +100,9 @@ public class MemberStoreLogic implements MemberStore{
 
 	// 관리자 회원탈퇴
 	@Override
-		public void removeAdminMember(SqlSessionTemplate session, Integer memberNo) {
+	public void removeAdminMember(SqlSessionTemplate session, Integer memberNo) {
 		session.delete("MemberMapper.deleteAdminMember", memberNo);
-		}
+	}
 
 	// 관리자페이지 회원검색
 	@Override
@@ -114,14 +116,14 @@ public class MemberStoreLogic implements MemberStore{
 
 	// 신규회원 차트 조회
 	@Override
-	public List<Member> selectNewRegisterChart(SqlSessionTemplate session) {
-		List<Member> newResgisterChart = session.selectList("MemberMapper.newResgisterChart");
+	public List<Enrollment> selectNewRegisterChart(SqlSessionTemplate session) {
+		List<Enrollment> newResgisterChart = session.selectList("MemberMapper.newResgisterChart");
 		return newResgisterChart;
 	}
 
 	@Override
-	public List<Member> selectGenderChart(SqlSessionTemplate session) {
-		List<Member> genderChart = session.selectList("MemberMapper.genderChart");
+	public List<Gender> selectGenderChart(SqlSessionTemplate session) {
+		List<Gender> genderChart = session.selectList("MemberMapper.genderChart");
 		return genderChart;
 	}
 

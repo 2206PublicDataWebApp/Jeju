@@ -1,6 +1,8 @@
 package com.jeju.member.service;
 
 
+import com.jeju.chart.domain.Enrollment;
+import com.jeju.chart.domain.Gender;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,12 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private SqlSessionTemplate session;
 	@Autowired
-		private MemberStore mStore;
+	private MemberStore mStore;
 
 	@Override
 	public Member loginMember(Member member) {
-		Member mOne 
-		= mStore.selectLoginMember(session, member);
+		Member mOne
+				= mStore.selectLoginMember(session, member);
 		return mOne;
 	}
 
@@ -52,8 +54,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int removeMember(String memberId) {
-		int result 
-		= mStore.deleteMember(session
+		int result
+				= mStore.deleteMember(session
 				, memberId);
 		return result;
 	}
@@ -79,7 +81,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-@Override
+	@Override
 	public List<Member> findIdByEmail(String memberEmail) {
 		List<Member> sList = mStore.findIdByEmail(session, memberEmail);
 		return sList;
@@ -93,42 +95,43 @@ public class MemberServiceImpl implements MemberService {
 
 
 	// 관리자페이지 전체멤버 조회
-		@Override
-		public List<Member> showAllMember() {
-			List<Member> memberList = mStore.showAllMember(session);
-			return memberList;
-		}
-
-		// 관리자페이지 회원탈퇴
-		@Override
-			public void removeAdminMember(Integer memberNo) {
-				mStore.removeAdminMember(session, memberNo);
-			}
-
-			// 관리자페이지 회원검색
-		@Override
-		public List<Member> searchAllByValue(String searchCondition, String searchValue) {
-			List<Member> searchList = mStore.searchAllByValue(session, searchCondition, searchValue);
-			return searchList;
-		}
-
-		// 신규회원 차트 조회
 	@Override
-	public List<Member> selectNewRegisterChart() {
-		List<Member> newResgisterChart = mStore.selectNewRegisterChart(session);
+	public List<Member> showAllMember() {
+		List<Member> memberList = mStore.showAllMember(session);
+		return memberList;
+	}
+
+	// 관리자페이지 회원탈퇴
+	@Override
+	public void removeAdminMember(Integer memberNo) {
+		mStore.removeAdminMember(session, memberNo);
+	}
+
+	// 관리자페이지 회원검색
+	@Override
+	public List<Member> searchAllByValue(String searchCondition, String searchValue) {
+		List<Member> searchList = mStore.searchAllByValue(session, searchCondition, searchValue);
+		return searchList;
+	}
+
+	// 신규회원총합 차트 조회
+	@Override
+	public List<Enrollment> selectNewRegisterChart() {
+		List<Enrollment> newResgisterChart = mStore.selectNewRegisterChart(session);
 		return newResgisterChart;
 	}
 
+	// 성비 차트 조회
 	@Override
-	public List<Member> selectGenderChart() {
-		List<Member>  genderChart = mStore.selectGenderChart(session);
+	public List<Gender> selectGenderChart() {
+		List<Gender>  genderChart = mStore.selectGenderChart(session);
 		return genderChart;
 	}
 
 	// 관리자페이지 회원수 총합
-		@Override
-		public int countAllMember(String searchCondition, String searchValue) {
-			int count = mStore.countAllMember(session, searchCondition, searchValue);
-			return count;
-		}
+	@Override
+	public int countAllMember(String searchCondition, String searchValue) {
+		int count = mStore.countAllMember(session, searchCondition, searchValue);
+		return count;
+	}
 }

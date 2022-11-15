@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -37,10 +38,11 @@ public class AdminMemberController {
     // 관리자페이지 회원조회 및 페이징
     @GetMapping("/member")
     public ModelAndView showAdminMember
-            (ModelAndView modelAndView,
-             @RequestParam(value = "page", required=false) Integer page,
-             HttpSession httpSession
-            ){
+    (ModelAndView modelAndView,
+     @RequestParam(value = "page", required=false) Integer page,
+     HttpSession httpSession,
+     HttpServletRequest request
+    ){
         logger.info("관리자 회원관리 페이지 접속 시도 {}", modelAndView);
 
         Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
@@ -50,9 +52,9 @@ public class AdminMemberController {
             modelAndView.addObject("errorMsg", errorMsg);
             modelAndView.addObject("redirectUrl", "/member/loginView.kh");
             modelAndView.setViewName("/common/error");
+            logger.warn("권한이 없는 사용자의 관리자 페이지 접근 > IP address : {}", request.getRemoteAddr());
             return modelAndView;
         }
-
 
         int memberTotalCount = memberService.showAllMember().size();
         int memberLimit = 10; // 한 화면에 나타날 회원의 수

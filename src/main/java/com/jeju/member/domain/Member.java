@@ -29,20 +29,8 @@ public class Member {
 	private int memberNo;
 	private int couponCount;
 
-	// 차트 신규회원가입수
-	private int count;
-
-	// 차트 성별총합
-	private int genderCount;
 
 
-	public int getGenderCount() {
-		return genderCount;
-	}
-
-	public void setGenderCount(int genderCount) {
-		this.genderCount = genderCount;
-	}
 
 	public String getMemberId() {
 		return memberId;
@@ -159,13 +147,7 @@ public class Member {
 		this.couponCount = couponCount;
 	}
 
-	public int getCount() {
-		return count;
-	}
 
-	public void setCount(int count) {
-		this.count = count;
-	}
 
 
 	public Member() {
@@ -189,7 +171,6 @@ public class Member {
 		this.mStatus = mStatus;
 		this.memberNo = memberNo;
 		this.couponCount = couponCount;
-		this.count = count;
 	}
 
 
