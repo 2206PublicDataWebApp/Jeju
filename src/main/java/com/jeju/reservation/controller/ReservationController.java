@@ -101,6 +101,7 @@ public class ReservationController {
 			ModelAndView mv,
 			@ModelAttribute Reservation reservation) {
 		Reservation reserveInfo = aService.selectNonMemberInfo(reservation);
+		System.out.println(reserveInfo);
 		mv.addObject("reserveInfo", reserveInfo);
 		mv.setViewName("/mypage/nonReservation");
 		return mv;
@@ -201,7 +202,7 @@ public class ReservationController {
 //			////////////////예약 완료 리스트///////////////////
 			List<Reservation> rList = aService.selectReserveList(memberId);
 			List<Reservation> sList = aService.expirationReserveList(memberId);
-			
+
 			mv.addObject("sList", sList);
 			mv.addObject("rList", rList);
 			mv.addObject("wList", wList);
