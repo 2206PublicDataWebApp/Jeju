@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="selectMyCoupon" resultMap="myCouponResultMap">
-		SELECT * FROM MY_COUPON_TBL
+		SELECT * FROM MY_COUPON_TBL WHERE MEMBER_ID = #{memberId} AND COUPON_USE = 0
 	</select>
 	
 	<select id="selectCouponCode" resultMap="myCouponResultMap">

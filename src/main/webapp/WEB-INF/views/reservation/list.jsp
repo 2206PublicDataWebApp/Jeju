@@ -195,7 +195,7 @@
                     <div class="card-body">
                     <c:if test="${!empty p }">
                     	<h5 class="card-title">숙소이름</h5>
-                      <p class="card-text">${p.pensionName }</p>
+                      <p class="card-text" id="pensionTitle">${p.pensionName }</p>
                       <br>
                        </c:if>  
                        <c:if test="${!empty r }">
@@ -369,9 +369,8 @@
  	     		    pg : 'kcp',
  	     		    pay_method : 'card',
  	     		    merchant_uid : 'merchant_' + new Date().getTime(),
- 	     		    name : '한재민' ,
-// 		    		amount : price1,
-					amount : '501',
+ 	     		    name : $("#pensionTitle").text(),
+ 		    		amount : price1,
  	     		    buyer_email : 'iamport@siot.do',
  	     		    buyer_name : $("#nameChk").val(),
  	     		    buyer_tel : $("#phone").val()
@@ -444,7 +443,6 @@
  	     		       alert(msg);
  	     		     location.href = "/";
  	     		    }	
-//  	     		  location.href = "/pension/list";
  	     		});	
  	    }else{
  	    	alert("결제를 진행할 수 없습니다. 다시한번 확인해주세요.");
@@ -466,11 +464,11 @@
  	    		$("#successNameChk").text("예약자 이름을 입력해주세요");
  				$("#successNameChk").css("color", "red");
  	    	}
-//  	    	if($("#phoneDoubleChk").val() != "true"){
-//  	    		console.log($("#phoneDoubleChk").val());
-//  	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-//  				$(".successPhoneChk").css("color", "red");	    		
-//  	    	}
+ 	    	if($("#phoneDoubleChk").val() != "true"){
+ 	    		console.log($("#phoneDoubleChk").val());
+ 	    		$(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+ 				$(".successPhoneChk").css("color", "red");	    		
+ 	    	}
  	    	return false
  	    }    	    	
      });
@@ -516,7 +514,7 @@
     		   	   	        				console.log("keyValue : " + keyValue);
 //												10분은 60만		
 //												1분은   6만 	
-     		   								var tts = 60000;	//1분
+     		   								var tts = 90000;	//1분
 // 											var tts = 1800000;
     		   	   	        				//local에 저장할 key, value와 만료시간을 입력받음
     		   									//local에 저장할 객체를 생성하여 value를 세팅하고 현재일자 + 만료기간을 지정하여 저장

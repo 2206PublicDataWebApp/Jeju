@@ -1,16 +1,9 @@
 package com.jeju.pension.controller;
 
-import com.jeju.member.domain.Member;
-import com.jeju.pagination.Pagination;
-import com.jeju.pension.domain.Pension;
-import com.jeju.pension.service.PensionService;
-import com.jeju.reservation.domain.Reservation;
-import com.jeju.review.controller.AdminReviewController;
-import com.jeju.review.domain.Review;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
@@ -20,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import com.jeju.member.domain.Member;
+import com.jeju.pagination.Pagination;
+import com.jeju.pension.domain.Pension;
+import com.jeju.pension.service.PensionService;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 
 @EnableWebSecurity
 @Controller
@@ -41,7 +38,7 @@ public class AdminPensionController {
              @RequestParam(value = "page", required=false) Integer page,
              HttpSession httpSession
             ){
-        logger.info("관리자 펜션관리 페이지 접속 시도 {}", modelAndView);
+//        logger.info("관리자 펜션관리 페이지 접속 시도 {}", modelAndView);
 
         Member member = (Member)httpSession.getAttribute("loginUser"); // 로그인 체크용
 

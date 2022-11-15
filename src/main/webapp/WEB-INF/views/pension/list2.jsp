@@ -25,7 +25,7 @@
 				</div>
 				<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 					<ul class="modify">
-						<li class="test4"><h2 style="font-size: 22px;">
+						<li class="test4"><h2 style="font-size: 22px; font-weight : bold;">
 								<a href="/pension/detailView?pensionNo=${search.pensionNo }&startDate=${startDate}&endDate=${endDate}">${search.pensionName }</a>
 							</h2></li>
 						<li class="test4">${search.pensionAddr }</li>
@@ -54,7 +54,7 @@
 					</div>
 					<div class="col-md-6 p-4 ps-md-0" id="tableBody2">
 						<ul class="modify">
-							<li class="test4"><h2 style="font-size: 22px;">
+							<li class="test4"><h2 style="font-size: 22px; font-weight : bold;">
 									<a href="/pension/detailView?pensionNo=${priceSet.pensionNo }&startDate=${startDate}&endDate=${endDate}">${priceSet.pensionName }</a>
 								</h2></li>
 							<li class="test4">${priceSet.pensionAddr }</li>
@@ -83,7 +83,7 @@
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
-                           <li class="test4"><h2 style="font-size : 22px;"><a href="/pension/detailView?pensionNo=${dateSearch.pensionNo }&startDate=${startDate}&endDate=${endDate}">${dateSearch.pensionName }</a></h2></li>
+                           <li class="test4"><h2 style="font-size : 22px; font-weight : bold;"><a href="/pension/detailView?pensionNo=${dateSearch.pensionNo }&startDate=${startDate}&endDate=${endDate}">${dateSearch.pensionName }</a></h2></li>
                            <li class="test4">${dateSearch.pensionAddr }</li>
                            <c:if test="${dateSearch.pensionPrice == '판매완료' }">
                               <li class="test4">${dateSearch.pensionPrice }</li>
