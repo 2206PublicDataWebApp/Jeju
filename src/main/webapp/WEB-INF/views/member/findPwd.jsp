@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스트랩 : 비밀번호 찾기</title>
+<title>비밀번호 찾기</title>
 <!-- CDN -->
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" />
@@ -42,9 +42,9 @@
 	</style>
 </head>
 <body>
-<div class="findIdResultForm">
+	<div class="findIdResultForm">
 		<form action="/member/findPwdResult" method="post">
-			<br>
+		<br>
 			<h3>비밀번호 찾기</h3>
 			<hr>
 			<label for="memberId">아이디</label><br>
@@ -56,10 +56,10 @@
 						</div>
 						<input type="text" placeholder="인증번호 입력" id="email_auth_key">
 						<br><br>
-			<button type="submit" id="findPwdBtn" onclick=""location.href='/member/findPwdResult'" >비밀번호 찾기</button></form>
+			<button type="submit" id="findPwdBtn" onclick="location.href='/member/loginView.kh'" >비밀번호 찾기</button></form>
+		</form>
 	</div>
 	<script>
-
 	var email_auth_cd = '';
 	 $(".email_auth_btn").click(function() {
 							var email = $('#email').val();
@@ -75,7 +75,6 @@
 										"email" : email
 									},
 									success : function(data) {
-
 										alert("인증번호가 발송되었습니다.");
 										email_auth_cd = data;
 									},
@@ -84,7 +83,6 @@
 									}
 								});
 							}
-
 						});
 	$("#email_auth_key").blur(function() {
 							if ($('#email_auth_key').val() != email_auth_cd || $('#email_auth_key').val() =='') {
@@ -95,8 +93,16 @@
 							}
 						});
 		
-		
-		
+		function numberCheck(){
+			var certificationNumber = $("#certificationNumber").val();
+			if(authNumber ==  certificationNumber){
+				window.alert("해당 이메일로 임시 비밀번호를 전송하였습니다. 확인을 누르면 로그인 페이지로 이동합니다.")
+				return true;
+			}else{
+				window.alert("인증번호가 일치하지 않습니다.")
+				return false;
+			}
+		}
 	</script>
 </body>
 </html>

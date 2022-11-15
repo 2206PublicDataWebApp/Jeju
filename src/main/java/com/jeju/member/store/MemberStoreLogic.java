@@ -1,7 +1,5 @@
 package com.jeju.member.store;
 
-
-
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,11 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class MemberStoreLogic implements MemberStore{
+public class MemberStoreLogic implements MemberStore {
 
 	@Override
 	public Member selectLoginMember(SqlSession session, Member member) {
-		Member mOne = session.selectOne("MemberMapper.selectLoginOne",member);
+		Member mOne = session.selectOne("MemberMapper.selectLoginOne", member);
 		return mOne;
 	}
 
@@ -36,7 +34,7 @@ public class MemberStoreLogic implements MemberStore{
 
 	@Override
 	public int insertMember(SqlSession session, Member member) {
-		
+
 		int result = session.insert("MemberMapper.insertMember", member);
 		return result;
 	}
@@ -50,7 +48,7 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public int deleteMember(SqlSession session, String memberId) {
 		int result = session.delete("MemberMapper.deleteMember", memberId);
-	//	int result = session.update("MemberMapper.deleteMember", memberId);
+		// int result = session.update("MemberMapper.deleteMember", memberId);
 		return result;
 	}
 
@@ -77,9 +75,8 @@ public class MemberStoreLogic implements MemberStore{
 		List<Member> sList = session.selectList("MemberMapper.findPwdByEmail", memberEmail);
 		return sList;
 	}
-
-
-
+	
+	
 	// 관리자 페이징용 전체조회
 	@Override
 	public List<Member> pagingShowAllMember(SqlSessionTemplate session, int currentPage, int memberLimit) {
@@ -91,16 +88,16 @@ public class MemberStoreLogic implements MemberStore{
 
 	// 관리자 전체멤버 조회
 	@Override
-	public List<Member> showAllMember(SqlSession session){
+	public List<Member> showAllMember(SqlSession session) {
 		List<Member> memberList = session.selectList("MemberMapper.adminShowAllMember");
 		return memberList;
 	}
 
 	// 관리자 회원탈퇴
 	@Override
-		public void removeAdminMember(SqlSessionTemplate session, Integer memberNo) {
+	public void removeAdminMember(SqlSessionTemplate session, Integer memberNo) {
 		session.delete("MemberMapper.deleteAdminMember", memberNo);
-		}
+	}
 
 	// 관리자페이지 회원검색
 	@Override
@@ -127,5 +124,11 @@ public class MemberStoreLogic implements MemberStore{
 		paramMap.put("searchValue", searchValue);
 		int count = session.selectOne("MemberMapper.countAllMember", paramMap);
 		return count;
+	}
+
+	@Override
+	public int changePwd(SqlSessionTemplate session, Member member) {
+		int result = session.update("MemberMapper.changePwd", member);
+		return result;
 	}
 }

@@ -44,7 +44,10 @@
   	<select id="findPwdByEmail" resultMap="memberResultMap">
   		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
   	</select>
-
+	<!-- 비밀번호 찾기 시 임시패스워드로 변경, 내 정보에서 비밀번호 변경하기 -->
+  	<update id="changePwd">
+  		UPDATE MEMBER_TBL SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_ID = #{memberId} 
+  	</update>
    <select id="selectMemberInfo" resultMap="memberResultMap">
    		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
    		</select>

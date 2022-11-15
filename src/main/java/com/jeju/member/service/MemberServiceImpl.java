@@ -1,6 +1,5 @@
 package com.jeju.member.service;
 
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,11 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private SqlSessionTemplate session;
 	@Autowired
-		private MemberStore mStore;
+	private MemberStore mStore;
 
 	@Override
 	public Member loginMember(Member member) {
-		Member mOne 
-		= mStore.selectLoginMember(session, member);
+		Member mOne = mStore.selectLoginMember(session, member);
 		return mOne;
 	}
 
@@ -52,19 +50,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int removeMember(String memberId) {
-		int result 
-		= mStore.deleteMember(session
-				, memberId);
+		int result = mStore.deleteMember(session, memberId);
 		return result;
 	}
 
-
 	@Override
 	public Member selectMemberInfo(String memberId) {
-		Member member =mStore.selectMemberInfo(session, memberId);
+		Member member = mStore.selectMemberInfo(session, memberId);
 		return member;
 	}
-
 
 	@Override
 	public int checkDupEmail(String memberEmail) {
@@ -78,8 +72,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberList;
 	}
 
-
-@Override
+	@Override
 	public List<Member> findIdByEmail(String memberEmail) {
 		List<Member> sList = mStore.findIdByEmail(session, memberEmail);
 		return sList;
@@ -91,28 +84,27 @@ public class MemberServiceImpl implements MemberService {
 		return sList;
 	}
 
-
 	// 관리자페이지 전체멤버 조회
-		@Override
-		public List<Member> showAllMember() {
-			List<Member> memberList = mStore.showAllMember(session);
-			return memberList;
-		}
+	@Override
+	public List<Member> showAllMember() {
+		List<Member> memberList = mStore.showAllMember(session);
+		return memberList;
+	}
 
-		// 관리자페이지 회원탈퇴
-		@Override
-			public void removeAdminMember(Integer memberNo) {
-				mStore.removeAdminMember(session, memberNo);
-			}
+	// 관리자페이지 회원탈퇴
+	@Override
+	public void removeAdminMember(Integer memberNo) {
+		mStore.removeAdminMember(session, memberNo);
+	}
 
-			// 관리자페이지 회원검색
-		@Override
-		public List<Member> searchAllByValue(String searchCondition, String searchValue) {
-			List<Member> searchList = mStore.searchAllByValue(session, searchCondition, searchValue);
-			return searchList;
-		}
+	// 관리자페이지 회원검색
+	@Override
+	public List<Member> searchAllByValue(String searchCondition, String searchValue) {
+		List<Member> searchList = mStore.searchAllByValue(session, searchCondition, searchValue);
+		return searchList;
+	}
 
-		// 신규회원 차트 조회
+	// 신규회원 차트 조회
 	@Override
 	public List<Member> selectNewRegisterChart() {
 		List<Member> newResgisterChart = mStore.selectNewRegisterChart(session);
@@ -120,9 +112,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 관리자페이지 회원수 총합
-		@Override
-		public int countAllMember(String searchCondition, String searchValue) {
-			int count = mStore.countAllMember(session, searchCondition, searchValue);
-			return count;
-		}
+	@Override
+	public int countAllMember(String searchCondition, String searchValue) {
+		int count = mStore.countAllMember(session, searchCondition, searchValue);
+		return count;
+	}
+
+	@Override
+	public int changePwd(Member member) {
+		int result = mStore.changePwd(session, member);
+		return result;
+	}
 }

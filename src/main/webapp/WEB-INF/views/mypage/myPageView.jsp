@@ -55,7 +55,7 @@
 		                            <img id="img" src="/resources/images/my.png" alt="">
 		                        </div>
 		                        <h3>내 정보</h3>
-		                        <a class="btn btn-outline-success" href="#">바로가기</a>
+		                        <a class="btn btn-outline-success" href="/mypage/modifyView">바로가기</a>
 		                    </div>
 		                </div>
 		                <div class="col-lg-4 col-md-6">
