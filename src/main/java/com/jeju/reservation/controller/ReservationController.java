@@ -101,6 +101,7 @@ public class ReservationController {
 			ModelAndView mv,
 			@ModelAttribute Reservation reservation) {
 		Reservation reserveInfo = aService.selectNonMemberInfo(reservation);
+		System.out.println(reserveInfo);
 		mv.addObject("reserveInfo", reserveInfo);
 		mv.setViewName("/mypage/nonReservation");
 		return mv;
