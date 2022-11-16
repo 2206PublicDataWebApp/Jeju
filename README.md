@@ -64,13 +64,13 @@
 
 ### 1. 로그인
 <p align="center">
-  <img src="./Readme_assets/login.PNG">
+  <img src="./Readme_assets/login.jpg">
 <p>
 <br>
 
 ### 2. 회원가입
 <p align="center">
-  <img src="./Readme_assets/register.PNG">
+  <img src="./Readme_assets/join.jpg">
 <p>
 <br>
 
@@ -78,25 +78,19 @@
 <p align="center">
   <img src="./Readme_assets/mypage1.PNG">
 <p>
-
-<p align="center">
-  <img src="./Readme_assets/mypage2.PNG">
-<p>
-
-<p align="center">
-  <img src="./Readme_assets/mypage3.PNG">
-<p>
-
-<p align="center">
-  <img src="./Readme_assets/mypage4.PNG">
-<p>
 <br>
 
 ### 4. 숙소 리스트	
 
 ### 5. 숙소 상세페이지
 <p align="center">
-<img src="./Readme_assets/recipe_list_1.png">
+<img src="./Readme_assets/pensionDetail.jpg">
+</p>
+<p align="center">
+<img src="./Readme_assets/map.jpg">
+</p>
+<p align="center">
+<img src="./Readme_assets/pensionDetai2.jpg">
 </p>
 
 ### 6. 숙소 예약	
