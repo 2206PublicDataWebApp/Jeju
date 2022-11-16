@@ -7,10 +7,6 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" rel="stylesheet">
 	<style>
-	    body {
-	        background: #f8f8f8;
-	        padding: 100px 0;
-	    }
 	    
 	    #login-form > div {
 	        margin: 15px 0;

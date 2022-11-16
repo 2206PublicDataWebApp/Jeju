@@ -63,12 +63,12 @@
 						               <td>
 						                  ${sessionScope.loginUser.memberId } 님 환영합니다
 							              <a href="#"><img onclick="location.href='/chat/login2.do'"
-							               src="/resources/images/3721186.png"style="width:60px; height:60px;">
+										src="/resources/images/consultimg.png"style="width:60px; height:60px;">
 						               	  </a>
 						               </td>
 						            </tr>
 						            <tr>
-						               <td><a href="/member/logout.kh"style="width:30px; height:30px; background-color: skyblue">로그아웃</a></td>
+						               <td><a href="/member/logout.kh"style="width:30px; height:30px; color : white;" >로그아웃</a></td>
 						            </tr>
 						         </table>
 						      </c:if>

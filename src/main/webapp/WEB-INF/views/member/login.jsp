@@ -1,16 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>회원가입</title>
+    <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
+    <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/all.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/422d96f707.js"
+	crossorigin="anonymous"></script>
 <style>
-{ padding: 0; margin: 0; } /* 태그 여백 없앰 */
-li{ list-style: none; } /* 기호나 번호를 제거 */
-a{ text-decoration: none; } /* 링크텍스트에 밑줄없앰 */
-button{ cursor: pointer; } /* 모든 버튼에 마우스손모양 처리 */
-
-/* body설정 */
-body{ background-color: #ededed; }
-
 .loginbox{
     width: 780px; height: 550px;
     margin: 0 auto; /* 블록요소를 부모영역에서 가운데 처리 */
@@ -81,20 +89,32 @@ body{ background-color: #ededed; }
     background-color: #1673ea;
     color: #fff; font-size: 14px; font-weight: bold;
 }
+{ padding: 0; margin: 0; } /* 태그 여백 없앰 */
+li{ list-style: none; } /* 기호나 번호를 제거 */
+a{ text-decoration: none; } /* 링크텍스트에 밑줄없앰 */
+button{ cursor: pointer; } /* 모든 버튼에 마우스손모양 처리 */
 </style>
-<head>
-        <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
-    </head>
-    <body>
-
+</head>
 
 <body>
-
-
-   <div class="loginbox">
-     		<h2>로그인</h2>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>        
+<!--  ************************* Page Title Starts Here ************************** -->
+       <div class="page-nav no-margin row">
+           <div class="container">
+               <div class="row">
+                   <h2>로그인</h2>
+                   <ul>
+                       <li> <a href="/home"><i class="fas fa-home"></i> 홈</a></li>
+                       <li><i class="fas fa-angle-double-right"></i> 로그인</li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+<br></br>
+<div class="loginbox">
+     		<h2 style="font-weight : bold;">로그인</h2>
          <form action="/member/login" method="post">
-         <fieldset>
+         <fieldset style="position : relative; bottom : 50px;">
           <legend>로그인 구역</legend>
          	<input type="hidden" name="pensionNo" value="${pensionNo }">
      		 <label for="memberId">아이디</label>
@@ -111,6 +131,7 @@ body{ background-color: #ededed; }
 			 </fieldset>
         </form>
    </div>
-
-
 </body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+</html>
