@@ -129,7 +129,9 @@
 <img src="./Readme_assets/admin2.png"/>
 </p>
 
-
+<p align="center">
+<img src="./Readme_assets/adminMain.jpg"/>
+</p>
 
 
 
