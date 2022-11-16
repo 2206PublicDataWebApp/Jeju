@@ -298,6 +298,7 @@
                                             <td>${adminReview.regDate}</td>
                                         </tr>
                                             </c:forEach>
+
                                         </tbody>
                                     </table>
                                 </div>
