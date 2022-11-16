@@ -17,8 +17,8 @@
 	<script src="/resources/js/jquery-3.6.1.min.js"></script>
 	<style>
 		#img{
-			width:200px;
-			height:170px;
+			width:125px;
+			height:110px;
 		}
 	</style>
 </head>

@@ -22,6 +22,9 @@
 		font-family:'여기어때 잘난체 OTF', GungsuhChe , "궁서체";
 		font-size:50px;
 	}
+	.idui{
+		color:white;
+	}
 </style>
 </head>
 <body>
@@ -53,14 +56,14 @@
 							<table align="right">
 								<tr>
 									<td>
-										<a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
+										<a href="/" class="idui">${sessionScope.loginUser.memberId }</a>님 환영합니다
 										<a href="#"><img onclick="location.href='/chat/login2.do'"
-										src="/resources/images/chatting.png"style="width:30px; height:30px; background-color: white;">
+										src="/resources/images/consultimg.png"style="width:60px; height:60px;">
 										</a>
 									</td>
 								</tr>
 								<tr>
-									<td><a href="/member/logout.kh">로그아웃</a></td>
+									<td><a href="/member/logout.kh" class="idui">로그아웃</a></td>
 								</tr>
 							</table>
 						</c:if>
