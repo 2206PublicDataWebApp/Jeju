@@ -103,14 +103,6 @@
 <img src="./Readme_assets/reservation.jpg">
 </p>
 
-<p align="center">
-<img src="./Readme_assets/recipe_modify_1.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/recipe_write_1.png">
-</p>
-
 ### 8. 커뮤니티	
 
 <p align="center">
