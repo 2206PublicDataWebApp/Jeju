@@ -14,7 +14,6 @@ public class CouponStoreLogic implements CouponStore{
 	//이벤트 진행중인 쿠폰 전체 조회
 	@Override
 	public List<Coupon> selectAllCoupon(SqlSession session) {
-		System.out.println("들어옴");
 		List<Coupon> cList = session.selectList("CouponMapper.selectAllEventCoupon");
 		return cList;
 	}
@@ -70,7 +69,7 @@ public class CouponStoreLogic implements CouponStore{
 
 	@Override
 	public List<MyCoupon> selectMyCouponList(SqlSession session, String memberId) {
-		List<MyCoupon> mList = session.selectList("MyCouponMapper.selectMyCoupon", memberId);
+		List<MyCoupon> mList = session.selectList("MyCouponMapper.selectAllMyCoupon", memberId);
 		return mList;
 	}
 

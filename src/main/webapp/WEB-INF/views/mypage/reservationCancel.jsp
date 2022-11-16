@@ -137,7 +137,7 @@
                       <p class="card-text">${rList.rePensionName }</p>
                       <br>
                       <h5 class="card-title">객실 타입 / 기간</h5>
-                      <p class="card-text">${rList.rePensionNo }</p>
+                      <p class="card-text" id="pensionTitle">${rList.rePensionNo }</p>
                       <br>
                       <h5 class="card-title">체크인</h5>
                       <p class="card-text">${rList.reStartDate }</p>
@@ -170,9 +170,9 @@
   	     		    pg : 'kcp',
   	     		    pay_method : 'card',
   	     		    merchant_uid : 'merchant_' + new Date().getTime(),
-  	     		    name : '한재민' ,
- 		    		amount : '501',
-//   	     			amount : '${price}',
+  	     		    name : $("#pensionTitle").text(),
+//  		    		amount : '501',
+  	     			amount : '${price}',
   	     		    buyer_email : 'iamport@siot.do',
   	     		    buyer_name : '${rList.memberId}'
 //   	     		    buyer_tel : $("#phone").val()

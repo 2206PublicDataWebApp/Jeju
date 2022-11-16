@@ -66,7 +66,6 @@ public class ReservationController {
 		Pension pension = aService.selectOneByPension(pensionNo);
 		//룸 정보 가져옴
 		Room room = aService.selectOneByRoom(roomNo);
-		System.out.println(room.getRoomName());
 		model.addAttribute("price", price);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);		
@@ -110,8 +109,7 @@ public class ReservationController {
 	@RequestMapping(value="/reservation/checkSessionId", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
 	public String checkSessionId(HttpSession session) {
 		String chkSession = "";
-		Member member = (Member) session.getAttribute("loginUser");
-		System.out.println(member);		
+		Member member = (Member) session.getAttribute("loginUser");	
 		if(member == null) {
 			chkSession = "";
 		}else {
@@ -165,7 +163,6 @@ public class ReservationController {
 		reservation.setRePensionName(imageList.getPensionName());
 		int result = aService.addReservation(reservation);		
 		if(result > 0) {
-			System.out.println("예약 성공!");
 			if(reservation.getMemberId().equals("비회원")) {
 				aService.sendReservationCode(phoneNumber, reservation.getReservationCode());
 			}
@@ -201,7 +198,7 @@ public class ReservationController {
 //			////////////////예약 완료 리스트///////////////////
 			List<Reservation> rList = aService.selectReserveList(memberId);
 			List<Reservation> sList = aService.expirationReserveList(memberId);
-			
+
 			mv.addObject("sList", sList);
 			mv.addObject("rList", rList);
 			mv.addObject("wList", wList);
@@ -227,10 +224,8 @@ public class ReservationController {
 		Member member = (Member) session.getAttribute("loginUser");
 		String memberId = member.getMemberId();
 		Reservation reservation = aService.selectCouponCode(reservationNo);
-		System.out.println(reservation.getCouponCode());
 		if(reservation.getCouponCode() != null && !reservation.getCouponCode().equals("")) {
 			int result = aService.upCouponCount(reservation);
-			System.out.println("");
 		}		
 		String chk = "";
 		int result = aService.deleteReservation(reservationNo);
@@ -285,7 +280,6 @@ public class ReservationController {
 	@RequestMapping(value="/reservation/waitAvailability", produces="text/plain;charset=utf-8", method=RequestMethod.POST)
 	public String waitAvailability(@RequestParam("memberId") String memberId) {
 		int count = aService.selectRstatus(memberId);
-		System.out.println("카운트값 : "+count);
 		return String.valueOf(count);		
 	}
 	
@@ -299,9 +293,7 @@ public class ReservationController {
 		int repriceNum = Integer.parseInt(rePrice.replaceAll("[^0-9]",""));
 		int salePriceNum = Integer.parseInt(salePrice.replaceAll("[^0-9]",""));
 		if(salePrice.contains("%")) {	
-			System.out.println("가격 : "+salePrice);
 			int no =  repriceNum / 10; 	
-			System.out.println(no);
 			char firstNum = salePrice.charAt(0);			
 			no = ((no * Character.getNumericValue(firstNum)));
 			result = String.valueOf(decFormat.format(repriceNum - no));

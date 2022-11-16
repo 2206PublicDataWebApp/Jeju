@@ -23,6 +23,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    
+    
 	<style>
    		#logo{
    			color:white;
@@ -191,10 +194,10 @@
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
-                           <li class="test4"><h2 style="font-size : 22px;"><a href="/pension/detailView?pensionNo=${pension.pensionNo }&startDate=${startDate}&endDate=${endDate}">${pension.pensionName }</a></h2></li>
-                           <li class="test4">${pension.pensionAddr }</li>
-                           <li class="test4">${pension.pensionPrice }</li>
-                           <li class="test4">${pension.reviewCount }개</li>
+                           <li class="test4"><h2 style="font-size : 22px; font-weight : bold;"><a href="/pension/detailView?pensionNo=${pension.pensionNo }&startDate=${startDate}&endDate=${endDate}">${pension.pensionName }</a></h2></li>
+                           <li class="test4" >${pension.pensionAddr }</li>
+                           <li class="test4" >${pension.pensionPrice }</li>
+                           <li class="test4" >${pension.reviewCount }개</li>
                         </ul>
                      </div>
                      </c:if>
@@ -207,7 +210,7 @@
                      </div>
                      <div class="col-md-6 p-4 ps-md-0" id="tableBody2">
                         <ul class="modify">
-                           <li class="test4"><h2 style="font-size : 22px;"><a href="/pension/detailView?pensionNo=${dateSearch.pensionNo }&startDate=${startDate}&endDate=${endDate}">${dateSearch.pensionName }</a></h2></li>
+                           <li class="test4"><h2 style="font-size : 22px; font-weight : bold;"><a href="/pension/detailView?pensionNo=${dateSearch.pensionNo }&startDate=${startDate}&endDate=${endDate}">${dateSearch.pensionName }</a></h2></li>
                            <li class="test4">${dateSearch.pensionAddr }</li>
                            <c:if test="${dateSearch.pensionPrice == '판매완료' }">
                               <li class="test4">${dateSearch.pensionPrice }</li>
@@ -304,7 +307,7 @@
                                       style="width: 160px; height: 130px;">
                                  <div class="text"
                                       style="display: inline-block; margin-left: 20px;">
-                                    <h5>${rank.pensionName }</h5>
+                                    <h5 style="font-wieght : bold;">${rank.pensionName }</h5>
                                     <div class="post-meta">
                                     <span class="mr-2"><fmt:formatNumber type="number"
                                         maxFractionDigits="3" value="${rank.pensionPrice}" />${rank.pensionPrice }</span>
@@ -384,7 +387,7 @@
       		  "showMethod": "fadeIn",
       		  "hideMethod": "fadeOut",
       		  "tapToDismiss": false,
-               timeOut: 4000
+               timeOut: 6000
         };
         toastr.success(data, "알림");
 	}

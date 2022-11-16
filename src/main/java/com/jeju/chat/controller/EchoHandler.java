@@ -75,7 +75,6 @@ public class EchoHandler extends TextWebSocketHandler{
 	    // 접속한 유저의 http세션을 조회하여 id를 얻는 함수
 		private String getMemberId(WebSocketSession session) {
 			Map<String, Object> httpSession = session.getAttributes();
-			System.out.println(httpSession.get("loginUser"));
 			Member member = (Member) httpSession.get("loginUser"); // 세션에 저장된 memberId 기준 조회
 			String memberId = member.getMemberId();
 			return memberId==null? null: memberId;
