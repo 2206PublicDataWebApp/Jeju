@@ -105,9 +105,7 @@
                         <p class="animated bounceInLeft">여러분의 숙소를 공유하여주세요! <br>
                             전국 각지에서 오는 여행객들과 새로운 인연을 만들어보세요 <br>
                             언제든지 숙소를 제주어때 사이트에 등록할 수 있습니다</p>
-
                         <div class="row vbh">
-
                             <div class="btn btn-primary animated bounceInUp"><a href="#" onclick="registPension('${sessionScope.loginUser.memberId}');" style="color:white">숙소 등록 하러가기</a></div>
                         </div>
                     </div>
@@ -328,6 +326,16 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+	function registPension(memberId) {
+		   if(memberId == "") {
+			   if(confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+				   location.href="/member/loginView.kh"
+			   }
+		   }else{
+	    location.href="/pension/registForm";
+		   }
+	}
+	
 	var socket = null;
 	function autoFunction(obj, sessionId) {
 		function auto() {

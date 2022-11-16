@@ -22,6 +22,9 @@
 		font-family:'여기어때 잘난체 OTF', GungsuhChe , "궁서체";
 		font-size:50px;
 	}
+	.idui{
+		color:white;
+	}
 </style>
 </head>
 <body>
@@ -31,7 +34,7 @@
                <div class="row">
                    <div class="col-md-4 d-none d-md-block mail-detail"></div>
                    <div class="col-md-4 logo">
-                   		<h1 id="logo">제주어때</h1>	
+                   		<h1 id="logo">제주어때</h1>
                        <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
                    </div>
                    <div class="col-md-4 d-none d-md-block social-link ">
@@ -51,17 +54,17 @@
 						</c:if>
 						<c:if test="${not empty sessionScope.loginUser }">
 							<table align="right">
-								 <tr>
-						               <td>
-						                  ${sessionScope.loginUser.memberId } 님 환영합니다
-							              <a href="#"><img onclick="location.href='/chat/login2.do'"
-							               src="/resources/images/3721186.png"style="width:30px; height:30px; background-color: white;">
-						               	  </a>
-						               </td>
-						            </tr>
-						            <tr>
-						               <td><a href="/member/logout.kh"style="width:30px; height:30px; background-color: skyblue">로그아웃</a></td>
-						            </tr>
+								<tr>
+									<td>
+										<a href="/" class="idui">${sessionScope.loginUser.memberId }</a>님 환영합니다
+										<a href="#"><img onclick="location.href='/chat/login2.do'"
+										src="/resources/images/consultimg.png"style="width:60px; height:60px;">
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td><a href="/member/logout.kh" class="idui">로그아웃</a></td>
+								</tr>
 							</table>
 						</c:if>
 					</div>
