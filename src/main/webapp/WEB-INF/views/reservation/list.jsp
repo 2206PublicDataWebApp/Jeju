@@ -355,11 +355,11 @@
           }
      }
 
-
+//      && $("#phoneDoubleChk").val() == "true"
      var codeBtn2 = "";     
      //바로 결제      
      $("#button1").click(function(){
-        if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null && $("#phoneDoubleChk").val() == "true"){
+        if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#agreement3").prop("checked") && $("#nameChk").val() != null ){
               var price1 = $("#price").text().replace(",", "");
               var price2 = price1.replace("원", "");
               //가맹점 식별코드
@@ -463,16 +463,16 @@
               $("#successNameChk").text("예약자 이름을 입력해주세요");
              $("#successNameChk").css("color", "red");
            }
-           if($("#phoneDoubleChk").val() != "true"){
-              console.log($("#phoneDoubleChk").val());
-              $(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-             $(".successPhoneChk").css("color", "red");             
-           }
+//            if($("#phoneDoubleChk").val() != "true"){
+//               console.log($("#phoneDoubleChk").val());
+//               $(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//              $(".successPhoneChk").css("color", "red");             
+//            }
            return false
         }              
      });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     
+//      && $("#phoneDoubleChk").val() == "true"
      //나중에 결제 
      $("#button2").click(function() {
         $.ajax({
@@ -493,7 +493,7 @@
                        alert("이미 결제해야할 예약건이 있습니다! 결제 완료 후 다시 시도해주세요.");
                        location.href="/";
                     }else {
-                        if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null && $("#phoneDoubleChk").val() == "true"){
+                        if($(".agree1").prop("checked") && $(".agree2").prop("checked") && $(".agree3").prop("checked") && $("#nameChk").val() != null ){
                                $.ajax({
                                  url : "/reservation/waiting",
                                  type : "post",
@@ -572,11 +572,11 @@
                                $("#successNameChk").text("예약자 이름을 입력해주세요");
                               $("#successNameChk").css("color", "red");
                             }
-                              if($("#phoneDoubleChk").val() != "true"){
-                                 console.log($("#phoneDoubleChk").val());
-                                 $(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
-                                $(".successPhoneChk").css("color", "red");             
-                              }
+//                               if($("#phoneDoubleChk").val() != "true"){
+//                                  console.log($("#phoneDoubleChk").val());
+//                                  $(".successPhoneChk").text("휴대폰 인증을 완료해주세요.");
+//                                 $(".successPhoneChk").css("color", "red");             
+//                               }
                             return false
                             }
                     }
@@ -699,50 +699,50 @@
          });
      });
 
-        var code2 = "";
-       $("#phoneChk").click(function(){
-          if($("#phone").val() != "") {
-             alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-             var phone = $("#phone").val();
-             $.ajax({
-                  type:"GET",
-                  url:"/reservation/phoneCheck?memberPhone=" + phone,
-                  cache : false,
-                  success:function(data){
-                     if(data == "error"){
-                        alert("휴대폰 번호가 올바르지 않습니다.");
-                      $(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-                      $(".successPhoneChk").css("color","red");
-                      $("#phone").attr("autofocus",true);
-                     }else{                 
-                        $("#phone2").attr("disabled",false);
-                        $("#phoneChk2").css("display","inline-block");
-                        $(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-                        $(".successPhoneChk").css("color","green");
-                        $("#phone").attr("readonly",true);
-                        code2 = data;
-                     }
-                  }
-              });
-          }else {
-             alert("휴대폰 번호를 입력해주세요.");
-          }
-       });
+//         var code2 = "";
+//        $("#phoneChk").click(function(){
+//           if($("#phone").val() != "") {
+//              alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+//              var phone = $("#phone").val();
+//              $.ajax({
+//                   type:"GET",
+//                   url:"/reservation/phoneCheck?memberPhone=" + phone,
+//                   cache : false,
+//                   success:function(data){
+//                      if(data == "error"){
+//                         alert("휴대폰 번호가 올바르지 않습니다.");
+//                       $(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+//                       $(".successPhoneChk").css("color","red");
+//                       $("#phone").attr("autofocus",true);
+//                      }else{                 
+//                         $("#phone2").attr("disabled",false);
+//                         $("#phoneChk2").css("display","inline-block");
+//                         $(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+//                         $(".successPhoneChk").css("color","green");
+//                         $("#phone").attr("readonly",true);
+//                         code2 = data;
+//                      }
+//                   }
+//               });
+//           }else {
+//              alert("휴대폰 번호를 입력해주세요.");
+//           }
+//        });
 
        
-       $("#phoneChk2").click(function(){
-          if($("#phone2").val() == code2){
-             $(".successPhoneChk").text("인증번호가 일치합니다.");
-             $(".successPhoneChk").css("color","green");
-             $("#phoneDoubleChk").val("true");
-             $("#phone2").attr("disabled",true);
-          }else{
-             $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-             $(".successPhoneChk").css("color","red");
-             $("#phoneDoubleChk").val("false");
-             $(this).attr("autofocus",true);
-          }
-       });
+//        $("#phoneChk2").click(function(){
+//           if($("#phone2").val() == code2){
+//              $(".successPhoneChk").text("인증번호가 일치합니다.");
+//              $(".successPhoneChk").css("color","green");
+//              $("#phoneDoubleChk").val("true");
+//              $("#phone2").attr("disabled",true);
+//           }else{
+//              $(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+//              $(".successPhoneChk").css("color","red");
+//              $("#phoneDoubleChk").val("false");
+//              $(this).attr("autofocus",true);
+//           }
+//        });
 
       //약관 내용 열고 닫기
        function clickshow(elem,ID) {

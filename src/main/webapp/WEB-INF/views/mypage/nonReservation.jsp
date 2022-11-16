@@ -280,7 +280,7 @@
     		 	success : function(result) {
     		 		if(result == "삭제성공") {
     		 			alert("취소되었습니다.");
-    		 			location.href = "/pension/list";
+    		 			location.href = "/";
     		 		} 		
     		 	}
     		 });

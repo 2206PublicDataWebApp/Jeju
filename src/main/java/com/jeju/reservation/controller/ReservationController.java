@@ -50,7 +50,6 @@ public class ReservationController {
 		Member member = (Member) session.getAttribute("loginUser");
 		if(member != null) {
 			String memberId = member.getMemberId();
-			Member mOne = aService.selectOneByMember(memberId);
 			List<Coupon> cList = new ArrayList<Coupon>();
 			//쿠폰 정보 가져옴
 			List<MyCoupon> myList = aService.selectAllMyCoupon(memberId);
@@ -59,7 +58,6 @@ public class ReservationController {
 				cList.add(i, coupon);
 			}
 			mv.addObject("cList", cList);
-			mv.addObject("mOne", mOne);
 		}
 		
 		//펜션 정보 가져옴
