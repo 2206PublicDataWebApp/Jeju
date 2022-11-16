@@ -26,7 +26,7 @@ public interface MemberService {
 	public List<Member> findIdByEmail(String memberId);
 	//비밀번호찾기
 	public List<Member> findPwdByEmail(String memberPwd);
-
+	public int changePwd(Member member);
 
 	// 관리자페이지 전체멤버 조회
 	public List<Member> showAllMember();

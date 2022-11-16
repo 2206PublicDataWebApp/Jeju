@@ -20,81 +20,106 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@ServerEndpoint(value="/echo.do")
+@ServerEndpoint(value = "/echo.do")
 
 public class WebSocketChat {
-	
-    
-    private static final List<Session> sessionList=new ArrayList<Session>();;
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
-    public WebSocketChat() {
-        // TODO Auto-generated constructor stub
-        System.out.println("웹소켓(서버) 객체생성");
-    }
-    
-    @OnOpen
-    public void onOpen(Session session) {
-        logger.info("Open session id:"+session.getId());
-        try {
-            final Basic basic=session.getBasicRemote();
-            basic.sendText("빠른 시간내에 상담에 응하겠습니다 잠시만 기다려주세요.");
-        }catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e.getMessage());
-        }
-        sessionList.add(session);
-    }
-    
-    /*
-     * 모든 사용자에게 메시지를 전달한다.
-     * @param self
-     * @param sender
-     * @param message
-     */
-    private void sendAllSessionToMessage(Session self, String sender, String message) {
-    	
-        try {
-            for(Session session : WebSocketChat.sessionList) {
-                if(!self.getId().equals(session.getId())) {
-                    session.getBasicRemote().sendText(sender+" : "+message);
-                }
-            }
-        }catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    /*
-     * 내가 입력하는 메세지
-     * @param message
-     * @param session
-     */
-    @OnMessage
-    public void onMessage(String message,Session session) {
-    	
-    	String sender = message.split(",")[1];
-    	message = message.split(",")[0];
-    	
-        logger.info("Message From "+sender + ": "+message);
-        try {
-            final Basic basic=session.getBasicRemote();
-            basic.sendText("<나> : "+message);
-        }catch (Exception e) {
-            // TODO: handle exception
-            System.out.println(e.getMessage());
-        }
-        sendAllSessionToMessage(session, sender, message);
-    }
-    
-    @OnError
-    public void onError(Throwable e,Session session) {
-        
-    }
-    
-    @OnClose
-    public void onClose(Session session) {
-        logger.info("Session "+session.getId()+" has ended");
-        sessionList.remove(session);
-    }
+
+	private static final List<Session> sessionList = new ArrayList<Session>();;
+	private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
+
+	public WebSocketChat() {
+		// TODO Auto-generated constructor stub
+		System.out.println("웹소켓(서버) 객체생성");
+	}
+
+	@OnOpen
+	public void onOpen(Session session) {
+		logger.info("Open session id:" + session.getId());
+		try {
+//			final Basic basic = session.getBasicRemote();
+//			basic.sendText("빠른 시간내에 상담에 응하겠습니다 잠시만 기다려주세요.");
+		
+		
+			sendAllSessionToMessage2(session, "", " 상대방이 입장 하였습니다");
+//            if(session.getId().equals("5")) {
+//            	basic.sendText("관리자");
+//            }else {
+//            	basic.sendText("연결중...");
+//            }
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		sessionList.add(session);
+	}
+
+	/*
+	 * 모든 사용자에게 메시지를 전달한다.
+	 * 
+	 * @param self
+	 * 
+	 * @param sender
+	 * 
+	 * @param message
+	 */
+	private void sendAllSessionToMessage(Session self, String sender, String message) {
+		try {
+			for (Session session : WebSocketChat.sessionList) {
+				if (!self.getId().equals(session.getId())) {
+					session.getBasicRemote().sendText(sender + " : " + message);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void sendAllSessionToMessage2(Session self, String memberId, String message) {
+		try {
+			for (Session session : WebSocketChat.sessionList) {
+				if (!self.getId().equals(session.getId())) {
+					session.getBasicRemote().sendText(memberId + "  " + message);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
+	/*
+	 * 내가 입력하는 메세지
+	 * 
+	 * @param message
+	 * 
+	 * @param session
+	 */
+	@OnMessage
+	public void onMessage(String message, Session session) {
+
+		String sender = message.split(",")[1];
+		message = message.split(",")[0];
+
+		logger.info("Message From " + sender + ": " + message);
+		try {
+			final Basic basic = session.getBasicRemote();
+			basic.sendText("<나> : " + message);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		sendAllSessionToMessage(session, sender, message);
+	}
+
+	@OnError
+	public void onError(Throwable e, Session session) {
+
+	}
+
+	@OnClose
+	public void onClose(Session session) {
+		logger.info("Session " + session.getId() + " has ended");
+		sessionList.remove(session);
+	}
 }

@@ -51,17 +51,17 @@
 						</c:if>
 						<c:if test="${not empty sessionScope.loginUser }">
 							<table align="right">
-								<tr>
-									<td>
-										<a href="/">${sessionScope.loginUser.memberId }</a>님 환영합니다
-										<a href="#"><img onclick="location.href='/chat/login2.do'"
-										src="/resources/images/chatting.png"style="width:30px; height:30px; background-color: white;">
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td><a href="/member/logout.kh">로그아웃</a></td>
-								</tr>
+								 <tr>
+						               <td>
+						                  ${sessionScope.loginUser.memberId } 님 환영합니다
+							              <a href="#"><img onclick="location.href='/chat/login2.do'"
+							               src="/resources/images/3721186.png"style="width:30px; height:30px; background-color: white;">
+						               	  </a>
+						               </td>
+						            </tr>
+						            <tr>
+						               <td><a href="/member/logout.kh"style="width:30px; height:30px; background-color: skyblue">로그아웃</a></td>
+						            </tr>
 							</table>
 						</c:if>
 					</div>

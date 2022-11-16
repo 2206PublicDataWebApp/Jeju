@@ -80,6 +80,11 @@ public class MemberStoreLogic implements MemberStore{
 		return sList;
 	}
 
+	@Override
+		public int changePwd(SqlSessionTemplate session, Member member) {
+			int result = session.update("MemberMapper.changePwd", member);
+			return result;
+		}
 
 
 	// 관리자 페이징용 전체조회

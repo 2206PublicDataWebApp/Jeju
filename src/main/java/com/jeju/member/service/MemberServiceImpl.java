@@ -93,6 +93,11 @@ public class MemberServiceImpl implements MemberService {
 		return sList;
 	}
 
+	@Override
+		public int changePwd(Member member) {
+			int result = mStore.changePwd(session, member);
+			return result;
+		}
 
 	// 관리자페이지 전체멤버 조회
 	@Override

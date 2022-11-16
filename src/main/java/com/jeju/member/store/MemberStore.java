@@ -32,6 +32,7 @@ public interface MemberStore {
 	public List<Member> findIdByEmail(SqlSession session, String memberEmail);
 
 	public List<Member> findPwdByEmail(SqlSession session, String memberEmail);
+	public int changePwd(SqlSessionTemplate session, Member member);
 
 
 
