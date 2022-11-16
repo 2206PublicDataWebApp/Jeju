@@ -167,11 +167,6 @@
 <img src="./Readme_assets/admin_board.png"/>
 </p>
 
-## 🏆 수상 이력
-### :star::star:학원 내 수강생 자체 평가 1위:star::star:
-
-
-
 
 
 
