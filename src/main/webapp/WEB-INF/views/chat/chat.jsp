@@ -1,23 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>실시간채팅</title>
-<script src="/resources/js/jquery-3.6.1.min.js"></script>
-<link rel="shortcut icon" href="/resources/assets/images/fav.png"
-	type="image/x-icon">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
-	rel="stylesheet">
-<link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/all.min.css">
-<link rel="stylesheet" href="/resources/assets/css/animate.css">
-<link rel="stylesheet" type="text/css"
-	href="/resources/assets/css/style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>회원가입</title>
+    <link rel="shortcut icon" href="/resources/assets/images/fav.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/resources/assets/images/fav.jpg">
+    <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/all.min.css">
+    <link rel="stylesheet" href="/resources/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/resources/assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/422d96f707.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/422d96f707.js"
+	crossorigin="anonymous"></script>
+
+
 <style>
 * {
 	margin: 0;
@@ -68,13 +70,13 @@
 .chat_wrap .input-div {
 	position: fixed;
 	bottom: 0;
-	width: 100%;
+	width: 50%;
 	background-color: #FFF;
 	text-align: center;
 	border-top: 1px solid #F18C7E;
 }
 .chat_wrap .input-div>textarea {
-	width: 100%;
+	width: 50%;
 	height: 80px;
 	border: none;
 	padding: 10px;
@@ -85,7 +87,52 @@
 </style>
 
 </head>
+
 <body>
+     <header class="container-fluid">
+           <div class="header-top">
+               <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 d-none d-md-block mail-detail"></div>
+                        <div class="col-md-4 logo">
+<!--                             <h1 id="logo">제주어때 </h1> -->
+                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+                        </div>
+                        <div class="col-md-4 d-none d-md-block social-link ">
+						      <c:if test="${not empty sessionScope.loginUser }">
+						         <table align="right">
+						            <tr>
+						               <td style="color : black;">
+						                  ${sessionScope.loginUser.memberId } 님 환영합니다
+							              <a href="#"><img onclick="location.href='/chat/login2.do'"
+										src="/resources/images/consultimg.png"style="width:60px; height:60px;">
+						               	  </a>
+						               </td>
+						            </tr>
+						            <tr>
+						               <td><a href="/member/logout.kh"style="width:30px; height:30px; color : black;"  >로그아웃</a></td>
+						            </tr>
+						         </table>
+						      </c:if>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           <div id="menu-jk" class="header-nav d-none d-md-block">
+               <div class="container">
+                   <div class="row nav-row">
+                       <ul>
+                          
+                           <li><a href="/mypage/myPage" style="color : black;">1:1 문의</a></li>
+                           <c:if test="${sessionScope.loginUser.memberId eq 'admin' }">
+                           	   <li><a href="/admin/adminPage">관리자페이지</a></li>
+                           </c:if>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+        </header>
+	<div style="width : 50%; margin : 0 auto; position:relative; top : 250px;">
 	<div class="chat_wrap">
 		<div class="header">CHAT</div>
 		<div class="chat">
@@ -116,11 +163,11 @@
 				</li>
 			</ul>
 		</div>
-	</div>
-
-
-	<div class="chat_wrap">
-		<div class="input-div">
+	</div>	
+</div>
+<div id="messages"  style="width : 50%; margin : 0 auto; position:relative; top : 250px;"></div>
+	<div class="chat_wrap" style="position : relative; left : 500px;">
+		<div class="input-div"><br>
 			<button class="btn btn-info btn-md-2" onclick="openSocket();">상담
 				시작</button>
 			<button class="btn btn-info btn-md-2" onclick="location.href='/home'">대회방
@@ -143,9 +190,9 @@
 		</div>
 	</div>
 	<!-- Server responses get written here -->
-	<div id="messages"></div>
-	<!-- websocket javascript -->
-	<script type="text/javascript">
+	
+</body>
+<script type="text/javascript">
         var ws;
         var messages = document.getElementById("messages");
 	    var count = 0;
@@ -160,7 +207,7 @@
 				
             }
             //웹소켓 객체 만드는 코드
-            ws = new WebSocket("ws://localhost:8989/echo.do");
+            ws = new WebSocket("ws://localhost:8888/echo.do");
             
             ws.onopen = function(event){
                 if(event.data === undefined){
@@ -203,11 +250,11 @@
       	}
         
   </script>
-	<script src="/resources/assets/js/popper.min.js"></script>
-	<script src="/resources/assets/js/bootstrap.min.js"></script>
-	<script
-		src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-	<script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
-	<script src="/resources/assets/js/script.js"></script>
-</body>
+<script src="/resources/assets/js/popper.min.js"></script>
+<script src="/resources/assets/js/bootstrap.min.js"></script>
+<script src="/resources/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+<script src="/resources/assets/plugins/slider/js/owl.carousel.min.js"></script>
+<script src="/resources/assets/js/script.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 </html>
