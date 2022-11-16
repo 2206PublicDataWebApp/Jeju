@@ -28,8 +28,6 @@ public class WebSocketChat {
     private static final List<Session> sessionList=new ArrayList<Session>();;
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
     public WebSocketChat() {
-        // TODO Auto-generated constructor stub
-        System.out.println("웹소켓(서버) 객체생성");
     }
     
     @OnOpen

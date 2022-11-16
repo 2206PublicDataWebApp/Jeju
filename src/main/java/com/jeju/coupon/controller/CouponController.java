@@ -100,7 +100,6 @@ public class CouponController {
 		MyCoupon mycoupon = new MyCoupon(memberId, couponCode);
 			int result = cService.updateUseCount(mycoupon);
 			if(result > 0) {
-				System.out.println("감소 성공");
 				chk = "성공";
 			}else {
 				chk = "실패";
