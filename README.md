@@ -111,24 +111,6 @@
 <img src="./Readme_assets/recipe_write_1.png">
 </p>
 
-
-### 7. 실시간 알림
-<p align="center">
-<img src="./Readme_assets/qna_list.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/qna_search.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/qna_dtail.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/qna_write.png">
-</p>
-
 ### 8. 커뮤니티	
 
 <p align="center">
@@ -141,23 +123,20 @@
 </p>
 
 
-### 11. 관리자 1대1 채팅	
+### 11. 1대1 문의(채팅)	
 <p align="center">
-<img src="./Readme_assets/admin_police.png"/>
-</p>
-
-<p align="center">
-<img src="./Readme_assets/admin_member.png"/>
-</p>
-
-<p align="center">
-<img src="./Readme_assets/admin_board.png"/>
+<img src="./Readme_assets/adminChat.png"/>
 </p>
 
 ### 11. 관리자 페이지	
 <p align="center">
 <img src="./Readme_assets/memberAdmin.jpg"/>
 </p>
+
+<p align="center">
+<img src="./Readme_assets/admin2.png"/>
+</p>
+
 
 
 
