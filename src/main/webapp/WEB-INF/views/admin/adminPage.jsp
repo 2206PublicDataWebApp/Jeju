@@ -191,7 +191,7 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div class="table-responsive table--no-card m-b-30">
                                 <h3 class="title-3 m-b-30">
                                     <i class="zmdi zmdi-account-calendar"></i>최근 등록된 회원</h3>
@@ -228,42 +228,15 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <h3 class="title-3 m-b-30">
-                                <i class="zmdi zmdi-account-calendar"></i>최근 등록된 문의</h3>
+                            <%--<h3 class="title-3 m-b-30">
+                                <i class="zmdi zmdi-account-calendar"></i></h3>
                             <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
                                 <div class="au-card-inner">
                                     <div class="table-responsive">
-                                        <table class="table table-top-countries">
-                                            <tbody>
-                                            <tr>
-                                                <td>조혜원님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>한상일님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>이혁렬님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>한재민님의 질문</td>
-                                                <td class="text-right">미답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>민봉식님의 질문</td>
-                                                <td class="text-right">답변</td>
-                                            </tr>
-                                            <tr>
-                                                <td>민봉식님의 질문</td>
-                                                <td class="text-right">답변</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
 
