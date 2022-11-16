@@ -203,7 +203,6 @@
                             <table class="table table-borderless table-data3">
                                 <thead>
                                 <tr>
-                                    <th>숙소</th>
                                     <th>아이디</th>
                                     <th>내용</th>
                                     <th>작성일</th>
@@ -214,7 +213,6 @@
                                             <c:forEach items="${reviewPagingList }" var="adminReview" varStatus="i">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
-                                            <td>숙소이름</td>
                                             <td>${adminReview.memberId}</td>
                                             <td>${adminReview.substringReview} </td>
                                             <td>${adminReview.regDate}</td>
