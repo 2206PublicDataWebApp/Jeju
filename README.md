@@ -74,7 +74,7 @@
 <p>
 <br>
 
-### 3. 마이페이지
+### 3. 마이페이지	
 <p align="center">
   <img src="./Readme_assets/mypage1.PNG">
 <p>
@@ -92,14 +92,14 @@
 <p>
 <br>
 
-### 4. 
+### 4. 숙소 리스트	
 
-### 5. 
+### 5. 숙소 상세페이지
 <p align="center">
 <img src="./Readme_assets/recipe_list_1.png">
 </p>
 
-### 6. 
+### 6. 숙소 예약	
 <p align="center">
 <img src="./Readme_assets/recipe_dtail_1.png">
 </p>
@@ -113,7 +113,7 @@
 </p>
 
 
-### 7.
+### 7. 실시간 알림
 <p align="center">
 <img src="./Readme_assets/qna_list.png">
 </p>
@@ -130,7 +130,7 @@
 <img src="./Readme_assets/qna_write.png">
 </p>
 
-### 8. 
+### 8. 숙소 등록	
 
 <p align="center">
 <img src="./Readme_assets/notice_1.png">
@@ -144,7 +144,7 @@
 <img src="./Readme_assets/notice_3.png">
 </p>
 
-### 9. 채팅 상담
+### 9. 공지사항 게시판
 <p align="center">
 <img src="https://user-images.githubusercontent.com/109611438/193573724-af74d886-ac1d-4a49-8762-7a397c5aaf18.JPG"/>
 </p>
@@ -152,12 +152,12 @@
 <img src="https://user-images.githubusercontent.com/109611438/193573728-7c788814-80ae-4316-83a3-34f21b8c7c98.jpg"/>
 </p>
 
-### 10. 검색
+### 10. 오픈채팅방
 <p align="center">
 <img src="https://user-images.githubusercontent.com/109611438/193573734-3a6133de-0c72-4373-a794-6c60fb999565.JPG"/>
 </p>
 
-### 11. 관리자 페이지
+### 11. 관리자 1대1 채팅	
 <p align="center">
 <img src="./Readme_assets/admin_police.png"/>
 </p>
@@ -168,6 +168,11 @@
 
 <p align="center">
 <img src="./Readme_assets/admin_board.png"/>
+</p>
+
+### 11. 관리자 페이지	
+<p align="center">
+<img src="./Readme_assets/admin_police.png"/>
 </p>
 
 
