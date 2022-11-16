@@ -96,7 +96,6 @@
 		<!--     <div class="input-div"> -->
 		<!--         <textarea placeholder="Press Enter for send message."></textarea> -->
 		<!--     </div> -->
-
 		<!-- format -->
 		<c:if test="${member ne 'admin' }">
 			<h4>상담 시작을 누르시고 기다리시면 최대한 빠르게 응답 하겠습니다.</h4>
