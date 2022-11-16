@@ -1,7 +1,7 @@
 <h1 align="center">제주어때에 오신 것을 환영합니다 :)</h1>
 
 <p align="center">
-  <img src="./Readme_assets/메인페이지.">
+  <img src="./Readme_assets/메인페이지.jpg">
 <p>
 
 ## :film_projector: [웹버전 시연영상](https://youtu.be/21dfU2m0mz4) :iphone: [모바일버전 시연영상](https://youtu.be/ek9YBXw9iXo) :loudspeaker:[기획보고서](https://drive.google.com/file/d/1tgI4TGPzVjk94w7uZH6swSkuV7SN0593/view?usp=sharing)
