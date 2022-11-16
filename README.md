@@ -121,6 +121,11 @@
 </p>
 
 ### 11. 관리자 페이지	
+
+<p align="center">
+<img src="./Readme_assets/adminMain.jpg"/>
+</p>
+
 <p align="center">
 <img src="./Readme_assets/memberAdmin.jpg"/>
 </p>
@@ -129,9 +134,6 @@
 <img src="./Readme_assets/admin2.png"/>
 </p>
 
-<p align="center">
-<img src="./Readme_assets/adminMain.jpg"/>
-</p>
 
 
 
