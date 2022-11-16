@@ -1,5 +1,9 @@
 package com.jeju.security.sqlInjection;
 
+import com.jeju.member.controller.AdminMemberController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -17,6 +21,8 @@ public class SqlInjectionFilter implements  Filter{
     public void init(FilterConfig filterConfig) throws ServletException {
       }
 
+  private static final Logger logger = LoggerFactory.getLogger(SqlInjectionFilter.class);
+
       public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
       throws IOException, ServletException {
 
@@ -26,9 +32,9 @@ public class SqlInjectionFilter implements  Filter{
 
         String url = request.getServletPath();
         try {
-            System.out.println("## url: \t" + url);
+          logger.info("## url: \t" + url);
         } catch (Exception e) {
-            System.out.println("error : " + e);
+          logger.info("error : " + e);
         }
 
         chain.doFilter(req, res);

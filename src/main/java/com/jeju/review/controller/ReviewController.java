@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.jeju.member.controller.AdminMemberController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +27,10 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService rService;
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
+
+
 	// 마이페이지 후기 조회
 	@GetMapping("/mypage/review")
 	public ModelAndView ReivewView(
@@ -62,7 +68,6 @@ public class ReviewController {
 	public ModelAndView RegistReview(
 			ModelAndView mv
 			,@ModelAttribute Review review) {
-		System.out.println(review);
 		rService.registerReview(review);
 		rService.modifyReviewCheck(review);
 		mv.setViewName("redirect:/mypage/review");

@@ -26,7 +26,6 @@ public class PensionStoreLogic implements PensionStore{
 	// 숙소 등록
 	@Override
 	public void insertPension(SqlSession session, Pension pension) {
-		System.out.println("ddddd");
 		session.insert("PensionMapper.insertPension", pension);
 	}
 	// 객실 번호 가져오기

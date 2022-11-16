@@ -43,7 +43,7 @@ public class PayController {
 		pay.setPayPensionNo(payPensionNo);
 		int result = pService.insertPayInfo(pay);
 		if(result > 0) {
-			System.out.println("결제 테이블 추가 성공!");
+			/*System.out.println("결제 테이블 추가 성공!");*/
 		}
 		
 		return "결제 성공! 메인페이지로 이동합니다.";	

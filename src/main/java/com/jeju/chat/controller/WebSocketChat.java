@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class WebSocketChat {
 	
-    
+
     private static final List<Session> sessionList=new ArrayList<Session>();;
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
     public WebSocketChat() {
@@ -38,7 +38,8 @@ public class WebSocketChat {
             basic.sendText("빠른 시간내에 상담에 응하겠습니다 잠시만 기다려주세요.");
         }catch (Exception e) {
             // TODO: handle exception
-            System.out.println(e.getMessage());
+
+            logger.info(e.getMessage());
         }
         sessionList.add(session);
     }
@@ -59,7 +60,7 @@ public class WebSocketChat {
             }
         }catch (Exception e) {
             // TODO: handle exception
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
     
@@ -80,7 +81,7 @@ public class WebSocketChat {
             basic.sendText("<나> : "+message);
         }catch (Exception e) {
             // TODO: handle exception
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
         sendAllSessionToMessage(session, sender, message);
     }

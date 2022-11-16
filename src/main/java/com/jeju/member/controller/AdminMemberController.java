@@ -2,6 +2,7 @@ package com.jeju.member.controller;
 
 import com.jeju.member.domain.Member;
 import com.jeju.member.service.MemberService;
+import com.jeju.member.service.MemberServiceImpl;
 import com.jeju.pagination.Pagination;
 
 import com.jeju.review.controller.AdminReviewController;

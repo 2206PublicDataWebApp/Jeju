@@ -3,8 +3,11 @@ package com.jeju.reservation.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.jeju.member.controller.AdminMemberController;
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
+
+	private static final Logger logger = LoggerFactory.getLogger(ReservationServiceImpl.class);
+
 	@Autowired 
 	private ReservationStore aStore;
 	@Autowired
@@ -45,8 +51,8 @@ public class ReservationServiceImpl implements ReservationService{
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
 	      } catch (CoolsmsException e) {
-	        System.out.println(e.getMessage());
-	        System.out.println(e.getCode());
+			logger.info(e.getMessage());
+	        logger.info(String.valueOf(e.getCode()));
 	      }
 	}
 	
@@ -66,8 +72,8 @@ public class ReservationServiceImpl implements ReservationService{
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
 	      } catch (CoolsmsException e) {
-	        System.out.println(e.getMessage());
-	        System.out.println(e.getCode());
+			logger.info(e.getMessage());
+			logger.info(String.valueOf(e.getCode()));
 	      }
 	}
 

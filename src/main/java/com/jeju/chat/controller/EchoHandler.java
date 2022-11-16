@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.jeju.member.controller.AdminMemberController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -14,7 +17,9 @@ import com.jeju.member.domain.Member;
 public class EchoHandler extends TextWebSocketHandler{
 	// 로그인중인 개별유저
 		Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
-		
+
+	private static final Logger logger = LoggerFactory.getLogger(TextWebSocketHandler.class);
+
 		
 		// 클라이언트가 서버로 연결시
 		@Override
@@ -68,7 +73,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		}
 		// 로그 메시지
 		private void log(String logmsg) {
-			System.out.println(new Date() + " : " + logmsg);
+			logger.info(new Date() + " : " + logmsg);
 		}
 		
 		// 웹소켓에 id 가져오기
