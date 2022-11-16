@@ -125,7 +125,7 @@
 				시작</button>
 			<button class="btn btn-info btn-md-2" onclick="location.href='/home'">대회방
 				나가기</button>
-			
+
 			<br />
 			<br />
 			<br />
@@ -150,50 +150,50 @@
         var messages = document.getElementById("messages");
 	    var count = 0;
 	    var 웰컴;
-        
+
         function openSocket(){
         	var memberId = $("#sender").val();
         	writeResponse(memberId+"님이 입장하였습니다.");
-           
+
             if(ws !== undefined && ws.readyState !== WebSocket.CLOSED ){
                 writeResponse("WebSocket is already opened. ");
-				
+
             }
             //웹소켓 객체 만드는 코드
             ws = new WebSocket("ws://localhost:8989/echo.do");
-            
+
             ws.onopen = function(event){
                 if(event.data === undefined){
               		return;
                 }
                 writeResponse(event.data);
             };
-            
+
             ws.onmessage = function(event){
                 console.log('writeResponse');
                 console.log(event.data)
                 writeResponse(event.data);
             };
-            
+
             ws.onclose = function(event){
                 writeResponse("대화 종료");
             }
-			
-            
+
+
         }
-        
+
         function send(){
             var text = document.getElementById("messageinput").value+","+document.getElementById("sender").value;
             ws.send(text);
             text = "";
-            $("#messageinput").val("");          
+            $("#messageinput").val("");
         }
-    
-        
+
+
         function closeSocket(){
             ws.close();
         }
-        
+
         function writeResponse(text){
             messages.innerHTML += "<br/>"+text;
         }
@@ -201,7 +201,7 @@
             console.log(messages.parentNode);
             messages.innerHTML = "";
       	}
-        
+
   </script>
 	<script src="/resources/assets/js/popper.min.js"></script>
 	<script src="/resources/assets/js/bootstrap.min.js"></script>

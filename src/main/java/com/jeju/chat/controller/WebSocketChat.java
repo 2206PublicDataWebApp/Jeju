@@ -29,7 +29,7 @@ public class WebSocketChat {
 
 	public WebSocketChat() {
 		// TODO Auto-generated constructor stub
-		System.out.println("웹소켓(서버) 객체생성");
+		logger.info("웹소켓(서버) 객체 생성");
 	}
 
 	@OnOpen

@@ -30,7 +30,6 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminMemberController {
 
-    // private final MemberService memberService;
     @Autowired
     private MemberService memberService;
 
