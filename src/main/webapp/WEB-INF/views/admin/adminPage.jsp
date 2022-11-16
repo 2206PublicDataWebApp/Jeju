@@ -285,16 +285,13 @@
                                     <table class="table table-top-campaign">
                                         <tbody>
                                         <tr>
-                                            <td>숙소</td>
                                             <td>아이디</td>
                                             <td>내용</td>
                                             <td>작성일</td>
-
                                         </tr>
                                             <c:forEach items="${reviewList }" var="adminReview" varStatus="i" begin="0" end="5" step="1">
                                         <tr>
                                             <input type="hidden" name="reviewNo" value="${adminReview.reviewNo}">
-                                            <td>숙소이름</td>
                                             <td>${adminReview.memberId}</td>
                                             <td><a href="#">${fn:substring(adminReview.reviewContents, 0, 45)} ... </a></td>
                                             <%--<td>${adminReview.reviewContents}</td>--%>
