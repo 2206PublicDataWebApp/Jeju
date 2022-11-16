@@ -76,26 +76,31 @@
 
 ### 3. 마이페이지	
 <p align="center">
-  <img src="./Readme_assets/mypage1.PNG">
+  <img src="./Readme_assets/mypage123.png">
 <p>
 <br>
 
 ### 4. 숙소 리스트	
+<p align="center">
+<img src="./Readme_assets/pensionList.jpg">
+</p>
 
 ### 5. 숙소 상세페이지
 <p align="center">
 <img src="./Readme_assets/pensionDetail.jpg">
 </p>
+
 <p align="center">
-<img src="./Readme_assets/map.jpg">
+<img src="./Readme_assets/map.png">
 </p>
+
 <p align="center">
-<img src="./Readme_assets/pensionDetai2.jpg">
+<img src="./Readme_assets/pensionDetail2.jpg">
 </p>
 
 ### 6. 숙소 예약	
 <p align="center">
-<img src="./Readme_assets/recipe_dtail_1.png">
+<img src="./Readme_assets/reservation.jpg">
 </p>
 
 <p align="center">
@@ -124,32 +129,17 @@
 <img src="./Readme_assets/qna_write.png">
 </p>
 
-### 8. 숙소 등록	
+### 8. 커뮤니티	
 
 <p align="center">
-<img src="./Readme_assets/notice_1.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/notice_2.png">
-</p>
-
-<p align="center">
-<img src="./Readme_assets/notice_3.png">
+<img src="./Readme_assets/openChat.jpg">
 </p>
 
 ### 9. 공지사항 게시판
 <p align="center">
-<img src="https://user-images.githubusercontent.com/109611438/193573724-af74d886-ac1d-4a49-8762-7a397c5aaf18.JPG"/>
-</p>
-<p>
-<img src="https://user-images.githubusercontent.com/109611438/193573728-7c788814-80ae-4316-83a3-34f21b8c7c98.jpg"/>
+<img src="./Readme_assets/notice.jpg">
 </p>
 
-### 10. 오픈채팅방
-<p align="center">
-<img src="https://user-images.githubusercontent.com/109611438/193573734-3a6133de-0c72-4373-a794-6c60fb999565.JPG"/>
-</p>
 
 ### 11. 관리자 1대1 채팅	
 <p align="center">
@@ -166,21 +156,8 @@
 
 ### 11. 관리자 페이지	
 <p align="center">
-<img src="./Readme_assets/admin_police.png"/>
+<img src="./Readme_assets/memberAdmin.jpg"/>
 </p>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
