@@ -1,4 +1,4 @@
 package com.jeju.chart.domain;
 
-public class Chart {
+public class Register {
 }

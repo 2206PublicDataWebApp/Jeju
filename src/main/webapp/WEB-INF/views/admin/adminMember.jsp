@@ -210,8 +210,6 @@
                                         <th>가입날짜</th>
                                         <th>생년월일</th>
                                         <th>성별</th>
-                                        <th>총결재금액</th>
-                                        <th>예약횟수</th>
                                         <th>탈퇴</th>
                                     </tr>
                                     </thead>
@@ -226,8 +224,6 @@
                                         <td>${adminMember.enrollDate}</td>
                                         <td>${adminMember.birthDate}</td>
                                         <td>${adminMember.gender}</td>
-                                        <td>0</td>
-                                        <td>0</td>
                                         <td><a href="#" onclick="removeAdminMember(${adminMember.memberNo})">탈퇴</a></td>
                                     </tr>
                                     </c:forEach>
@@ -235,7 +231,7 @@
                                 </table>
                                 </div>
                                 <!-- 페이징 시작-->
-                                <div>
+                                <div align="center">
                                     <article>
                                         <!-- 이전 페이지 -->
                                         <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">

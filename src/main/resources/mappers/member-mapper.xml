@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
    <resultMap type="Member" id="memberResultMap">
       <result    property="memberId"    column="MEMBER_ID"/>
       <result property="memberPwd"    column="MEMBER_PWD"/>
-      <result property="memberEmail"    column="MEMBER_EMAIL"/>      
-      <result property="adminCheck"    column="ADMIN_CHECK"/>   
-      <result property="memberName"    column="MEMBER_NAME"/>   
+      <result property="memberEmail"    column="MEMBER_EMAIL"/>
+      <result property="adminCheck"    column="ADMIN_CHECK"/>
+      <result property="memberName"    column="MEMBER_NAME"/>
       <result property="memberPhone"    column="MEMBER_PHONE"/>
       <result property="memberAddr"    column="MEMBER_ADDR"/>
       <result property="phone2"       column="PHONE2"/>
@@ -18,36 +18,48 @@
       <result property="enrollDate"    column="ENROLL_DATE"/>
       <result property="updateDate"    column="UPDATE_DATE"/>
       <result property="useCount"    column="USE_COUNT"/>
-      <result property="gender"       column="GENDER"/>   
+      <result property="gender"       column="GENDER"/>
       <result property="birthDate"    column="BIRTH_DATE"/>
       <result property="mStatus"       column="M_STATUS"/>
-       <result property="memberNo"       column="MEMBER_NO"/>
-       <result property="couponCount"       column="COUPON_COUNT"/>
-
+      <result property="memberNo"       column="MEMBER_NO"/>
+      <result property="couponCount"       column="COUPON_COUNT"/>
    </resultMap>
-   	<!-- 아이디 중복 체크 -->
-<select id="idChk" resultType="int">
-	SELECT COUNT(*) FROM MEMBER_TBL
-	WHERE MEMBER_ID = #{memberId}
-</select>
-   	<!-- 비밀번호 중복 체크 -->
-<select id="passChk" resultType="int">
-	SELECT COUNT(*) FROM MEMBER_TBL
-	WHERE MEMBER_ID = #{memberId}
-	AND MEMBER_PWD= #{memberPwd}
-</select>
-<!-- 아이디 찾기 결과 -->
-  	<select id="findIdByEmail" resultMap="memberResultMap">
-  		SELECT MEMBER_ID FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
-  	</select>
-  	<!-- 비번 찾기 결과 -->
-  	<select id="findPwdByEmail" resultMap="memberResultMap">
-  		SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
-  	</select>
+
+   <!-- 관리자페이지 차트 신규회원총합 -->
+   <resultMap id="enrollmentMap" type="Enrollment">
+      <result property="enrollment"       column="ENROLLMENT"/>
+      <result property="count"       column="COUNT"/>
+   </resultMap>
+
+   <!-- 관리자페이지 차트 성비 -->
+   <resultMap id="genderMap" type="Gender">
+      <result property="gender"       column="GENDER"/>
+      <result property="count"       column="COUNT"/>
+   </resultMap>
+
+   <!-- 아이디 중복 체크 -->
+   <select id="idChk" resultType="int">
+      SELECT COUNT(*) FROM MEMBER_TBL
+      WHERE MEMBER_ID = #{memberId}
+   </select>
+   <!-- 비밀번호 중복 체크 -->
+   <select id="passChk" resultType="int">
+      SELECT COUNT(*) FROM MEMBER_TBL
+      WHERE MEMBER_ID = #{memberId}
+        AND MEMBER_PWD= #{memberPwd}
+   </select>
+   <!-- 아이디 찾기 결과 -->
+   <select id="findIdByEmail" resultMap="memberResultMap">
+      SELECT MEMBER_ID FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
+   </select>
+   <!-- 비번 찾기 결과 -->
+   <select id="findPwdByEmail" resultMap="memberResultMap">
+      SELECT MEMBER_PWD FROM MEMBER_TBL WHERE MEMBER_EMAIL = #{memberEmail }
+   </select>
 
    <select id="selectMemberInfo" resultMap="memberResultMap">
-   		SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
-   		</select>
+      SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
+   </select>
    <select id="selectCheckOne" resultType="_int">
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
@@ -58,15 +70,15 @@
    <update id="updateMember" parameterType="Member">
       UPDATE MEMBER_TBL
       SET MEMBER_PWD = #{memberPwd }, MEMBER_PHONE = #{memberPhone}
-      , MEMBER_ADDR = #{memberAddr }
+        , MEMBER_ADDR = #{memberAddr }
       WHERE MEMBER_ID = #{memberId }
    </update>
-   
+
    <update id="deleteMember" parameterType="string">
       DELETE FROM MEMBER_TBL
 
       WHERE MEMBER_ID = #{memberId }
-      AND MEMBER_PWD = #{memberPwd}
+        AND MEMBER_PWD = #{memberPwd}
 
    </update>
    <select id="selectLoginOne" resultMap="memberResultMap">
@@ -89,9 +101,9 @@
    </select>
 
    <!--관리자 전체 멤버 리스트 조회-->
-<select id="adminShowAllMember" resultMap="memberResultMap">
-   SELECT * FROM MEMBER_TBL ORDER BY ENROLL_DATE DESC
-</select>
+   <select id="adminShowAllMember" resultMap="memberResultMap">
+      SELECT * FROM MEMBER_TBL ORDER BY ENROLL_DATE DESC
+   </select>
 
    <!-- 관리자 페이징용 전체 멤버 리스트 조회 -->
    <select id="pagingShowAllMember" resultMap="memberResultMap">
@@ -107,25 +119,25 @@
    <select id="countAllMember" resultMap="memberResultMap">
       SELECT COUNT(*) FROM MEMBER_TBL
    </select>
-   
+
    <select id="selectOneByMember" resultMap="memberResultMap">
-   	  SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
+      SELECT * FROM MEMBER_TBL WHERE MEMBER_ID = #{memberId}
    </select>
- 
+
 
    <!-- 관리자 회원 검색 -->
    <select id="searchAllByValue" resultMap="memberResultMap">
       SELECT * FROM MEMBER_TBL
-    <where>
+      <where>
          <if test="searchCondition.toString() == 'name'">
             MEMBER_NAME LIKE '%'||#{searchValue}||'%'
          </if>
          <if test="searchCondition.toString() == 'address'">
             MEMBER_ADDR LIKE '%'||#{searchValue}||'%'
          </if>
-       <if test="searchCondition.toString() == 'phone'">
-          MEMBER_PHONE LIKE '%'||#{searchValue}||'%'
-       </if>
+         <if test="searchCondition.toString() == 'phone'">
+            MEMBER_PHONE LIKE '%'||#{searchValue}||'%'
+         </if>
          <if test="searchCondition.toString() == 'all'">
             MEMBER_NAME LIKE '%'||#{searchValue}||'%'
             OR
@@ -137,17 +149,24 @@
       </where>
    </select>
 
-   <select id="newResgisterChart" resultMap="memberResultMap">
-    SELECT ENROLL_DATE, COUNT(*) FROM MEMBER_TBL GROUP BY ENROLL_DATE
+   <!-- 관리자페이지 신규회원 총합 차트 -->
+   <select id="newResgisterChart" resultMap="enrollmentMap">
+      SELECT TO_CHAR(ENROLL_DATE, 'YYYYMMDD') AS ENROLLMENT, COUNT(ENROLL_DATE) as COUNT
+      FROM MEMBER_TBL GROUP BY TO_CHAR(ENROLL_DATE, 'YYYYMMDD')
+   </select>
 
+   <!-- 관리자페이지 성별 차트-->
+   <select id="genderChart" resultMap="genderMap">
+      SELECT GENDER, COUNT(GENDER) as COUNT
+      FROM MEMBER_TBL GROUP BY GENDER
    </select>
 
    <update id="increaseCouponCount">
-   	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT+1 WHERE MEMBER_ID = #{memberId}
+      UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT+1 WHERE MEMBER_ID = #{memberId}
    </update>
 
-	<update id="decreaseCouponCount">
-   	  UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT-1 WHERE MEMBER_ID = #{memberId}
+   <update id="decreaseCouponCount">
+      UPDATE MEMBER_TBL SET COUPON_COUNT = COUPON_COUNT-1 WHERE MEMBER_ID = #{memberId}
    </update>
 
 

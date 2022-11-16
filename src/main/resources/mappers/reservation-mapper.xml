@@ -26,9 +26,9 @@
 		INSERT INTO RESERVATION_TBL VALUES(SEQ_RESERVATION_NO.NEXTVAL, #{memberId}, 1, #{roomNo}, #{rePensionNo}, 0, #{rePrice},  #{reservationName}, #{reFilePath}, #{rePensionName}, #{reStartDate}, #{reEndDate}, DEFAULT, DEFAULT, #{couponCode}, #{reservationCode})
 	</insert>
 
-	<!-- 관리자페이지 , SELECT 내용 추가하기 -->
+	<!-- 관리자페이지 모든예약내역 출력 -->
 	<select id="adminShowAllReservation" resultMap="reservationResultMap">
-		SELECT RESERVATION_NO, MEMBER_ID, R_STATUS, ROOM_NO, RE_PENSION_NO, USE_HISTORY, USE_HISTORY, RE_PRICE FROM RESERVATION_TBL ORDER BY RESERVATION_NO DESC
+		SELECT RE_PAY_DATE, RE_PENSION_NAME, RESERVATION_NO, MEMBER_ID, R_STATUS, ROOM_NO, RE_PENSION_NO, USE_HISTORY, USE_HISTORY, RE_PRICE, RE_START_DATE, RE_END_DATE FROM RESERVATION_TBL ORDER BY RESERVATION_NO DESC
 	</select>
 	
 	<select id="selectCouponCode" resultMap="reservationResultMap">

@@ -30,8 +30,6 @@ public class Member {
 	private int couponCount;
 
 
-	private int count;
-
 
 
 	public String getMemberId() {
@@ -149,13 +147,9 @@ public class Member {
 		this.couponCount = couponCount;
 	}
 
-	public int getCount() {
-		return count;
-	}
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+
+
 	public Member() {
 
 		this.memberId = memberId;
@@ -177,7 +171,6 @@ public class Member {
 		this.mStatus = mStatus;
 		this.memberNo = memberNo;
 		this.couponCount = couponCount;
-		this.count = count;
 	}
 
 

@@ -1,6 +1,8 @@
 package com.jeju.member.service;
 
 
+import com.jeju.chart.domain.Enrollment;
+import com.jeju.chart.domain.Gender;
 import com.jeju.member.domain.Member;
 
 import java.util.List;
@@ -46,5 +48,6 @@ public interface MemberService {
 	// 관리자페이지 회원검색
 	List<Member> searchAllByValue(String searchCondition, String searchValue);
 
-	List<Member> selectNewRegisterChart();
+	List<Enrollment> selectNewRegisterChart();
+	List<Gender> selectGenderChart();
 }

@@ -226,7 +226,7 @@
                                 </div>
 
                         <!-- 페이징 시작-->
-                        <div>
+                        <div align="center">
                             <article>
                                 <!-- 이전 페이지 -->
                                 <c:if test="${pagination.startNavi != 1 && pagination.startNavi > 0}">

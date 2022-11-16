@@ -199,7 +199,7 @@
                                     <thead>
                                     <tbody>
                                     <tr>
-                                        <td>회원번호</td>
+                                        <td>번호</td>
                                         <td>아이디</td>
                                         <td>이메일</td>
                                         <td>이름</td>
@@ -208,12 +208,10 @@
                                         <td>가입날짜</td>
                                         <td>생년월일</td>
                                         <td>성별</td>
-                                        <td>총결재금액</td>
-                                        <td>예약횟수</td>
                                     </tr>
                                     <c:forEach items="${memberList }" var="adminMember" begin="0" end="5" step="1" varStatus="i">
                                     <tr>
-                                        <td>${adminMember.memberNo}</td>
+                                        <td>${i.count}</td>
                                         <td>${adminMember.memberId}</td>
                                         <td>${adminMember.memberEmail}</td>
                                         <td>${adminMember.memberName}</td>
@@ -222,8 +220,6 @@
                                         <td>${adminMember.enrollDate}</td>
                                         <td>${adminMember.birthDate}</td>
                                         <td>${adminMember.gender}</td>
-                                        <td>0</td>
-                                        <td>0</td>
                                     </tr>
                                     </c:forEach>
                                     </thead>
@@ -285,7 +281,7 @@
                                             <th>이름</th>
                                             <th>주소</th>
                                             <th>가격</th>
-                                            <th>등록 날짜</th>
+                                            <th>기타</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -296,7 +292,7 @@
                                                 <th>${adminPension.pensionName}</th>
                                                 <th>${adminPension.pensionAddr}</th>
                                                 <th>${adminPension.pensionPrice}</th>
-                                                <th> 등록 날짜로 지정</th>
+                                                <th></th>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -358,7 +354,6 @@
                                         <th>결재일</th>
                                         <th>아이디</th>
                                         <th>가격</th>
-                                        <th>예약상태</th>
                                         <th>예약기간-시작</th>
                                         <th>예약기간-마감</th>
                                         <th>기타</th>
@@ -368,15 +363,23 @@
                                     <c:forEach items="${reservationList }" var="adminReservation" varStatus="i" begin="0" end="5" step="1">
                                         <tr>
                                             <td>${adminReservation.reservationNo}</td>
-                                            <td>${adminReservation.roomNo}</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>${adminReservation.rePensionName}</td>
+                                            <td>
+                                            <c:choose>
+                                                <c:when test="${adminReservation.rStatus eq 1}" >
+                                                    미결재
+                                                </c:when>
+                                                <c:when test="${adminReservation.rStatus ne 1}" >
+                                                    결재완료
+                                                </c:when>
+                                            </c:choose>
+                                            </td>
+                                            <td>${adminReservation.rePayDate}</td>
                                             <td>${adminReservation.memberId}</td>
-                                            <td>${adminReservation.rePrice}</td>
-                                            <td>${adminReservation.rStatus}</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>${adminReservation.rePrice}원</td>
+                                            <td>${adminReservation.reStartDate}</td>
+                                            <td>${adminReservation.reEndDate}</td>
+                                            <td></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
