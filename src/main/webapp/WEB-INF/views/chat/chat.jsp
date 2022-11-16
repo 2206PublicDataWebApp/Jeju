@@ -23,7 +23,6 @@
 	margin: 0;
 	padding: 0;
 }
-
 .chat_wrap .header {
 	font-size: 14px;
 	padding: 15px 0;
@@ -31,37 +30,29 @@
 	color: white;
 	text-align: center;
 }
-
 .chat_wrap .chat {
 	padding-bottom: 80px;
 }
-
 .chat_wrap .chat ul {
 	width: 100%;
 	list-style: none;
 }
-
 .chat_wrap .chat ul li {
 	width: 100%;
 }
-
 .chat_wrap .chat ul li.left {
 	text-align: left;
 }
-
 .chat_wrap .chat ul li.right {
 	text-align: right;
 }
-
 .chat_wrap .chat ul li>div {
 	font-size: 13px;
 }
-
 .chat_wrap .chat ul li>div.sender {
 	margin: 10px 20px 0 20px;
 	font-weight: bold;
 }
-
 .chat_wrap .chat ul li>div.message {
 	display: inline-block;
 	word-break: break-all;
@@ -74,7 +65,6 @@
 	color: #555;
 	text-align: left;
 }
-
 .chat_wrap .input-div {
 	position: fixed;
 	bottom: 0;
@@ -83,14 +73,12 @@
 	text-align: center;
 	border-top: 1px solid #F18C7E;
 }
-
 .chat_wrap .input-div>textarea {
 	width: 100%;
 	height: 80px;
 	border: none;
 	padding: 10px;
 }
-
 .format {
 	display: none;
 }
@@ -213,7 +201,6 @@
             console.log(messages.parentNode);
             messages.innerHTML = "";
       	}
-
         
   </script>
 	<script src="/resources/assets/js/popper.min.js"></script>

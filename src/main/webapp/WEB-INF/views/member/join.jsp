@@ -158,7 +158,7 @@ span.guide {
 
 						<div class="email_auth">
 							<input type="text" placeholder="이메일(*하나의 이메일당 하나의 아이디만 가능)"
-								name="memberEmail" id="email" class="email join-box__input">
+								name="memberEmail" id="email" class="email join-box__input" style="margin-bottom : 15px;">
 							<span class="test ok" style="">이 메일은 사용 가능합니다.</span> <span
 								class="test error" style="">이 메일 이미 사용중입니다.</span>
 
@@ -196,21 +196,21 @@ span.guide {
 						<tr>
 						<br></br> 
 							<td>우편 번호</td>
-							<td><input type="text" name="post" class="postcodify_postcode5">
-						<button type="button" id="postcodify_search_button">검색</button>
+							<td><input type="text" name="post" class="postcodify_postcode5 join-box__input" style="margin-bottom : 15px;">
+						<button type="button" id="postcodify_search_button" class="email_auth_btn">검색</button>
 						<br></br>
 							</td>
 						</tr>
 						<tr>
 							<td>도로 주소</td>
 							<td><input type="text"
-								name="address1" class="postcodify_address" ></td>
+								name="address1" class="postcodify_address join-box__input" ></td>
 						</tr>
 						<tr>
 						<br></br>
 							<td>상세 주소</td>
 							<td><input type="text" 
-								name="address2" class="postcodify_details"></td>
+								name="address2" class="postcodify_details join-box__input"></td>
 						</tr>
 
 						<tr>

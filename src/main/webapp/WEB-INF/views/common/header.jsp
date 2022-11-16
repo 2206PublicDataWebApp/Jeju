@@ -28,65 +28,63 @@
 </style>
 </head>
 <body>
-   <header class="container-flui">
-      <div class="header-top">
-          <div class="container">
-               <div class="row">
-                   <div class="col-md-4 d-none d-md-block mail-detail"></div>
-                   <div class="col-md-4 logo">
-                   		<h1 id="logo">제주어때</h1>
-                       <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
-                   </div>
-                   <div class="col-md-4 d-none d-md-block social-link ">
-						<c:if test="${empty sessionScope.loginUser  }">
-							<div class="login-area">
-								<table align="right">
-									<tr>
-										<td rowspan="2">
-											<button onclick="location.href='/member/loginView.kh'"
-												class="btn btn-primary">로그인</button>
-											<button onclick="location.href='/member/joinView.kh'"
-												class="btn btn-secondary">회원가입</button>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</c:if>
-						<c:if test="${not empty sessionScope.loginUser }">
-							<table align="right">
-								<tr>
-									<td>
-										<a href="/" class="idui">${sessionScope.loginUser.memberId }</a>님 환영합니다
-										<a href="#"><img onclick="location.href='/chat/login2.do'"
+   <header class="container-fluid">
+           <div class="header-top">
+               <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 d-none d-md-block mail-detail"></div>
+                        <div class="col-md-4 logo">
+                            <h1 id="logo">제주어때 </h1>
+                            <a data-toggle="collapse" data-target="#menu-jk" href="#menu-jk"><i class="fas d-block d-sm-block d-md-none small-menu fa-bars"></i></a>
+                        </div>
+                        <div class="col-md-4 d-none d-md-block social-link ">
+                               <c:if test="${empty sessionScope.loginUser  }">
+						         <div class="login-area">
+						            <table align="right">
+						               <tr>
+						                  <td rowspan="2">
+						                     <button onclick="location.href='/member/loginView.kh'" class="btn btn-primary">로그인</button>
+						                     <button onclick="location.href='/member/joinView.kh'" class="btn btn-secondary">회원가입</button>
+						                  </td>
+						               </tr>
+						            </table>
+						         </div>
+						      </c:if>
+						      <c:if test="${not empty sessionScope.loginUser }">
+						         <table align="right">
+						            <tr>
+						               <td>
+						                  ${sessionScope.loginUser.memberId } 님 환영합니다
+							              <a href="#"><img onclick="location.href='/chat/login2.do'"
 										src="/resources/images/consultimg.png"style="width:60px; height:60px;">
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td><a href="/member/logout.kh" class="idui">로그아웃</a></td>
-								</tr>
-							</table>
-						</c:if>
-					</div>
+						               	  </a>
+						               </td>
+						            </tr>
+						            <tr>
+						               <td><a href="/member/logout.kh"style="width:30px; height:30px; color : white;" >로그아웃</a></td>
+						            </tr>
+						         </table>
+						      </c:if>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           <div id="menu-jk" class="header-nav d-none d-md-block">
+               <div class="container">
+                   <div class="row nav-row">
+                       <ul>
+                           <li><a href="/home">홈</a></li>
+                           <li><a href="/notice/list">공지사항</a></li>
+                           <li><a href="/community/chat">커뮤니티</a></li>
+                           <li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
+                           <li><a href="/mypage/myPage">마이페이지</a></li>
+                           <c:if test="${sessionScope.loginUser.memberId eq 'admin' }">
+                           	   <li><a href="/admin/adminPage">관리자페이지</a></li>
+                           </c:if>
+                       </ul>
+                   </div>
                </div>
            </div>
-       </div>
-       <div id="menu-jk" class="header-nav d-none d-md-block">
-           <div class="container">
-               <div class="row nav-row">
-                   <ul>
-                       <li><a href="/home">홈</a>
-                       <li><a href="/notice/list">공지사항</a></li>
-                       <li><a href="/community/chat">커뮤니티</a></li>
-                       <li><a href="/mypage/myPage">마이페이지</a></li>
-                       <li><a href="/coupon/couponEventList">쿠폰 이벤트</a></li>
-                       <c:if test="${sessionScope.loginUser.memberId == 'admin' }">
-                       	  <li><a href="/admin/adminPage">관리자페이지</a></li>
-                       </c:if>
-                   </ul>
-               </div>
-           </div>
-       </div> 
-   </header>
+        </header>
 </body>
 </html>

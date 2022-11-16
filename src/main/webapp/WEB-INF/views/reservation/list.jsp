@@ -50,10 +50,10 @@
     <div class="page-nav no-margin row">
         <div class="container">
             <div class="row">
-                <h2>About Traveler</h2>
+                <h2>예약페이지</h2>
                 <ul>
-                    <li> <a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><i class="fas fa-angle-double-right"></i> About Us</li>
+                    <li> <a href="#"><i class="fas fa-home"></i>상세페이지</a></li>
+                    <li><i class="fas fa-angle-double-right"></i>예약페이지</li>
                 </ul>
             </div>
         </div>
