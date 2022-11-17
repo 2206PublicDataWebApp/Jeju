@@ -39,7 +39,7 @@
 
 ## ⚙️ 기술 스택
 <p align="center">
-  <img src="https://img.shields.io/badge/JAVA-007396?style=flat-square&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-   square&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html-E34F26?style=flat-square&logo=html5&logoColor=white"> <img           src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-    square&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/JSON-000000?style=flat-square&logo=JSON&logoColor=white"> <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=white"> <img src="https://img.shields.io/badge/Ajax-7D929E?style=flat-square&logo=Mybatis&logoColor=white">
+  <img src="https://img.shields.io/badge/JAVA-007396?style=flat-square&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-   square&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html-E34F26?style=flat-square&logo=html5&logoColor=white"> <img           src="https://img.shields.io/badge/css-1572B6?style=flat-square&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=flat-    square&logo=bootstrap&logoColor=whit"> <img src="https://img.shields.io/badge/JSON-000000?style=flat-square&logo=JSON&logoColor=white"> <img src="https://img.shields.io/badge/oracle-F80000?style=flat-square&logo=oracle&logoColor=white"> <img src="https://img.shields.io/badge/Ajax-7D929E?style=flat-square&logo=Mybatis&logoColor=white">
   
 <p>
 
@@ -49,7 +49,7 @@
 |기능|상세|
 |:--:|:--:|
 |로그인|세션을 이용하여 로그인 구현, AdminCheck(Boolean) 값을 이용해 관리자와 회원 구분 |
-|회원가입|email인증을 이용하여 메일 계정 하나당 하나의 id |
+|회원가입|email인증을 이용하여 메일 하나당 하나의 id만 회원가입 |
 |마이페이지| 이용내역 / 내 정보(수정,삭제) / 숙소 관리(수정,삭제) / 후기 조회(수정,삭제) / 찜 내역(조회) / 내 쿠폰함(조회) |
 |숙소 리스트(홈)| 예약날짜 지정/ 인기순, 가격순 정렬/ 카테고리 필터링/ 가격대 필터링/ 숙소 검색|
 |숙소 상세페이지| 숙소 이름, 숙소 소개, 편의시설, 체크인/체크아웃, 주소(지도api), 후기조회 |
