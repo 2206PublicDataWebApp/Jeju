@@ -36,7 +36,10 @@
   <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/Ecplise IDE-2C2255?style=flat-square&logo=Eclipse IDE&logoColor=white"> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"> 
 <img src="https://img.shields.io/badge/Apache Maven-C71A36?style=flat-square&logo=Apache Maven&logoColor=white"> <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=white"> <img src="https://img.shields.io/badge/Mybatis-181717?style=flat-square&logo=Mybatis&logoColor=white">  <img src="https://img.shields.io/badge/GIT-F05032?style=flat-square&logo=GIT&logoColor=white"> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white">
 <p>
-
+ - JDK 1.8
+ - Spring
+ DB : Oracle
+  
 
 ## ⚙️ 기술 스택
 <p align="center">
