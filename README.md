@@ -104,24 +104,24 @@
 <img src="./Readme_assets/reservation.jpg">
 </p>
 
-### 8. 커뮤니티	
+### 7. 커뮤니티	
 
 <p align="center">
 <img src="./Readme_assets/openChat.jpg">
 </p>
 
-### 9. 공지사항 게시판
+### 8. 공지사항 게시판
 <p align="center">
 <img src="./Readme_assets/notice.jpg">
 </p>
 
 
-### 11. 1대1 문의(채팅)	
+### 9. 1대1 문의(채팅)	
 <p align="center">
 <img src="./Readme_assets/adminChat.png"/>
 </p>
 
-### 11. 관리자 페이지	
+### 10. 관리자 페이지	
 
 <p align="center">
 <img src="./Readme_assets/adminMain.jpg"/>
