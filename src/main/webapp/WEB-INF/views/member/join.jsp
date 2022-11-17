@@ -284,7 +284,7 @@ span.guide {
 					// 					///////////////////////////////////////메일인증//////////////////////////////////////////		  
 					var email_auth_cd = '';
 
-					$(".email_auth_btn")
+					$("#email_auth_btn")
 							.click(
 									function() {
 										$(document)
@@ -339,7 +339,7 @@ span.guide {
 																		}
 																	});
 														});
-										$(".email_auth_btn")
+										$("#email_auth_btn")
 												.click(
 														function() {
 															var email = $(
