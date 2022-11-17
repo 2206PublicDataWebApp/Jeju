@@ -56,6 +56,7 @@ public class AdminMemberController {
             return modelAndView;
         }
 
+
         int memberTotalCount = memberService.showAllMember().size();
         int memberLimit = 10; // 한 화면에 나타날 회원의 수
 
